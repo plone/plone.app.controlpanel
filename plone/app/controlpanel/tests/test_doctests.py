@@ -17,10 +17,11 @@ def test_suite():
              'filter.txt',
              'mail.txt',
              'maintenance.txt',
+             'markup.txt',
+             'proxy.txt',
              'search.txt',
              'site.txt',
              'skins.txt',
-             'markup.txt',
              'types.txt',
              ]
     suite = TestSuite()

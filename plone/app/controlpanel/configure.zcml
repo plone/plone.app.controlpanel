@@ -14,6 +14,8 @@
 
   <adapter factory=".markup.MarkupControlPanelAdapter" />
 
+  <adapter factory=".proxy.ProxyControlPanelAdapter" />
+
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
   <adapter factory=".search.SearchControlPanelAdapter" />
@@ -65,6 +67,13 @@
       name="maintenance-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".maintenance.MaintenanceControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="proxy-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".proxy.ProxyControlPanel"
       permission="cmf.ManagePortal"
       />
 
