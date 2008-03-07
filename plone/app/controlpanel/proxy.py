@@ -11,7 +11,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_unicode
 
-from form import ControlPanelForm
+from plone.app.controlpanel.form import ControlPanelForm
 
 class IProxySchema(Interface):
     http_proxy = TextLine(title=_(u'HTTP proxy'),
