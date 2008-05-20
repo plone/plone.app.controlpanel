@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0.5'
+version = '1.0.5-plip225-proxy'
 
 setup(name='plone.app.controlpanel',
       version=version,
