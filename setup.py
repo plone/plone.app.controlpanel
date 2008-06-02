@@ -1,17 +1,15 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
 version = '1.1.1'
 
 setup(name='plone.app.controlpanel',
       version=version,
       description="Formlib-based controlpanels for Plone.",
-      long_description="""\
-""",
+      long_description=open("README.txt").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Framework :: Plone",
-        "Framework :: Zope2",
-        "Framework :: Zope3",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
@@ -26,5 +24,11 @@ setup(name='plone.app.controlpanel',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'plone.app.form',
+        'plone.app.workflow',
+        'plone.fieldsets',
+        'plone.memoize',
+        'plone.protect',
       ],
       )
+
