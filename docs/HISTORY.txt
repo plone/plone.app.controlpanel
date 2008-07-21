@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.2 Unreleased
-----------------
+1.1.2-jarn.1 - Unsupported release
+----------------------------------
 
 - Added checkbox for enabling/disabling inline editing.
   [fschulze]
