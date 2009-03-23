@@ -4,6 +4,10 @@ Changelog
 1.1.4 - unreleased
 ------------------
 
+- Bug fix: so called 'bad types' are not listed in the search panel,
+  but on save they should still be added to the types_not_searched
+  property in the site_properties.  Backport from branch 1.2.
+  [maurits]
 
 1.1.3 - 2009-03-07
 ------------------
