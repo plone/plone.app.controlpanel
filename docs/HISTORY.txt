@@ -1,8 +1,12 @@
 Changelog
 =========
 
-1.1.4 - unreleased
+1.1.4 - 2009-05-09
 ------------------
+
+- Changed tests in skins.txt to also work when the mark_special_links property
+  does not exist yet, which is the case in Plone 3.2.
+  [maurits]
 
 - Bug fix: so called 'bad types' are not listed in the search panel,
   but on save they should still be added to the types_not_searched
