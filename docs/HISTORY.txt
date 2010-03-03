@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.2.1 - unreleased
-------------------
+1.3 - 2010-03-03
+----------------
 
 - Fixed some duplicated msgids with different defaults.
   There is no new strings to translate.
