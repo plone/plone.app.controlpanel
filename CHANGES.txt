@@ -4,6 +4,9 @@ Changelog
 2.0.5 - unreleased
 ------------------
 
+- Fixed : Group titles were not display on group prefs page
+  when title property was got from mutable properties plugin.
+  [thomasdesvenain]
 
 2.0.4 - 2010-10-27
 ------------------
