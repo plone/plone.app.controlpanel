@@ -16,6 +16,7 @@ from Products.CMFDefault.formlib.schema import ProxyFieldProperty
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import normalizeString
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 from Products.PluggableAuthService.interfaces.plugins import IRolesPlugin, IGroupsPlugin
 
@@ -107,12 +108,12 @@ class UsersGroupsControlPanelView(ControlPanelView):
         if searchGroups:
             groupResults = searchView.merge(chain(*[searchView.searchGroups(**{field: searchString}) for field in ['id', 'title']]), 'groupid')
             groupResults = [gtool.getGroupById(g['id']) for g in groupResults if g['id'] not in ignore]
-            groupResults.sort(key=lambda x: x is not None and x.getGroupTitleOrName().lower())
+            groupResults.sort(key=lambda x: x is not None and normalizeString(x.getGroupTitleOrName()))
 
         if searchUsers:
             userResults = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['login', 'fullname', 'email']]), 'userid')
             userResults = [mtool.getMemberById(u['id']) for u in userResults if u['id'] not in ignore]
-            userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and x.getProperty('fullname').lower() or '')
+            userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and normalizeString(x.getProperty('fullname')) or '')
 
         return groupResults + userResults
 
