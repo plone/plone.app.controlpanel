@@ -212,7 +212,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
             results.append(user_info)
 
         # Sort the users by fullname
-        results.sort(key=lambda x: x is not None and x['fullname'] is not None and x['fullname'].lower() or '')
+        results.sort(key=lambda x: x is not None and x['fullname'] is not None and normalizeString(x['fullname']) or '')
 
         # Reset the request variable, just in case.
         self.request.set('__ignore_group_roles__', False)
@@ -426,10 +426,10 @@ class GroupMembershipControlPanel(UsersGroupsControlPanelView):
         searchResults = self.gtool.getGroupMembers(self.groupname)
 
         groupResults = [self.gtool.getGroupById(m) for m in searchResults]
-        groupResults.sort(key=lambda x: x is not None and x.getGroupTitleOrName().lower())
+        groupResults.sort(key=lambda x: x is not None and normalizeString(x.getGroupTitleOrName()))
 
         userResults = [self.mtool.getMemberById(m) for m in searchResults]
-        userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and x.getProperty('fullname').lower() or '')
+        userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and normalizeString(x.getProperty('fullname')) or '')
 
         mergedResults = groupResults + userResults
         return filter(None, mergedResults)
@@ -480,7 +480,7 @@ class UserMembershipControlPanel(UsersGroupsControlPanelView):
 
     def getGroups(self):
         groupResults = [self.gtool.getGroupById(m) for m in self.gtool.getGroupsForPrincipal(self.member)]
-        groupResults.sort(key=lambda x: x is not None and x.getGroupTitleOrName().lower())
+        groupResults.sort(key=lambda x: x is not None and normalizeString(x.getGroupTitleOrName()))
         return filter(None, groupResults)
 
     def getPotentialGroups(self, searchString):
