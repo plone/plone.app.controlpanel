@@ -264,8 +264,6 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 # deletion
                 mtool.deleteMembers(delete, delete_memberareas=0, delete_localroles=1, REQUEST=context.REQUEST)
             if users_with_reset_passwords:
-                #utils.addPortalMessage(_(u'The following users have been sent an e-mail with link to reset their password: ') + ', '.join(users_with_reset_passwords))
-                #utils.addPortalMessage(_(u'The following users have been sent an e-mail with link to reset their password: '))
                 reset_passwords_message = _(
                     u"reset_passwords_msg",
                     default=u"The following users have been sent an e-mail with link to reset their password: ${user_ids}", 
