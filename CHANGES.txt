@@ -14,6 +14,10 @@ Changelog
   when title property was got from mutable properties plugin.
   [thomasdesvenain]
 
+- Replace reference to "personalize_form" with "@@personal-information".
+  http://dev.plone.org/plone/ticket/10756
+  [khink]
+
 2.0.4 - 2010-10-27
 ------------------
 
