@@ -229,6 +229,8 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
 
             utils = getToolByName(context, 'plone_utils')
 
+            users_with_reset_passwords = []
+
             for user in users:
                 # Don't bother if the user will be deleted anyway
                 if user.id in delete:
@@ -255,11 +257,14 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 if pw:
                     context.REQUEST.form['new_password'] = pw
                     regtool.mailPassword(user.id, context.REQUEST)
+                    users_with_reset_passwords.append(user.id)
 
             if delete:
                 # TODO We should eventually have a global switch to determine member area
                 # deletion
                 mtool.deleteMembers(delete, delete_memberareas=0, delete_localroles=1, REQUEST=context.REQUEST)
+            if users_with_reset_passwords:
+                utils.addPortalMessage(_(u'The following users have been sent an e-mail with link to reset their password: ') + ', '.join(users_with_reset_passwords))
             utils.addPortalMessage(_(u'Changes applied.'))
 
 class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
