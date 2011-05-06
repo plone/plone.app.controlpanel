@@ -115,7 +115,7 @@ class UsersGroupsControlPanelView(ControlPanelView):
             userResults = [mtool.getMemberById(u['id']) for u in userResults if u['id'] not in ignore]
             userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and normalizeString(x.getProperty('fullname')) or '')
 
-        return groupResults + userResults
+        return filter(None, groupResults + userResults)
 
     def atoi(self, s):
         try:
@@ -266,8 +266,8 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
             if users_with_reset_passwords:
                 reset_passwords_message = _(
                     u"reset_passwords_msg",
-                    default=u"The following users have been sent an e-mail with link to reset their password: ${user_ids}", 
-                    mapping={ 
+                    default=u"The following users have been sent an e-mail with link to reset their password: ${user_ids}",
+                    mapping={
                         u"user_ids" : ', '.join(users_with_reset_passwords),
                         },
                     )
@@ -316,6 +316,10 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
         for group_info in inheritance_enabled_groups:
             groupId = group_info['id']
             group = acl.getGroupById(groupId)
+            # play safe, though this should never happen
+            if group is None:
+                logger.warn('Skipped group without group object: %s' % groupId)
+                continue
             group_info['title'] = group.getProperty('title', group_info['title'])
             allAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
@@ -335,6 +339,10 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
         for group_info in explicit_groups:
             groupId = group_info['id']
             group = acl.getGroupById(groupId)
+            # play safe, though this should never happen
+            if group is None:
+                logger.warn('Skipped group without group object: %s' % groupId)
+                continue
             group_info['title'] = group.getProperty('title', group_info['title'])
 
             explicitlyAssignedRoles = []
@@ -498,4 +506,3 @@ class UserMembershipControlPanel(UsersGroupsControlPanelView):
     def getPotentialGroups(self, searchString):
         ignoredGroups = [x.id for x in self.getGroups() if x is not None]
         return self.membershipSearch(searchString, searchUsers=False, ignore=ignoredGroups)
-
