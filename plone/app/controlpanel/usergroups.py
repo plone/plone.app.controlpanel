@@ -349,9 +349,6 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
         acl = getToolByName(self, 'acl_users')
         rolemakers = acl.plugins.listPlugins(IRolesPlugin)
 
-        searchView = getMultiAdapter((aq_inner(self.context), self.request),
-            name='pas_search')
-
         # First, search for inherited roles assigned to each group.
         # We push this in the request so that IRoles plugins are told provide
         # the roles inherited from the groups to which the principal belongs.
@@ -413,7 +410,7 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
             group_info['can_delete'] = group.canDelete()
             results.append(group_info)
         # Sort the groups by title
-        sortedResults = searchView.sort(results, 'title')
+        sortedResults = self.searchView.sort(results, 'title')
 
         # Reset the request variable, just in case.
         self.request.set('__ignore_group_roles__', False)
