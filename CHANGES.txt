@@ -4,6 +4,11 @@ Changelog
 2.0.6 - Unreleased
 ------------------
 
+- Fixed regression in user/groups control panel that caused appropriate
+  warning for many users/groups setting enabled to not appear. (See:
+  http://dev.plone.org/plone/ticket/11753)
+  [aclark]
+
 2.0.5 - 2011-01-03
 ------------------
 
