@@ -150,6 +150,40 @@ class UsersGroupsControlPanelView(ControlPanelView):
         except ValueError:
             return 0
 
+    # The next two class methods implement the following truth table:
+    # 
+    # MANY USERS/GROUPS SEARCHING       CAN LIST USERS/GROUPS   RESULT
+    # False             False           False                   Lists unavailable
+    # False             False           True                    Show all
+    # False             True            False                   Show matching
+    # False             True            True                    Show matching
+    # True              False           False                   Too many to list
+    # True              False           True                    Lists unavailable
+    # True              True            False                   Show matching
+    # True              True            True                    Show matching
+
+    # TODO: Maybe have these methods return a text message (instead of a bool)
+    # corresponding to the actual result, e.g. "Too many to list", "Lists unavailable"
+
+    @property
+    def show_group_listing_warning(self):
+        if not self.searchString:
+            acl = getToolByName(self, 'acl_users')
+            if acl.canListAllGroups():
+                if self.many_groups:
+                    return True
+        return False
+
+    @property
+    def show_users_listing_warning(self):
+        if not self.searchString:
+            acl = getToolByName(self, 'acl_users')
+            # XXX Huh? Is canListAllUsers broken?
+            if not acl.canListAllUsers():
+                if self.many_users:
+                    return True
+        return False
+
 
 class UsersOverviewControlPanel(UsersGroupsControlPanelView):
 
