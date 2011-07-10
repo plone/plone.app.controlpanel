@@ -4,7 +4,9 @@ Changelog
 2.0.7 - Unreleased
 ------------------
 
-- Nothing changed yet.
+- On the Type-panel, fix the case when no workflow is set as default workflow.
+  Fixes http://dev.plone.org/plone/ticket/11901
+  [WouterVH]
 
 
 2.0.6 - 2011-05-13
