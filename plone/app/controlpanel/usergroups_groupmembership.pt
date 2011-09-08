@@ -239,7 +239,9 @@
                                        class="noborder"
                                        name="add:list"
                                        value="value"
-                                         tal:attributes="value this_user/getId" />
+                                       tal:define="canAddToGroup python:m.canAddToGroup(g) and ('Manager' not in obj.getRoles() or view.is_zope_manager)"
+                                       tal:attributes="value this_user/getId;
+                                                       disabled python:canAddToGroup and default or 'disabled'" />
                               </td>
 
                               <td>
