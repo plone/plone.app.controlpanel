@@ -4,6 +4,11 @@ Changelog
 2.1.2 - Unreleased
 ------------------
 
+- Fixed canAddToGroup check in usergroups_usermembership view, apparently 
+  a bad copy and paste from the old prefs_search_macros. It checked against
+  the authenticated user instead of the member we're currently looking at.
+  [vincentfretin]
+
 - On usergroup-groupmembership view, check for each found principal that it
   can be added to the group. Previously it checked that authenticated user can
   be added to the group, that is non sense.
