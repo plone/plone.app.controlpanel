@@ -4,6 +4,12 @@ Changelog
 2.1.2 - Unreleased
 ------------------
 
+- Introduced an update method in GroupMembershipControlPanel and
+  UserMembershipControlPanel to seperate setting of variables and template
+  rendering, so it is possible to subclass those classes to add new
+  functionnalities.
+  [vincentfretin]
+
 - Fixed canAddToGroup check in usergroups_usermembership view, apparently 
   a bad copy and paste from the old prefs_search_macros. It checked against
   the authenticated user instead of the member we're currently looking at.

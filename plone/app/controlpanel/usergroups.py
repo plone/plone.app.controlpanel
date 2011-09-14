@@ -572,7 +572,7 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
 
 class GroupMembershipControlPanel(UsersGroupsControlPanelView):
 
-    def __call__(self):
+    def update(self):
         self.groupname = getattr(self.request, 'groupname')
         self.gtool = getToolByName(self, 'portal_groups')
         self.mtool = getToolByName(self, 'portal_membership')
@@ -622,6 +622,8 @@ class GroupMembershipControlPanel(UsersGroupsControlPanelView):
 
         self.groupMembers = self.getMembers()
 
+    def __call__(self):
+        self.update()
         return self.index()
 
     def isGroup(self, itemName):
@@ -645,7 +647,7 @@ class GroupMembershipControlPanel(UsersGroupsControlPanelView):
 
 class UserMembershipControlPanel(UsersGroupsControlPanelView):
 
-    def __call__(self):
+    def update(self):
         self.userid = getattr(self.request, 'userid')
         self.gtool = getToolByName(self, 'portal_groups')
         self.mtool = getToolByName(self, 'portal_membership')
@@ -685,6 +687,9 @@ class UserMembershipControlPanel(UsersGroupsControlPanelView):
             self.newSearch = True
 
         self.groups = self.getGroups()
+
+    def __call__(self):
+        self.update()
         return self.index()
 
     def getGroups(self):
