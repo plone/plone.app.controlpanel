@@ -4,6 +4,10 @@ Changelog
 2.1.4 (unreleased)
 ------------------
 
+- Fix tests after recent plone.app.layout change to create a
+  useractions view.
+  [maurits]
+
 - Make a condition in usergroup_groupdetails.pt Chameleon-safe.
   [stefan]
 
