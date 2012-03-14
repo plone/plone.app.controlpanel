@@ -17,7 +17,7 @@ Viewing the site control panel
 
 Click the cancel button:
 
-    >>> self.browser.getControl(name="form.actions.cancel").click()
+    >>> self.browser.getControl(name="form.buttons.cancel").click()
     >>> self.browser.url.endswith('plone_control_panel')
     True
 
@@ -33,10 +33,12 @@ Configure the locking for the site
 Standard behavior for locking is to have it enabled. Let's change that:
 
     >>> self.browser.open('http://nohost/plone/@@editing-controlpanel')
-    >>> self.browser.getControl(name='form.lock_on_ttw_edit').value
+    >>> self.browser.getControl(name='form.widgets.lock_on_ttw_edit:list').value
+    ['selected']
+    >>> self.browser.getControl(name='form.widgets.lock_on_ttw_edit:list').value = False
+    >>> self.browser.getControl(name="form.buttons.save").click()
+    >>> self.browser.url.endswith('editing-controlpanel')
     True
-    >>> self.browser.getControl(name='form.lock_on_ttw_edit').value = False
-    >>> self.browser.getControl(name="form.actions.save").click()
 
 Confirm that our change updated the property:
 

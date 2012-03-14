@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+      name="editing-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".editing.EditingControlPanelView"
+      permission="plone.app.controlpanel.Editing"
+      />
+
+</configure>

@@ -5,9 +5,9 @@
 
   <include file="permissions.zcml"/>
 
-  <adapter factory=".calendar.CalendarControlPanelAdapter" />
+  <include package=".browser" />
 
-  <adapter factory=".editing.EditingControlPanelAdapter" />
+  <adapter factory=".calendar.CalendarControlPanelAdapter" />
 
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
@@ -38,13 +38,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".calendar.CalendarControlPanel"
       permission="plone.app.controlpanel.Calendar"
-      />
-
-  <browser:page
-      name="editing-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".editing.EditingControlPanel"
-      permission="plone.app.controlpanel.Editing"
       />
 
   <browser:page
