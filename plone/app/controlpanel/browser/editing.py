@@ -1,3 +1,7 @@
+from Products.CMFDefault.formlib.schema import ProxyFieldProperty
+from zope.component import adapts
+from zope.interface import implements
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -133,3 +137,21 @@ class ControlPanelFormWrapper(layout.FormWrapper):
 
 EditingControlPanelView = layout.wrap_form(
     EditingControlPanel, ControlPanelFormWrapper)
+
+
+class EditingControlPanelAdapter(object):
+
+    adapts(IPloneSiteRoot)
+    implements(IEditingSchema)
+
+    def __init__(self, context):
+        self.context = context
+        self.portal = getSite()
+        pprop = getToolByName(self.portal, 'portal_properties')
+        self.context = pprop.site_properties
+        self.visible_ids = self.context.visible_ids
+        self.enable_inline_editing = self.context.enable_inline_editing
+        self.enable_link_integrity_checks = self.context.enable_link_integrity_checks
+        self.ext_editor = self.context.ext_editor
+        self.default_editor = self.context.default_editor
+        self.lock_on_ttw_edit = self.context.lock_on_ttw_edit

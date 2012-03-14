@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from plone.app.controlpanel.browser.editing import IEditingSchema
 import unittest2 as unittest
 
 from zope.component import getMultiAdapter
+from zope.component import getAdapter
 
 from plone.app.controlpanel.browser.editing import EditingControlPanel
 
@@ -80,6 +82,55 @@ class EditingControlPanelFormTest(unittest.TestCase):
 
         self.assertEquals(
             self.site_properties.getProperty('visible_ids'), True)
+
+
+class EditingControlPanelAdapterTest(unittest.TestCase):
+
+    layer = PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.request = self.layer['request']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        ptool = getToolByName(self.portal, 'portal_properties')
+        self.site_properties = ptool.site_properties
+
+    def test_visible_ids_setting(self):
+        self.assertEquals(self.site_properties.visible_ids, False)
+        self.site_properties.visible_ids = True
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        self.assertEquals(editing_settings.visible_ids, True)
+
+    def test_enable_inline_editing_setting(self):
+        self.assertEquals(self.site_properties.enable_inline_editing, False)
+        self.site_properties.enable_inline_editing = True
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        self.assertEquals(editing_settings.enable_inline_editing, True)
+
+    def test_enable_link_integrity_checks_setting(self):
+        self.assertEquals(
+            self.site_properties.enable_link_integrity_checks, True)
+        self.site_properties.enable_link_integrity_checks = False
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        self.assertEquals(editing_settings.enable_link_integrity_checks, False)
+
+    def test_ext_editor_setting(self):
+        self.assertEquals(self.site_properties.ext_editor, False)
+        self.site_properties.ext_editor = True
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        self.assertEquals(editing_settings.ext_editor, True)
+
+    def test_default_editor_setting(self):
+        self.assertEquals(self.site_properties.default_editor, "TinyMCE")
+        self.site_properties.default_editor = "Kupu"
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        self.assertEquals(editing_settings.default_editor, "Kupu")
+
+    def test_lock_on_ttw_edit_setting(self):
+        self.assertEquals(self.site_properties.lock_on_ttw_edit, True)
+        self.site_properties.lock_on_ttw_edit = False
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        self.assertEquals(editing_settings.lock_on_ttw_edit, False)
 
 
 def test_suite():
