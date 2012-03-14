@@ -26,6 +26,7 @@ setup(name='plone.app.controlpanel',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'plone.autoform',
         'plone.app.form',
         'plone.app.vocabularies',
         'plone.app.workflow',
