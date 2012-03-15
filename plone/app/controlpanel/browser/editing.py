@@ -1,6 +1,6 @@
-from Products.CMFDefault.formlib.schema import ProxyFieldProperty
 from zope.component import adapts
 from zope.interface import implements
+from Products.CMFDefault.formlib.schema import ProxyFieldProperty
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
@@ -96,8 +96,10 @@ class EditingControlPanel(AutoExtensibleForm, form.EditForm):
         context['enable_link_integrity_checks'] = \
             site_properties.getProperty('enable_link_integrity_checks')
         context['ext_editor'] = site_properties.getProperty('ext_editor')
-        context['default_editor'] = site_properties.getProperty('default_editor')
-        context['lock_on_ttw_edit'] = site_properties.getProperty('lock_on_ttw_edit')
+        context['default_editor'] = site_properties.getProperty(
+            'default_editor')
+        context['lock_on_ttw_edit'] = site_properties.getProperty(
+            'lock_on_ttw_edit')
         return context
 
     @button.buttonAndHandler(_('Save'), name='save')
@@ -149,9 +151,11 @@ class EditingControlPanelAdapter(object):
         self.portal = getSite()
         pprop = getToolByName(self.portal, 'portal_properties')
         self.context = pprop.site_properties
-        self.visible_ids = self.context.visible_ids
-        self.enable_inline_editing = self.context.enable_inline_editing
-        self.enable_link_integrity_checks = self.context.enable_link_integrity_checks
-        self.ext_editor = self.context.ext_editor
-        self.default_editor = self.context.default_editor
-        self.lock_on_ttw_edit = self.context.lock_on_ttw_edit
+        self.encoding = pprop.site_properties.default_charset
+
+    visible_ids = ProxyFieldProperty(IEditingSchema['visible_ids'])
+    enable_inline_editing = ProxyFieldProperty(IEditingSchema['enable_inline_editing'])
+    enable_link_integrity_checks = ProxyFieldProperty(IEditingSchema['enable_link_integrity_checks'])
+    ext_editor = ProxyFieldProperty(IEditingSchema['ext_editor'])
+    default_editor = ProxyFieldProperty(IEditingSchema['default_editor'])
+    lock_on_ttw_edit = ProxyFieldProperty(IEditingSchema['lock_on_ttw_edit'])
