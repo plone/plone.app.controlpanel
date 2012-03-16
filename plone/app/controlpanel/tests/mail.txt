@@ -1,56 +1,65 @@
 Mail control panel
 ==================
 
+Test setup::
+
+    >>> app = layer['app']
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> browser.handleErrors = False
+    >>> browser.addHeader('Authorization', 'Basic admin:secret')
+    >>> portal = layer['portal']
+
 First some initial setup code:
 
     >>> from Products.CMFCore.utils import getToolByName
     >>> from zope.component import getUtility
     >>> from Products.MailHost.interfaces import IMailHost
-    >>> ctool = getToolByName(self.portal, 'portal_calendar')
+    >>> ctool = getToolByName(portal, 'portal_calendar')
     >>> mailhost = getUtility(IMailHost)
-    >>> self.loginAsManager()
+
 
 Viewing the mail control panel
 --------------------------------
 
-    >>> self.browser.open('http://nohost/plone/@@mail-controlpanel')
-    >>> self.browser.url.endswith('mail-controlpanel')
+    >>> browser.open('http://nohost/plone/@@mail-controlpanel')
+    >>> browser.url.endswith('mail-controlpanel')
     True
 
 Click the cancel button:
 
-    >>> self.browser.getControl(name="form.actions.cancel").click()
-    >>> self.browser.url.endswith('plone_control_panel')
+    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.url.endswith('plone_control_panel')
     True
 
 There should be still no changes:
 
-    >>> 'Changes canceled.' in self.browser.contents
+    >>> 'Changes canceled.' in browser.contents
     True
 
 Make some changes
 -----------------
 
-    >>> self.browser.open('http://nohost/plone/@@mail-controlpanel')
-    >>> self.browser.url.endswith('mail-controlpanel')
+    >>> browser.open('http://nohost/plone/@@mail-controlpanel')
+    >>> browser.url.endswith('mail-controlpanel')
     True
 
-    >>> self.browser.getControl(name='form.smtp_host').value = 'localhost2'
-    >>> self.browser.getControl(name='form.smtp_port').value = '2525'
-    >>> self.browser.getControl(name='form.smtp_userid').value = 'admin'
-    >>> self.browser.getControl(name='form.smtp_pass').value = 'secret'
-    >>> self.browser.getControl(name='form.email_from_name').value = 'Spambot'
-    >>> self.browser.getControl(name='form.email_from_address').value = 'spam@localhost'
+    >>> browser.getControl(name='form.smtp_host').value = 'localhost2'
+    >>> browser.getControl(name='form.smtp_port').value = '2525'
+    >>> browser.getControl(name='form.smtp_userid').value = 'admin'
+    >>> browser.getControl(name='form.smtp_pass').value = 'secret'
+    >>> browser.getControl(name='form.email_from_name').value = 'Spambot'
+    >>> browser.getControl(name='form.email_from_address').value = 'spam@localhost'
 
 Click the save button:
 
-    >>> self.browser.getControl(name="form.actions.save").click()
-    >>> self.browser.url.endswith('mail-controlpanel')
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.url.endswith('mail-controlpanel')
     True
 
 We should be informed that something has changed:
 
-    >>> 'Changes saved.' in self.browser.contents
+    >>> 'Changes saved.' in browser.contents
     True
 
 Make sure the changes have been applied correctly to the mailhost:
@@ -67,8 +76,8 @@ Make sure the changes have been applied correctly to the mailhost:
     >>> getattr(mailhost, 'smtp_pass', mailhost.smtp_pwd)
     u'secret'
 
-    >>> self.site_props.email_from_name
+    >>> portal.portal_properties.site_properties.email_from_name
     u'Spambot'
 
-    >>> self.site_props.email_from_address
+    >>> portal.portal_properties.site_properties.email_from_address
     'spam@localhost'
