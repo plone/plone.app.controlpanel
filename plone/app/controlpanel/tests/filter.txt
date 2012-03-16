@@ -1,6 +1,16 @@
 Filter control panel
 ====================
 
+Test setup::
+
+    >>> app = layer['app']
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> browser.handleErrors = False
+    >>> browser.addHeader('Authorization', 'Basic admin:secret')
+    >>> portal = layer['portal']
+    >>> portal_url = portal.absolute_url()
+
 First some initial setup code:
 
     >>> import sys
@@ -8,9 +18,8 @@ First some initial setup code:
     >>> from Products.PortalTransforms.interfaces import IPortalTransformsTool
     >>> from Products.CMFCore.utils import getToolByName
 
-    >>> browser = self.browser
     >>> safe_html = getUtility(IPortalTransformsTool).safe_html
-    >>> self.loginAsManager()
+
 
 Viewing the search control panel
 --------------------------------
@@ -140,7 +149,7 @@ Changing a permitted style:
 Check that the filtering works
 ------------------------------
 
-    >>> browser.open('http://nohost/plone/Members')
+    >>> browser.open(portal_url)
     >>> browser.getLink('Add new').click()
     >>> 'Add new item' in browser.contents
     True
