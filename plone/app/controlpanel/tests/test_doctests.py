@@ -8,8 +8,8 @@ import pprint
 
 from plone.testing import layered
 
-from plone.app.discussion.testing import \
-    PLONE_APP_DISCUSSION_FUNCTIONAL_TESTING
+from plone.app.controlpanel.testing import \
+    PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING
 
 
 optionflags = (
@@ -40,7 +40,6 @@ def test_suite():
                                      globs={'pprint': pprint.pprint,
                                             }
                                      ),
-                layer=PLONE_APP_DISCUSSION_FUNCTIONAL_TESTING)
+                layer=PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING)
         for test in normal_testfiles])
     return suite
-
