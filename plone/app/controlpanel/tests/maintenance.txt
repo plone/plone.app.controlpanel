@@ -7,36 +7,38 @@ Test setup::
     >>> from plone.testing.z2 import Browser
     >>> browser = Browser(app)
     >>> browser.handleErrors = False
-    >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
+    >>> portal_url = portal.absolute_url()
 
 
 Viewing the maintenance control panel
 -------------------------------------
 
-    >>> browser.open('http://nohost/plone/@@maintenance-controlpanel')
-    >>> browser.url.endswith('maintenance-controlpanel')
-    True
+Login as Plone admin with the manager role:
+
+    >>> from plone.app.testing import TEST_USER_ID, TEST_USER_PASSWORD
+    >>> from plone.app.testing import setRoles
+    >>> setRoles(portal, TEST_USER_ID, ['Manager'])
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = TEST_USER_ID
+    >>> browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
+    >>> browser.getControl(name='submit').click()
 
 While we have manage permisssions inside the site, we don't have them at the
 Zope root:
 
-    >>> 'You are not allowed to manage the Zope server' in browser.contents
-    True
+    >>> browser.open(portal_url + '/@@maintenance-controlpanel')
+    Traceback (most recent call last):
+    ...
+    Unauthorized: You are not authorized to access this resource.
 
-Let's create a manager at the Zope root:
+Login with a manager at the Zope root:
 
-    >>> app.acl_users.userFolderAddUser('app', 'secret', ['Manager'], [])
-
-And log in as that user instead:
-
-    >>> browser.open('http://nohost/plone/')
-    >>> browser.getLink('Log out').click()
-    >>> loginAsManager(user='app')
+    >>> browser.addHeader('Authorization', 'Basic admin:secret')
 
 See if we can manage the server now:
 
-    >>> browser.open('http://nohost/plone/@@maintenance-controlpanel')
+    >>> browser.open(portal_url + '/@@maintenance-controlpanel')
     >>> browser.url.endswith('maintenance-controlpanel')
     True
 
