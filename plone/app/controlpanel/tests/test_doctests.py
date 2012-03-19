@@ -28,6 +28,7 @@ normal_testfiles = [
     'skins.txt',
     'markup.txt',
     'navigation.txt',
+    'usergroups.txt',
     'types.txt',
 ]
 
