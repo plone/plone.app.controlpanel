@@ -66,25 +66,18 @@ We'll reset her password.
     >>> browser.getControl(name='users.resetpassword:records').value = True
     >>> browser.getControl(name='form.button.Modify').click()
 
-Whoops, we haven't set up our mailhost...
-    >>> 'No mailhost defined. Unable to reset passwords.' in browser.contents
+Let's do that and try again.
+    >>> browser.open('http://nohost/plone/@@mail-controlpanel')
+    >>> browser.getControl(name='form.smtp_host').value = 'nohost'
+    >>> browser.getControl(name='form.smtp_userid').value = 'bob@example.com'
+    >>> browser.getControl(name='form.actions.save').click()
+    >>> browser.getLink('Users and Groups').click()
+    >>> browser.getControl(name='searchstring').value = 'gracie@'
+    >>> browser.getControl(name='form.button.Modify').click()
+    >>> 'Gracie Adams' in browser.contents
     True
-
-# Mailhost is failing in this testcase, so commenting this bit out for now.
-# Let's do that and try again.
-#     >>> browser.open('http://nohost/plone/@@mail-controlpanel')
-#     >>> browser.getControl('SMTP server').value = 'nohost'
-#     >>> browser.getControl("Site 'From' address").value = 'bob@example.com'
-#     >>> browser.getControl('Save').click()
-#     >>> browser.getLink('Users and Groups').click()
-#     >>> browser.getControl(name='searchstring').value = 'gracie@'
-#     >>> browser.getControl(name='form.button.Search').click()
-#     >>> 'Gracie Adams' in browser.contents
-#     True
-#     >>> browser.getControl(name='users.resetpassword:records').value = True
-#     >>> browser.getControl(name='form.button.Modify').click()
-#     >>> 'No mailhost defined. Unable to reset passwords.' in browser.contents
-#     False
+    >>> browser.getControl(name='users.resetpassword:records').value = True
+    >>> browser.getControl(name='form.button.Modify').click()
 
 Let's try deleting Gracie.
     >>> browser.getControl(name='searchstring').value = 'gracie@'
