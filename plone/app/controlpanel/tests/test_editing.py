@@ -159,16 +159,16 @@ class EditingControlPanelAdapterTest(unittest.TestCase):
         self.assertEquals(self.site_properties.default_editor, "None")
 
     def test_get_lock_on_ttw_edit_setting(self):
-        self.assertEquals(self.site_properties.lock_on_ttw_edit, True)
-        self.site_properties.lock_on_ttw_edit = False
+        self.assertEquals(self.site_properties.lock_on_ttw_edit, False)
+        self.site_properties.lock_on_ttw_edit = True
         editing_settings = getAdapter(self.portal, IEditingSchema)
-        self.assertEquals(editing_settings.lock_on_ttw_edit, False)
+        self.assertEquals(editing_settings.lock_on_ttw_edit, True)
 
     def test_set_lock_on_ttw_edit_setting(self):
-        self.assertEquals(self.site_properties.lock_on_ttw_edit, True)
-        editing_settings = getAdapter(self.portal, IEditingSchema)
-        editing_settings.lock_on_ttw_edit = False
         self.assertEquals(self.site_properties.lock_on_ttw_edit, False)
+        editing_settings = getAdapter(self.portal, IEditingSchema)
+        editing_settings.lock_on_ttw_edit = True
+        self.assertEquals(self.site_properties.lock_on_ttw_edit, True)
 
 
 def test_suite():
