@@ -20,6 +20,7 @@
 
   <include file="permissions.zcml"/>
 
+  <include package=".bbb" />
   <include package=".browser" />
 
   <adapter factory=".calendar.CalendarControlPanelAdapter" />

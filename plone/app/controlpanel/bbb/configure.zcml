@@ -1,0 +1,10 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <!-- Adapter  -->
+  <adapter factory=".adapter.EditingControlPanelAdapter" />
+  <adapter factory=".adapter.MailControlPanelAdapter" />
+
+</configure>
