@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+from plone.registry import Registry
 from Products.CMFCore.interfaces import ISiteRoot
 from zope.component import getUtility
-from plone.app.controlpanel.browser.mail import IMailSchema
+from plone.app.controlpanel.interfaces import IMailSchema
 import unittest2 as unittest
 
 from zope.component import getMultiAdapter
@@ -29,6 +30,9 @@ class MailControlPanelIntegrationTest(unittest.TestCase):
         self.request = self.layer['request']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
+        self.registry = Registry()
+        self.registry.registerInterface(IMailSchema)
+
     def test_mail_controlpanel_view(self):
         view = getMultiAdapter((self.portal, self.portal.REQUEST),
                                name="mail-controlpanel")
@@ -39,6 +43,48 @@ class MailControlPanelIntegrationTest(unittest.TestCase):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
         self.assertTrue('plone.app.registry' in [a.getAction(self)['id']
                             for a in self.controlpanel.listActions()])
+
+    def test_smtp_host_setting(self):
+        self.assertTrue('smtp_host' in IMailSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMailSchema.smtp_host'],
+            "localhost")
+
+    def test_smtp_port_setting(self):
+        self.assertTrue('smtp_port' in IMailSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMailSchema.smtp_port'],
+            25)
+
+    def test_smtp_userid_setting(self):
+        self.assertTrue('smtp_userid' in IMailSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMailSchema.smtp_userid'],
+            None)
+
+    def test_smtp_pass_setting(self):
+        self.assertTrue('smtp_pass' in IMailSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMailSchema.smtp_pass'],
+            None)
+
+    def test_email_from_name_setting(self):
+        self.assertTrue('email_from_name' in IMailSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMailSchema.email_from_name'],
+            None)
+
+    def test_email_from_address_setting(self):
+        self.assertTrue('email_from_address' in IMailSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMailSchema.email_from_address'],
+            None)
 
 
 class MailControlPanelFormTest(unittest.TestCase):
