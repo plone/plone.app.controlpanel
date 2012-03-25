@@ -9,75 +9,11 @@ from zope.interface import implements
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from zope import schema
-from zope.interface import Interface
 
 from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
 
-
-class IMailSchema(Interface):
-    """Combined schema for the adapter lookup.
-    """
-
-    smtp_host = schema.TextLine(
-        title=_(u'label_smtp_server',
-                default=u'SMTP server'),
-        description=_(u"help_smtp_server",
-                     default=u"The address of your local "
-                     "SMTP (outgoing e-mail) server. Usually "
-                     "'localhost', unless you use an "
-                     "external server to send e-mail."),
-        default=u'localhost',
-        required=True)
-
-    smtp_port = schema.Int(
-        title=_(u'label_smtp_port',
-                default=u'SMTP port'),
-        description=_(u"help_smtp_port",
-                      default=u"The port of your local SMTP "
-                      "(outgoing e-mail) server. Usually '25'."),
-        default=25,
-        required=True)
-
-    smtp_userid = schema.TextLine(
-        title=_(u'label_smtp_userid',
-               default=u'ESMTP username'),
-        description=_(u"help_smtp_userid",
-                     default=u"Username for authentication "
-                     "to your e-mail server. Not required "
-                     "unless you are using ESMTP."),
-        default=None,
-        required=False)
-
-    smtp_pass = schema.Password(
-        title=_(u'label_smtp_pass',
-               default=u'ESMTP password'),
-        description=_(u"help_smtp_pass",
-                     default=u"The password for the ESMTP "
-                     "user account."),
-        default=None,
-        required=False)
-
-    email_from_name = schema.TextLine(
-        title=_(u"Site 'From' name"),
-        description=_(u"Plone generates e-mail using "
-                      "this name as the e-mail "
-                      "sender."),
-        default=None,
-        required=True)
-
-    email_from_address = schema.ASCII(
-        title=_(u"Site 'From' address"),
-        description=_(u"Plone generates e-mail using "
-                      "this address as the e-mail "
-                      "return address. It is also "
-                      "used as the destination "
-                      "address for the site-wide "
-                      "contact form and the 'Send test "
-                      "e-mail' feature."),
-        default=None,
-        required=True)
+from plone.app.controlpanel.interfaces import IMailSchema
 
 
 class MailSettingsControlPanel(controlpanel.RegistryEditForm):

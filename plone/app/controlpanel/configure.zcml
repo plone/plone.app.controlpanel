@@ -13,7 +13,7 @@
     />
 
   <subscriber
-    for="plone.app.controlpanel.browser.mail.IMailSchema
+    for="plone.app.controlpanel.interfaces.IMailSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".browser.mail.updateMailSettings"
     />
