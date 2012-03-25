@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.interfaces import ISiteRoot
 from zope.component import getUtility
-from plone.app.controlpanel.browser.mail import IMailSettingsControlPanel
+from plone.app.controlpanel.browser.mail import IMailSchema
 import unittest2 as unittest
 
 from zope.component import getMultiAdapter
@@ -99,24 +99,24 @@ class MailControlPanelAdapterTest(unittest.TestCase):
     def test_get_smtp_host_setting(self):
         self.assertEquals(self.mailhost.smtp_host, "")
         self.mailhost.smtp_host = u"localhost"
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.smtp_host, u"localhost")
 
     def test_set_smtp_host_setting(self):
         self.assertEquals(self.mailhost.smtp_host, u"")
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.smtp_host = u"localhost"
         self.assertEquals(self.mailhost.smtp_host, u"localhost")
 
     def test_get_smtp_port_setting(self):
         self.assertEquals(self.portal.getProperty("smtp_port"), None)
         self.portal.smtp_port = 25
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.smtp_port, 25)
 
     def test_set_smtp_port_setting(self):
         self.assertEquals(self.mailhost.smtp_port, 25)
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.smtp_port = 42
         self.assertEquals(self.mailhost.smtp_port, 42)
 
@@ -124,12 +124,12 @@ class MailControlPanelAdapterTest(unittest.TestCase):
         self.assertEquals(
             self.portal.getProperty("smtp_userid"), None)
         self.portal.smtp_userid = u"johndoe"
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.smtp_userid, u"johndoe")
 
     def test_set_smtp_userid_setting(self):
         self.assertEquals(self.mailhost.smtp_uid, "")
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.smtp_userid = "johndoe"
         mailhost = getToolByName(self.portal, 'MailHost')
         self.assertEquals(
@@ -138,24 +138,24 @@ class MailControlPanelAdapterTest(unittest.TestCase):
     def test_get_smtp_pass_setting(self):
         self.assertEquals(self.mailhost.smtp_pwd, "")
         self.portal.smtp_pass = "secret"
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.smtp_pass, "secret")
 
     def test_set_smtp_pass_setting(self):
         self.assertEquals(self.mailhost.smtp_pwd, "")
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.smtp_pass = "secret"
         self.assertEquals(self.mailhost.smtp_pwd, "secret")
 
     def test_get_email_from_name_setting(self):
         self.assertEquals(self.portal.getProperty("email_from_name"), "")
         self.portal.email_from_name = u"Plone Site"
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.email_from_name, u"Plone Site")
 
     def test_set_email_from_name_setting(self):
         self.assertEquals(self.portal.getProperty("email_from_name"), "")
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.email_from_name = u"Plone Site"
         self.assertEquals(
             getUtility(ISiteRoot).email_from_name, u"Plone Site")
@@ -168,7 +168,7 @@ class MailControlPanelAdapterTest(unittest.TestCase):
 
     def test_set_email_from_address_setting(self):
         self.assertEquals(self.portal.getProperty("email_from_address"), "")
-        mail_settings = getAdapter(self.portal, IMailSettingsControlPanel)
+        mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.email_from_address = "plone@plone.org"
         self.assertEquals(
             getUtility(ISiteRoot).email_from_address, "plone@plone.org")

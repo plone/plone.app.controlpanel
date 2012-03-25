@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <registry>
- <records interface="plone.app.controlpanel.browser.mail.IMailSettingsControlPanel" />
+ <records interface="plone.app.controlpanel.browser.mail.IMailSchema" />
 </registry>

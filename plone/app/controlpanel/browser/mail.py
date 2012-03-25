@@ -15,7 +15,7 @@ from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
 
 
-class IMailSettingsControlPanel(Interface):
+class IMailSchema(Interface):
     """Combined schema for the adapter lookup.
     """
 
@@ -81,7 +81,7 @@ class IMailSettingsControlPanel(Interface):
 
 class MailSettingsControlPanel(controlpanel.RegistryEditForm):
 
-    schema = IMailSettingsControlPanel
+    schema = IMailSchema
     label = _(u"Mail settings")
     description = _(u"""""")
 
@@ -132,7 +132,7 @@ from Products.CMFPlone.utils import safe_hasattr
 class MailControlPanelAdapter(object):
 
     adapts(IPloneSiteRoot)
-    implements(IMailSettingsControlPanel)
+    implements(IMailSchema)
 
     def __init__(self, context):
         self.context = context
@@ -141,8 +141,8 @@ class MailControlPanelAdapter(object):
         self.encoding = pprop.site_properties.default_charset
         self.context = getToolByName(context, 'MailHost')
 
-    smtp_host = ProxyFieldProperty(IMailSettingsControlPanel['smtp_host'])
-    smtp_port = ProxyFieldProperty(IMailSettingsControlPanel['smtp_port'])
+    smtp_host = ProxyFieldProperty(IMailSchema['smtp_host'])
+    smtp_port = ProxyFieldProperty(IMailSchema['smtp_port'])
 
     def get_smtp_userid(self):
         return getattr(self.context, 'smtp_userid',
