@@ -139,7 +139,7 @@ class MailControlPanelAdapter(object):
         self.portal = getSite()
         pprop = getToolByName(self.portal, 'portal_properties')
         self.encoding = pprop.site_properties.default_charset
-        self.context = getToolByName(context, 'MailHost')
+        self.context = getToolByName(self.portal, 'MailHost')
 
     smtp_host = ProxyFieldProperty(IMailSchema['smtp_host'])
     smtp_port = ProxyFieldProperty(IMailSchema['smtp_port'])
