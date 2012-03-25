@@ -1,4 +1,5 @@
 from zope.component import getUtility
+from Products.CMFPlone.utils import safe_hasattr
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
@@ -124,9 +125,6 @@ def updateMailSettings(settings, event):
 
 class MailControlPanel(controlpanel.ControlPanelFormWrapper):
     form = MailSettingsControlPanel
-
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
-from Products.CMFPlone.utils import safe_hasattr
 
 
 class MailControlPanelAdapter(object):
