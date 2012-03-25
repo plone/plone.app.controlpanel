@@ -33,6 +33,63 @@ class IConfigurationChangedEvent(Interface):
     data = Attribute("The configuration data which was changed.")
 
 
+class IEditingSchema(Interface):
+
+    visible_ids = schema.Bool(
+        title=_(u"Show 'Short Name' on content?"),
+        description=_(u"Display and allow users to edit the "
+             "'Short name' content identifiers, which form the "
+             "URL part of a content item's address. Once "
+             "enabled, users will then be able to enable this "
+             "option in their preferences."),
+        default=False,
+        required=False)
+
+    default_editor = schema.Choice(
+        title=_(u'Default editor'),
+        description=_(u"Select the default wysiwyg "
+            "editor. Users will be able to choose their "
+            "own or select to use the site default."),
+        default=u'TinyMCE',
+        missing_value=set(),
+        vocabulary="plone.app.vocabularies.AvailableEditors",
+        required=False)
+
+    ext_editor = schema.Bool(
+        title=_(u'Enable External Editor feature'),
+        description=_(u"Determines if the external editor "
+            "feature is enabled. This feature requires a "
+            "special client-side application installed. The "
+            "users also have to enable this in their "
+            "preferences."),
+        default=False,
+        required=False)
+
+    enable_inline_editing = schema.Bool(
+        title=_(u"Enable inline editing"),
+        description=_(u"Check this to enable "
+                      "inline editing on the site."),
+        default=True,
+        required=False)
+
+    enable_link_integrity_checks = schema.Bool(
+        title=_(u"Enable link integrity checks"),
+        description=_(u"Determines if the users should get "
+            "warnings when they delete or move content that "
+            "is linked from inside the site."),
+        default=True,
+        required=False)
+
+    lock_on_ttw_edit = schema.Bool(
+        title=_(u"Enable locking for through-the-web edits"),
+        description=_(u"Disabling locking here will only "
+              "affect users editing content through the "
+              "Plone web UI.  Content edited via WebDAV "
+              "clients will still be subject to locking."),
+        default=True,
+        required=False)
+
+
 class IMailSchema(Interface):
     """Combined schema for the adapter lookup.
     """

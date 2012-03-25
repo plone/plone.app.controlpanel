@@ -6,9 +6,10 @@ from zope.interface import implements
 from Products.CMFCore.interfaces import ISiteRoot
 from zope.site.hooks import getSite
 from Products.CMFPlone.utils import safe_hasattr
-from plone.app.controlpanel.browser.editing import IEditingSchema
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+
+from plone.app.controlpanel.interfaces import IEditingSchema
 
 
 class EditingControlPanelAdapter(object):

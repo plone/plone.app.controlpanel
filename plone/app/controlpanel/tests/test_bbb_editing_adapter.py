@@ -3,10 +3,11 @@ from plone.app.testing import setRoles
 from zope.component import getAdapter
 from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
-from plone.app.controlpanel.browser.editing import IEditingSchema
 
 from plone.app.controlpanel.testing import \
     PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
+
+from plone.app.controlpanel.interfaces import IEditingSchema
 
 
 class EditingControlPanelAdapterTest(unittest.TestCase):
