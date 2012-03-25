@@ -1,7 +1,22 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser">
+
+  <genericsetup:registerProfile
+    name="default"
+    title="Plone Control Panels"
+    directory="profiles/default"
+    description="Control panels for Plone."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+  <subscriber
+    for="plone.app.controlpanel.browser.mail.IMailSettingsControlPanel
+         plone.registry.interfaces.IRecordModifiedEvent"
+    handler=".browser.mail.updateMailSettings"
+    />
 
   <include file="permissions.zcml"/>
 
@@ -14,8 +29,6 @@
   <adapter factory=".language.LanguageControlPanelAdapter" />
 
   <adapter factory=".navigation.NavigationControlPanelAdapter" />
-
-  <adapter factory=".mail.MailControlPanelAdapter" />
 
   <adapter factory=".maintenance.MaintenanceControlPanelAdapter" />
 
@@ -52,13 +65,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".language.LanguageControlPanel"
       permission="plone.app.controlpanel.Language"
-      />
-
-  <browser:page
-      name="mail-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".mail.MailControlPanel"
-      permission="plone.app.controlpanel.Mail"
       />
 
   <browser:page

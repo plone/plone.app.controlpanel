@@ -3,13 +3,24 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:browser="http://namespaces.zope.org/browser">
 
+  <!-- Editing Control Panel -->
   <adapter factory=".editing.EditingControlPanelAdapter" />
-
   <browser:page
       name="editing-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".editing.EditingControlPanelView"
       permission="plone.app.controlpanel.Editing"
       />
+
+  <include package="plone.app.registry" />
+
+  <!-- Mail Control Panel -->
+  <adapter factory=".mail.MailControlPanelAdapter" />
+  <browser:page
+    name="mail-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".mail.MailControlPanel"
+    permission="cmf.ManagePortal"
+    />
 
 </configure>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object
+    name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="plone.app.controlpanel"
+    purge="False">
+
+    <configlet
+        title="Mail"
+        action_id="mail"
+        appId="plone.app.controlpanel"
+        category="plone"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@mail-controlpanel"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>

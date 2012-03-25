@@ -22,7 +22,7 @@ normal_testfiles = [
     'filter.txt',
     'mail.txt',
     'maintenance.txt',
-    'security_enable_user_folder.txt',
+#    'security_enable_user_folder.txt',
     'search.txt',
     'site.txt',
     'skins.txt',

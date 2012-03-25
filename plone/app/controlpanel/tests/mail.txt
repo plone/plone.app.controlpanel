@@ -9,26 +9,26 @@ Test setup::
     >>> browser.handleErrors = False
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
+    >>> portal_url = portal.absolute_url()
 
 First some initial setup code:
 
     >>> from Products.CMFCore.utils import getToolByName
     >>> from zope.component import getUtility
     >>> from Products.MailHost.interfaces import IMailHost
-    >>> ctool = getToolByName(portal, 'portal_calendar')
     >>> mailhost = getUtility(IMailHost)
 
 
 Viewing the mail control panel
 --------------------------------
 
-    >>> browser.open('http://nohost/plone/@@mail-controlpanel')
+    >>> browser.open(portal_url + '/@@mail-controlpanel')
     >>> browser.url.endswith('mail-controlpanel')
     True
 
 Click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl(name="form.buttons.cancel").click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -44,16 +44,16 @@ Make some changes
     >>> browser.url.endswith('mail-controlpanel')
     True
 
-    >>> browser.getControl(name='form.smtp_host').value = 'localhost2'
-    >>> browser.getControl(name='form.smtp_port').value = '2525'
-    >>> browser.getControl(name='form.smtp_userid').value = 'admin'
-    >>> browser.getControl(name='form.smtp_pass').value = 'secret'
-    >>> browser.getControl(name='form.email_from_name').value = 'Spambot'
-    >>> browser.getControl(name='form.email_from_address').value = 'spam@localhost'
+    >>> browser.getControl(name='form.widgets.smtp_host').value = 'localhost2'
+    >>> browser.getControl(name='form.widgets.smtp_port').value = '2525'
+    >>> browser.getControl(name='form.widgets.smtp_userid').value = 'admin'
+    >>> browser.getControl(name='form.widgets.smtp_pass').value = 'secret'
+    >>> browser.getControl(name='form.widgets.email_from_name').value = 'Spambot'
+    >>> browser.getControl(name='form.widgets.email_from_address').value = 'spam@localhost'
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('mail-controlpanel')
     True
 

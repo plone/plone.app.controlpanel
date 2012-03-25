@@ -68,9 +68,9 @@ We'll reset her password.
 
 Let's do that and try again.
     >>> browser.open('http://nohost/plone/@@mail-controlpanel')
-    >>> browser.getControl(name='form.smtp_host').value = 'nohost'
-    >>> browser.getControl(name='form.smtp_userid').value = 'bob@example.com'
-    >>> browser.getControl(name='form.actions.save').click()
+    >>> browser.getControl(name='form.widgets.smtp_host').value = 'nohost'
+    >>> browser.getControl(name='form.widgets.smtp_userid').value = 'bob@example.com'
+    >>> browser.getControl(name='form.buttons.save').click()
     >>> browser.getLink('Users and Groups').click()
     >>> browser.getControl(name='searchstring').value = 'gracie@'
     >>> browser.getControl(name='form.button.Modify').click()
