@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
-version = '2.2.4dev'
+version = '3.0dev'
 
 setup(name='plone.app.controlpanel',
       version=version,
-      description="Formlib-based controlpanels for Plone.",
+      description="Control panels for Plone.",
       long_description=open("README.txt").read() + "\n" +
                        open("CHANGES.txt").read(),
       classifiers=[
@@ -15,7 +15,7 @@ setup(name='plone.app.controlpanel',
           "Operating System :: OS Independent",
           "Programming Language :: Python",
         ],
-      keywords='plone controlpanel formlib',
+      keywords='plone controlpanel autoform z3cform registry',
       author='Plone Foundation',
       author_email='plone-developers@lists.sourceforge.net',
       url='http://pypi.python.org/pypi/plone.app.controlpanel',
