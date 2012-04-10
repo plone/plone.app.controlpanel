@@ -8,6 +8,9 @@ Changelog
   http://dev.plone.org/ticket/10359
   [timo]
 
+- Don't display an empty list element if the control panel item isn't visible.
+  [esteele]
+
 
 2.2.3 (2012-01-26)
 ------------------
