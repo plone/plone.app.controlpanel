@@ -18,6 +18,12 @@
     handler=".browser.mail.updateMailSettings"
     />
 
+  <subscriber
+    for="plone.app.controlpanel.interfaces.ISecuritySchema
+         plone.registry.interfaces.IRecordModifiedEvent"
+    handler=".browser.security.updateSecuritySettings"
+    />
+
   <include file="permissions.zcml"/>
 
   <include package=".bbb" />
@@ -38,8 +44,6 @@
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
   <adapter factory=".search.SearchControlPanelAdapter" />
-
-  <adapter factory=".security.SecurityControlPanelAdapter" />
 
   <adapter factory=".site.SiteControlPanelAdapter" />
 
@@ -108,13 +112,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".search.SearchControlPanel"
       permission="plone.app.controlpanel.Search"
-      />
-
-  <browser:page
-      name="security-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".security.SecurityControlPanel"
-      permission="plone.app.controlpanel.Security"
       />
 
   <browser:page
