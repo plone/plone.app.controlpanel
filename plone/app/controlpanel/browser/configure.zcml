@@ -21,4 +21,12 @@
     permission="cmf.ManagePortal"
     />
 
+  <!-- Security Control Panel -->
+  <browser:page
+    name="security-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".security.SecurityControlPanelView"
+    permission="cmf.ManagePortal"
+    />
+
 </configure>

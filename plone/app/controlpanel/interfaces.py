@@ -152,3 +152,49 @@ class IMailSchema(Interface):
                       "e-mail' feature."),
         default=None,
         required=True)
+
+
+class ISecuritySchema(Interface):
+
+    enable_self_reg = schema.Bool(
+        title=_(u'Enable self-registration'),
+        description=_(u"Allows users to register themselves on the site. If "
+                      "not selected, only site managers can add new users."),
+        default=False,
+        required=False)
+
+    enable_user_pwd_choice = schema.Bool(
+        title=_(u'Let users select their own passwords'),
+        description=_(u"If not selected, a URL will be generated and "
+                      "e-mailed. Users are instructed to follow the link to "
+                      "reach a page where they can change their password and "
+                      "complete the registration process; this also verifies "
+                      "that they have entered a valid email address."),
+        default=False,
+        required=False)
+
+    enable_user_folders = schema.Bool(
+        title=_(u'Enable User Folders'),
+        description=_(u"If selected, home folders where users can create "
+                      "content will be created when they log in."),
+        default=False,
+        required=False)
+
+    allow_anon_views_about = schema.Bool(
+        title=_(u"Allow anyone to view 'about' information"),
+        description=_(u"If not selected only logged-in users will be able to "
+                      "view information about who created an item and when it "
+                      "was modified."),
+        default=False,
+        required=False)
+
+    use_email_as_login = schema.Bool(
+        title=_(u'Use email address as login name'),
+        description=_(u"Allows new  users to login with their email address "
+                      "instead of specifying a separate login name. (Existing "
+                      "users must go to the @@personal-information page once "
+                      "and save it before this setting has effect for them. "
+                      "Or use the @@migrate-to-emaillogin page as a site "
+                      "admin)"),
+        default=False,
+        required=False)
