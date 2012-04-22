@@ -44,7 +44,7 @@ class MailControlPanelAdapterTest(unittest.TestCase):
         self.assertEquals(self.mailhost.smtp_port, 42)
 
     def test_get_smtp_userid_setting(self):
-        self.mailhost.smtp_userid = "johndoe"
+        self.mailhost.smtp_uid = "johndoe"
         mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.smtp_userid, "johndoe")
 
@@ -52,17 +52,17 @@ class MailControlPanelAdapterTest(unittest.TestCase):
         mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.smtp_userid = "johndoe"
         self.assertEquals(
-            self.mailhost.smtp_userid, "johndoe")
+            self.mailhost.smtp_uid, "johndoe")
 
     def test_get_smtp_pass_setting(self):
-        self.mailhost.smtp_pass = "secret"
+        self.mailhost.smtp_pwd = "secret"
         mail_settings = getAdapter(self.portal, IMailSchema)
         self.assertEquals(mail_settings.smtp_pass, "secret")
 
     def test_set_smtp_pass_setting(self):
         mail_settings = getAdapter(self.portal, IMailSchema)
         mail_settings.smtp_pass = "secret"
-        self.assertEquals(self.mailhost.smtp_pass, "secret")
+        self.assertEquals(self.mailhost.smtp_pwd, "secret")
 
     def test_get_email_from_name_setting(self):
         self.portal.email_from_name = u"Plone Site"
