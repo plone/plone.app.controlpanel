@@ -1,5 +1,6 @@
-Mail control panel
-==================
+==============================================================================
+Navigation Control Panel
+==============================================================================
 
 Test setup::
 
@@ -15,8 +16,8 @@ Test setup::
     >>> navProps = pprop['navtree_properties']
 
 
-Viewing the mail control panel
---------------------------------
+Viewing the navigation control panel
+------------------------------------
 
     >>> browser.open('http://nohost/plone/@@navigation-controlpanel')
     >>> browser.url.endswith('navigation-controlpanel')
@@ -43,7 +44,6 @@ Make some changes
     >>> browser.getControl('Automatically generate tabs').selected = False
     >>> browser.getControl('Generate tabs for items other than folders').selected = False
     >>> browser.getControl('Show items normally excluded from navigation if viewing their children.').selected = False
-    >>> browser.getControl('Collection').selected = False
     >>> browser.getControl('Page').selected = False
     >>> browser.getControl('News Item').selected = False
     >>> browser.getControl('Filter on workflow state').selected = True
@@ -70,9 +70,6 @@ Make sure the changes have been applied correctly:
 
     >>> navProps.showAllParents
     False
-
-    >>> 'Topic' in navProps.metaTypesNotToList
-    True
 
     >>> 'Document' in navProps.metaTypesNotToList
     True
