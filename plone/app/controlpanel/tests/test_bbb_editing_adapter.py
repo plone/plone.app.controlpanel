@@ -21,6 +21,9 @@ class EditingControlPanelAdapterTest(unittest.TestCase):
         ptool = getToolByName(self.portal, 'portal_properties')
         self.site_properties = ptool.site_properties
 
+    def test_adapter_lookup(self):
+        self.assertTrue(getAdapter(self.portal, IEditingSchema))
+
     def test_get_visible_ids_setting(self):
         self.assertEquals(self.site_properties.visible_ids, False)
         self.site_properties.visible_ids = True

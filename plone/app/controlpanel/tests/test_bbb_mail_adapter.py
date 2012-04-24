@@ -23,6 +23,9 @@ class MailControlPanelAdapterTest(unittest.TestCase):
         self.site_properties = ptool.site_properties
         self.mailhost = getToolByName(self.portal, 'MailHost')
 
+    def test_adapter_lookup(self):
+        self.assertTrue(getAdapter(self.portal, IMailSchema))
+
     def test_get_smtp_host_setting(self):
         self.mailhost.smtp_host = u"localhost"
         mail_settings = getAdapter(self.portal, IMailSchema)
