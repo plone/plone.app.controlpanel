@@ -6,5 +6,6 @@
   <!-- Adapter  -->
   <adapter factory=".editing.EditingControlPanelAdapter" />
   <adapter factory=".mail.MailControlPanelAdapter" />
+  <adapter factory=".security.SecurityControlPanelAdapter" />
 
 </configure>
