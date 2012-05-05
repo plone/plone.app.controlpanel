@@ -9,12 +9,8 @@ Test setup::
     >>> browser.handleErrors = False
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
+    >>> portal_url = portal.absolute_url()
 
-First some initial setup code:
-
-    >>> from zope.component import getUtility
-    >>> from Products.CMFCore.interfaces import IPropertiesTool
-    >>> ptool = getUtility(IPropertiesTool)
 
 Viewing the site control panel
 -----------------------------
@@ -35,20 +31,205 @@ There should be still no changes:
     True
 
 
-Configure the locking for the site
-----------------------------------
+Visible ids
+-----------
 
-Standard behavior for locking is to have it enabled. Let's change that:
+By default 'visible ids' are disabled::
 
-    >>> browser.open('http://nohost/plone/@@editing-controlpanel')
-    >>> browser.getControl(name='form.widgets.lock_on_ttw_edit:list').value
-    ['selected']
-    >>> browser.getControl(name='form.widgets.lock_on_ttw_edit:list').value = False
+    >>> browser.open(portal_url + '/@@editing-controlpanel')
+    >>> browser.getControl(name='form.widgets.visible_ids:list').value
+    []
+
+The 'visible ids' setting is stored on the site properties::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('visible_ids')
+    False
+
+Set 'visible ids' to True on control panel::
+
+    >>> browser.getControl(name='form.widgets.visible_ids:list').value = [True]
     >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('editing-controlpanel')
     True
 
-Confirm that our change updated the property:
+Confirm that the visible ids setting has been stored::
 
-    >>> ptool.site_properties.lock_on_ttw_edit
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('visible_ids')
+    True
+
+
+Enable inline editing
+---------------------
+
+By default 'enable inline editing' is disabled::
+
+    >>> browser.open(portal_url + '/@@editing-controlpanel')
+    >>> browser.getControl(name='form.widgets.enable_inline_editing:list').value
+    []
+
+The 'enable inline editing' setting is stored on the site properties::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('enable_inline_editing')
     False
+
+Set 'enable inline editing' to True::
+
+    >>> browser.getControl(name='form.widgets.enable_inline_editing:list').value = [True]
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url.endswith('editing-controlpanel')
+    True
+
+Confirm that the 'enable inline editing' setting has been stored::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('enable_inline_editing')
+    True
+
+
+Enable link integrity checks
+----------------------------
+
+By default 'enable link integrity checks' is enabled::
+
+    >>> browser.open(portal_url + '/@@editing-controlpanel')
+    >>> browser.getControl(name='form.widgets.enable_link_integrity_checks:list').value
+    ['selected']
+
+The 'enable link integrity checks' setting is stored on the site properties::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('enable_link_integrity_checks')
+    True
+
+Set 'enable link integrity checks' to False::
+
+    >>> browser.getControl(name='form.widgets.enable_link_integrity_checks:list').value = []
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url.endswith('editing-controlpanel')
+    True
+
+Confirm that the 'enable link integrity checks' setting has been stored::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('enable_link_integrity_checks')
+    False
+
+
+Default Editor
+--------------
+
+By default 'TinyMCE' is the default editor::
+
+    >>> browser.open(portal_url + '/@@editing-controlpanel')
+    >>> browser.getControl(name='form.widgets.default_editor:list').value
+    ['TinyMCE']
+
+XXX: Todo:
+
+    >>> browser.getControl(name='form.widgets.default_editor:list').options
+    ['--NOVALUE--', 'None', 'TinyMCE']
+
+
+The 'default editor' setting is stored on the site properties::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('default_editor')
+    'TinyMCE'
+
+Set 'default editor' setting to None::
+
+    >>> browser.getControl(name='form.widgets.default_editor:list').value = []
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url.endswith('editing-controlpanel')
+    True
+
+Confirm that the default editor setting has been stored::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('default_editor')
+    set([])
+
+
+Lock on TTW edit
+----------------
+
+By default 'lock on ttw edit' is enabled::
+
+    >>> browser.open(portal_url + '/@@editing-controlpanel')
+    >>> browser.getControl(name='form.widgets.lock_on_ttw_edit:list').value
+    ['selected']
+
+The 'lock on ttw edit' setting is stored on the site properties::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('lock_on_ttw_edit')
+    True
+
+Set 'lock on ttw edit' to False::
+
+    >>> browser.getControl(name='form.widgets.lock_on_ttw_edit:list').value = []
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url.endswith('editing-controlpanel')
+    True
+
+Confirm that the 'lock on ttw edit' setting has been stored::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('lock_on_ttw_edit')
+    False
+
+
+External Editor
+---------------
+
+By default 'external editor' is enabled::
+
+    >>> browser.open(portal_url + '/@@editing-controlpanel')
+    >>> browser.getControl(name='form.widgets.ext_editor:list').value
+    []
+
+The 'external editor' setting is stored on the site properties::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('ext_editor')
+    False
+
+Set 'external editor' to True::
+
+    >>> browser.getControl(name='form.widgets.ext_editor:list').value = ['selected']
+    >>> browser.getControl(name="form.buttons.save").click()
+    >>> browser.url.endswith('editing-controlpanel')
+    True
+
+Confirm that the 'external editor' setting has been stored::
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> ptool = getToolByName(portal, "portal_properties")
+    >>> site_properties = ptool.site_properties
+    >>> site_properties.getProperty('ext_editor')
+    True
