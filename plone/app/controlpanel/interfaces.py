@@ -53,7 +53,7 @@ class IEditingSchema(Interface):
         default=u'TinyMCE',
         missing_value=set(),
         vocabulary="plone.app.vocabularies.AvailableEditors",
-        required=False)
+        required=True)
 
     ext_editor = schema.Bool(
         title=_(u'Enable External Editor feature'),

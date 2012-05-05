@@ -139,11 +139,10 @@ By default 'TinyMCE' is the default editor::
     >>> browser.getControl(name='form.widgets.default_editor:list').value
     ['TinyMCE']
 
-XXX: Todo:
+By default 'TinyMCE' is the only option::
 
     >>> browser.getControl(name='form.widgets.default_editor:list').options
-    ['--NOVALUE--', 'None', 'TinyMCE']
-
+    ['None', 'TinyMCE']
 
 The 'default editor' setting is stored on the site properties::
 
@@ -155,7 +154,7 @@ The 'default editor' setting is stored on the site properties::
 
 Set 'default editor' setting to None::
 
-    >>> browser.getControl(name='form.widgets.default_editor:list').value = []
+    >>> browser.getControl(name='form.widgets.default_editor:list').value = ['None']
     >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('editing-controlpanel')
     True
@@ -166,7 +165,7 @@ Confirm that the default editor setting has been stored::
     >>> ptool = getToolByName(portal, "portal_properties")
     >>> site_properties = ptool.site_properties
     >>> site_properties.getProperty('default_editor')
-    set([])
+    'None'
 
 
 Lock on TTW edit
