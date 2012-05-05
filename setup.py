@@ -58,5 +58,6 @@ setup(name='plone.app.controlpanel',
         'Products.statusmessages',
         'Zope2>=2.13.0',
         'ZODB3',
+        'collective.monkeypatcher',
       ],
       )

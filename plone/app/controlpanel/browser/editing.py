@@ -78,4 +78,3 @@ class ControlPanelFormWrapper(layout.FormWrapper):
 
 EditingControlPanelView = layout.wrap_form(
     EditingControlPanel, ControlPanelFormWrapper)
-

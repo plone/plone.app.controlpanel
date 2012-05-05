@@ -1,7 +1,17 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:browser="http://namespaces.zope.org/browser">
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:monkey="http://namespaces.plone.org/monkey">
+
+  <!-- Monkey Patch Properties Tool -->
+  <include package="collective.monkeypatcher" />
+  <monkey:patch
+    description=""
+    class="Products.CMFPlone.PropertiesTool.SimpleItemWithProperties"
+    original="_setProperty"
+    replacement=".patches._setProperty"
+    />
 
   <!-- Adapter  -->
   <adapter factory=".editing.EditingControlPanelAdapter" />
