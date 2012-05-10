@@ -18,7 +18,7 @@
     name="mail-controlpanel"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".mail.MailControlPanel"
-    permission="cmf.ManagePortal"
+    permission="plone.app.controlpanel.Mail"
     />
 
   <!-- Security Control Panel -->
@@ -26,7 +26,7 @@
     name="security-controlpanel"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".security.SecurityControlPanelView"
-    permission="cmf.ManagePortal"
+    permission="plone.app.controlpanel.Security"
     />
 
 </configure>
