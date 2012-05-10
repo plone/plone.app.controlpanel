@@ -9,8 +9,8 @@
   <monkey:patch
     description=""
     class="Products.CMFPlone.PropertiesTool.SimpleItemWithProperties"
-    original="_setProperty"
-    replacement=".patches._setProperty"
+    original="_updateProperty"
+    replacement=".patches._updateProperty"
     />
 
   <!-- Adapter  -->
