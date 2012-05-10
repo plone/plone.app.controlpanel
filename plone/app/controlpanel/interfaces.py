@@ -69,7 +69,7 @@ class IEditingSchema(Interface):
         title=_(u"Enable inline editing"),
         description=_(u"Check this to enable "
                       "inline editing on the site."),
-        default=True,
+        default=False,
         required=False)
 
     enable_link_integrity_checks = schema.Bool(

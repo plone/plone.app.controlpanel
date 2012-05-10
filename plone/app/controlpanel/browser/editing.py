@@ -1,80 +1,63 @@
-from zope.component import adapts
-from zope.interface import implements
-from Products.CMFDefault.formlib.schema import ProxyFieldProperty
-from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from logging import getLogger
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
-from z3c.form import form
-from plone.z3cform import layout
-from Products.CMFPlone import PloneMessageFactory as _
-from plone.autoform.form import AutoExtensibleForm
+
+from plone.app.controlpanel import _
+from plone.app.registry.browser import controlpanel
 
 from plone.app.controlpanel.interfaces import IEditingSchema
 
+log = getLogger('Plone')
 
-class EditingControlPanel(AutoExtensibleForm, form.EditForm):
+
+class EditingControlPanel(controlpanel.RegistryEditForm):
+
     schema = IEditingSchema
-    id = "editing-control-panel"
-    label = _("Editing settings")
-    description = _("General editing settings.")
-    form_name = _("Editing settings")
-    control_panel_view = "editing-controlpanel"
+    label = _(u"Editing settings")
+    description = _(u"""""")
 
-    def getContent(self):
-        portal = getSite()
-        pprop = getToolByName(portal, 'portal_properties')
-        site_properties = pprop.site_properties
-        self.context = site_properties
-        context = dict()
-        context['visible_ids'] = site_properties.getProperty('visible_ids')
-        context['enable_inline_editing'] = \
-            site_properties.getProperty('enable_inline_editing')
-        context['enable_link_integrity_checks'] = \
-            site_properties.getProperty('enable_link_integrity_checks')
-        context['ext_editor'] = site_properties.getProperty('ext_editor')
-        context['default_editor'] = site_properties.getProperty(
-            'default_editor')
-        context['lock_on_ttw_edit'] = site_properties.getProperty(
-            'lock_on_ttw_edit')
-        return context
+    def updateFields(self):
+        super(EditingControlPanel, self).updateFields()
 
-    @button.buttonAndHandler(_('Save'), name='save')
+    def updateWidgets(self):
+        super(EditingControlPanel, self).updateWidgets()
+
+    @button.buttonAndHandler(_('Save'), name=None)
     def handleSave(self, action):
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
             return
-        portal = getSite()
-        pprop = getToolByName(portal, 'portal_properties')
-        site_properties = pprop.site_properties
-        site_properties.manage_changeProperties(
-            visible_ids=data['visible_ids'],
-            enable_inline_editing=data['enable_inline_editing'],
-            enable_link_integrity_checks=data['enable_link_integrity_checks'],
-            ext_editor=data['ext_editor'],
-            default_editor=data['default_editor'],
-            lock_on_ttw_edit=data['lock_on_ttw_edit'])
-        #IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"),
-        #S                                              "info")
-        self.request.response.redirect("@@editing-controlpanel")
+        self.applyChanges(data)
+        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved."),
+                                                      "info")
+        self.context.REQUEST.RESPONSE.redirect("@@editing-controlpanel")
 
-    @button.buttonAndHandler(_(u"Cancel"), name='cancel')
+    @button.buttonAndHandler(_('Cancel'), name='cancel')
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(
-            _(u"Changes canceled."), "info")
-        self.request.response.redirect("plone_control_panel")
+        IStatusMessage(self.request).addStatusMessage(_(u"Changes canceled."),
+                                                      "info")
+        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
+                                                  self.control_panel_view))
 
 
-class ControlPanelFormWrapper(layout.FormWrapper):
-    """Use this form as the plone.z3cform layout wrapper to get the control
-    panel layout.
+def updateEditingSettings(settings, event):
+    """Update Plone's editing settings when the editing settings in the
+    editing control panel change.
     """
+    portal = getSite()
+    portal_properties = getToolByName(portal, "portal_properties")
+    site_properties = portal_properties.site_properties
+    site_properties.visible_ids = settings.visible_ids
+    site_properties.enable_inline_editing = settings.enable_inline_editing
+    site_properties.enable_link_integrity_checks = \
+        settings.enable_link_integrity_checks
+    site_properties.ext_editor = settings.ext_editor
+    site_properties.default_editor = settings.default_editor
+    site_properties.lock_on_ttw_edit = settings.lock_on_ttw_edit
 
-    index = ViewPageTemplateFile('controlpanel_layout.pt')
 
-
-EditingControlPanelView = layout.wrap_form(
-    EditingControlPanel, ControlPanelFormWrapper)
+class EditingControlPanelView(controlpanel.ControlPanelFormWrapper):
+    form = EditingControlPanel

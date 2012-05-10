@@ -13,6 +13,12 @@
     />
 
   <subscriber
+    for="plone.app.controlpanel.interfaces.IEditingSchema
+         plone.registry.interfaces.IRecordModifiedEvent"
+    handler=".browser.editing.updateEditingSettings"
+    />
+
+  <subscriber
     for="plone.app.controlpanel.interfaces.IMailSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".browser.mail.updateMailSettings"

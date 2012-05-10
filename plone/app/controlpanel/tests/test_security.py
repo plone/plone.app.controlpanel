@@ -23,7 +23,7 @@ from plone.app.controlpanel.testing import \
 
 
 class SecurityRegistryIntegrationTest(unittest.TestCase):
-    """Tests that all security settings are stored as plone.app.registry
+    """Test that the security settings are stored as plone.app.registry
     settings.
     """
 
@@ -85,7 +85,7 @@ class SecurityRegistryIntegrationTest(unittest.TestCase):
 
 
 class SecurityControlPanelFunctionalTest(unittest.TestCase):
-    """Tests that changes in the security control panel are actually
+    """Test that changes in the security control panel are actually
     stored in the registry.
     """
 
@@ -164,7 +164,7 @@ class SecurityControlPanelFunctionalTest(unittest.TestCase):
 
 
 class SecurityRegistryIntegrationTest(unittest.TestCase):
-    """Tests that changes in the security registry are actually applied.
+    """Test that changes in the security registry are actually applied.
     """
 
     layer = PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING

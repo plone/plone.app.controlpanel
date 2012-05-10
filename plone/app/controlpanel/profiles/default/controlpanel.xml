@@ -6,6 +6,18 @@
     purge="False">
 
     <configlet
+        title="Editing"
+        action_id="editing"
+        appId="plone.app.controlpanel"
+        category="plone"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@editing-controlpanel"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+    <configlet
         title="Mail"
         action_id="mail"
         appId="plone.app.controlpanel"

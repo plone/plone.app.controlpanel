@@ -150,7 +150,7 @@ The 'default editor' setting is stored on the site properties::
     >>> ptool = getToolByName(portal, "portal_properties")
     >>> site_properties = ptool.site_properties
     >>> site_properties.getProperty('default_editor')
-    'TinyMCE'
+    u'TinyMCE'
 
 Set 'default editor' setting to None::
 
