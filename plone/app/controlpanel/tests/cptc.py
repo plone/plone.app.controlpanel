@@ -2,16 +2,14 @@
 """Base class for control panel test cases.
 
 This is in a separate module because it's potentially useful to other
-packages which register controlpanels. They should be able to import it
-without the PloneTestCase.setupPloneSite() side effects.
+packages which register controlpanels.
 """
 
 import re
 
-from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
-from Products.PloneTestCase.PloneTestCase import portal_owner, default_password
-from Products.Five.testbrowser import Browser
 from Products.CMFCore.utils import getToolByName
+
+from plone.app.testing import api
 
 
 class FakeRequest(object):
@@ -20,13 +18,13 @@ class FakeRequest(object):
     environ = {}
 
 
-class ControlPanelTestCase(FunctionalTestCase):
+class ControlPanelTestCase(api.PloneTestCase):
     """base test case with convenience methods for all control panel tests"""
 
     def afterSetUp(self):
         super(ControlPanelTestCase, self).afterSetUp()
 
-        self.browser = Browser()
+        self.browser = api.Browser(self.app)
 
         self.uf = self.portal.acl_users
         self.uf.userFolderAddUser('root', 'secret', ['Manager'], [])
