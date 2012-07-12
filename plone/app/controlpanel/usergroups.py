@@ -354,9 +354,12 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                     # AlecM thinks this wouldn't be a problem if mail queuing was
                     # always on -- but it isn't. (stevem)
                     # so we test if queue is not on to set immediate
-                    immediate = not self.get_mailhost().smtp_queue
+                    #immediate = not self.get_mailhost().smtp_queue
+                    # do3cc: immediate is not available in plone 4.2 and this branch should stay
+                    # compatible with 4.2
                     try:
-                        regtool.mailPassword(user.id, context.REQUEST, immediate=immediate)
+                        # regtool.mailPassword(user.id, context.REQUEST, immediate=immediate)
+                        regtool.mailPassword(user.id, context.REQUEST)
                     except SMTPException as e:
                         logger.exception(e)
                         users_failed_reset_passwords.append(user.id)
