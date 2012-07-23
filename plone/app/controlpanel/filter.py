@@ -1,4 +1,5 @@
 from plone.fieldsets.fieldsets import FormFieldsets
+from plone.app.form.widgets.sequencewidget import ListSequenceWidget
 
 from zope.interface import Interface
 from zope.component import adapts
@@ -6,7 +7,6 @@ from zope.interface import implements
 from zope import schema
 from zope.formlib.widget import CustomWidgetFactory
 from zope.formlib.objectwidget import ObjectWidget
-from zope.formlib.sequencewidget import ListSequenceWidget
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
