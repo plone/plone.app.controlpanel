@@ -2,7 +2,14 @@
 Navigation Control Panel
 ==============================================================================
 
-Test setup::
+The navigation control panel lets you control how the navigation is
+constructed in your site. The control panel holds settings for
+"tab generation settings", "displayed content types", "workflow settings",
+and "show excluded items". We will test those sections one after another.
+
+
+Test setup
+----------
 
     >>> app = layer['app']
     >>> from plone.testing.z2 import Browser
@@ -10,16 +17,18 @@ Test setup::
     >>> browser.handleErrors = False
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
+    >>> portal_url = portal.absolute_url()
     >>> from Products.CMFCore.utils import getToolByName
     >>> pprop = getToolByName(portal, 'portal_properties')
     >>> siteProps = pprop['site_properties']
     >>> navProps = pprop['navtree_properties']
 
 
-Viewing the navigation control panel
-------------------------------------
+Tabs Generation Settings
+------------------------
 
-    >>> browser.open('http://nohost/plone/@@navigation-controlpanel')
+    >>> browser.open(portal_url + '/plone_control_panel')
+    >>> browser.getLink('Navigation').click()
     >>> browser.url.endswith('navigation-controlpanel')
     True
 
@@ -30,7 +39,35 @@ Default values:
     >>> browser.getControl('Generate tabs for items other than folders').selected
     True
 
-Default content types that show up in the navigation:
+Change settings:
+
+    >>> browser.getControl('Automatically generate tabs', index=0).selected = False
+    >>> browser.getControl('Generate tabs for items other than folders').selected = False
+
+    >>> browser.getControl("Save").click()
+    >>> browser.url.endswith('navigation-controlpanel')
+    True
+    >>> 'Changes saved.' in browser.contents
+    True
+
+Make sure the settings have been applied properly:
+
+    >>> siteProps.disable_folder_sections
+    True
+
+    >>> siteProps.disable_nonfolderish_sections
+    True
+
+
+Displayed Content Types
+-----------------------
+
+    >>> browser.open(portal_url + '/plone_control_panel')
+    >>> browser.getLink('Navigation').click()
+    >>> browser.url.endswith('navigation-controlpanel')
+    True
+
+Default values:
 
     >>> browser.getControl('Collection', index=0).selected
     True
@@ -51,10 +88,67 @@ Default content types that show up in the navigation:
     >>> browser.getControl('Page').selected
     True
 
-Filter on workflow state default values:
+Change settings:
+
+    >>> browser.getControl('Collection', index=0).selected = False
+    >>> browser.getControl('Comment').selected = True
+    >>> browser.getControl('Event').selected = False
+    >>> browser.getControl('File').selected = False
+    >>> browser.getControl('Folder').selected = False
+    >>> browser.getControl('Image').selected = False
+    >>> browser.getControl('Link').selected = False
+    >>> browser.getControl('News Item').selected = False
+    >>> browser.getControl('Page').selected = False
+
+    >>> browser.getControl("Save").click()
+    >>> browser.url.endswith('navigation-controlpanel')
+    True
+    >>> 'Changes saved.' in browser.contents
+    True
+
+Make sure the settings have been applied properly:
+
+    >>> 'Collection' in navProps.metaTypesNotToList
+    True
+
+    >>> 'Comment' in navProps.metaTypesNotToList
+    False
+
+    >>> 'Event' in navProps.metaTypesNotToList
+    True
+
+    >>> 'File' in navProps.metaTypesNotToList
+    True
+
+    >>> 'Folder' in navProps.metaTypesNotToList
+    True
+
+    >>> 'Image' in navProps.metaTypesNotToList
+    True
+
+    >>> 'Link' in navProps.metaTypesNotToList
+    True
+
+    >>> 'News Item' in navProps.metaTypesNotToList
+    True
+
+    >>> 'Document' in navProps.metaTypesNotToList
+    True
+
+
+Workflow Settings
+-----------------
+
+    >>> browser.open(portal_url + '/plone_control_panel')
+    >>> browser.getLink('Navigation').click()
+    >>> browser.url.endswith('navigation-controlpanel')
+    True
+
+Default values:
 
     >>> browser.getControl('Filter on workflow state').selected
     False
+
     >>> browser.getControl('Externally visible [external]').selected
     False
     >>> browser.getControl('Internal draft [internal]').selected
@@ -70,42 +164,7 @@ Filter on workflow state default values:
     >>> browser.getControl('Published [published]').selected
     False
 
-Show excluded items default value:
-
-    >>> browser.getControl('Show items normally excluded from navigation if viewing their children.').selected
-    True
-
-Click the cancel button:
-
-    >>> browser.getControl(name="form.actions.cancel").click()
-    >>> browser.url.endswith('plone_control_panel')
-    True
-
-There should be still no changes:
-
-    >>> 'Changes canceled.' in browser.contents
-    True
-
-
-Make some changes
------------------
-
-    >>> browser.getLink('Navigation').click()
-    >>> browser.url.endswith('navigation-controlpanel')
-    True
-
-    >>> browser.getControl('Automatically generate tabs', index=0).selected = False
-    >>> browser.getControl('Generate tabs for items other than folders').selected = False
-
-    >>> browser.getControl('Collection', index=0).selected = False
-    >>> browser.getControl('Comment').selected = True
-    >>> browser.getControl('Event').selected = False
-    >>> browser.getControl('File').selected = False
-    >>> browser.getControl('Folder').selected = False
-    >>> browser.getControl('Image').selected = False
-    >>> browser.getControl('Link').selected = False
-    >>> browser.getControl('News Item').selected = False
-    >>> browser.getControl('Page').selected = False
+Change settings:
 
     >>> browser.getControl('Filter on workflow state').selected = True
     >>> browser.getControl('Externally visible [external]').selected = True
@@ -116,55 +175,63 @@ Make some changes
     >>> browser.getControl('Public draft [visible]').selected = True
     >>> browser.getControl('Published [published]').selected = True
 
-    >>> browser.getControl('Show items normally excluded from navigation if viewing their children.').selected = False
-
-Click the save button:
-
     >>> browser.getControl("Save").click()
     >>> browser.url.endswith('navigation-controlpanel')
     True
-
-We should be informed that something has changed:
-
     >>> 'Changes saved.' in browser.contents
     True
 
-Make sure the changes have been applied correctly:
-
-    >>> siteProps.disable_folder_sections
-    True
-
-    >>> siteProps.disable_nonfolderish_sections
-    True
-
-    >>> navProps.showAllParents
-    False
-
-    >>> 'Document' in navProps.metaTypesNotToList
-    True
-
-    >>> 'News Item' in navProps.metaTypesNotToList
-    True
+Make sure the settings have been applied properly:
 
     >>> navProps.enable_wf_state_filtering
+    True
+
+    >>> 'external' in navProps.wf_states_to_show
+    True
+
+    >>> 'internal' in navProps.wf_states_to_show
+    True
+
+    >>> 'internally_published' in navProps.wf_states_to_show
+    True
+
+    >>> 'pending' in navProps.wf_states_to_show
     True
 
     >>> 'private' in navProps.wf_states_to_show
     True
 
-Make sure, settings in search do not affect the settings in navigation
-
-    >>> browser.open('http://nohost/plone/@@search-controlpanel')
-    >>> browser.getControl('Folder').selected = False
-    >>> browser.getControl(name="form.actions.save").click()
-
-    >>> browser.open('http://nohost/plone/@@navigation-controlpanel')
-    >>> browser.getControl('Folder').selected = False
-    >>> browser.getControl("Save").click()
-    >>> browser.getControl('Folder').selected
-    False
-
-    >>> browser.getControl('Folder').selected = True
-    >>> browser.getControl("Save").click()
-    >>> browser.getControl('Folder').selected
+    >>> 'visible' in navProps.wf_states_to_show
     True
+
+    >>> 'published' in navProps.wf_states_to_show
+    True
+
+
+Show excluded items
+-------------------
+
+    >>> browser.open(portal_url + '/plone_control_panel')
+    >>> browser.getLink('Navigation').click()
+    >>> browser.url.endswith('navigation-controlpanel')
+    True
+
+Default value:
+
+    >>> browser.getControl('Show items normally excluded from navigation if viewing their children.').selected
+    True
+
+Change setting:
+
+    >>> browser.getControl('Show items normally excluded from navigation if viewing their children.').selected = False
+
+    >>> browser.getControl("Save").click()
+    >>> browser.url.endswith('navigation-controlpanel')
+    True
+    >>> 'Changes saved.' in browser.contents
+    True
+
+Make sure the settings have been applied properly:
+
+    >>> navProps.showAllParents
+    False
