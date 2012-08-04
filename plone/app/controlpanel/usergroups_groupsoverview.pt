@@ -77,8 +77,8 @@
                   <span tal:omit-tag=""
                         i18n:translate="description_groups_management2">
                     The symbol
-                    <img i18n:name="image_link_icon"
-                         tal:replace="structure context/site_icon.gif" />
+                    <img src="" i18n:name="image_link_icon"
+                         tal:attributes="src string:${context/absolute_url}/site_icon.png" />
                     indicates a role inherited from membership in another group.
                   </span>
                 </p>
@@ -223,7 +223,9 @@
                                            tal:condition="python:explicit and not enabled and not inherited"
                                            tal:attributes="name string:group_${group_info/groupid}:list;
                                                            value portal_role" />
-                                    <img tal:condition="inherited" tal:replace="structure context/site_icon.gif" />
+                                    <img tal:condition="inherited" src=""
+                                         tal:attributes="src string:${context/absolute_url}/site_icon.png"
+                                         />
                                   </tal:block>
                                 </td>
 
