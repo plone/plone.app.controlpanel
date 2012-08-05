@@ -20,34 +20,9 @@ log = getLogger('Plone')
 
 class MailControlPanelForm(controlpanel.RegistryEditForm):
 
-    schema = IMailSchema
     id = "MailControlPanel"
     label = _(u"Mail settings")
-    description = _(u"""""")
-
-    def updateFields(self):
-        super(MailControlPanelForm, self).updateFields()
-
-    def updateWidgets(self):
-        super(MailControlPanelForm, self).updateWidgets()
-
-    @button.buttonAndHandler(_('Save'), name=None)
-    def handleSave(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved."),
-                                                      "info")
-        self.context.REQUEST.RESPONSE.redirect("@@mail-controlpanel")
-
-    @button.buttonAndHandler(_('Cancel'), name='cancel')
-    def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes canceled."),
-                                                      "info")
-        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
-                                                  self.control_panel_view))
+    schema = IMailSchema
 
     @button.buttonAndHandler(_('label_smtp_test',
         default='Save and send test e-mail'), name='test')
@@ -103,6 +78,10 @@ class MailControlPanelForm(controlpanel.RegistryEditForm):
             socket.setdefaulttimeout(timeout)
 
 
+class MailControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = MailControlPanelForm
+
+
 def updateMailSettings(settings, event):
     portal = getSite()
     mailhost = getToolByName(portal, 'MailHost')
@@ -113,7 +92,3 @@ def updateMailSettings(settings, event):
     getUtility(ISiteRoot).email_from_name = \
         settings.email_from_name
     getUtility(ISiteRoot).email_from_address = settings.email_from_address
-
-
-class MailControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = MailControlPanelForm

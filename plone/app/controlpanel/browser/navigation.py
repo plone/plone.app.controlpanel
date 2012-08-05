@@ -1,7 +1,5 @@
 from plone.app.vocabularies.types import BAD_TYPES
 from logging import getLogger
-from Products.statusmessages.interfaces import IStatusMessage
-from z3c.form import button
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
 from zope.site.hooks import getSite
@@ -34,26 +32,9 @@ class NavigationControlPanelForm(controlpanel.RegistryEditForm):
         self.fields['workflow_states_to_show'].widgetFactory = \
             CheckBoxFieldWidget
 
-    def updateWidgets(self):
-        super(NavigationControlPanelForm, self).updateWidgets()
 
-    @button.buttonAndHandler(_('Save'), name=None)
-    def handleSave(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved."),
-                                                      "info")
-        self.context.REQUEST.RESPONSE.redirect("@@navigation-controlpanel")
-
-    @button.buttonAndHandler(_('Cancel'), name='cancel')
-    def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes canceled."),
-                                                      "info")
-        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
-                                                  self.control_panel_view))
+class NavigationControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = NavigationControlPanelForm
 
 
 def updateNavigationSettings(settings, event):
@@ -90,7 +71,3 @@ def updateNavigationSettings(settings, event):
 
     if event.record.fieldName == "show_excluded_items":
         navProps.showAllParents = settings.show_excluded_items
-
-
-class NavigationControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = NavigationControlPanelForm

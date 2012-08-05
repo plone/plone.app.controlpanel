@@ -14,34 +14,13 @@ log = getLogger('Plone')
 
 class SecurityControlPanelForm(controlpanel.RegistryEditForm):
 
-    schema = ISecuritySchema
     id = "SecurityControlPanel"
     label = _(u"Security settings")
-    description = _(u"""""")
+    schema = ISecuritySchema
 
-    def updateFields(self):
-        super(SecurityControlPanelForm, self).updateFields()
 
-    def updateWidgets(self):
-        super(SecurityControlPanelForm, self).updateWidgets()
-
-    @button.buttonAndHandler(_('Save'), name=None)
-    def handleSave(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved."),
-                                                      "info")
-        self.context.REQUEST.RESPONSE.redirect("@@security-controlpanel")
-
-    @button.buttonAndHandler(_('Cancel'), name='cancel')
-    def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes canceled."),
-                                                      "info")
-        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
-                                                  self.control_panel_view))
+class SecurityControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = SecurityControlPanelForm
 
 
 def updateSecuritySettings(settings, event):
@@ -56,7 +35,3 @@ def updateSecuritySettings(settings, event):
     site_properties.use_email_as_login = settings.use_email_as_login
     mtool = getToolByName(portal, "portal_membership")
     mtool.memberareaCreationFlag = settings.enable_user_folders
-
-
-class SecurityControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = SecurityControlPanelForm

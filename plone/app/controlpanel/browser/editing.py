@@ -1,7 +1,6 @@
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from logging import getLogger
-from z3c.form import button
 
 from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
@@ -16,14 +15,6 @@ class EditingControlPanelForm(controlpanel.RegistryEditForm):
     id = "EditingControlPanel"
     label = _(u"Editing settings")
     schema = IEditingSchema
-
-    @button.buttonAndHandler(_('Save'), name=None)
-    def handleSave(self, action):
-        super(EditingControlPanelForm, self).handleSave(self, action)
-
-    @button.buttonAndHandler(_('Cancel'), name='cancel')
-    def handleCancel(self, action):
-        super(EditingControlPanelForm, self).handleCancel(self, action)
 
 
 class EditingControlPanel(controlpanel.ControlPanelFormWrapper):
