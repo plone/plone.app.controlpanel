@@ -1,7 +1,6 @@
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from logging import getLogger
-from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 
 from plone.app.controlpanel import _
@@ -14,34 +13,21 @@ log = getLogger('Plone')
 
 class EditingControlPanelForm(controlpanel.RegistryEditForm):
 
-    schema = IEditingSchema
     id = "EditingControlPanel"
     label = _(u"Editing settings")
-    description = _(u"""""")
-
-    def updateFields(self):
-        super(EditingControlPanelForm, self).updateFields()
-
-    def updateWidgets(self):
-        super(EditingControlPanelForm, self).updateWidgets()
+    schema = IEditingSchema
 
     @button.buttonAndHandler(_('Save'), name=None)
     def handleSave(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        self.applyChanges(data)
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes saved."),
-                                                      "info")
-        self.context.REQUEST.RESPONSE.redirect("@@editing-controlpanel")
+        super(EditingControlPanelForm, self).handleSave(self, action)
 
     @button.buttonAndHandler(_('Cancel'), name='cancel')
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(_(u"Changes canceled."),
-                                                      "info")
-        self.request.response.redirect("%s/%s" % (self.context.absolute_url(),
-                                                  self.control_panel_view))
+        super(EditingControlPanelForm, self).handleCancel(self, action)
+
+
+class EditingControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = EditingControlPanelForm
 
 
 def updateEditingSettings(settings, event):
@@ -58,7 +44,3 @@ def updateEditingSettings(settings, event):
     site_properties.ext_editor = settings.ext_editor
     site_properties.default_editor = settings.default_editor
     site_properties.lock_on_ttw_edit = settings.lock_on_ttw_edit
-
-
-class EditingControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = EditingControlPanelForm

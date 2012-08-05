@@ -63,6 +63,8 @@ Set 'visible ids' to True on control panel::
 
     >>> browser.getControl(name='form.widgets.visible_ids:list').value = [True]
     >>> browser.getControl(name="form.buttons.save").click()
+    >>> "Changes saved." in browser.contents
+    True
     >>> browser.url.endswith('editing-controlpanel')
     True
 
