@@ -1,0 +1,55 @@
+DONE
+====
+
+ [X] @@editing-controlpanel     formlib
+ [X] @@mail-controlpanel        formlib
+ [X] @@navigation-controlpanel  formlib
+ [X] @@security-controlpanel    formlib
+
+TODO
+====
+
+ [ ] @@types-controlpanel       formlib (ControlPanelForm)     prefs_configlet_main
+ [ ] @@skins-controlpanel       formlib (ControlPanelForm)
+ [ ] @@usergroup-userprefs      formlib (ControlPanelForm)
+ [ ] @@language-controlpanel    formlib (ControlPanelForm)
+ [ ] @@search-controlpanel      formlib (ControlPanelForm)
+ [ ] @@markup-controlpanel      formlib (ControlPanelForm)
+ [ ] @@maintenance-controlpanel formlib (SchemaAdapterBase)
+ [ ] @@site-controlpanel        formlib (ControlPanelForm)
+ [ ] @@filter-controlpanel      formlib (ControlPanelForm)
+ [ ] @@calendar-controlpanel    formlib (ControlPanelForm)
+
+
+Separate Packages
+-----------------
+
+ [ ] @@caching-controlpanel (plone.app.caching)     prefs_configlet_content
+
+ [ ] @@theming-controlpanel (plone.app.theming)     prefs_configlet_main
+
+ [ ] @@imaging-controlpanel (plone.app.imaging)
+     plone.app.imaging/plone/app/imaging/configlet.py    from plone.app.controlpanel.form import ControlPanelForm
+
+ [ ] @@discussion-settings (plone.app.discussion)           plone.app.registry
+      prefs_configlet_content
+
+ [ ] @@dexterity-types (plone.app.dexterity)                plone.app.registry
+
+ [ ] @@rules-controlpanel (plone.app.contentrules)
+
+ [ ] portal_tinymce/@@tinymce-controlpanel (P.TinyMCE)
+
+
+Ignore
+======
+
+ [ ] portal_registry
+
+ [ ] prefs_install_products_form
+     prefs_configlet_main        Products.CMFPlone/Products/CMFPlone/plone_prefs/prefs_install_products_form.pt
+
+ [ ] prefs_error_log_form
+     prefs_configlet_main        Products.CMFPlone/Products/CMFPlone/plone_prefs/prefs_configlet_main.pt
+
+ [ ] portal_atct/atct_manageTopicIndex
