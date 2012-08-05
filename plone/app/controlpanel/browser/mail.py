@@ -1,18 +1,22 @@
 import smtplib
 import socket
 import sys
+
+from logging import getLogger
 from zope.component import getUtility
+from Products.CMFCore.interfaces import ISiteRoot
+from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.site.hooks import getSite
-from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.MailHost.MailHost import MailHostError
-from Products.statusmessages.interfaces import IStatusMessage
 
 from plone.app.registry.browser import controlpanel
 
 from plone.app.controlpanel import _
 from plone.app.controlpanel.interfaces import IMailSchema
+
+log = getLogger('Plone')
 
 
 class MailControlPanelForm(controlpanel.RegistryEditForm):
@@ -21,9 +25,16 @@ class MailControlPanelForm(controlpanel.RegistryEditForm):
     label = _(u"Mail settings")
     schema = IMailSchema
 
-    @button.buttonAndHandler(
-        _('label_smtp_test', default='Save and send test e-mail'),
-        name='test')
+    @button.buttonAndHandler(_('Save'), name=None)
+    def handleSave(self, action):
+        super(MailControlPanelForm, self).handleSave(self, action)
+
+    @button.buttonAndHandler(_('Cancel'), name='cancel')
+    def handleCancel(self, action):
+        super(MailControlPanelForm, self).handleCancel(self, action)
+
+    @button.buttonAndHandler(_('label_smtp_test',
+        default='Save and send test e-mail'), name='test')
     def handle_test_action(self, action):
         data = self.request.form
         # Save data first
@@ -76,10 +87,6 @@ class MailControlPanelForm(controlpanel.RegistryEditForm):
             socket.setdefaulttimeout(timeout)
 
 
-class MailControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = MailControlPanelForm
-
-
 def updateMailSettings(settings, event):
     portal = getSite()
     mailhost = getToolByName(portal, 'MailHost')
@@ -90,3 +97,7 @@ def updateMailSettings(settings, event):
     getUtility(ISiteRoot).email_from_name = \
         settings.email_from_name
     getUtility(ISiteRoot).email_from_address = settings.email_from_address
+
+
+class MailControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = MailControlPanelForm
