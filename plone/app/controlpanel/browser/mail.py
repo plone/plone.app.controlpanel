@@ -24,8 +24,9 @@ class MailControlPanelForm(controlpanel.RegistryEditForm):
     label = _(u"Mail settings")
     schema = IMailSchema
 
-    @button.buttonAndHandler(_('label_smtp_test',
-        default='Save and send test e-mail'), name='test')
+    @button.buttonAndHandler(
+        _('label_smtp_test', default='Save and send test e-mail'),
+        name='test')
     def handle_test_action(self, action):
         data = self.request.form
         # Save data first

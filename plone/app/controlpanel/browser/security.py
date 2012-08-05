@@ -1,8 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from zope.site.hooks import getSite
 from logging import getLogger
-from Products.statusmessages.interfaces import IStatusMessage
-from z3c.form import button
 
 from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel

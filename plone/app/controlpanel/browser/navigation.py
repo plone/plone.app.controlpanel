@@ -56,8 +56,8 @@ def updateNavigationSettings(settings, event):
     if event.record.fieldName == "displayed_types":
         allTypes = ttool.listContentTypes()
         blacklistedTypes = [
-            t for t in allTypes \
-            if t not in settings.displayed_types \
+            t for t in allTypes
+            if t not in settings.displayed_types
             or t in BAD_TYPES]
         navProps.metaTypesNotToList = blacklistedTypes
         return
