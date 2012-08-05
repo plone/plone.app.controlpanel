@@ -12,17 +12,18 @@ from plone.app.controlpanel.interfaces import IEditingSchema
 log = getLogger('Plone')
 
 
-class EditingControlPanel(controlpanel.RegistryEditForm):
+class EditingControlPanelForm(controlpanel.RegistryEditForm):
 
     schema = IEditingSchema
+    id = "EditingControlPanel"
     label = _(u"Editing settings")
     description = _(u"""""")
 
     def updateFields(self):
-        super(EditingControlPanel, self).updateFields()
+        super(EditingControlPanelForm, self).updateFields()
 
     def updateWidgets(self):
-        super(EditingControlPanel, self).updateWidgets()
+        super(EditingControlPanelForm, self).updateWidgets()
 
     @button.buttonAndHandler(_('Save'), name=None)
     def handleSave(self, action):
@@ -59,5 +60,5 @@ def updateEditingSettings(settings, event):
     site_properties.lock_on_ttw_edit = settings.lock_on_ttw_edit
 
 
-class EditingControlPanelView(controlpanel.ControlPanelFormWrapper):
-    form = EditingControlPanel
+class EditingControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = EditingControlPanelForm

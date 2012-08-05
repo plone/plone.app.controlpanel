@@ -101,6 +101,20 @@ class NavigationControlPanelFunctionalTest(unittest.TestCase):
         self.browser.open(
             "%s/plone_control_panel" % self.portal_url)
         self.browser.getLink('Navigation').click()
+        self.assertTrue("Navigation settings" in self.browser.contents)
+
+    def test_navigation_control_panel_backlink(self):
+        self.browser.open(
+            "%s/@@navigation-controlpanel" % self.portal_url)
+        self.assertTrue("Plone Configuration" in self.browser.contents)
+
+    def test_navigation_control_panel_sidebar(self):
+        self.browser.open(
+            "%s/@@navigation-controlpanel" % self.portal_url)
+        self.browser.getLink('Site Setup').click()
+        self.assertEqual(
+            self.browser.url,
+            'http://nohost/plone/@@overview-controlpanel')
 
     def test_generate_tabs(self):
         registry = getUtility(IRegistry)

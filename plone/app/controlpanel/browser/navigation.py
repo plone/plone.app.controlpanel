@@ -15,7 +15,7 @@ from plone.app.controlpanel.interfaces import INavigationSchema
 log = getLogger('Plone')
 
 
-class NavigationControlPanel(controlpanel.RegistryEditForm):
+class NavigationControlPanelForm(controlpanel.RegistryEditForm):
 
     schema = INavigationSchema
     id = "NavigationControlPanel"
@@ -28,14 +28,14 @@ class NavigationControlPanel(controlpanel.RegistryEditForm):
         u"its settings directly.")
 
     def updateFields(self):
-        super(NavigationControlPanel, self).updateFields()
+        super(NavigationControlPanelForm, self).updateFields()
         self.fields['displayed_types'].widgetFactory = \
             CheckBoxFieldWidget
         self.fields['workflow_states_to_show'].widgetFactory = \
             CheckBoxFieldWidget
 
     def updateWidgets(self):
-        super(NavigationControlPanel, self).updateWidgets()
+        super(NavigationControlPanelForm, self).updateWidgets()
 
     @button.buttonAndHandler(_('Save'), name=None)
     def handleSave(self, action):
@@ -92,5 +92,5 @@ def updateNavigationSettings(settings, event):
         navProps.showAllParents = settings.show_excluded_items
 
 
-class NavigationControlPanelView(controlpanel.ControlPanelFormWrapper):
-    form = NavigationControlPanel
+class NavigationControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = NavigationControlPanelForm

@@ -106,6 +106,19 @@ class SecurityControlPanelFunctionalTest(unittest.TestCase):
             "%s/plone_control_panel" % self.portal_url)
         self.browser.getLink('Security').click()
 
+    def test_security_control_panel_backlink(self):
+        self.browser.open(
+            "%s/@@security-controlpanel" % self.portal_url)
+        self.assertTrue("Plone Configuration" in self.browser.contents)
+
+    def test_security_control_panel_sidebar(self):
+        self.browser.open(
+            "%s/@@security-controlpanel" % self.portal_url)
+        self.browser.getLink('Site Setup').click()
+        self.assertEqual(
+            self.browser.url,
+            'http://nohost/plone/@@overview-controlpanel')
+
     def test_enable_self_reg(self):
         self.browser.open(
             "%s/@@security-controlpanel" % self.portal_url)

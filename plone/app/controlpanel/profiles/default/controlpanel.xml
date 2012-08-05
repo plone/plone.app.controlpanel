@@ -30,6 +30,18 @@
     </configlet>
 
     <configlet
+        title="Navigation"
+        action_id="navigation"
+        appId="plone.app.controlpanel"
+        category="plone"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@navigation-controlpanel"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+    <configlet
         title="Security"
         action_id="security"
         appId="plone.app.controlpanel"

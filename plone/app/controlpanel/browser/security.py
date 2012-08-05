@@ -12,17 +12,18 @@ from plone.app.controlpanel.interfaces import ISecuritySchema
 log = getLogger('Plone')
 
 
-class SecurityControlPanel(controlpanel.RegistryEditForm):
+class SecurityControlPanelForm(controlpanel.RegistryEditForm):
 
     schema = ISecuritySchema
+    id = "SecurityControlPanel"
     label = _(u"Security settings")
     description = _(u"""""")
 
     def updateFields(self):
-        super(SecurityControlPanel, self).updateFields()
+        super(SecurityControlPanelForm, self).updateFields()
 
     def updateWidgets(self):
-        super(SecurityControlPanel, self).updateWidgets()
+        super(SecurityControlPanelForm, self).updateWidgets()
 
     @button.buttonAndHandler(_('Save'), name=None)
     def handleSave(self, action):
@@ -57,5 +58,5 @@ def updateSecuritySettings(settings, event):
     mtool.memberareaCreationFlag = settings.enable_user_folders
 
 
-class SecurityControlPanelView(controlpanel.ControlPanelFormWrapper):
-    form = SecurityControlPanel
+class SecurityControlPanel(controlpanel.ControlPanelFormWrapper):
+    form = SecurityControlPanelForm

@@ -9,7 +9,7 @@
   <browser:page
       name="editing-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".editing.EditingControlPanelView"
+      class=".editing.EditingControlPanel"
       permission="plone.app.controlpanel.Editing"
       />
 
@@ -51,7 +51,7 @@
   <browser:page
     name="security-controlpanel"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".security.SecurityControlPanelView"
+    class=".security.SecurityControlPanel"
     permission="plone.app.controlpanel.Security"
     />
 

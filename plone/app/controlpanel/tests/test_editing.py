@@ -109,10 +109,23 @@ class EditingControlPanelFunctionalTest(unittest.TestCase):
                 'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
             )
 
-    def test_security_control_panel_link(self):
+    def test_editing_control_panel_link(self):
         self.browser.open(
             "%s/plone_control_panel" % self.portal_url)
         self.browser.getLink('Editing').click()
+
+    def test_editing_control_panel_backlink(self):
+        self.browser.open(
+            "%s/@@editing-controlpanel" % self.portal_url)
+        self.assertTrue("Plone Configuration" in self.browser.contents)
+
+    def test_editing_control_panel_sidebar(self):
+        self.browser.open(
+            "%s/@@editing-controlpanel" % self.portal_url)
+        self.browser.getLink('Site Setup').click()
+        self.assertEqual(
+            self.browser.url,
+            'http://nohost/plone/@@overview-controlpanel')
 
     def test_visible_ids(self):
         self.browser.open(

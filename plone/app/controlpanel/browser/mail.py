@@ -18,17 +18,18 @@ from plone.app.controlpanel.interfaces import IMailSchema
 log = getLogger('Plone')
 
 
-class MailSettingsControlPanel(controlpanel.RegistryEditForm):
+class MailControlPanelForm(controlpanel.RegistryEditForm):
 
     schema = IMailSchema
+    id = "MailControlPanel"
     label = _(u"Mail settings")
     description = _(u"""""")
 
     def updateFields(self):
-        super(MailSettingsControlPanel, self).updateFields()
+        super(MailControlPanelForm, self).updateFields()
 
     def updateWidgets(self):
-        super(MailSettingsControlPanel, self).updateWidgets()
+        super(MailControlPanelForm, self).updateWidgets()
 
     @button.buttonAndHandler(_('Save'), name=None)
     def handleSave(self, action):
@@ -80,6 +81,7 @@ class MailSettingsControlPanel(controlpanel.RegistryEditForm):
             socket.setdefaulttimeout(3)
             try:
                 mailhost.send(message, email_recipient, source,
+                              mfrom=fromname,
                               subject=subject,
                               charset=email_charset,
                               immediate=True)
@@ -114,4 +116,4 @@ def updateMailSettings(settings, event):
 
 
 class MailControlPanel(controlpanel.ControlPanelFormWrapper):
-    form = MailSettingsControlPanel
+    form = MailControlPanelForm
