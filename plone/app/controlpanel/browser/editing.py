@@ -1,13 +1,10 @@
 from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
-from logging import getLogger
 
-from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
 
+from plone.app.controlpanel import _
 from plone.app.controlpanel.interfaces import IEditingSchema
-
-log = getLogger('Plone')
 
 
 class EditingControlPanelForm(controlpanel.RegistryEditForm):

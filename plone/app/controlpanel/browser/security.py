@@ -1,13 +1,11 @@
-from Products.CMFCore.utils import getToolByName
 from zope.site.hooks import getSite
-from logging import getLogger
+
+from Products.CMFCore.utils import getToolByName
 
 from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
 
 from plone.app.controlpanel.interfaces import ISecuritySchema
-
-log = getLogger('Plone')
 
 
 class SecurityControlPanelForm(controlpanel.RegistryEditForm):

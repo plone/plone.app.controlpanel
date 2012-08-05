@@ -1,21 +1,18 @@
-from logging import getLogger
 import smtplib
 import socket
 import sys
 from zope.component import getUtility
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
 from zope.site.hooks import getSite
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.MailHost.MailHost import MailHostError
+from Products.statusmessages.interfaces import IStatusMessage
 
-from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
 
+from plone.app.controlpanel import _
 from plone.app.controlpanel.interfaces import IMailSchema
-
-log = getLogger('Plone')
 
 
 class MailControlPanelForm(controlpanel.RegistryEditForm):

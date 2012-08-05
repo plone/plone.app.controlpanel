@@ -1,16 +1,13 @@
-from plone.app.vocabularies.types import BAD_TYPES
-from logging import getLogger
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
-
 from zope.site.hooks import getSite
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from Products.CMFCore.utils import getToolByName
 
 from plone.app.controlpanel import _
-from plone.app.registry.browser import controlpanel
-
 from plone.app.controlpanel.interfaces import INavigationSchema
 
-log = getLogger('Plone')
+from plone.app.registry.browser import controlpanel
+
+from plone.app.vocabularies.types import BAD_TYPES
 
 
 class NavigationControlPanelForm(controlpanel.RegistryEditForm):
