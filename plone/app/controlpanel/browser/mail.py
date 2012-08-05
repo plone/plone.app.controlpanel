@@ -2,7 +2,6 @@ from logging import getLogger
 import smtplib
 import socket
 import sys
-from z3c.form import form
 from zope.component import getUtility
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.statusmessages.interfaces import IStatusMessage

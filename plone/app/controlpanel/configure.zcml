@@ -12,22 +12,12 @@
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
-  <subscriber
-    for="plone.app.controlpanel.interfaces.IEditingSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".browser.editing.updateEditingSettings"
-    />
-
-  <subscriber
-    for="plone.app.controlpanel.interfaces.IMailSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".browser.mail.updateMailSettings"
-    />
-
-  <subscriber
-    for="plone.app.controlpanel.interfaces.ISecuritySchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".browser.security.updateSecuritySettings"
+  <!-- Register the import step -->
+  <genericsetup:importStep
+    name="plone.app.controlpanel"
+    title="plone.app.controlpanel import handlers"
+    description=""
+    handler="plone.app.controlpanel.setuphandlers.setupVarious"
     />
 
   <include file="permissions.zcml"/>
@@ -40,8 +30,6 @@
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
   <adapter factory=".language.LanguageControlPanelAdapter" />
-
-  <adapter factory=".navigation.NavigationControlPanelAdapter" />
 
   <adapter factory=".maintenance.MaintenanceControlPanelAdapter" />
 
@@ -90,13 +78,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".maintenance.MaintenanceControlPanel"
       permission="cmf.ManagePortal"
-      />
-
-  <browser:page
-      name="navigation-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".navigation.NavigationControlPanel"
-      permission="plone.app.controlpanel.Navigation"
       />
 
   <browser:page
