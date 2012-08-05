@@ -3,11 +3,8 @@ import socket
 import sys
 
 from logging import getLogger
-from zope.component import getUtility
-from Products.CMFCore.interfaces import ISiteRoot
 from Products.statusmessages.interfaces import IStatusMessage
 from z3c.form import button
-from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.MailHost.MailHost import MailHostError
 
@@ -86,18 +83,6 @@ class MailControlPanelForm(controlpanel.RegistryEditForm):
         finally:
             # Restore timeout to default value
             socket.setdefaulttimeout(timeout)
-
-
-def updateMailSettings(settings, event):
-    portal = getSite()
-    mailhost = getToolByName(portal, 'MailHost')
-    mailhost.smtp_host = settings.smtp_host
-    mailhost.smtp_port = settings.smtp_port
-    mailhost.smtp_userid = settings.smtp_userid
-    mailhost.smtp_pass = settings.smtp_pass
-    getUtility(ISiteRoot).email_from_name = \
-        settings.email_from_name
-    getUtility(ISiteRoot).email_from_address = settings.email_from_address
 
 
 class MailControlPanel(controlpanel.ControlPanelFormWrapper):

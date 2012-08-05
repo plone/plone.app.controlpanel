@@ -1,3 +1,4 @@
+from zope.site.hooks import getSite
 from zope.component import adapts
 from plone.app.controlpanel.interfaces import INavigationSchema
 from zope.interface import implements
@@ -80,3 +81,39 @@ class NavigationControlPanelAdapter(object):
     workflow_states_to_show = property(
         get_workflow_states_to_show,
         set_workflow_states_to_show)
+
+
+def updateNavigationSettings(settings, event):
+    portal = getSite()
+    ttool = getToolByName(portal, 'portal_types')
+    pprop = getToolByName(portal, 'portal_properties')
+    siteProps = pprop['site_properties']
+    navProps = pprop['navtree_properties']
+
+    if event.record.fieldName == "generate_tabs":
+        siteProps.disable_folder_sections = not settings.generate_tabs
+        return
+
+    if event.record.fieldName == "nonfolderish_tabs":
+        siteProps.disable_nonfolderish_sections = \
+            not settings.nonfolderish_tabs
+        return
+
+    if event.record.fieldName == "displayed_types":
+        allTypes = ttool.listContentTypes()
+        blacklistedTypes = [
+            t for t in allTypes
+            if t not in settings.displayed_types
+            or t in BAD_TYPES]
+        navProps.metaTypesNotToList = blacklistedTypes
+        return
+
+    if event.record.fieldName == "filter_on_workflow":
+        navProps.enable_wf_state_filtering = settings.filter_on_workflow
+        return
+    if event.record.fieldName == "workflow_states_to_show":
+        navProps.wf_states_to_show = settings.workflow_states_to_show
+        return
+
+    if event.record.fieldName == "show_excluded_items":
+        navProps.showAllParents = settings.show_excluded_items

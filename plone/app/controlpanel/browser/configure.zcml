@@ -21,24 +21,12 @@
       permission="plone.app.controlpanel.Editing"
       />
 
-  <subscriber
-    for="plone.app.controlpanel.interfaces.IEditingSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".editing.updateEditingSettings"
-    />
-
   <!-- Mail Control Panel -->
   <browser:page
     name="mail-controlpanel"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".mail.MailControlPanel"
     permission="plone.app.controlpanel.Mail"
-    />
-
-  <subscriber
-    for="plone.app.controlpanel.interfaces.IMailSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".mail.updateMailSettings"
     />
 
   <!-- Navigation Control Panel -->
@@ -49,24 +37,12 @@
     permission="plone.app.controlpanel.Navigation"
     />
 
-  <subscriber
-    for="plone.app.controlpanel.interfaces.INavigationSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".navigation.updateNavigationSettings"
-    />
-
   <!-- Security Control Panel -->
   <browser:page
     name="security-controlpanel"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     class=".security.SecurityControlPanel"
     permission="plone.app.controlpanel.Security"
-    />
-
-  <subscriber
-    for="plone.app.controlpanel.interfaces.ISecuritySchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".security.updateSecuritySettings"
     />
 
 </configure>

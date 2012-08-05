@@ -74,3 +74,15 @@ class MailControlPanelAdapter(object):
 
     email_from_address = property(get_email_from_address,
                                   set_email_from_address)
+
+
+def updateMailSettings(settings, event):
+    portal = getSite()
+    mailhost = getToolByName(portal, 'MailHost')
+    mailhost.smtp_host = settings.smtp_host
+    mailhost.smtp_port = settings.smtp_port
+    mailhost.smtp_userid = settings.smtp_userid
+    mailhost.smtp_pass = settings.smtp_pass
+    getUtility(ISiteRoot).email_from_name = \
+        settings.email_from_name
+    getUtility(ISiteRoot).email_from_address = settings.email_from_address
