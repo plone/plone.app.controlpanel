@@ -34,7 +34,8 @@ class MailControlPanelForm(controlpanel.RegistryEditForm):
         super(MailControlPanelForm, self).handleCancel(self, action)
 
     @button.buttonAndHandler(_('label_smtp_test',
-        default='Save and send test e-mail'), name='test')
+        default='Save and send test e-mail'),
+        name='test')
     def handle_test_action(self, action):
         data = self.request.form
         # Save data first
