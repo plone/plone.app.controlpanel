@@ -11,7 +11,6 @@ TODO
 
  [ ] @@types-controlpanel       formlib (ControlPanelForm)     prefs_configlet_main
  [ ] @@skins-controlpanel       formlib (ControlPanelForm)
- [ ] @@usergroup-userprefs      formlib (ControlPanelForm)
  [ ] @@language-controlpanel    formlib (ControlPanelForm)
  [ ] @@search-controlpanel      formlib (ControlPanelForm)
  [ ] @@markup-controlpanel      formlib (ControlPanelForm)
@@ -19,6 +18,13 @@ TODO
  [ ] @@site-controlpanel        formlib (ControlPanelForm)
  [ ] @@filter-controlpanel      formlib (ControlPanelForm)
  [ ] @@calendar-controlpanel    formlib (ControlPanelForm)
+
+ [ ] @@usergroup-userprefs      formlib (ControlPanelForm)
+ [ ] @@usergroup-groupprefs
+ [ ] @@usergroup-controlpanel
+ [ ] @@usergroup-groupmembership
+ [ ] @@usergroup-usermembership
+ [ ] @@usergroup-groupdetails
 
 
 Separate Packages
