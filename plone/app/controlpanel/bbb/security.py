@@ -27,8 +27,8 @@ class SecurityControlPanelAdapter(object):
         app_perms = self.portal.rolesOfPermission(
             permission='Add portal member')
         for appperm in app_perms:
-            if appperm['name'] == 'Anonymous' and \
-               appperm['selected'] == 'SELECTED':
+            if appperm['name'] == 'Anonymous' \
+            and appperm['selected'] == 'SELECTED':
                 return True
         return False
 
@@ -39,9 +39,9 @@ class SecurityControlPanelAdapter(object):
         for appperm in app_perms:
             if appperm['selected'] == 'SELECTED':
                 reg_roles.append(appperm['name'])
-        if value == True and 'Anonymous' not in reg_roles:
+        if value is True and 'Anonymous' not in reg_roles:
             reg_roles.append('Anonymous')
-        if value == False and 'Anonymous' in reg_roles:
+        if value is False and 'Anonymous' in reg_roles:
             reg_roles.remove('Anonymous')
 
         self.portal.manage_permission('Add portal member', roles=reg_roles,

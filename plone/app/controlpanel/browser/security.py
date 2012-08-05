@@ -1,7 +1,3 @@
-from zope.site.hooks import getSite
-
-from Products.CMFCore.utils import getToolByName
-
 from plone.app.controlpanel import _
 from plone.app.registry.browser import controlpanel
 
