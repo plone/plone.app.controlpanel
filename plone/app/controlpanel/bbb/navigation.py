@@ -83,7 +83,12 @@ class NavigationControlPanelAdapter(object):
         set_workflow_states_to_show)
 
 
-def updateNavigationSettings(settings, event):
+def synchronizeNavigationProperties(settings, event):
+    """Synchronizes the (legacy) site and navtree portal properties when
+       plone.app.registry navigation settings (new) changed.
+
+       Portal Properties => plone.app.registry
+    """
     portal = getSite()
     ttool = getToolByName(portal, 'portal_types')
     pprop = getToolByName(portal, 'portal_properties')

@@ -29,7 +29,7 @@
   <subscriber
     for="plone.app.controlpanel.interfaces.INavigationSchema
          plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".navigation.updateNavigationSettings"
+    handler=".navigation.synchronizeNavigationProperties"
     />
 
   <subscriber
