@@ -26,9 +26,9 @@ class SecurityControlPanelAdapter(object):
     def get_enable_self_reg(self):
         app_perms = self.portal.rolesOfPermission(
             permission='Add portal member')
-        for appperm in app_perms:
-            if appperm['name'] == 'Anonymous' \
-            and appperm['selected'] == 'SELECTED':
+        for app_perm in app_perms:
+            if app_perm['name'] == 'Anonymous' \
+            and app_perm['selected'] == 'SELECTED':
                 return True
         return False
 
@@ -56,7 +56,7 @@ class SecurityControlPanelAdapter(object):
             return True
 
     def set_enable_user_pwd_choice(self, value):
-        if value == True:
+        if value is True:
             self.portal.validate_email = False
         else:
             self.portal.validate_email = True
