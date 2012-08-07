@@ -37,10 +37,28 @@ def syncPloneAppRegistryToEditingSiteProperties(settings, event):
     portal = getSite()
     portal_properties = getToolByName(portal, "portal_properties")
     site_properties = portal_properties.site_properties
-    site_properties.visible_ids = settings.visible_ids
-    site_properties.enable_inline_editing = settings.enable_inline_editing
-    site_properties.enable_link_integrity_checks = \
-        settings.enable_link_integrity_checks
-    site_properties.ext_editor = settings.ext_editor
-    site_properties.default_editor = settings.default_editor
-    site_properties.lock_on_ttw_edit = settings.lock_on_ttw_edit
+
+    if event.record.fieldName == "visible_ids":
+        site_properties.visible_ids = settings.visible_ids
+        return
+
+    if event.record.fieldName == "enable_inline_editing":
+        site_properties.enable_inline_editing = settings.enable_inline_editing
+        return
+
+    if event.record.fieldName == "enable_link_integrity_checks":
+        site_properties.enable_link_integrity_checks = \
+            settings.enable_link_integrity_checks
+        return
+
+    if event.record.fieldName == "ext_editor":
+        site_properties.ext_editor = settings.ext_editor
+        return
+
+    if event.record.fieldName == "default_editor":
+        site_properties.default_editor = settings.default_editor
+        return
+
+    if event.record.fieldName == "lock_on_ttw_edit":
+        site_properties.lock_on_ttw_edit = settings.lock_on_ttw_edit
+        return

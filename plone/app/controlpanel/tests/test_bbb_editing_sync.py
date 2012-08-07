@@ -12,7 +12,7 @@ from plone.app.controlpanel.testing import \
     PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
 
 
-class EditingPropertiesBBBTest(unittest.TestCase):
+class SyncPloneAppRegistryToEditingSitePropertiesTest(unittest.TestCase):
 
     layer = PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
 
