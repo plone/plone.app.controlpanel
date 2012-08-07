@@ -27,14 +27,14 @@ class MailControlPanelAdapterTest(unittest.TestCase):
         self.assertTrue(getAdapter(self.portal, IMailSchema))
 
     def test_get_smtp_host_setting(self):
-        self.mailhost.smtp_host = u"localhost"
+        self.mailhost.smtp_host = u"nohost.com"
         mail_settings = getAdapter(self.portal, IMailSchema)
-        self.assertEquals(mail_settings.smtp_host, u"localhost")
+        self.assertEquals(mail_settings.smtp_host, u"nohost.com")
 
     def test_set_smtp_host_setting(self):
         mail_settings = getAdapter(self.portal, IMailSchema)
-        mail_settings.smtp_host = u"localhost"
-        self.assertEquals(self.mailhost.smtp_host, u"localhost")
+        mail_settings.smtp_host = u"nohost.com"
+        self.assertEquals(self.mailhost.smtp_host, u"nohost.com")
 
     def test_get_smtp_port_setting(self):
         self.mailhost.smtp_port = 41

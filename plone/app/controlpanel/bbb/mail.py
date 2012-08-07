@@ -1,5 +1,4 @@
 from zope.component import adapts
-from Products.CMFDefault.formlib.schema import ProxyFieldProperty
 from zope.component import getUtility
 from zope.interface import implements
 from Products.CMFCore.interfaces import ISiteRoot
@@ -23,8 +22,23 @@ class MailControlPanelAdapter(object):
         self.encoding = pprop.site_properties.default_charset
         self.context = getToolByName(self.portal, 'MailHost')
 
-    smtp_host = ProxyFieldProperty(IMailSchema['smtp_host'])
-    smtp_port = ProxyFieldProperty(IMailSchema['smtp_port'])
+    def get_smtp_host(self):
+        return getattr(self.context, 'smtp_host', None)
+
+    def set_smtp_host(self, value):
+        if safe_hasattr(self.context, 'smtp_host'):
+            self.context.smtp_host = value
+
+    smtp_host = property(get_smtp_host, set_smtp_host)
+
+    def get_smtp_port(self):
+        return getattr(self.context, 'smtp_port', None)
+
+    def set_smtp_port(self, value):
+        if safe_hasattr(self.context, 'smtp_port'):
+            self.context.smtp_port = value
+
+    smtp_port = property(get_smtp_port, set_smtp_port)
 
     def get_smtp_userid(self):
         return getattr(self.context, 'smtp_userid',
@@ -79,10 +93,28 @@ class MailControlPanelAdapter(object):
 def syncPloneAppRegistryToMailhostProperties(settings, event):
     portal = getSite()
     mailhost = getToolByName(portal, 'MailHost')
-    mailhost.smtp_host = settings.smtp_host
-    mailhost.smtp_port = settings.smtp_port
-    mailhost.smtp_userid = settings.smtp_userid
-    mailhost.smtp_pass = settings.smtp_pass
-    getUtility(ISiteRoot).email_from_name = \
-        settings.email_from_name
-    getUtility(ISiteRoot).email_from_address = settings.email_from_address
+
+    if event.record.fieldName == "smtp_host":
+        mailhost.smtp_host = settings.smtp_host
+        return
+
+    if event.record.fieldName == "smtp_port":
+        mailhost.smtp_port = settings.smtp_port
+        return
+
+    if event.record.fieldName == "smtp_userid":
+        mailhost.smtp_uid = settings.smtp_userid
+        return
+
+    if event.record.fieldName == "smtp_pass":
+        mailhost.smtp_pwd = settings.smtp_pass
+        return
+
+    if event.record.fieldName == "email_from_name":
+        getUtility(ISiteRoot).email_from_name = \
+            settings.email_from_name
+        return
+
+    if event.record.fieldName == "email_from_address":
+        getUtility(ISiteRoot).email_from_address = settings.email_from_address
+        return
