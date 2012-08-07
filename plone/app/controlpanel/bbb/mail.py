@@ -76,7 +76,7 @@ class MailControlPanelAdapter(object):
                                   set_email_from_address)
 
 
-def updateMailSettings(settings, event):
+def syncPloneAppRegistryToMailhostProperties(settings, event):
     portal = getSite()
     mailhost = getToolByName(portal, 'MailHost')
     mailhost.smtp_host = settings.smtp_host

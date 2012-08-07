@@ -83,12 +83,7 @@ class NavigationControlPanelAdapter(object):
         set_workflow_states_to_show)
 
 
-def synchronizeNavigationProperties(settings, event):
-    """Synchronizes the (legacy) site and navtree portal properties when
-       plone.app.registry navigation settings (new) changed.
-
-       Portal Properties => plone.app.registry
-    """
+def syncPloneAppRegistryToNavigationPortalProperties(settings, event):
     portal = getSite()
     ttool = getToolByName(portal, 'portal_types')
     pprop = getToolByName(portal, 'portal_properties')
@@ -116,9 +111,11 @@ def synchronizeNavigationProperties(settings, event):
     if event.record.fieldName == "filter_on_workflow":
         navProps.enable_wf_state_filtering = settings.filter_on_workflow
         return
+
     if event.record.fieldName == "workflow_states_to_show":
         navProps.wf_states_to_show = settings.workflow_states_to_show
         return
 
     if event.record.fieldName == "show_excluded_items":
         navProps.showAllParents = settings.show_excluded_items
+        return

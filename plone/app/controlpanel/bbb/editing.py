@@ -33,10 +33,7 @@ class EditingControlPanelAdapter(object):
         IEditingSchema['lock_on_ttw_edit'])
 
 
-def updateEditingSettings(settings, event):
-    """Update Plone's editing settings when the editing settings in the
-    editing control panel change.
-    """
+def syncPloneAppRegistryToEditingSiteProperties(settings, event):
     portal = getSite()
     portal_properties = getToolByName(portal, "portal_properties")
     site_properties = portal_properties.site_properties

@@ -120,10 +120,7 @@ class SecurityControlPanelAdapter(object):
                                   set_use_email_as_login)
 
 
-def updateSecuritySettings(settings, event):
-    """Update Plone's security settings when the security settings in the
-    security control panel changes.
-    """
+def syncPloneAppRegistryToSecurityPortalProperties(settings, event):
     portal = getSite()
     portal.validate_email = not settings.enable_user_pwd_choice
     portal_properties = getToolByName(portal, "portal_properties")
