@@ -2,6 +2,7 @@ from zope.site.hooks import getSite
 from Products.CMFCore.ActionInformation import Action
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from zope.component import adapts
+from zope.component import getAdapter
 from zope.interface import implements
 from plone.app.controlpanel.interfaces import ISecuritySchema
 from Products.CMFPlone.utils import safe_hasattr
@@ -36,9 +37,9 @@ class SecurityControlPanelAdapter(object):
         app_perms = self.portal.rolesOfPermission(
             permission='Add portal member')
         reg_roles = []
-        for appperm in app_perms:
-            if appperm['selected'] == 'SELECTED':
-                reg_roles.append(appperm['name'])
+        for app_perm in app_perms:
+            if app_perm['selected'] == 'SELECTED':
+                reg_roles.append(app_perm['name'])
         if value is True and 'Anonymous' not in reg_roles:
             reg_roles.append('Anonymous')
         if value is False and 'Anonymous' in reg_roles:
@@ -122,10 +123,28 @@ class SecurityControlPanelAdapter(object):
 
 def syncPloneAppRegistryToSecurityPortalProperties(settings, event):
     portal = getSite()
-    portal.validate_email = not settings.enable_user_pwd_choice
+    security_properties = getAdapter(portal, ISecuritySchema)
     portal_properties = getToolByName(portal, "portal_properties")
     site_properties = portal_properties.site_properties
-    site_properties.allowAnonymousViewAbout = settings.allow_anon_views_about
-    site_properties.use_email_as_login = settings.use_email_as_login
-    mtool = getToolByName(portal, "portal_membership")
-    mtool.memberareaCreationFlag = settings.enable_user_folders
+
+    if event.record.fieldName == "enable_self_reg":
+        security_properties.enable_self_reg = settings.enable_self_reg
+        return
+
+    if event.record.fieldName == "enable_user_pwd_choice":
+        portal.validate_email = not settings.enable_user_pwd_choice
+        return
+
+    if event.record.fieldName == "enable_user_folders":
+        mtool = getToolByName(portal, "portal_membership")
+        mtool.memberareaCreationFlag = settings.enable_user_folders
+        return
+
+    if event.record.fieldName == "allow_anon_views_about":
+        site_properties.allowAnonymousViewAbout = \
+            settings.allow_anon_views_about
+        return
+
+    if event.record.fieldName == "use_email_as_login":
+        site_properties.use_email_as_login = settings.use_email_as_login
+        return
