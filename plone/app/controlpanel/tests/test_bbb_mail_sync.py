@@ -14,7 +14,7 @@ from plone.app.controlpanel.testing import \
     PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
 
 
-class SyncPloneAppRegistryToMailhostProperties(unittest.TestCase):
+class TestSyncPloneAppRegistryToMailhostProperties(unittest.TestCase):
 
     layer = PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
 
