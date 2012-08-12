@@ -24,9 +24,9 @@ def _setPropValue(self, id, value):
 
 
 def manage_makeChanges(
-    self, title, smtp_host, smtp_port, smtp_uid='',
-    smtp_pwd='', smtp_queue=False, smtp_queue_directory='/tmp',
-    force_tls=False, REQUEST=None):
+        self, title, smtp_host, smtp_port, smtp_uid='',
+        smtp_pwd='', smtp_queue=False, smtp_queue_directory='/tmp',
+        force_tls=False, REQUEST=None):
     #super(MailBase, self).manage_makeChanges(
     #    title,
     #    smtp_host,
