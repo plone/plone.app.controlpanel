@@ -13,6 +13,13 @@
     replacement=".patches._setPropValue"
     />
 
+  <monkey:patch
+    description=""
+    class="Products.MailHost.MailHost.MailBase"
+    original="manage_makeChanges"
+    replacement=".patches.manage_makeChanges"
+    />
+
   <!-- Subscriber -->
   <subscriber
     for="plone.app.controlpanel.interfaces.IEditingSchema
