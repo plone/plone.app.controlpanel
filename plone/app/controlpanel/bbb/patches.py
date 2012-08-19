@@ -8,6 +8,24 @@ from plone.app.controlpanel.interfaces import IMailSchema
 from plone.app.controlpanel.interfaces import INavigationSchema
 
 
+def setPloneSitePropertyValue(self, id, value):
+    from OFS.PropertyManager import PropertyManager
+    # XXX: This line should work!
+    #super(PropertyManager, self)._setPropValue(id, value)
+    super(PropertyManager, self).__thisclass__._setPropValue(self, id, value)
+    registry = queryUtility(IRegistry, context=self)
+    if registry:
+        if id in IMailSchema.names():
+            try:
+                settings = registry.forInterface(IMailSchema)
+                setattr(settings, id, value)
+            except:
+                # XXX: We have to figure out why this lookup sometimes fails
+                # with a plone.app.registry KeyError: 'Interface `...` defines
+                # a field `...`, for which there is no record.'.
+                pass
+
+
 def _setPropValue(self, id, value):
     super(SimpleItemWithProperties, self)._setPropValue(id, value)
     registry = queryUtility(IRegistry, context=self)

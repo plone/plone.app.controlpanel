@@ -127,19 +127,21 @@ class TestSyncMailhostPropertiesToPloneAppRegistry(unittest.TestCase):
         self.assertEqual(self.settings.smtp_pass, u"secret")
 
     def test_sync_email_form_name(self):
-        self.assertEqual(getUtility(ISiteRoot).email_from_name, "")
+        self.assertEqual(self.portal.email_from_name, "")
         self.assertEqual(self.settings.email_from_name, None)
-        getUtility(ISiteRoot).email_from_name = u"Site Administrator"
+        self.portal.manage_changeProperties(
+            email_from_name=u"Site Administrator")
         self.assertEqual(
             getUtility(ISiteRoot).email_from_name,
             u"Site Administrator")
         self.assertEqual(self.settings.email_from_name, u"Site Administrator")
 
     def test_sync_email_form_address(self):
-        self.assertEqual(getUtility(ISiteRoot).email_from_address, "")
+        self.assertEqual(self.portal.email_from_address, "")
         self.assertEqual(self.settings.email_from_address, None)
-        getUtility(ISiteRoot).email_from_address = "admin@plone.org"
+        self.portal.manage_changeProperties(
+            email_from_address="admin@plone.org")
         self.assertEqual(
             getUtility(ISiteRoot).email_from_address,
             "admin@plone.org")
-        self.assertEqual(self.settings.email_from_address, u"admin@plone.org")
+        self.assertEqual(self.settings.email_from_address, "admin@plone.org")

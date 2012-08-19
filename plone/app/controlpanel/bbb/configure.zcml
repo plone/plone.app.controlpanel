@@ -20,6 +20,13 @@
     replacement=".patches.manage_makeChanges"
     />
 
+  <monkey:patch
+    description=""
+    class="Products.CMFPlone.Portal.PloneSite"
+    original="_setPropValue"
+    replacement=".patches.setPloneSitePropertyValue"
+    />
+
   <!-- Subscriber -->
   <subscriber
     for="plone.app.controlpanel.interfaces.IEditingSchema
