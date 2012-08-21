@@ -4,7 +4,8 @@ Changelog
 2.2.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed i18n regression in control-panel.pt
+  [vincentfretin]
 
 
 2.2.7 (2012-08-04)
