@@ -1,4 +1,3 @@
-from z3c.form import interfaces
 
 from zope import schema
 
