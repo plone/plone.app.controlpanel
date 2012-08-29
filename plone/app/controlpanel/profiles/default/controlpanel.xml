@@ -6,6 +6,18 @@
     purge="False">
 
     <configlet
+        title="Calendar"
+        action_id="calendar"
+        appId="plone.app.controlpanel"
+        category="plone"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@calendar-controlpanel"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+    <configlet
         title="Editing"
         action_id="editing"
         appId="plone.app.controlpanel"

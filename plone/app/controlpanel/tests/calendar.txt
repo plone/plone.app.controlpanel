@@ -24,18 +24,13 @@ Viewing the calendar control panel
 
 Click the save button without making any changes:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('calendar-controlpanel')
-    True
-
-We should get a status message:
-
-    >>> 'No changes made.' in browser.contents
     True
 
 Now click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl(name="form.buttons.cancel").click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -51,11 +46,11 @@ Make some changes
     >>> browser.url.endswith('calendar-controlpanel')
     True
 
-    >>> browser.getControl(name='form.firstweekday').value = ['3']
+    >>> browser.getControl(name='form.widgets.firstweekday:list').value = ['3']
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('calendar-controlpanel')
     True
 
@@ -68,37 +63,3 @@ Make sure the changes have been applied correctly to the tool:
 
     >>> ctool.firstweekday
     3
-
-Different Locale
-----------------
-
-Lets emulate a different locale, to be able to get the weekday names
-in the native language. We'll use Brazilian Portuguese, of course... ;-)
-
-    >>> from plone.app.controlpanel import widgets
-    >>> PT_BR = ((u'Segunda', 0),
-    ...          (u'Terça', 1),
-    ...          (u'Quarta', 2),
-    ...          (u'Quinta', 3),
-    ...          (u'Sexta', 4),
-    ...          (u'Sábado', 5),
-    ...          (u'Domingo', 6))
-    >>> widgets.WEEKDAYS = PT_BR
-
-An int field with a fake context.
-
-    >>> from zope.schema import Int
-    >>> field = Int(title=u'Day of week')
-    >>> field.context = object()
-
-We need a request too.
-
-    >>> from zope.publisher.browser import TestRequest
-    >>> request = TestRequest()
-
-Now create the widget itself and access a localized term.
-
-    >>> widget = widgets.WeekdayWidget(field, request)
-    >>> term = widget.vocabulary.getTerm(3)
-    >>> term.title
-    u'Quinta'

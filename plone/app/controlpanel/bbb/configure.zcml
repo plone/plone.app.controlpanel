@@ -29,6 +29,12 @@
 
   <!-- Subscriber -->
   <subscriber
+    for="plone.app.controlpanel.interfaces.ICalendarSchema
+         plone.registry.interfaces.IRecordModifiedEvent"
+    handler=".calendar.syncPloneAppRegistryToCalendarProperties"
+    />
+
+  <subscriber
     for="plone.app.controlpanel.interfaces.IEditingSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".editing.syncPloneAppRegistryToEditingSiteProperties"
@@ -53,6 +59,7 @@
     />
 
   <!-- Adapter  -->
+  <adapter factory=".calendar.CalendarControlPanelAdapter" />
   <adapter factory=".editing.EditingControlPanelAdapter" />
   <adapter factory=".mail.MailControlPanelAdapter" />
   <adapter factory=".navigation.NavigationControlPanelAdapter" />
