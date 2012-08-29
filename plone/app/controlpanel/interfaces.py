@@ -1,4 +1,7 @@
+from z3c.form import interfaces
+
 from zope import schema
+
 from zope.interface import Attribute
 from zope.interface import Interface
 
@@ -31,6 +34,35 @@ class IConfigurationChangedEvent(Interface):
     context = Attribute("The configuration context which was changed.")
 
     data = Attribute("The configuration data which was changed.")
+
+
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+
+weekdays = SimpleVocabulary([
+    SimpleTerm(value=0, title=_(u'Monday')),
+    SimpleTerm(value=1, title=_(u'Tuesday')),
+    SimpleTerm(value=2, title=_(u'Wednesday')),
+    SimpleTerm(value=3, title=_(u'Thursday')),
+    SimpleTerm(value=4, title=_(u'Friday')),
+    SimpleTerm(value=5, title=_(u'Saturday')),
+    SimpleTerm(value=6, title=_(u'Sunday')),
+    ])
+
+
+class ICalendarSchema(Interface):
+
+    firstweekday = schema.Choice(
+        title=_(u'First day of week in the calendar'),
+        default=0,
+        vocabulary=weekdays,
+        required=True)
+
+    calendar_states = schema.List(
+      title=_(u'Workflow states to show in the calendar'),
+      required=True,
+      default=['published'],
+      value_type=schema.Choice(
+          source="plone.app.vocabularies.WorkflowStates"))
 
 
 class IEditingSchema(Interface):
