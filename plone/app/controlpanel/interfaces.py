@@ -57,11 +57,11 @@ class ICalendarSchema(Interface):
         required=True)
 
     calendar_states = schema.List(
-      title=_(u'Workflow states to show in the calendar'),
-      required=True,
-      default=['published'],
-      value_type=schema.Choice(
-          source="plone.app.vocabularies.WorkflowStates"))
+        title=_(u'Workflow states to show in the calendar'),
+        required=True,
+        default=['published'],
+        value_type=schema.Choice(
+            source="plone.app.vocabularies.WorkflowStates"))
 
 
 class IEditingSchema(Interface):
