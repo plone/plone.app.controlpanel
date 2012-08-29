@@ -4,6 +4,14 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser">
 
+    <!--
+    <class class=".widgets.WeekdayWidget">
+        <require
+            permission="zope.Public"
+            interface="plone.app.controlpanel.interfaces.IWeekdayWidget"
+        />
+    </class>-->
+
   <genericsetup:registerProfile
     name="default"
     title="Plone Control Panels"
@@ -25,8 +33,6 @@
   <include package=".bbb" />
   <include package=".browser" />
 
-  <adapter factory=".calendar.CalendarControlPanelAdapter" />
-
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
   <adapter factory=".language.LanguageControlPanelAdapter" />
@@ -44,13 +50,6 @@
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
-
-  <browser:page
-      name="calendar-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".calendar.CalendarControlPanel"
-      permission="plone.app.controlpanel.Calendar"
-      />
 
   <browser:page
       name="filter-controlpanel"

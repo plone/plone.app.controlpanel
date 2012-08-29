@@ -13,6 +13,14 @@
       permission="plone.app.controlpanel.Overview"
       />
 
+  <!-- Calendar Control Panel -->
+  <browser:page
+      name="calendar-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".calendar.CalendarControlPanel"
+      permission="plone.app.controlpanel.Calendar"
+      />
+
   <!-- Editing Control Panel -->
   <browser:page
       name="editing-controlpanel"
