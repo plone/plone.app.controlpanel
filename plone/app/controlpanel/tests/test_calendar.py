@@ -43,8 +43,9 @@ class CalendarControlPanelIntegrationTest(unittest.TestCase):
 
     def test_calendar_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        self.assertTrue('CalendarSettings' in [a.getAction(self)['id']
-                            for a in self.controlpanel.listActions()])
+        self.assertTrue(
+            'CalendarSettings' in [a.getAction(self)['id']
+            for a in self.controlpanel.listActions()])
 
     def test_firstweekday_setting(self):
         self.assertTrue('firstweekday' in ICalendarSchema.names())
@@ -77,8 +78,7 @@ class CalendarControlPanelFunctionalTest(unittest.TestCase):
         self.browser = Browser(self.app)
         self.browser.handleErrors = False
         self.browser.addHeader('Authorization',
-                'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
-            )
+                'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,))
 
     def test_calendar_control_panel_link(self):
         self.browser.open(
