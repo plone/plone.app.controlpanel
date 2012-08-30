@@ -20,11 +20,20 @@
     replacement=".patches.manage_makeChanges"
     />
 
+  <!-- Monkey Patch Plone Site -->
   <monkey:patch
     description=""
     class="Products.CMFPlone.Portal.PloneSite"
     original="_setPropValue"
     replacement=".patches.setPloneSitePropertyValue"
+    />
+
+  <!-- Monkey Patch Calendar Tool -->
+  <monkey:patch
+    description="Calendar Tool Monkey Patch"
+    class="Products.CMFCalendar.CalendarTool.CalendarTool"
+    original="edit_configuration"
+    replacement=".patches.edit_configuration"
     />
 
   <!-- Subscriber -->

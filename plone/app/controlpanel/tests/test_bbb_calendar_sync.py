@@ -52,11 +52,19 @@ class SyncCalendarPropertiesToPloneAppRegistryTest(unittest.TestCase):
     def test_firstweekday_property(self):
         self.assertEquals(self.ctool.firstweekday, 0)
         self.assertEquals(self.settings.firstweekday, 0)
-        self.ctool.manage_changeProperties(firstweekday=5)
+        self.ctool.edit_configuration(
+            ('Event'),
+            True,
+            firstweekday=5)
+        self.assertEquals(self.ctool.firstweekday, 5)
         self.assertEquals(self.settings.firstweekday, 5)
 
     def test_calendar_states_property(self):
         self.assertEquals(self.ctool.calendar_states, ('published',))
         self.assertEquals(self.settings.calendar_states, ['published'])
-        self.ctool.manage_changeProperties(calendar_states=['private'])
+        self.ctool.edit_configuration(
+            ('Event'),
+            True,
+            show_states=('private',))
+        self.assertEquals(self.ctool.calendar_states, ('private',))
         self.assertEquals(self.settings.calendar_states, ['private'])

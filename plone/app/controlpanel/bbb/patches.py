@@ -3,6 +3,7 @@ from plone.registry.interfaces import IRegistry
 
 from Products.CMFPlone.PropertiesTool import SimpleItemWithProperties
 
+from plone.app.controlpanel.interfaces import ICalendarSchema
 from plone.app.controlpanel.interfaces import IEditingSchema
 from plone.app.controlpanel.interfaces import IMailSchema
 from plone.app.controlpanel.interfaces import INavigationSchema
@@ -66,3 +67,20 @@ def manage_makeChanges(
             setattr(settings, "smtp_userid", smtp_uid)
         if smtp_pwd:
             setattr(settings, "smtp_pass", smtp_pwd)
+
+
+def edit_configuration(self, show_types, use_session, show_states=None,
+                       firstweekday=None):
+    #from Products.CMFCalendar.CalendarTool import CalendarTool
+    #super(CalendarTool, self).edit_configuration(
+    #    show_types,
+    #    use_session,
+    #    show_states,
+    #    firstweekday)
+    registry = queryUtility(IRegistry, context=self)
+    if registry:
+        settings = registry.forInterface(ICalendarSchema)
+        if firstweekday:
+            settings.firstweekday = firstweekday
+        if show_states:
+            settings.calendar_states = list(show_states)
