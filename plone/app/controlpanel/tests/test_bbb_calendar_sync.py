@@ -32,9 +32,9 @@ class SyncPloneAppRegistryToCalendarPropertiesTest(unittest.TestCase):
 
     def test_sync_calendar_states_property(self):
         self.assertEquals(self.ctool.calendar_states, ('published',))
-        self.assertEquals(self.settings.calendar_states, ['published'])
-        self.settings.calendar_states = ['private']
-        self.assertEquals(self.ctool.calendar_states, ['private'])
+        self.assertEquals(self.settings.calendar_states, ('published',))
+        self.settings.calendar_states = ('private',)
+        self.assertEquals(self.ctool.calendar_states, ('private',))
 
 
 class SyncCalendarPropertiesToPloneAppRegistryTest(unittest.TestCase):
@@ -61,10 +61,10 @@ class SyncCalendarPropertiesToPloneAppRegistryTest(unittest.TestCase):
 
     def test_calendar_states_property(self):
         self.assertEquals(self.ctool.calendar_states, ('published',))
-        self.assertEquals(self.settings.calendar_states, ['published'])
+        self.assertEquals(self.settings.calendar_states, ('published',))
         self.ctool.edit_configuration(
             ('Event'),
             True,
             show_states=('private',))
         self.assertEquals(self.ctool.calendar_states, ('private',))
-        self.assertEquals(self.settings.calendar_states, ['private'])
+        self.assertEquals(self.settings.calendar_states, ('private',))

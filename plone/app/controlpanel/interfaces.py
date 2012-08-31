@@ -56,10 +56,10 @@ class ICalendarSchema(Interface):
         vocabulary=weekdays,
         required=True)
 
-    calendar_states = schema.List(
+    calendar_states = schema.Tuple(
         title=_(u'Workflow states to show in the calendar'),
         required=True,
-        default=['published'],
+        default=('published',),
         value_type=schema.Choice(
             source="plone.app.vocabularies.WorkflowStates"))
 

@@ -83,4 +83,4 @@ def edit_configuration(self, show_types, use_session, show_states=None,
         if firstweekday:
             settings.firstweekday = firstweekday
         if show_states:
-            settings.calendar_states = list(show_states)
+            settings.calendar_states = show_states

@@ -59,7 +59,7 @@ class CalendarControlPanelIntegrationTest(unittest.TestCase):
         self.assertEqual(
             self.registry['plone.app.controlpanel.interfaces.' +
                           'ICalendarSchema.calendar_states'],
-            ['published'])
+            ('published',))
 
 
 class CalendarControlPanelFunctionalTest(unittest.TestCase):
@@ -112,10 +112,10 @@ class CalendarControlPanelFunctionalTest(unittest.TestCase):
         self.browser.open(
             "%s/@@calendar-controlpanel" % self.portal_url)
         self.browser.getControl(name="form.widgets.calendar_states:list")\
-            .value = ['private']
+            .value = ('private',)
         self.browser.getControl('Save').click()
 
-        self.assertEqual(self.settings.calendar_states, ['private'])
+        self.assertEqual(self.settings.calendar_states, ('private',))
 
 
 def test_suite():
