@@ -152,8 +152,9 @@ class IMailSchema(Interface):
         required=True)
 
     smtp_userid = schema.TextLine(
-        title=_(u'label_smtp_userid',
-               default=u'ESMTP username'),
+        title=_(
+            u'label_smtp_userid',
+            default=u'ESMTP username'),
         description=_(
             u"help_smtp_userid",
             default=u"Username for authentication "
@@ -225,8 +226,8 @@ class INavigationSchema(Interface):
         required=False,
         default=(),
         value_type=schema.Choice(
-            source="plone.app.vocabularies.ReallyUserFriendlyTypes")
-        )
+            source="plone.app.vocabularies.ReallyUserFriendlyTypes"
+        ))
 
     filter_on_workflow = schema.Bool(
         title=_(u"Filter on workflow state"),
