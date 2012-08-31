@@ -164,8 +164,9 @@ class IMailSchema(Interface):
         required=False)
 
     smtp_pass = schema.Password(
-        title=_(u'label_smtp_pass',
-               default=u'ESMTP password'),
+        title=_(
+            u'label_smtp_pass',
+            default=u'ESMTP password'),
         description=_(
             u"help_smtp_pass",
             default=u"The password for the ESMTP "
@@ -241,8 +242,7 @@ class INavigationSchema(Interface):
         required=False,
         default=(),
         value_type=schema.Choice(
-            source="plone.app.vocabularies.WorkflowStates")
-        )
+            source="plone.app.vocabularies.WorkflowStates"))
 
     show_excluded_items = schema.Bool(
         title=_(
