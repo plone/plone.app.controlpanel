@@ -314,8 +314,7 @@ ICON_VISIBILITY_CHOICES = {
 }
 
 ICON_VISIBILITY_VOCABULARY = SimpleVocabulary(
-    [SimpleTerm(v, v, k) for k, v in ICON_VISIBILITY_CHOICES.items()]
-    )
+    [SimpleTerm(v, v, k) for k, v in ICON_VISIBILITY_CHOICES.items()])
 
 
 class ISkinsSchema(Interface):
@@ -334,7 +333,7 @@ class ISkinsSchema(Interface):
             u"If enabled all external links "
             u"will be marked with link type "
             u"specific icons."),
-         default=True)
+        default=True)
 
     ext_links_open_new_window = schema.Bool(
         title=_(u"External links open in new window"),
