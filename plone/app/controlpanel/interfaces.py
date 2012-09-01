@@ -347,6 +347,7 @@ class ISkinsSchema(Interface):
         description=_(
             u"If disabled the content icons in folder listings and portlets "
             u"won't be visible."),
+        default='enabled',
         vocabulary=ICON_VISIBILITY_VOCABULARY)
 
     use_popups = schema.Bool(

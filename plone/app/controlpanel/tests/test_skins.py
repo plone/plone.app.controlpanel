@@ -54,6 +54,34 @@ class SkinsControlPanelIntegrationTest(unittest.TestCase):
                           'ISkinsSchema.theme'],
             "Sunburst Theme")
 
+    def test_mark_special_links(self):
+        self.assertTrue('theme' in ISkinsSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'ISkinsSchema.mark_special_links'],
+            True)
+
+    def test_ext_links_open_new_window(self):
+        self.assertTrue('theme' in ISkinsSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'ISkinsSchema.ext_links_open_new_window'],
+            False)
+
+    def test_icon_visibility(self):
+        self.assertTrue('theme' in ISkinsSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'ISkinsSchema.icon_visibility'],
+            "enabled")
+
+    def test_use_popups(self):
+        self.assertTrue('theme' in ISkinsSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'ISkinsSchema.use_popups'],
+            True)
+
 
 class SkinsControlPanelFunctionalTest(unittest.TestCase):
     """Test that changes in the skins control panel are actually
@@ -103,6 +131,24 @@ class SkinsControlPanelFunctionalTest(unittest.TestCase):
         self.browser.getControl('Save').click()
 
         self.assertEqual(self.settings.theme, "Plone Default")
+
+    def test_mark_special_links(self):
+        self.browser.open(
+            "%s/@@skins-controlpanel" % self.portal_url)
+        self.browser.getControl("Mark external links")\
+            .selected = False
+        self.browser.getControl('Save').click()
+
+        self.assertEqual(self.settings.mark_special_links, False)
+
+    def test_ext_links_open_new_window(self):
+        self.browser.open(
+            "%s/@@skins-controlpanel" % self.portal_url)
+        self.browser.getControl("External links open in new window")\
+            .selected = True
+        self.browser.getControl('Save').click()
+
+        self.assertEqual(self.settings.ext_links_open_new_window, True)
 
 
 def test_suite():
