@@ -47,8 +47,6 @@
 
   <adapter factory=".site.SiteControlPanelAdapter" />
 
-  <adapter factory=".skins.SkinsControlPanelAdapter" />
-
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
 
   <browser:page
@@ -98,13 +96,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".site.SiteControlPanel"
       permission="plone.app.controlpanel.Site"
-      />
-
-  <browser:page
-      name="skins-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".skins.SkinsControlPanel"
-      permission="plone.app.controlpanel.Themes"
       />
 
   <browser:page

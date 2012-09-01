@@ -34,7 +34,7 @@ Viewing the skins control panel
 
 Click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl("Cancel").click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -50,11 +50,11 @@ Make some changes
     >>> browser.url.endswith('skins-controlpanel')
     True
 
-    >>> browser.getControl(name='form.theme').value = ('Plone Default', )
+    >>> browser.getControl(name='form.widgets.theme:list').value = ('Plone Default', )
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> browser.url.endswith('skins-controlpanel')
     True
 
@@ -97,7 +97,7 @@ in the browser:
 Checking mark_special_items should enable the js support and set the site prop:
 
     >>> browser.getControl(name='form.mark_special_links').value = True
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> site_props.mark_special_links
     'true'
 
@@ -107,7 +107,7 @@ Checking mark_special_items should enable the js support and set the site prop:
 Checking ext_links_open_new_window should enable the js support and set the site prop:
 
     >>> browser.getControl(name='form.ext_links_open_new_window').value = True
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> site_props.external_links_open_new_window
     'true'
 
@@ -118,7 +118,7 @@ Unchecking mark_special_links while new_window is set should leave the js
 support in place since it's needed to support new_window:
 
     >>> browser.getControl(name='form.mark_special_links').value = False
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> site_props.mark_special_links
     'false'
 
@@ -128,7 +128,7 @@ support in place since it's needed to support new_window:
 Unchecking new_window should finally turn off the js support:
 
     >>> browser.getControl(name='form.ext_links_open_new_window').value = False
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> site_props.external_links_open_new_window
     'false'
 
@@ -148,13 +148,13 @@ We should be starting with popupforms.js enabled:
 Unchecking use_popups should turn off the js support:
 
     >>> browser.getControl(name='form.use_popups').value = False
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> jstool.getResource('popupforms.js').getEnabled()
     False
 
 Checking use_popups should turn re-enable:
 
     >>> browser.getControl(name='form.use_popups').value = True
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> jstool.getResource('popupforms.js').getEnabled()
     True
