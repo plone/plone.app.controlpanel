@@ -305,3 +305,54 @@ class ISecuritySchema(Interface):
             u"admin)"),
         default=False,
         required=False)
+
+
+ICON_VISIBILITY_CHOICES = {
+    _(u"Only for users who are logged in"): 'authenticated',
+    _(u"Never show icons"): 'disabled',
+    _(u"Always show icons"): 'enabled',
+}
+
+ICON_VISIBILITY_VOCABULARY = SimpleVocabulary(
+    [SimpleTerm(v, v, k) for k, v in ICON_VISIBILITY_CHOICES.items()]
+    )
+
+
+class ISkinsSchema(Interface):
+
+    theme = schema.Choice(
+        title=_(u'Default theme'),
+        description=_(u'Select the default theme for the site.'),
+        required=True,
+        missing_value=tuple(),
+        default="Sunburst Theme",
+        vocabulary="plone.app.vocabularies.Skins")
+
+    mark_special_links = schema.Bool(
+        title=_(u'Mark external links'),
+        description=_(
+            u"If enabled all external links "
+            u"will be marked with link type "
+            u"specific icons."),
+         default=True)
+
+    ext_links_open_new_window = schema.Bool(
+        title=_(u"External links open in new window"),
+        description=_(
+            u"If enabled all external links in the content region open in a "
+            u"new window."),
+        default=False)
+
+    icon_visibility = schema.Choice(
+        title=_(u'Show content type icons'),
+        description=_(
+            u"If disabled the content icons in folder listings and portlets "
+            u"won't be visible."),
+        vocabulary=ICON_VISIBILITY_VOCABULARY)
+
+    use_popups = schema.Bool(
+        title=_(u'Use popup overlays for simple forms'),
+        description=_(
+            u"If enabled popup overlays will be used for simple forms like "
+            u"login, contact and delete confirmation."),
+        default=True)
