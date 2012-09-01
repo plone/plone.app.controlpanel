@@ -70,8 +70,9 @@ class SkinsControlPanelFunctionalTest(unittest.TestCase):
         self.settings = registry.forInterface(ISkinsSchema)
         self.browser = Browser(self.app)
         self.browser.handleErrors = False
-        self.browser.addHeader('Authorization',
-                'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,))
+        self.browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,))
 
     def test_skins_control_panel_link(self):
         self.browser.open(
