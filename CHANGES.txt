@@ -4,7 +4,9 @@ Changelog
 2.2.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed issue with non-ascii Workflow titles breaking types 
+  control panel.
+  [ericof]
 
 
 2.2.8 (2012-08-23)
