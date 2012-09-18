@@ -12,6 +12,7 @@ from Acquisition import aq_inner
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone.app.controlpanel.events import ConfigurationChangedEvent
@@ -21,15 +22,13 @@ from plone.app.controlpanel.form import ControlPanelView
 
 def format_title(text, request=None):
     ''' Format ans translate workflow title '''
-    if type(text) == str:
-        text = text.decode('utf-8')
+    text = safe_unicode(text)
     return translate(text, domain='plone', context=request)
 
 
 def format_description(text, request=None):
     # We expect the workflow to be a text of '- ' divided bullet points.
-    if type(text) == str:
-        text = text.decode('utf-8')
+    text = safe_unicode(text)
     text = translate(text.strip(), domain='plone', context=request)
     return [s.strip() for s in text.split('- ') if s]
 

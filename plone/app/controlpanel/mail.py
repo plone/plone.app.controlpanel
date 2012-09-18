@@ -24,6 +24,7 @@ from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_hasattr
+from Products.CMFPlone.utils import safe_unicode
 from Products.MailHost.MailHost import MailHostError
 from Products.statusmessages.interfaces import IStatusMessage
 
@@ -135,9 +136,7 @@ class MailControlPanelAdapter(SchemaAdapterBase):
 
     def get_email_from_name(self):
         email_from_name = getUtility(ISiteRoot).email_from_name
-        if type(email_from_name) == str:
-            email_from_name = email_from_name.decode('utf-8')
-        return email_from_name
+        return safe_unicode(email_from_name)
 
     def set_email_from_name(self, value):
         getUtility(ISiteRoot).email_from_name = value
