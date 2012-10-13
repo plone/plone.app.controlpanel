@@ -220,4 +220,32 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="prefs_error_log_showEntry"
+      template="prefs_error_log_showEntry.pt"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="prefs_error_log_form"
+      template="prefs_error_log_form.pt"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="prefs_error_log_setProperties"
+      class=".error_log.ErrorLogSetProperties"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="prefs_error_log_update"
+      class=".error_log.ErrorLogUpdate"
+      permission="cmf.ManagePortal"
+      />
+
 </configure>
