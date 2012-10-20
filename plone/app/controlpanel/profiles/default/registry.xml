@@ -5,5 +5,6 @@
  <records interface="plone.app.controlpanel.interfaces.IMailSchema" />
  <records interface="plone.app.controlpanel.interfaces.INavigationSchema" />
  <records interface="plone.app.controlpanel.interfaces.ISecuritySchema" />
+ <records interface="plone.app.controlpanel.interfaces.ISiteSchema" />
  <records interface="plone.app.controlpanel.interfaces.ISkinsSchema" />
 </registry>

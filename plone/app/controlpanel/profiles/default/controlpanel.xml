@@ -66,6 +66,18 @@
     </configlet>
 
     <configlet
+        title="Site"
+        action_id="site"
+        appId="plone.app.controlpanel"
+        category="plone"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@site-controlpanel"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+    <configlet
         title="Skins"
         action_id="skins"
         appId="plone.app.controlpanel"

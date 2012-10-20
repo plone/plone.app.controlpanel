@@ -24,7 +24,7 @@ Viewing the site control panel
 
 Click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl("Cancel").click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -40,12 +40,12 @@ Make some changes
     >>> browser.url.endswith('site-controlpanel')
     True
 
-    >>> browser.getControl(name='form.site_title').value = "Site"
-    >>> browser.getControl(name='form.enable_sitemap').value = True
+    >>> browser.getControl(name='form.widgets.site_title').value = "Site"
+    >>> browser.getControl(name='form.widgets.enable_sitemap:list').value = True
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> browser.url.endswith('site-controlpanel')
     True
 
@@ -77,11 +77,11 @@ Make again some changes
     >>> browser.url.endswith('site-controlpanel')
     True
 
-    >>> browser.getControl(name='form.enable_sitemap').value = False
+    >>> browser.getControl(name='form.widgets.enable_sitemap:list').value = False
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> browser.url.endswith('site-controlpanel')
     True
 
@@ -115,11 +115,11 @@ Test the DC properties
     >>> browser.url.endswith('site-controlpanel')
     True
 
-    >>> browser.getControl(name='form.exposeDCMetaTags').value = True
+    >>> browser.getControl(name='form.widgets.exposeDCMetaTags:list').value = True
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl("Save").click()
     >>> browser.url.endswith('site-controlpanel')
     True
 

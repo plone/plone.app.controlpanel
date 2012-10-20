@@ -45,8 +45,6 @@
 
   <adapter factory=".search.SearchControlPanelAdapter" />
 
-  <adapter factory=".site.SiteControlPanelAdapter" />
-
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
 
   <browser:page
@@ -89,13 +87,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".search.SearchControlPanel"
       permission="plone.app.controlpanel.Search"
-      />
-
-  <browser:page
-      name="site-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".site.SiteControlPanel"
-      permission="plone.app.controlpanel.Site"
       />
 
   <browser:page

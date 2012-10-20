@@ -1,10 +1,13 @@
 DONE
 ====
 
+ [X] @@calendar-controlpanel    formlib
  [X] @@editing-controlpanel     formlib
  [X] @@mail-controlpanel        formlib
  [X] @@navigation-controlpanel  formlib
  [X] @@security-controlpanel    formlib
+ [X] @@site-controlpanel        formlib (ControlPanelForm)
+
 
 TODO
 ====
@@ -15,10 +18,8 @@ TODO
  [ ] @@search-controlpanel      formlib (ControlPanelForm)
  [ ] @@markup-controlpanel      formlib (ControlPanelForm)
  [ ] @@maintenance-controlpanel formlib (SchemaAdapterBase)
- [ ] @@site-controlpanel        formlib (ControlPanelForm)
- [ ] @@filter-controlpanel      formlib (ControlPanelForm)
- [ ] @@calendar-controlpanel    formlib (ControlPanelForm)
 
+ [ ] @@filter-controlpanel      formlib (ControlPanelForm)
  [ ] @@usergroup-userprefs      formlib (ControlPanelForm)
  [ ] @@usergroup-groupprefs
  [ ] @@usergroup-controlpanel
