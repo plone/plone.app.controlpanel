@@ -13,8 +13,8 @@ from plone.app.controlpanel.testing import \
 
 
 optionflags = (
-    doctest.ELLIPSIS | \
-    doctest.NORMALIZE_WHITESPACE | \
+    doctest.ELLIPSIS |
+    doctest.NORMALIZE_WHITESPACE |
     doctest.REPORT_ONLY_FIRST_FAILURE)
 normal_testfiles = [
     'calendar.txt',
