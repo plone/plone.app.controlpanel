@@ -13,7 +13,6 @@ TODO
 ====
 
  [ ] @@types-controlpanel       formlib (ControlPanelForm)     prefs_configlet_main
- [ ] @@skins-controlpanel       formlib (ControlPanelForm)
  [ ] @@language-controlpanel    formlib (ControlPanelForm)
  [ ] @@search-controlpanel      formlib (ControlPanelForm)
  [ ] @@markup-controlpanel      formlib (ControlPanelForm)
@@ -27,6 +26,11 @@ TODO
  [ ] @@usergroup-usermembership
  [ ] @@usergroup-groupdetails
 
+
+Deprecated
+==========
+
+[ ] @@skins-controlpanel       formlib (ControlPanelForm)
 
 Separate Packages
 -----------------

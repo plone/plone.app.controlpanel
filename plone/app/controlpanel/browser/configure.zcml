@@ -61,12 +61,4 @@
     permission="plone.app.controlpanel.Site"
     />
 
-  <!-- Skins Control Panel -->
-  <browser:page
-    name="skins-controlpanel"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    class=".skins.SkinsControlPanel"
-    permission="plone.app.controlpanel.Themes"
-    />
-
 </configure>
