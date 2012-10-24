@@ -83,8 +83,8 @@ class IFilterAttributesSchema(Interface):
 
 class IFilterEditorSchema(Interface):
     style_whitelist = schema.List(
-        title=_(u'Permitted styles'),
-        description=_(u'These CSS styles are allowed in style attributes.'),
+        title=_(u'Permitted properties'),
+        description=_(u'These CSS properties are allowed in style attributes.'),
         default=u'text-align list-style-type float'.split(),
         value_type=schema.TextLine(),
         required=False)
