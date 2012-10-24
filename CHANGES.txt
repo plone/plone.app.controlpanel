@@ -4,7 +4,8 @@ Changelog
 2.2.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- change title and description for permitted styles so its correct
+  [maartenkling]
 
 
 2.2.9 (2012-10-11)
@@ -14,7 +15,7 @@ Changelog
   This fixes https://dev.plone.org/ticket/12385
   [ericof]
 
-- Fixed issue with non-ascii Workflow titles breaking types 
+- Fixed issue with non-ascii Workflow titles breaking types
   control panel.
   [ericof]
 
