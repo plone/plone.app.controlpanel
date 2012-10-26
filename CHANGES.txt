@@ -4,7 +4,10 @@ Changelog
 2.2.10 (unreleased)
 -------------------
 
-- change title and description for permitted styles so its correct
+- Fix 'Redirect immediately to link target' setting doesn't stick #12892
+  [maartenkling]
+
+- Change title and description for permitted styles so its correct
   [maartenkling]
 
 - Fix @@usergroup-groupmembership "Show All users" batching broken
