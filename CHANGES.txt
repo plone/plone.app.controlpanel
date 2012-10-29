@@ -4,6 +4,9 @@ Changelog
 2.3.3 (unreleased)
 ------------------
 
+- Add error class to portalMessage when portalMessage contains error
+  [maartenkling]
+
 - Fix 'Redirect immediately to link target' setting doesn't stick #12892
   [maartenkling]
 
