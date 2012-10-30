@@ -13,6 +13,9 @@ Changelog
 - Fix @@usergroup-groupmembership "Show All users" batching broken
   [maartenkling]
 
+- Add error class to portalMessage when portalMessage contains error
+  [maartenkling]
+
 2.2.9 (2012-10-11)
 ------------------
 
