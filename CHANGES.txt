@@ -4,6 +4,9 @@ Changelog
 2.2.10 (unreleased)
 -------------------
 
+- When browsing users and groups, clear searchstring when selecting show all
+  [maartenkling]
+
 - Fix 'Redirect immediately to link target' setting doesn't stick #12892
   [maartenkling]
 
