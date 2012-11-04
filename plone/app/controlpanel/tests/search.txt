@@ -51,8 +51,7 @@ Make some changes
     True
 
     >>> browser.getControl('Enable LiveSearch').selected = False
-    >>> browser.getControl(name='form.widgets.types_not_searched.from').value = \
-    ...     ['Event', 'Document']
+    >>> browser.getControl(name='form.widgets.types_not_searched:list').value = ['Event', 'Document']
 
 
 Click the save button:
@@ -89,5 +88,3 @@ should still be listed in the site_properties as not searchable:
     >>> from plone.app.vocabularies.types import BAD_TYPES
     >>> [bad for bad in BAD_TYPES if bad not in site_props.types_not_searched]
     []
-
-

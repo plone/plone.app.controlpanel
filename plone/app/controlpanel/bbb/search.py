@@ -76,3 +76,7 @@ def syncPloneAppRegistryToSearchPortalProperties(settings, event):
     if event.record.fieldName == "enable_livesearch":
         search_properties.enable_livesearch = settings.enable_livesearch
         return
+
+    if event.record.fieldName == "types_not_searched":
+        search_properties.types_not_searched = settings.types_not_searched
+        return
