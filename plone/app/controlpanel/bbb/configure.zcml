@@ -50,6 +50,12 @@
     />
 
   <subscriber
+    for="plone.app.controlpanel.interfaces.ILanguageSchema
+         plone.registry.interfaces.IRecordModifiedEvent"
+    handler=".language.syncPloneAppRegistryToLanguageProperties"
+    />
+
+  <subscriber
     for="plone.app.controlpanel.interfaces.IMailSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".mail.syncPloneAppRegistryToMailhostProperties"
@@ -76,6 +82,7 @@
   <!-- Adapter  -->
   <adapter factory=".calendar.CalendarControlPanelAdapter" />
   <adapter factory=".editing.EditingControlPanelAdapter" />
+  <adapter factory=".language.LanguageControlPanelAdapter" />
   <adapter factory=".mail.MailControlPanelAdapter" />
   <adapter factory=".navigation.NavigationControlPanelAdapter" />
   <adapter factory=".site.SiteControlPanelAdapter" />

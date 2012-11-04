@@ -35,8 +35,6 @@
 
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
-  <adapter factory=".language.LanguageControlPanelAdapter" />
-
   <adapter factory=".maintenance.MaintenanceControlPanelAdapter" />
 
   <adapter factory=".markup.MarkupControlPanelAdapter" />
@@ -52,13 +50,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".filter.FilterControlPanel"
       permission="plone.app.controlpanel.Filtering"
-      />
-
-  <browser:page
-      name="language-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".language.LanguageControlPanel"
-      permission="plone.app.controlpanel.Language"
       />
 
   <browser:page

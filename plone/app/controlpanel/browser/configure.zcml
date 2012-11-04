@@ -29,6 +29,14 @@
       permission="plone.app.controlpanel.Editing"
       />
 
+  <!-- Language Control Panel -->
+  <browser:page
+      name="language-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".language.LanguageControlPanel"
+      permission="plone.app.controlpanel.Language"
+      />
+
   <!-- Mail Control Panel -->
   <browser:page
     name="mail-controlpanel"
