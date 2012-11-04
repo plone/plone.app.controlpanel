@@ -1,18 +1,18 @@
 DONE
 ====
 
- [X] @@calendar-controlpanel    formlib
- [X] @@editing-controlpanel     formlib
- [X] @@mail-controlpanel        formlib
- [X] @@navigation-controlpanel  formlib
- [X] @@security-controlpanel    formlib
- [X] @@site-controlpanel        formlib (ControlPanelForm)
+ [X] @@calendar-controlpanel    plone.app.registry (was formlib)
+ [X] @@editing-controlpanel     plone.app.registry (was formlib)
+ [X] @@mail-controlpanel        plone.app.registry (was formlib)
+ [X] @@navigation-controlpanel  plone.app.registry (was formlib)
+ [X] @@security-controlpanel    plone.app.registry (was formlib)
+ [X] @@site-controlpanel        plone.app.registry (was formlib)
+ [X] @@types-controlpanel       plone.autoform     (was formlib)
 
 
 TODO
 ====
 
- [ ] @@types-controlpanel       formlib (ControlPanelForm)     prefs_configlet_main
  [ ] @@language-controlpanel    formlib (ControlPanelForm)
  [ ] @@search-controlpanel      formlib (ControlPanelForm)
  [ ] @@markup-controlpanel      formlib (ControlPanelForm)

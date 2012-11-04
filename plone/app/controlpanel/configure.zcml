@@ -81,13 +81,6 @@
       />
 
   <browser:page
-      name="types-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".types.TypesControlPanel"
-      permission="plone.app.controlpanel.Types"
-      />
-
-  <browser:page
       name="usergroup-userprefs"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".usergroups.UsersOverviewControlPanel"
