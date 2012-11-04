@@ -1,4 +1,3 @@
-from zope.site.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.statusmessages.interfaces import IStatusMessage
@@ -24,13 +23,7 @@ from zope.schema.interfaces import IVocabularyFactory
 
 from Acquisition import aq_inner
 
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from plone.app.controlpanel.events import ConfigurationChangedEvent
-
-from plone.app.controlpanel.form import ControlPanelView
 
 
 def format_description(text, request=None):
@@ -41,21 +34,21 @@ def format_description(text, request=None):
 
 # These are convenient / user friendly versioning policies.
 VERSION_POLICIES = [
-        dict(id="off",
-             policy=(),
-             title=_(u"versioning_off",
-                     default=u"No versioning")),
+    dict(id="off",
+         policy=(),
+         title=_(u"versioning_off",
+                 default=u"No versioning")),
 
-        dict(id="manual",
-             policy=("version_on_revert",),
-             title=_(u"versioning_manual",
-                     default=u"Manual")),
+    dict(id="manual",
+         policy=("version_on_revert",),
+         title=_(u"versioning_manual",
+                 default=u"Manual")),
 
-        dict(id="automatic",
-             policy=("at_edit_autoversion", "version_on_revert"),
-             title=_(u"versioning_automatic",
-                     default=u"Automatic")),
-        ]
+    dict(id="automatic",
+         policy=("at_edit_autoversion", "version_on_revert"),
+         title=_(u"versioning_automatic",
+                 default=u"Automatic")),
+]
 
 
 class ITypesSchema(Interface):
@@ -71,7 +64,6 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
     form_name = _("Types settings")
     control_panel_view = "types-controlpanel"
     template = ViewPageTemplateFile('types.pt')
-
 
     @button.buttonAndHandler(_('Save'), name='save')
     def handleSave(self, action):
@@ -104,7 +96,7 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
     def type_id(self):
         type_id = self.request.get('type_id', None)
         if type_id is None:
-            type_id=''
+            type_id = ''
         return type_id
 
     @property
@@ -142,15 +134,20 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
                 addable = form.get('addable', False)
                 allow_discussion = form.get('allow_discussion', False)
 
-                fti.manage_changeProperties(global_allow = bool(addable),
-                                            allow_discussion = bool(allow_discussion))
+                fti.manage_changeProperties(
+                    global_allow=bool(addable),
+                    allow_discussion=bool(allow_discussion)
+                )
 
                 version_policy = form.get('versionpolicy', "off")
-                if version_policy!=self.current_versioning_policy():
-                    newpolicy=[p for p in VERSION_POLICIES if p["id"]==version_policy][0]
+                if version_policy != self.current_versioning_policy():
+                    newpolicy = [
+                        p for p in VERSION_POLICIES
+                        if p["id"] == version_policy][0]
 
-
-                    versionable_types = list(portal_repository.getVersionableContentTypes())
+                    versionable_types = list(
+                        portal_repository.getVersionableContentTypes()
+                    )
                     if not newpolicy["policy"]:
                         if type_id in versionable_types:
                             versionable_types.remove(type_id)
@@ -161,29 +158,41 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
                     for policy in portal_repository.listPolicies():
                         policy_id = policy.getId()
                         if policy_id in newpolicy["policy"]:
-                            portal_repository.addPolicyForContentType(type_id, policy_id)
+                            portal_repository.addPolicyForContentType(
+                                type_id,
+                                policy_id
+                            )
                         else:
-                            portal_repository.removePolicyFromContentType(type_id, policy_id)
+                            portal_repository.removePolicyFromContentType(
+                                type_id,
+                                policy_id
+                            )
 
-                    portal_repository.setVersionableContentTypes(versionable_types)
+                    portal_repository.setVersionableContentTypes(
+                        versionable_types
+                    )
 
                 searchable = form.get('searchable', False)
-                blacklisted = list(site_properties.getProperty('types_not_searched'))
+                blacklisted = list(
+                    site_properties.getProperty('types_not_searched')
+                )
                 if searchable and type_id in blacklisted:
                     blacklisted.remove(type_id)
                 elif not searchable and type_id not in blacklisted:
                     blacklisted.append(type_id)
-                site_properties.manage_changeProperties(types_not_searched = \
-                                                        blacklisted)
+                site_properties.manage_changeProperties(
+                    types_not_searched=blacklisted
+                )
 
                 redirect_links = form.get('redirect_links', False)
-                site_properties.manage_changeProperties(redirect_links = \
-                                                        redirect_links)
+                site_properties.manage_changeProperties(
+                    redirect_links=redirect_links
+                )
 
             # Update workflow
-            if self.have_new_workflow() and \
-               form.get('form.workflow.submitted', False) and \
-               save_button:
+            if self.have_new_workflow() \
+                    and form.get('form.workflow.submitted', False) \
+                    and save_button:
                 if self.new_workflow_is_different():
                     new_wf = self.new_workflow()
                     if new_wf == '[none]':
@@ -192,21 +201,31 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
                         chain = new_wf
                     else:
                         chain = (new_wf,)
-                    state_map = dict([(s['old_state'], s['new_state']) for s in \
-                                      form.get('new_wfstates', [])])
-                    if state_map.has_key('[none]'):
+                    state_map = dict([
+                        (s['old_state'], s['new_state'])
+                        for s in form.get('new_wfstates', [])
+                    ])
+                    if '[none]' in state_map:
                         state_map[None] = state_map['[none]']
                         del state_map['[none]']
                     if type_id:
-                        type_ids=(type_id,)
+                        type_ids = (type_id,)
                     else:
                         wt = getToolByName(self.context, 'portal_workflow')
                         tt = getToolByName(self.context, 'portal_types')
-                        nondefault = [info[0] for info in wt.listChainOverrides()]
-                        type_ids = [type for type in tt.listContentTypes() if type not in nondefault]
-                        wt.setChainForPortalTypes(type_ids, wt.getDefaultChain())
+                        nondefault = [
+                            info[0] for info in wt.listChainOverrides()
+                        ]
+                        type_ids = [
+                            type for type in tt.listContentTypes()
+                            if type not in nondefault
+                        ]
+                        wt.setChainForPortalTypes(
+                            type_ids,
+                            wt.getDefaultChain()
+                        )
                         wt.setDefaultChain(','.join(chain))
-                        chain='(Default)'
+                        chain = '(Default)'
 
                     remap_workflow(context, type_ids=type_ids, chain=chain,
                                    state_map=state_map)
@@ -216,22 +235,28 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
 
                 else:
                     portal_workflow = getToolByName(context, 'portal_workflow')
-                    if self.new_workflow()=='(Default)':
+                    if self.new_workflow() == '(Default)':
                         # The WorkflowTool API can not handle this sanely
-                        cbt=portal_workflow._chains_by_type
-                        if cbt.has_key(type_id):
+                        cbt = portal_workflow._chains_by_type
+                        if type_id in cbt:
                             del cbt[type_id]
                     else:
-                        portal_workflow.setChainForPortalTypes((type_id,),
-                                self.new_workflow())
+                        portal_workflow.setChainForPortalTypes(
+                            (type_id,),
+                            self.new_workflow()
+                        )
 
-                self.request.response.redirect('%s/@@types-controlpanel?\
-type_id=%s' % (context.absolute_url() , type_id))
+                self.request.response.redirect(
+                    '%s/@@types-controlpanel?type_id=%s' % (
+                        context.absolute_url(),
+                        type_id
+                    )
+                )
                 postback = False
 
         elif cancel_button:
-            self.request.response.redirect(self.context.absolute_url() + \
-                                           '/plone_control_panel')
+            self.request.response.redirect(
+                self.context.absolute_url() + '/plone_control_panel')
             postback = False
 
         if postback:
@@ -244,17 +269,25 @@ type_id=%s' % (context.absolute_url() , type_id))
 
     @memoize
     def selectable_types(self):
-        vocab_factory = getUtility(IVocabularyFactory,
-                                   name="plone.app.vocabularies.ReallyUserFriendlyTypes")
+        vocab_factory = getUtility(
+            IVocabularyFactory,
+            name="plone.app.vocabularies.ReallyUserFriendlyTypes"
+        )
         types = []
         for v in vocab_factory(self.context):
             if v.title:
                 title = translate(v.title, context=self.request)
             else:
-                title = translate(v.token, domain='plone', context=self.request)
-            types.append(dict(id=v.value, title=title) )
+                title = translate(
+                    v.token,
+                    domain='plone',
+                    context=self.request
+                )
+            types.append(dict(id=v.value, title=title))
+
         def _key(v):
             return v['title']
+
         types.sort(key=_key)
         return types
 
@@ -290,7 +323,8 @@ type_id=%s' % (context.absolute_url() , type_id))
         context = aq_inner(self.context)
         portal_properties = getToolByName(context, 'portal_properties')
         site_props = portal_properties.site_properties
-        return self.type_id == 'Link' and site_props.getProperty('redirect_links') or False
+        return self.type_id == 'Link' \
+            and site_props.getProperty('redirect_links') or False
 
     @memoize
     def current_workflow(self):
@@ -299,19 +333,34 @@ type_id=%s' % (context.absolute_url() , type_id))
         default_workflow = self.default_workflow(False)
         nondefault = [info[0] for info in portal_workflow.listChainOverrides()]
         chain = portal_workflow.getChainForPortalType(self.type_id)
-        empty_workflow_dict = dict(id='[none]',
-                                   title=_(u"label_no_workflow"),
-                                   description= [_(u"description_no_workflow",
-                                   default=u"This type has no workflow. The visibilty "
-                                       u"of items of this type is determined by "
-                                       u"the folder they are in.")])
+        empty_workflow_dict = dict(
+            id='[none]',
+            title=_(u"label_no_workflow"),
+            description=[_(
+                u"description_no_workflow",
+                default=u"This type has no workflow. The visibilty "
+                        u"of items of this type is determined by "
+                        u"the folder they are in.")
+            ]
+        )
 
         if self.type_id in nondefault:
             if chain:
                 wf_id = chain[0]
                 wf = getattr(portal_workflow, wf_id)
-                title = translate(wf.title, domain='plone', context=self.request)
-                return dict(id=wf.id, title=title, description=format_description(wf.description, self.request))
+                title = translate(
+                    wf.title,
+                    domain='plone',
+                    context=self.request
+                )
+                return dict(
+                    id=wf.id,
+                    title=title,
+                    description=format_description(
+                        wf.description,
+                        self.request
+                    )
+                )
             else:
                 return empty_workflow_dict
 
@@ -321,11 +370,14 @@ type_id=%s' % (context.absolute_url() , type_id))
         default_title = translate(default_workflow.title, domain='plone',
                                   context=self.request)
         return dict(id='(Default)',
-                    title=_(u"label_default_workflow_title",
+                    title=_(
+                        u"label_default_workflow_title",
                         default=u"Default workflow (${title})",
                         mapping=dict(title=default_title)),
-                    description=format_description(default_workflow.description, self.request))
-
+                    description=format_description(
+                        default_workflow.description,
+                        self.request)
+                    )
 
     def available_workflows(self):
         vocab_factory = getUtility(IVocabularyFactory,
@@ -335,10 +387,16 @@ type_id=%s' % (context.absolute_url() , type_id))
             if v.title:
                 title = translate(v.title, context=self.request)
             else:
-                title = translate(v.token, domain='plone', context=self.request)
-            workflows.append(dict(id=v.value, title=title) )
+                title = translate(
+                    v.token,
+                    domain='plone',
+                    context=self.request
+                )
+            workflows.append(dict(id=v.value, title=title))
+
         def _key(v):
             return v['title']
+
         workflows.sort(key=_key)
 
         default_workflow = self.default_workflow(False)
@@ -347,21 +405,29 @@ type_id=%s' % (context.absolute_url() , type_id))
             default_workflow = self.default_workflow(False)
             default_title = translate(default_workflow.title,
                                       domain='plone', context=self.request)
-            workflows.insert(0, dict(id='(Default)',
+            workflows.insert(
+                0,
+                dict(
+                    id='(Default)',
                     title=_(u"label_default_workflow_title",
                             default=u"Default workflow (${title})",
                             mapping=dict(title=default_title)),
-                    description=format_description(default_workflow.description, self.request)))
+                    description=format_description(
+                        default_workflow.description,
+                        self.request
+                    )
+                )
+            )
 
         return workflows
 
     @memoize
     def new_workflow(self):
         current_workflow = self.current_workflow()['id']
-        if self.type_id=='':
+        if self.type_id == '':
             # If we are looking at the default workflow we need to show
             # the real workflow
-            current_workflow=self.real_workflow(current_workflow)
+            current_workflow = self.real_workflow(current_workflow)
         old_type_id = self.request.form.get('old_type_id', self.type_id)
         if old_type_id != self.type_id:
             return current_workflow
@@ -387,7 +453,7 @@ type_id=%s' % (context.absolute_url() , type_id))
 
     @memoize
     def real_workflow(self, wf):
-        if wf=='(Default)':
+        if wf == '(Default)':
             return self.default_workflow()
         else:
             return wf
@@ -397,7 +463,8 @@ type_id=%s' % (context.absolute_url() , type_id))
         new_workflow = self.new_workflow()
         current_workflow = self.current_workflow()['id']
 
-        return self.real_workflow(new_workflow)!=self.real_workflow(current_workflow)
+        return self.real_workflow(new_workflow) != self.real_workflow(
+            current_workflow)
 
     @memoize
     def new_workflow_is_none(self):
@@ -409,7 +476,8 @@ type_id=%s' % (context.absolute_url() , type_id))
 
         if self.new_workflow_is_different():
             if self.new_workflow_is_none():
-                return [_(u"description_no_workflow",
+                return [_(
+                    u"description_no_workflow",
                     default=u"This type has no workflow. The visibilty of "
                             u"items of this type is determined by the "
                             u"folder they are in.")]
@@ -419,7 +487,6 @@ type_id=%s' % (context.absolute_url() , type_id))
 
         return None
 
-
     def new_workflow_available_states(self):
         if self.new_workflow_is_different():
             new_workflow = self.real_workflow(self.new_workflow())
@@ -427,7 +494,11 @@ type_id=%s' % (context.absolute_url() , type_id))
             wf = getattr(portal_workflow, new_workflow)
             states = []
             for s in wf.states.objectValues():
-                title = translate(s.title, domain='plone', context=self.request)
+                title = translate(
+                    s.title,
+                    domain='plone',
+                    context=self.request
+                )
                 states.append(dict(id=s.id, title=title))
             return states
         else:
@@ -442,9 +513,9 @@ type_id=%s' % (context.absolute_url() , type_id))
         if current_workflow == '[none]':
             new_wf = getattr(portal_workflow, new_workflow)
             default_state = new_wf.initial_state
-            return [dict(old_id = '[none]',
-                         old_title = _(u"No workflow"),
-                         suggested_id = default_state)]
+            return [dict(old_id='[none]',
+                         old_title=_(u"No workflow"),
+                         suggested_id=default_state)]
 
         elif self.new_workflow_is_different():
             old_wf = getattr(portal_workflow, current_workflow)
@@ -455,15 +526,20 @@ type_id=%s' % (context.absolute_url() , type_id))
 
             states = []
             for old in old_wf.states.objectValues():
-                title = translate(old.title, domain='plone', context=self.request)
-                states.append(
-                    dict(old_id = old.id,
-                         old_title = title,
-                         suggested_id = (old.id in new_states and \
-                                         old.id or default_state)))
+                title = translate(
+                    old.title,
+                    domain='plone',
+                    context=self.request
+                )
+                states.append(dict(
+                    old_id=old.id,
+                    old_title=title,
+                    suggested_id=(old.id in new_states and
+                                  old.id or default_state)))
             return states
         else:
             return []
+
 
 class ControlPanelFormWrapper(layout.FormWrapper):
     """Use this form as the plone.z3cform layout wrapper to get the control
