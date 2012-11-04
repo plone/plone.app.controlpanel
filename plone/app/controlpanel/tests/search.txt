@@ -23,7 +23,7 @@ Viewing the search control panel
 
 Click the save button without making any changes:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl('Save').click()
     >>> browser.url.endswith('search-controlpanel')
     True
 
@@ -34,7 +34,7 @@ We should get a status message:
 
 Now click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl('Cancel').click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -50,14 +50,14 @@ Make some changes
     >>> browser.url.endswith('search-controlpanel')
     True
 
-    >>> browser.getControl(name='form.enable_livesearch').value = False
-    >>> browser.getControl(name='form.types_not_searched').value = \
+    >>> browser.getControl('Enable LiveSearch').selected = False
+    >>> browser.getControl(name='form.widgets.types_not_searched.from').value = \
     ...     ['Event', 'Document']
-    
+
 
 Click the save button:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl('Save').click()
     >>> browser.url.endswith('search-controlpanel')
     True
 

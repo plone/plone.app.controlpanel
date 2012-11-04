@@ -53,6 +53,14 @@
     permission="plone.app.controlpanel.Navigation"
     />
 
+  <!-- Search Control Panel -->
+  <browser:page
+      name="search-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".search.SearchControlPanel"
+      permission="plone.app.controlpanel.Search"
+      />
+
   <!-- Security Control Panel -->
   <browser:page
     name="security-controlpanel"

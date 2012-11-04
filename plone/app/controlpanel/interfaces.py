@@ -285,6 +285,32 @@ class INavigationSchema(Interface):
         required=False)
 
 
+class ISearchSchema(Interface):
+
+    enable_livesearch = schema.Bool(
+        title=_(u'Enable LiveSearch'),
+        description=_(
+            u"Enables the LiveSearch feature, which shows live "
+            u"results if the browser supports JavaScript."),
+        default=True,
+        required=True
+    )
+
+    types_not_searched = schema.Tuple(
+        title=_(u"Define the types to be shown in the site and searched"),
+        description=_(
+            u"Define the types that should be searched and be "
+            u"available in the user facing part of the site. "
+            u"Note that if new content types are installed, they "
+            u"will be enabled by default unless explicitly turned "
+            u"off here or by the relevant installer."
+        ),
+        required=True,
+        value_type=schema.Choice(
+            source="plone.app.vocabularies.ReallyUserFriendlyTypes")
+    )
+
+
 class ISecuritySchema(Interface):
 
     enable_self_reg = schema.Bool(
