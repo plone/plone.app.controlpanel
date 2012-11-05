@@ -675,7 +675,7 @@ class GroupMembershipControlPanel(UsersGroupsControlPanelView):
             search = form.get('form.button.Search', None) is not None
             findAll = form.get('form.button.FindAll', None) is not None and not self.many_users
             self.searchString = not findAll and form.get('searchstring', '') or ''
-            if not(self.many_users) or bool(self.searchString):
+            if (not(self.many_users) and not form.get('form.button.Edit', None)) or bool(self.searchString):
                 self.searchResults = self.getPotentialMembers(self.searchString)
 
             if search or findAll:
