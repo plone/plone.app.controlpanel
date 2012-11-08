@@ -4,6 +4,14 @@ Changelog
 2.3.3 (unreleased)
 ------------------
 
+- When browsing users and groups, clear searchstring when adding
+  or removing.  Also do not show search results then.
+  [maurits]
+
+- When browsing users and groups, clear searchstring when selecting
+  show all.
+  [maartenkling]
+
 - Add error class to portalMessage when portalMessage contains error
   [maartenkling]
 
@@ -15,6 +23,7 @@ Changelog
 
 - Fix @@usergroup-groupmembership "Show All users" batching broken
   [maartenkling]
+
 
 2.3.2 (2012-10-16)
 ------------------
