@@ -4,7 +4,12 @@ Changelog
 2.2.10 (unreleased)
 -------------------
 
-- When browsing users and groups, clear searchstring when selecting show all
+- When browsing users and groups, clear searchstring when when adding
+  or removing.  Also do not show search results then.
+  [maurits]
+
+- When browsing users and groups, clear searchstring when selecting
+  show all.
   [maartenkling]
 
 - Fix 'Redirect immediately to link target' setting doesn't stick #12892
@@ -18,6 +23,7 @@ Changelog
 
 - Add error class to portalMessage when portalMessage contains error
   [maartenkling]
+
 
 2.2.9 (2012-10-11)
 ------------------
