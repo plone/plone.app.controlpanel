@@ -259,11 +259,7 @@ Users/Groups can be removed from this list as well.
     >>> self.browser.getControl(name='form.button.Edit').click()
     >>> 'Changes made' in self.browser.contents
     True
-    >>> self.browser.getControl(name='delete:list').getControl(value='XYsmd7ux')
-    Traceback (most recent call last):
-    ...
-    LookupError: value 'XYsmd7ux'
-    >>> self.browser.getControl(name='add:list').getControl(value='XYsmd7ux').selected
+    >>> 'Abigail Simmons' in self.browser.contents
     False
 
 Open the groups overview, make sure Group 1 and Group 2 don't have globally-assigned roles
@@ -350,11 +346,7 @@ Users/Groups they can be removed from this list as well.
     >>> self.browser.getControl(name='form.button.Edit').click()
     >>> 'Changes made' in self.browser.contents
     True
-    >>> self.browser.getControl(name='delete:list').getControl(value='XYsmd7ux')
-    Traceback (most recent call last):
-    ...
-    LookupError: value 'XYsmd7ux'
-    >>> self.browser.getControl(name='add:list').getControl(value='XYsmd7ux').selected
+    >>> 'Abigail Simmons' in self.browser.contents
     False
 
 Groups nested within groups assigned to this one should not be displayed
