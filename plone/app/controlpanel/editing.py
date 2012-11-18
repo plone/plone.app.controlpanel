@@ -1,4 +1,3 @@
-from zope.component import adapts
 from zope.formlib import form
 from zope.interface import implements
 from zope.schema import Bool
@@ -11,9 +10,15 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFDefault.formlib.schema import ProxyFieldProperty
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
-from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 from form import ControlPanelForm
+
+try:
+    import plone.app.kss
+except ImportError:
+    HAS_KSS = False
+else:
+    HAS_KSS = True
 
 
 class IEditingSchema(ILockSettings):
@@ -90,6 +95,8 @@ class EditingControlPanelAdapter(SchemaAdapterBase):
 class EditingControlPanel(ControlPanelForm):
 
     form_fields = form.FormFields(IEditingSchema)
+    if not HAS_KSS:
+        form_fields = form_fields.omit('enable_inline_editing')
 
     label = _("Editing settings")
     description = _("General editing settings.")

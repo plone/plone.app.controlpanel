@@ -4,6 +4,9 @@ Changelog
 2.3.3 (unreleased)
 ------------------
 
+- Only show the inline editing setting if plone.app.kss is present.
+  [davisagli]
+
 - When browsing users and groups, clear searchstring when adding
   or removing.  Also do not show search results then.
   [maurits]
