@@ -340,8 +340,10 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 if not self.is_zope_manager:
                     # don't allow adding or removing the Manager role
                     # add check if user is in Administrators group
-                    groups = [group.id for group in groups_tool.getGroupsByUserId(member.id)]
-                    if ('Manager' in roles or 'Administrators' in groups) != ('Manager' in current_roles):
+                    grouproles = []
+                    for group in groups_tool.getGroupsByUserId(member.id):
+                        grouproles.extend(group.getRoles())
+                    if ('Manager' in roles or 'Manager' in grouproles) != ('Manager' in current_roles):
                         raise Forbidden
 
                 # Ideally, we would like to detect if any role assignment has
