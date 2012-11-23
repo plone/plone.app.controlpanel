@@ -7,6 +7,10 @@ Changelog
 - Only show the inline editing setting if plone.app.kss is present.
   [davisagli]
 
+- fix as site administrator modify users in controlpanel
+  when a user in the list is in administrator group, refs #12307
+  [maartenkling]
+
 - When browsing users and groups, clear searchstring when adding
   or removing.  Also do not show search results then.
   [maurits]
