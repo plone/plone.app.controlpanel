@@ -303,6 +303,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
             acl_users = getToolByName(context, 'acl_users')
             mtool = getToolByName(context, 'portal_membership')
             regtool = getToolByName(context, 'portal_registration')
+            groups_tool = getToolByName(self, 'portal_groups')
 
             utils = getToolByName(context, 'plone_utils')
 
@@ -340,7 +341,11 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 roles = user.get('roles', [])
                 if not self.is_zope_manager:
                     # don't allow adding or removing the Manager role
-                    if ('Manager' in roles) != ('Manager' in current_roles):
+                    # add check if user is in Administrators group
+                    grouproles = []
+                    for group in groups_tool.getGroupsByUserId(member.id):
+                        grouproles.extend(group.getRoles())
+                    if ('Manager' in roles or 'Manager' in grouproles) != ('Manager' in current_roles):
                         raise Forbidden
 
                 # Ideally, we would like to detect if any role assignment has
