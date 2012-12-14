@@ -44,7 +44,7 @@ Changelog
 ------------------
 
 - Fixed issue with email_from_name set as string instead of unicode
-  This fixes https://dev.plone.org/ticket/12385
+  This fixes http://dev.plone.org/ticket/12385
   [ericof]
 
 - Fixed issue with non-ascii Workflow titles breaking types
