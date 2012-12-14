@@ -4,9 +4,6 @@ Changelog
 2.3.3 (unreleased)
 ------------------
 
-- Only show the inline editing setting if plone.app.kss is present.
-  [davisagli]
-
 - Fix description of 'email as login' security setting.  It said
   existing users could go to the personalize information page and save
   it to start using their email as login, but that no longer works and
@@ -14,6 +11,9 @@ Changelog
   migrate-to-emaillogin page as manager.
   Fixes http://dev.plone.org/ticket/11283
   [maurits]
+
+- Only show the inline editing setting if plone.app.kss is present.
+  [davisagli]
 
 - Fix as site administrator modify users in controlpanel
   when a user in the list is in administrator group, refs #12307
