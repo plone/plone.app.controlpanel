@@ -4,7 +4,15 @@ Changelog
 2.2.10 (unreleased)
 -------------------
 
-- fix as site administrator modify users in controlpanel
+- Fix description of 'email as login' security setting.  It said
+  existing users could go to the personalize information page and save
+  it to start using their email as login, but that no longer works and
+  is too hard to fix.  We now only recommend using the
+  migrate-to-emaillogin page as manager.
+  Fixes http://dev.plone.org/ticket/11283
+  [maurits]
+
+- Fix as site administrator modify users in controlpanel
   when a user in the list is in administrator group, refs #12307
   [maartenkling]
 
