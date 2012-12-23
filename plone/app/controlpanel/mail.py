@@ -179,7 +179,7 @@ class MailControlPanel(ControlPanelForm):
         fromaddr = self.context.getProperty('email_from_address')
         fromname = self.context.getProperty('email_from_name')
 
-        message = ("Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "
+        message = _(u"Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "
                    "Your receipt of this message (at the address specified in the "
                    "Site 'From' address field) "
                    "indicates that your e-mail server is working!\n\n"
@@ -187,7 +187,7 @@ class MailControlPanel(ControlPanelForm):
                    "Love,\n\nPlone")
         email_charset = self.context.getProperty('email_charset')
         email_recipient, source = fromaddr, fromaddr
-        subject = "Test e-mail from Plone"
+        subject = _(u"Test e-mail from Plone")
 
         # Make the timeout incredibly short. This is enough time for most mail
         # servers, wherever they may be in the world, to respond to the
