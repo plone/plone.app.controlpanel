@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.3 (unreleased)
+2.3.3 (2013-01-01)
 ------------------
 
 - Fix description of 'email as login' security setting.  It said
