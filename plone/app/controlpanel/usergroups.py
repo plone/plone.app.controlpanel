@@ -119,7 +119,7 @@ class UsersGroupsControlPanelView(ControlPanelView):
             groupResults.sort(key=lambda x: x is not None and normalizeString(x.getGroupTitleOrName()))
 
         if searchUsers:
-            userResults = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['login', 'fullname', 'email']]), 'userid')
+            userResults = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['name', 'fullname', 'email']]), 'userid')
             userResults = [mtool.getMemberById(u['id']) for u in userResults if u['id'] not in ignore]
             userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and normalizeString(x.getProperty('fullname')) or '')
 
@@ -217,7 +217,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         # the roles inherited from the groups to which the principal belongs.
         self.request.set('__ignore_group_roles__', False)
         self.request.set('__ignore_direct_roles__', True)
-        inheritance_enabled_users = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['login', 'fullname', 'email']]), 'userid')
+        inheritance_enabled_users = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['name', 'fullname', 'email']]), 'userid')
         allInheritedRoles = {}
         for user_info in inheritance_enabled_users:
             userId = user_info['id']
