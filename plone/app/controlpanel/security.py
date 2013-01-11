@@ -159,10 +159,10 @@ class SecurityControlPanelAdapter(SchemaAdapterBase):
 
 
     def get_allow_anon_views_about(self):
-        return self.context.site_properties.allowAnonymousViewAbout
+        return self.context.allowAnonymousViewAbout
 
     def set_allow_anon_views_about(self, value):
-        self.context.site_properties.allowAnonymousViewAbout = value
+        self.context.allowAnonymousViewAbout = value
 
     allow_anon_views_about = property(get_allow_anon_views_about,
                                       set_allow_anon_views_about)
