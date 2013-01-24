@@ -58,12 +58,12 @@ class ISecuritySchema(Interface):
 
     use_email_as_login = Bool(
         title=_(u'Use email address as login name'),
-        description=_(u"Allows new  users to login with their email address "
-                      "instead of specifying a separate login name. (Existing "
-                      "users must go to the @@personal-information page once "
-                      "and save it before this setting has effect for them. "
-                      "Or use the @@migrate-to-emaillogin page as a site "
-                      "admin)"),
+        description=_(u"Allows new users to login with their email address "
+                      "instead of specifying a separate login name. Existing "
+                      "users can still login with their user id until "
+                      "you use the @@migrate-to-emaillogin page as a site "
+                      "admin. It is recommended to do that immediately "
+                      "after changing this option."),
         default=False,
         required=False)
 
@@ -159,10 +159,10 @@ class SecurityControlPanelAdapter(SchemaAdapterBase):
 
 
     def get_allow_anon_views_about(self):
-        return self.context.site_properties.allowAnonymousViewAbout
+        return self.context.allowAnonymousViewAbout
 
     def set_allow_anon_views_about(self, value):
-        self.context.site_properties.allowAnonymousViewAbout = value
+        self.context.allowAnonymousViewAbout = value
 
     allow_anon_views_about = property(get_allow_anon_views_about,
                                       set_allow_anon_views_about)

@@ -19,13 +19,13 @@
 
             <dl tal:define="status view/status"
                  tal:condition="status"
-                 class="portalMessage info">
+                 class="portalMessage info"
+                 tal:attributes="class python: view.errors and 'portalMessage error' or 'portalMessage info'">
                 <dt i18n:translate="">
                     Info
                 </dt>
                 <dd tal:content="view/status" />
             </dl>
-
         </metal:block>
 
             <a href=""
@@ -33,7 +33,7 @@
                tal:attributes="href string:$portal_url/plone_control_panel"
                i18n:translate="">
                 Site Setup
-            </a> &rsaquo;
+            </a>
 
         <h1 class="documentFirstHeading"
             i18n:translate=""

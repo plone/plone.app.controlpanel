@@ -28,10 +28,10 @@
           The following email addresses are used by more than one account:
         </p>
         <ul>
-          <li tal:repeat="dup view/duplicates">
+          <ol tal:repeat="dup view/duplicates">
             <span tal:content="python:dup[0]" />:
             <span tal:repeat="account python:dup[1]" tal:content="account" />
-          </li>
+          </ol>
         </ul>
       </div>
       <div tal:condition="not:view/duplicates">

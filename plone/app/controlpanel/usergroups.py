@@ -119,7 +119,7 @@ class UsersGroupsControlPanelView(ControlPanelView):
             groupResults.sort(key=lambda x: x is not None and normalizeString(x.getGroupTitleOrName()))
 
         if searchUsers:
-            userResults = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['login', 'fullname', 'email']]), 'userid')
+            userResults = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['name', 'fullname', 'email']]), 'userid')
             userResults = [mtool.getMemberById(u['id']) for u in userResults if u['id'] not in ignore]
             userResults.sort(key=lambda x: x is not None and x.getProperty('fullname') is not None and normalizeString(x.getProperty('fullname')) or '')
 
@@ -217,7 +217,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         # the roles inherited from the groups to which the principal belongs.
         self.request.set('__ignore_group_roles__', False)
         self.request.set('__ignore_direct_roles__', True)
-        inheritance_enabled_users = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['login', 'fullname', 'email']]), 'userid')
+        inheritance_enabled_users = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['name', 'fullname', 'email']]), 'userid')
         allInheritedRoles = {}
         for user_info in inheritance_enabled_users:
             userId = user_info['id']
@@ -301,6 +301,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
             acl_users = getToolByName(context, 'acl_users')
             mtool = getToolByName(context, 'portal_membership')
             regtool = getToolByName(context, 'portal_registration')
+            groups_tool = getToolByName(self, 'portal_groups')
 
             utils = getToolByName(context, 'plone_utils')
 
@@ -338,7 +339,11 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 roles = user.get('roles', [])
                 if not self.is_zope_manager:
                     # don't allow adding or removing the Manager role
-                    if ('Manager' in roles) != ('Manager' in current_roles):
+                    # add check if user is in Administrators group
+                    grouproles = []
+                    for group in groups_tool.getGroupsByUserId(member.id):
+                        grouproles.extend(group.getRoles())
+                    if ('Manager' in roles or 'Manager' in grouproles) != ('Manager' in current_roles):
                         raise Forbidden
 
                 # Ideally, we would like to detect if any role assignment has
@@ -673,9 +678,16 @@ class GroupMembershipControlPanel(UsersGroupsControlPanelView):
                 self.context.plone_utils.addPortalMessage(_(u'Changes made.'))
 
             search = form.get('form.button.Search', None) is not None
-            findAll = form.get('form.button.FindAll', None) is not None and not self.many_users
-            self.searchString = not findAll and form.get('searchstring', '') or ''
-            if findAll or self.searchString != '':
+            edit = form.get('form.button.Edit', None) is not None and toDelete
+            add = form.get('form.button.Add', None) is not None and toAdd
+            findAll = form.get('form.button.FindAll', None) is not None and \
+                not self.many_users
+            # The search string should be cleared when one of the
+            # non-search buttons has been clicked.
+            if findAll or edit or add:
+                form['searchstring'] = ''
+            self.searchString = form.get('searchstring', '')
+            if findAll or bool(self.searchString):
                 self.searchResults = self.getPotentialMembers(self.searchString)
 
             if search or findAll:
