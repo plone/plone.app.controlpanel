@@ -54,3 +54,28 @@ are shown in the browser:
     >>> 'pt-br' in self.browser.contents
     True
 
+
+Make some more changes:
+
+    >>> self.browser.open('http://nohost/plone/@@language-controlpanel')
+    >>> self.browser.url.endswith('language-controlpanel')
+    True
+
+    >>> self.browser.getControl(name='form.use_content_negotiation').value = 'checked'
+    >>> self.browser.getControl(name='form.use_cookie_negotiation').value = 'checked'
+
+Click the save button:
+
+    >>> self.browser.getControl(name="form.actions.save").click()
+    >>> self.browser.url.endswith('language-controlpanel')
+    True
+
+
+And check this options are correctly saved in portal_languages:
+
+    >>> portal_languages.use_content_negotiation
+    True
+
+    >>> portal_languages.use_cookie_negotiation
+    True
+
