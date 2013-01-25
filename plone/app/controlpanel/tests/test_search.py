@@ -57,6 +57,22 @@ class SearchRegistryIntegrationTest(unittest.TestCase):
                           'ISearchSchema.enable_livesearch'],
             False)
 
+    def test_types_not_searched(self):
+        self.assertTrue('types_not_searched' in ISearchSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'ISearchSchema.types_not_searched'],
+            (
+                'Collection',
+                'Document',
+                'Event',
+                'File',
+                'Folder',
+                'Link',
+                'News Item',
+            )
+        )
+
 
 class SearchControlPanelFunctionalTest(unittest.TestCase):
     """Test that changes in the search control panel are actually
@@ -123,12 +139,27 @@ class SearchRegistryIntegrationTest(unittest.TestCase):
 
     def test_enable_livesearch(self):
         self.assertEqual(self.settings.enable_livesearch, True)
-        self.assertEquals(self.site_properties.enable_livesearch, True)
+        self.assertEqual(self.site_properties.enable_livesearch, True)
 
         self.settings.enable_livesearch = False
 
         self.assertEqual(self.settings.enable_livesearch, False)
-        self.assertEquals(self.site_properties.enable_livesearch, False)
+        self.assertEqual(self.site_properties.enable_livesearch, False)
+
+    def test_types_not_searched(self):
+        default_types_not_searched = ('ATBooleanCriterion', 'ATDateCriteria', 'ATDateRangeCriterion', 'ATListCriterion', 'ATPortalTypeCriterion', 'ATReferenceCriterion', 'ATSelectionCriterion', 'ATSimpleIntCriterion', 'ATSimpleStringCriterion', 'ATSortCriterion', 'ChangeSet', 'Discussion Item', 'Plone Site', 'TempFolder', 'ATCurrentAuthorCriterion', 'ATPathCriterion', 'ATRelativePathCriterion')
+        self.assertEqual(
+            self.settings.types_not_searched,
+            default_types_not_searched,
+        )
+        self.assertEqual(
+            self.site_properties.types_not_searched,
+            default_types_not_searched,
+        )
+        self.settings.types_not_searched = ('Event',)
+
+        self.assertEqual(self.settings.types_not_searched, ('Event',))
+        self.assertEqual(self.site_properties.types_not_searched, ('Event',))
 
 
 class SearchControlPanelAdapterFunctionalTest(unittest.TestCase):
@@ -157,6 +188,16 @@ class SearchControlPanelAdapterFunctionalTest(unittest.TestCase):
         self.browser.getControl('Save').click()
 
         self.assertEqual(self.site_properties.enable_livesearch, False)
+
+    def test_types_not_searched(self):
+        self.assertTrue('Event' not in self.site_properties.types_not_searched)
+        self.browser.open(
+            "%s/@@search-controlpanel" % self.portal_url)
+        self.browser.getControl(name='form.widgets.types_not_searched:list')\
+            .value = ['Event']
+        self.browser.getControl('Save').click()
+
+        self.assertTrue('Event' in self.site_properties.types_not_searched)
 
 
 def test_suite():

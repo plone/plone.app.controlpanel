@@ -8,13 +8,13 @@ DONE
  [X] @@security-controlpanel    plone.app.registry (was formlib)
  [X] @@site-controlpanel        plone.app.registry (was formlib)
  [X] @@types-controlpanel       plone.autoform     (was formlib)
+ [X] @@language-controlpanel    plone.app.registry (was formlib)
+ [ ] @@search-controlpanel      plone.app.registry (was formlib)
 
 
 TODO
 ====
 
- [ ] @@language-controlpanel    formlib (ControlPanelForm)
- [ ] @@search-controlpanel      formlib (ControlPanelForm)
  [ ] @@markup-controlpanel      formlib (ControlPanelForm)
  [ ] @@maintenance-controlpanel formlib (SchemaAdapterBase)
 
@@ -25,6 +25,9 @@ TODO
  [ ] @@usergroup-groupmembership
  [ ] @@usergroup-usermembership
  [ ] @@usergroup-groupdetails
+
+ [ ] Move from monkey patching to fireing events
+ [ ] Mark old resources as deprecated
 
 
 Deprecated

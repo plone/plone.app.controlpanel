@@ -306,6 +306,7 @@ class ISearchSchema(Interface):
             u"off here or by the relevant installer."
         ),
         required=True,
+        default=('ATBooleanCriterion', 'ATDateCriteria', 'ATDateRangeCriterion', 'ATListCriterion', 'ATPortalTypeCriterion', 'ATReferenceCriterion', 'ATSelectionCriterion', 'ATSimpleIntCriterion', 'ATSimpleStringCriterion', 'ATSortCriterion', 'ChangeSet', 'Discussion Item', 'Plone Site', 'TempFolder', 'ATCurrentAuthorCriterion', 'ATPathCriterion', 'ATRelativePathCriterion'),
         value_type=schema.Choice(
             source="plone.app.vocabularies.ReallyUserFriendlyTypes")
     )
