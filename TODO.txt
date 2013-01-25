@@ -16,6 +16,10 @@ TODO
 ====
 
  [ ] @@markup-controlpanel      formlib (ControlPanelForm)
+     !!! Wiki (wicked) settings are still in the control panel even though
+     there is a PLIP that claims that it has been removed:
+     https://dev.plone.org/ticket/8593
+
  [ ] @@maintenance-controlpanel formlib (SchemaAdapterBase)
 
  [ ] @@filter-controlpanel      formlib (ControlPanelForm)
