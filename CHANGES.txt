@@ -4,7 +4,12 @@ Changelog
 2.3.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added tests to the language control panel
+  [erral]
+
+- Added all options available in the portal_languages tool
+  in the language control panel
+  [erral]
 
 
 2.3.4 (2013-01-13)
