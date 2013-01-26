@@ -20,14 +20,15 @@ Viewing the markup control panel
 We have two controls, one for the default type and a multi selection for
 alternative formats:
 
-    >>> browser.getControl(name='form.default_type').value
+    >>> browser.getControl(name='form.widgets.default_type:list').value
     ['text/html']
-    >>> browser.getControl(name='form.allowed_types').value
+    >>> open('/tmp/testbrowser.html', 'w').write(browser.contents)
+    >>> browser.getControl(name='form.widgets.allowed_types:list').value
     ['text/html', 'text/x-web-textile']
 
 Click the save button without making any changes:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('markup-controlpanel')
     True
 
@@ -38,7 +39,7 @@ We should get a status message:
 
 Now click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl(name="form.buttons.cancel").click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -51,9 +52,9 @@ Modifying values
 ----------------
 
     >>> browser.open('http://nohost/plone/@@markup-controlpanel')
-    >>> browser.getControl(name='form.default_type').value = ['text/x-web-textile',]
-    >>> browser.getControl(name='form.allowed_types').value = ['text/html', 'text/x-web-textile']
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name='form.widgets.default_type:list').value = ['text/x-web-textile',]
+    >>> browser.getControl(name='form.widgets.allowed_types:list').value = ['text/html', 'text/x-web-textile']
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> 'Changes saved' in browser.contents
     True
 

@@ -4,6 +4,7 @@
   <records interface="plone.app.controlpanel.interfaces.IEditingSchema" />
   <records interface="plone.app.controlpanel.interfaces.ILanguageSchema" />
   <records interface="plone.app.controlpanel.interfaces.IMailSchema" />
+  <records interface="plone.app.controlpanel.interfaces.IMarkupSchema" />
   <records interface="plone.app.controlpanel.interfaces.INavigationSchema" />
   <records interface="plone.app.controlpanel.interfaces.ISearchSchema" />
   <records interface="plone.app.controlpanel.interfaces.ISecuritySchema" />

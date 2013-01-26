@@ -35,20 +35,11 @@
 
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
-  <adapter factory=".markup.MarkupControlPanelAdapter" />
-
   <browser:page
       name="filter-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".filter.FilterControlPanel"
       permission="plone.app.controlpanel.Filtering"
-      />
-
-  <browser:page
-      name="markup-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".markup.MarkupControlPanel"
-      permission="plone.app.controlpanel.Markup"
       />
 
   <browser:page
@@ -99,11 +90,6 @@
       factory=".widgets.MultiSelectTupleWidget"
       permission="zope.Public"
       />
-
-  <utility
-    component=".markup.WickedTypesVocabularyFactory"
-    name="plone.app.controlpanel.WickedPortalTypes"
-    />
 
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
