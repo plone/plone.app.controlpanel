@@ -9,7 +9,7 @@ DONE
  [X] @@site-controlpanel        plone.app.registry (was formlib)
  [X] @@types-controlpanel       plone.autoform     (was formlib)
  [X] @@language-controlpanel    plone.app.registry (was formlib)
- [ ] @@maintenance-controlpanel plone.app.registry (was formlib)
+ [X] @@maintenance-controlpanel plone.app.registry (was formlib)
  [ ] @@search-controlpanel      plone.app.registry (was formlib)
 
 
