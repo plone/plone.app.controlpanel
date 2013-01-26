@@ -48,8 +48,8 @@ See if we can manage the server now:
 While we cannot test the actual packaging during tests, we can skip the actual
 manage_pack method by providing a negative value for days:
 
-    >>> browser.getControl(name='form.days').value = '-1'
-    >>> browser.getControl(name="form.actions.pack").click()
+    >>> browser.getControl(name='form.widgets.days').value = '-1'
+    >>> browser.getControl(name="form.buttons.pack").click()
     >>> browser.url.endswith('maintenance-controlpanel')
     True
 

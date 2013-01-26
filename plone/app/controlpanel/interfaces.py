@@ -226,6 +226,20 @@ class IMailSchema(Interface):
         required=True)
 
 
+class IMaintenanceSchema(Interface):
+
+    days = schema.Int(
+        title=_(u"Days of object history to keep after packing"),
+        description=_(u"You should pack your database regularly. This number "
+                       "indicates how many days of undo history you want to "
+                       "keep. It is unrelated to versioning, so even if you "
+                       "pack the database, the history of the content changes "
+                       "will be kept. Recommended value is 7 days."),
+        default=7,
+        required=True
+    )
+
+
 class INavigationSchema(Interface):
 
     generate_tabs = schema.Bool(

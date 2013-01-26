@@ -96,6 +96,7 @@
   <adapter factory=".editing.EditingControlPanelAdapter" />
   <adapter factory=".language.LanguageControlPanelAdapter" />
   <adapter factory=".mail.MailControlPanelAdapter" />
+  <adapter factory=".maintenance.MaintenanceControlPanelAdapter" />
   <adapter factory=".navigation.NavigationControlPanelAdapter" />
   <adapter factory=".search.SearchControlPanelAdapter" />
   <adapter factory=".site.SiteControlPanelAdapter" />
