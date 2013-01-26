@@ -7,6 +7,7 @@ from plone.app.controlpanel.interfaces import ICalendarSchema
 from plone.app.controlpanel.interfaces import IEditingSchema
 from plone.app.controlpanel.interfaces import IMailSchema
 from plone.app.controlpanel.interfaces import INavigationSchema
+from plone.app.controlpanel.interfaces import IUserGroupsSettingsSchema
 
 
 def setPloneSitePropertyValue(self, id, value):
@@ -39,6 +40,9 @@ def _setPropValue(self, id, value):
             setattr(settings, id, value)
         if id in INavigationSchema.names():
             settings = registry.forInterface(INavigationSchema)
+            setattr(settings, id, value)
+        if id in IUserGroupsSettingsSchema.names():
+            settings = registry.forInterface(IUserGroupsSettingsSchema)
             setattr(settings, id, value)
 
 

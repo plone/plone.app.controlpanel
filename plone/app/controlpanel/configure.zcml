@@ -41,8 +41,6 @@
 
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
-  <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
-
   <browser:page
       name="filter-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -85,13 +83,6 @@
       class=".usergroups.GroupsOverviewControlPanel"
       permission="plone.app.controlpanel.UsersAndGroups"
       template="usergroups_groupsoverview.pt"
-      />
-
-  <browser:page
-      name="usergroup-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UserGroupsSettingsControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
       />
 
   <browser:page

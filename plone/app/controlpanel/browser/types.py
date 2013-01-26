@@ -541,13 +541,4 @@ class TypesControlPanel(AutoExtensibleForm, form.EditForm):
             return []
 
 
-class ControlPanelFormWrapper(layout.FormWrapper):
-    """Use this form as the plone.z3cform layout wrapper to get the control
-    panel layout.
-    """
 
-    index = ViewPageTemplateFile('controlpanel_layout.pt')
-
-
-TypesControlPanelView = layout.wrap_form(
-    TypesControlPanel, ControlPanelFormWrapper)

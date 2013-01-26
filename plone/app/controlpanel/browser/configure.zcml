@@ -85,4 +85,12 @@
     permission="plone.app.controlpanel.Types"
     />
 
+  <!-- Usergroup Control Panel -->
+  <browser:page
+    name="usergroup-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".usergroups.UserGroupsSettingsPanelView"
+    permission="plone.app.controlpanel.UsersAndGroups"
+    />
+
 </configure>

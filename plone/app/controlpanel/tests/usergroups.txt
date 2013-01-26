@@ -95,8 +95,10 @@ But the user Gracie Adams should now be gone.
 
 Turning on the 'many users' flag should remove the 'Search All' button.
     >>> browser.getLink('Settings').click()
-    >>> browser.getControl(name='form.many_users').value = True
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl(name='form.widgets.many_users:list').value = True
+    >>> browser.getControl(name='form.buttons.apply').click()
+    >>> "Data successfully updated" in browser.contents
+    True
 
 Go directly to the userprefs panel (getting link "Users" results in a trip to the Members folder).
     >>> browser.open('http://nohost/plone/@@usergroup-userprefs')
@@ -104,6 +106,7 @@ Go directly to the userprefs panel (getting link "Users" results in a trip to th
     False
 
 An empty search string while 'many users' is enabled should not perform a search.
+
     >>> browser.getControl(name='form.button.Search').click()
     >>> 'Enter a username to search for' in browser.contents
     True
@@ -151,8 +154,8 @@ Delete a group...
 
 Turning on the 'many groups' flag should remove the 'Search All' button.
     >>> browser.getLink('Settings').click()
-    >>> browser.getControl(name='form.many_groups').value = True
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl(name='form.widgets.many_groups:list').value = True
+    >>> browser.getControl('Apply').click()
     >>> browser.getLink('Groups').click()
     >>> 'Search All' in browser.contents
     False
@@ -202,9 +205,9 @@ According to the ticket, the user will now have an assigned role of 'Editor', wh
 
 Turn off the many groups/users flags again
     >>> browser.getLink('Settings').click()
-    >>> browser.getControl(name='form.many_groups').value = False
-    >>> browser.getControl(name='form.many_users').value = False
-    >>> browser.getControl('Save').click()
+    >>> browser.getControl(name='form.widgets.many_groups:list').value = False
+    >>> browser.getControl(name='form.widgets.many_users:list').value = False
+    >>> browser.getControl('Apply').click()
 
 Now let's try modifying some group memberships...
     >>> browser.open('http://nohost/plone/@@usergroup-groupprefs')

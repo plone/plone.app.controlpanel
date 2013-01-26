@@ -85,6 +85,12 @@
     handler=".site.syncPloneAppRegistryToSitePortalProperties"
     />
 
+  <subscriber
+    for="plone.app.controlpanel.interfaces.IUserGroupsSettingsSchema
+         plone.registry.interfaces.IRecordModifiedEvent"
+    handler=".usergroups.syncPloneAppRegistryToUserGroupsPortalProperties"
+    />
+
   <!-- Adapter  -->
   <adapter factory=".calendar.CalendarControlPanelAdapter" />
   <adapter factory=".editing.EditingControlPanelAdapter" />
@@ -94,5 +100,6 @@
   <adapter factory=".search.SearchControlPanelAdapter" />
   <adapter factory=".site.SiteControlPanelAdapter" />
   <adapter factory=".security.SecurityControlPanelAdapter" />
+  <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
 
 </configure>
