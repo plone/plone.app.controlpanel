@@ -13,6 +13,12 @@ DONE
  [ ] @@search-controlpanel      plone.app.registry (was formlib)
 
 
+REMOVED
+=======
+
+ [X] @@ramcache-controlpanel
+
+
 TODO
 ====
 

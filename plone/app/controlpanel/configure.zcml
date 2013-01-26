@@ -37,8 +37,6 @@
 
   <adapter factory=".markup.MarkupControlPanelAdapter" />
 
-  <adapter factory=".ram.RAMCacheControlPanelAdapter" />
-
   <browser:page
       name="filter-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -51,13 +49,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".markup.MarkupControlPanel"
       permission="plone.app.controlpanel.Markup"
-      />
-
-  <browser:page
-      name="ramcache-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".ram.RAMCacheControlPanel"
-      permission="cmf.ManagePortal"
       />
 
   <browser:page
