@@ -1,17 +1,22 @@
 DONE
 ====
 
- [X] @@calendar-controlpanel    plone.app.registry (was formlib)
- [X] @@editing-controlpanel     plone.app.registry (was formlib)
- [X] @@mail-controlpanel        plone.app.registry (was formlib)
- [X] @@navigation-controlpanel  plone.app.registry (was formlib)
- [X] @@security-controlpanel    plone.app.registry (was formlib)
- [X] @@site-controlpanel        plone.app.registry (was formlib)
- [X] @@types-controlpanel       plone.autoform     (was formlib)
- [X] @@language-controlpanel    plone.app.registry (was formlib)
- [X] @@maintenance-controlpanel plone.app.registry (was formlib)
- [ ] @@markup-controlpanel      plone.app.registry (was formlib)
- [ ] @@search-controlpanel      plone.app.registry (was formlib)
+ [X] @@calendar-controlpanel        plone.app.registry (was formlib)
+ [X] @@editing-controlpanel         plone.app.registry (was formlib)
+ [X] @@mail-controlpanel            plone.app.registry (was formlib)
+ [X] @@navigation-controlpanel      plone.app.registry (was formlib)
+ [X] @@security-controlpanel        plone.app.registry (was formlib)
+ [X] @@site-controlpanel            plone.app.registry (was formlib)
+ [X] @@types-controlpanel           plone.autoform     (was formlib)
+ [X] @@language-controlpanel        plone.app.registry (was formlib)
+ [X] @@maintenance-controlpanel     plone.app.registry (was formlib)
+ [X] @@markup-controlpanel          plone.app.registry (was formlib)
+ [X] @@search-controlpanel          plone.app.registry (was formlib)
+ [X] @@usergroup-groupprefs         browserview
+ [X] @@usergroup-controlpanel       browserview
+ [X] @@usergroup-groupmembership    browserview
+ [X] @@usergroup-usermembership     browserview
+ [X] @@usergroup-groupdetails       browserview
 
 
 REMOVED
@@ -22,15 +27,10 @@ REMOVED
 
 TODO
 ====
-
- [ ] @@filter-controlpanel      formlib (ControlPanelForm)
- [ ] @@usergroup-userprefs      formlib (ControlPanelForm)
- [ ] @@usergroup-groupprefs
- [ ] @@usergroup-controlpanel
- [ ] @@usergroup-groupmembership
- [ ] @@usergroup-usermembership
- [ ] @@usergroup-groupdetails
-
+ [ ] @@filter-controlpanel          plone.app.registry (was formlib)
+ ADAPTER, TESTS, WIDGETS
+ [ ] @@usergroup-userprefs          plone.app.registry (was formlib)
+ TABS STYLES
  [ ] Move from monkey patching to fireing events
  [ ] Mark old resources as deprecated
 
