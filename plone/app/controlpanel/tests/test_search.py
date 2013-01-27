@@ -156,6 +156,7 @@ class SearchRegistryIntegrationTest(unittest.TestCase):
             self.site_properties.types_not_searched,
             default_types_not_searched,
         )
+
         self.settings.types_not_searched = ('Event',)
 
         self.assertEqual(self.settings.types_not_searched, ('Event',))

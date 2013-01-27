@@ -60,8 +60,9 @@ class SearchControlPanelAdapter(object):
             t for t in self.ttool.listContentTypes() if t not in value
             or t in BAD_TYPES
         ]
-        self.context._updateProperty('types_not_searched', value)
-
+        self.context.manage_changeProperties(
+            types_not_searched=value
+        )
     # This also defines the user friendly types
     types_not_searched = property(
         get_types_not_searched,
@@ -78,5 +79,8 @@ def syncPloneAppRegistryToSearchPortalProperties(settings, event):
         return
 
     if event.record.fieldName == "types_not_searched":
-        search_properties.types_not_searched = settings.types_not_searched
+        #search_properties.types_not_searched = settings.types_not_searched
+        portal.portal_properties.site_properties.manage_changeProperties(
+            types_not_searched=settings.types_not_searched
+        )
         return

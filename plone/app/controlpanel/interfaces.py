@@ -230,11 +230,13 @@ class IMaintenanceSchema(Interface):
 
     days = schema.Int(
         title=_(u"Days of object history to keep after packing"),
-        description=_(u"You should pack your database regularly. This number "
-                       "indicates how many days of undo history you want to "
-                       "keep. It is unrelated to versioning, so even if you "
-                       "pack the database, the history of the content changes "
-                       "will be kept. Recommended value is 7 days."),
+        description=_(
+            u"You should pack your database regularly. This number "
+            u"indicates how many days of undo history you want to "
+            u"keep. It is unrelated to versioning, so even if you "
+            u"pack the database, the history of the content changes "
+            u"will be kept. Recommended value is 7 days."
+        ),
         default=7,
         required=True
     )
@@ -350,7 +352,25 @@ class ISearchSchema(Interface):
             u"off here or by the relevant installer."
         ),
         required=True,
-        default=('ATBooleanCriterion', 'ATDateCriteria', 'ATDateRangeCriterion', 'ATListCriterion', 'ATPortalTypeCriterion', 'ATReferenceCriterion', 'ATSelectionCriterion', 'ATSimpleIntCriterion', 'ATSimpleStringCriterion', 'ATSortCriterion', 'ChangeSet', 'Discussion Item', 'Plone Site', 'TempFolder', 'ATCurrentAuthorCriterion', 'ATPathCriterion', 'ATRelativePathCriterion'),
+        default=(
+            'ATBooleanCriterion',
+            'ATDateCriteria',
+            'ATDateRangeCriterion',
+            'ATListCriterion',
+            'ATPortalTypeCriterion',
+            'ATReferenceCriterion',
+            'ATSelectionCriterion',
+            'ATSimpleIntCriterion',
+            'ATSimpleStringCriterion',
+            'ATSortCriterion',
+            'ChangeSet',
+            'Discussion Item',
+            'Plone Site',
+            'TempFolder',
+            'ATCurrentAuthorCriterion',
+            'ATPathCriterion',
+            'ATRelativePathCriterion'
+        ),
         value_type=schema.Choice(
             source="plone.app.vocabularies.ReallyUserFriendlyTypes")
     )
@@ -512,22 +532,28 @@ class ISkinsSchema(Interface):
 
 class IUserGroupsSettingsSchema(Interface):
 
-    many_groups = schema.Bool(title=_(u'Many groups?'),
-                       description=_(u"Determines if your Plone is optimized "
-                           "for small or large sites. In environments with a "
-                           "lot of groups it can be very slow or impossible "
-                           "to build a list all groups. This option tunes the "
-                           "user interface and behaviour of Plone for this "
-                           "case by allowing you to search for groups instead "
-                           "of listing all of them."),
-                       default=False)
+    many_groups = schema.Bool(
+        title=_(u'Many groups?'),
+        description=_(
+            u"Determines if your Plone is optimized "
+            u"for small or large sites. In environments with a "
+            u"lot of groups it can be very slow or impossible "
+            u"to build a list all groups. This option tunes the "
+            u"user interface and behaviour of Plone for this "
+            u"case by allowing you to search for groups instead "
+            u"of listing all of them."),
+        default=False
+    )
 
-    many_users = schema.Bool(title=_(u'Many users?'),
-                      description=_(u"Determines if your Plone is optimized "
-                          "for small or large sites. In environments with a "
-                          "lot of users it can be very slow or impossible to "
-                          "build a list all users. This option tunes the user "
-                          "interface and behaviour of Plone for this case by "
-                          "allowing you to search for users instead of "
-                          "listing all of them."),
-                      default=False)
+    many_users = schema.Bool(
+        title=_(u'Many users?'),
+        description=_(
+            u"Determines if your Plone is optimized "
+            u"for small or large sites. In environments with a "
+            u"lot of users it can be very slow or impossible to "
+            u"build a list all users. This option tunes the user "
+            u"interface and behaviour of Plone for this case by "
+            u"allowing you to search for users instead of "
+            u"listing all of them."),
+        default=False
+    )
