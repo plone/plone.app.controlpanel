@@ -45,8 +45,10 @@ class MarkupRegistryIntegrationTest(unittest.TestCase):
 
     def test_plone_app_registry_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        self.assertTrue('plone.app.registry' in [a.getAction(self)['id']
-                            for a in self.controlpanel.listActions()])
+        self.assertTrue(
+            'plone.app.registry' in [a.getAction(self)['id']
+            for a in self.controlpanel.listActions()]
+        )
 
     def test_default_type_setting(self):
         self.assertTrue('default_type' in IMarkupSchema.names())
@@ -56,8 +58,16 @@ class MarkupRegistryIntegrationTest(unittest.TestCase):
             'text/html'
         )
 
+    def test_allowed_types_setting(self):
+        self.assertTrue('allowed_types' in IMarkupSchema.names())
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'IMarkupSchema.allowed_types'],
+            ('text/html', 'text/x-web-textile')
+        )
 
-class MarkupRegistryIntegrationTest(unittest.TestCase):
+
+class SyncPloneAppRegistryToPortalPropertiesIntegrationTest(unittest.TestCase):
     """Test plone.app.registry => portal properties sync.
     """
 
@@ -83,8 +93,17 @@ class MarkupRegistryIntegrationTest(unittest.TestCase):
             self.site_properties.default_contenttype, 'text/plain'
         )
 
+    def test_allowed_types(self):
+        self.settings.allowed_types = ('text/plain',)
 
-class PortalPropertiesToPloneAppRegistrySyncIntegrationTest(unittest.TestCase):
+        self.assertEqual(self.settings.allowed_types, ('text/plain',))
+        self.assertTrue(
+            'text/plain' not in
+            self.site_properties.getProperty('forbidden_contenttypes')
+        )
+
+
+class SyncPortalPropertiesToPloneAppRegistryIntegrationTest(unittest.TestCase):
     """Test portal properties => plone.app.registry sync.
     """
 
@@ -116,6 +135,19 @@ class PortalPropertiesToPloneAppRegistrySyncIntegrationTest(unittest.TestCase):
         )
         self.assertEqual(self.settings.default_type, 'text/plain')
 
+    def test_allowed_types(self):
+        self.assertTrue(
+            'text/plain' in
+            self.site_properties.getProperty('forbidden_contenttypes')
+        )
+
+        self.settings.allowed_types = ('text/plain',)
+
+        self.assertFalse(
+            'text/plain' in
+            self.site_properties.getProperty('forbidden_contenttypes')
+        )
+
 
 class MarkupControlPanelFunctionalTest(unittest.TestCase):
     """Make sure changes in the markup control panel are properly
@@ -130,9 +162,10 @@ class MarkupControlPanelFunctionalTest(unittest.TestCase):
         self.portal_url = self.portal.absolute_url()
         self.browser = Browser(self.app)
         self.browser.handleErrors = False
-        self.browser.addHeader('Authorization',
-                'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
-            )
+        self.browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
+        )
 
     def test_markup_control_panel_link(self):
         self.browser.open(
@@ -161,6 +194,19 @@ class MarkupControlPanelFunctionalTest(unittest.TestCase):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(IMarkupSchema)
         self.assertEqual(settings.default_type, 'text/plain')
+
+    def test_allowed_types(self):
+        self.browser.open(
+            "%s/@@markup-controlpanel" % self.portal_url)
+        self.browser.getControl(
+            name='form.widgets.allowed_types:list'
+        ).value = ['text/plain']
+        self.browser.getControl('Save').click()
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(IMarkupSchema)
+        self.assertEqual(settings.allowed_types, ('text/plain',))
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)

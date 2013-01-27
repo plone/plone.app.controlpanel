@@ -45,9 +45,12 @@ def _setPropValue(self, id, value):
         if id in IUserGroupsSettingsSchema.names():
             settings = registry.forInterface(IUserGroupsSettingsSchema)
             setattr(settings, id, value)
-        if id in ['default_contenttype']:
+        if id == 'default_contenttype':
             settings = registry.forInterface(IMarkupSchema)
             settings.default_type = value
+        if id == 'allowed_types':
+            settings = registry.forInterface(IMarkupSchema)
+            settings.allowed_types = value
 
 
 def manage_makeChanges(
