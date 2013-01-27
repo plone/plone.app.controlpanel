@@ -24,12 +24,13 @@ class MarkupControlPanelAdapter(object):
         portal_url = getToolByName(context, 'portal_url')
         self.portal = portal_url.getPortalObject()
         self.context = pprop.site_properties
+        self.site_properties = pprop.site_properties
 
     def get_default_type(self):
-        return getDefaultContentType(self.context)
+        return self.site_properties.getProperty('default_contenttype')
 
     def set_default_type(self, value):
-        setDefaultContentType(self.context, value)
+        self.site_properties.manage_changeProperties(default_contenttype=value)
 
     default_type = property(get_default_type, set_default_type)
 
@@ -44,3 +45,13 @@ class MarkupControlPanelAdapter(object):
         setForbiddenContentTypes(self.context, forbidden_types)
 
     allowed_types = property(get_allowed_types, set_allowed_types)
+
+
+def syncPloneAppRegistryToMarkupPortalProperties(settings, event):
+    portal = getSite()
+    pprop = getToolByName(portal, 'portal_properties')
+    site_properties = pprop['site_properties']
+
+    if event.record.fieldName == "default_type":
+        site_properties.default_contenttype = settings.default_type
+        return

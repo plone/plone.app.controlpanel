@@ -10,6 +10,7 @@ DONE
  [X] @@types-controlpanel       plone.autoform     (was formlib)
  [X] @@language-controlpanel    plone.app.registry (was formlib)
  [X] @@maintenance-controlpanel plone.app.registry (was formlib)
+ [ ] @@markup-controlpanel      plone.app.registry (was formlib)
  [ ] @@search-controlpanel      plone.app.registry (was formlib)
 
 
@@ -21,12 +22,6 @@ REMOVED
 
 TODO
 ====
-
- [ ] @@markup-controlpanel      formlib (ControlPanelForm)
-     !!! Wiki (wicked) settings are still in the control panel even though
-     there is a PLIP that claims that it has been removed:
-     https://dev.plone.org/ticket/8593
-
 
  [ ] @@filter-controlpanel      formlib (ControlPanelForm)
  [ ] @@usergroup-userprefs      formlib (ControlPanelForm)

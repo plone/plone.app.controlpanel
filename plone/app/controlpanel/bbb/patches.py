@@ -1,3 +1,4 @@
+from plone.app.controlpanel.interfaces import IMarkupSchema
 from zope.component import queryUtility
 from plone.registry.interfaces import IRegistry
 
@@ -44,6 +45,9 @@ def _setPropValue(self, id, value):
         if id in IUserGroupsSettingsSchema.names():
             settings = registry.forInterface(IUserGroupsSettingsSchema)
             setattr(settings, id, value)
+        if id in ['default_contenttype']:
+            settings = registry.forInterface(IMarkupSchema)
+            settings.default_type = value
 
 
 def manage_makeChanges(
