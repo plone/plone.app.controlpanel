@@ -42,38 +42,6 @@
       permission="plone.app.controlpanel.Filtering"
       />
 
-  <browser:page
-      name="usergroup-groupprefs"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupsOverviewControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupsoverview.pt"
-      />
-
-  <browser:page
-      name="usergroup-groupmembership"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupMembershipControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupmembership.pt"
-      />
-
-  <browser:page
-      name="usergroup-usermembership"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UserMembershipControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_usermembership.pt"
-      />
-
-  <browser:page
-      name="usergroup-groupdetails"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupDetailsControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupdetails.pt"
-      />
-
   <view
       type="zope.publisher.interfaces.browser.IBrowserRequest"
       for="zope.schema.interfaces.ITuple
