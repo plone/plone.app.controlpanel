@@ -2,6 +2,7 @@
 <registry>
   <records interface="plone.app.controlpanel.interfaces.ICalendarSchema" />
   <records interface="plone.app.controlpanel.interfaces.IEditingSchema" />
+  <records interface="plone.app.controlpanel.interfaces.IFilterSchema" />
   <records interface="plone.app.controlpanel.interfaces.ILanguageSchema" />
   <records interface="plone.app.controlpanel.interfaces.IMailSchema" />
   <records interface="plone.app.controlpanel.interfaces.IMarkupSchema" />

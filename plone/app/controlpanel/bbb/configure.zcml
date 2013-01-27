@@ -100,6 +100,7 @@
   <!-- Adapter  -->
   <adapter factory=".calendar.CalendarControlPanelAdapter" />
   <adapter factory=".editing.EditingControlPanelAdapter" />
+  <!--<adapter factory=".filter.FilterControlPanelAdapter" />-->
   <adapter factory=".language.LanguageControlPanelAdapter" />
   <adapter factory=".mail.MailControlPanelAdapter" />
   <adapter factory=".maintenance.MaintenanceControlPanelAdapter" />

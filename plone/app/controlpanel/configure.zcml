@@ -33,15 +33,6 @@
   <include package=".bbb" />
   <include package=".browser" />
 
-  <adapter factory=".filter.FilterControlPanelAdapter" />
-
-  <browser:page
-      name="filter-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".filter.FilterControlPanel"
-      permission="plone.app.controlpanel.Filtering"
-      />
-
   <view
       type="zope.publisher.interfaces.browser.IBrowserRequest"
       for="zope.schema.interfaces.ITuple

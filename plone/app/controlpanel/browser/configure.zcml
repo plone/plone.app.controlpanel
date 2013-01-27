@@ -29,6 +29,15 @@
       permission="plone.app.controlpanel.Editing"
       />
 
+
+  <!-- Filter Control Panel -->
+  <browser:page
+      name="filter-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".filter.FilterControlPanel"
+      permission="plone.app.controlpanel.Filtering"
+      />
+
   <!-- Language Control Panel -->
   <browser:page
       name="language-controlpanel"

@@ -30,7 +30,7 @@ Viewing the search control panel
 
 Click the save button without making any changes:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('filter-controlpanel')
     True
 
@@ -41,7 +41,7 @@ We should get a status message:
 
 Now click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
+    >>> browser.getControl(name="form.buttons.cancel").click()
     >>> browser.url.endswith('plone_control_panel')
     True
 
@@ -121,7 +121,7 @@ Add a new nasty tag
 
     >>> browser.getControl("Add Nasty tags").click()
     >>> browser.getControl(name="form.nasty_tags.6.").value = "span"
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> print_all_of('nasty_tags')
     applet
     embed
@@ -139,7 +139,7 @@ Adding span to nasty tags should have automatically removed it from the valid ta
 Changing a permitted style:
 
     >>> browser.getControl(name="form.style_whitelist.2.").value = "color"
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> print_all_of('style_whitelist')
     text-align
     list-style-type
