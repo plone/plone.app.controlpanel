@@ -54,12 +54,4 @@
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
 
-  <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="migrate-to-emaillogin"
-      class=".security.EmailLogin"
-      template="emaillogin.pt"
-      permission="cmf.ManagePortal"
-      />
-
 </configure>
