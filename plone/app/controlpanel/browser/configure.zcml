@@ -109,4 +109,12 @@
     permission="plone.app.controlpanel.UsersAndGroups"
     />
 
+  <browser:page
+    name="usergroup-userprefs"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".usergroups_usersoverview.UsersOverviewControlPanel"
+    permission="plone.app.controlpanel.UsersAndGroups"
+    template="usergroups_usersoverview.pt"
+    />
+
 </configure>
