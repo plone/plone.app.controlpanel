@@ -4,8 +4,7 @@ Changelog
 2.3.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Add "Member fields" tab (plip13350) [kiorky]
 
 2.3.4 (2013-01-13)
 ------------------
