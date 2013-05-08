@@ -34,6 +34,9 @@ TODO
  [ ] Move from monkey patching to fireing events
  [ ] Mark old resources as deprecated
 
+ [ ] Check out https://github.com/collective/collective.z3cform.widgets /
+     https://github.com/Quimera/tasksplease for the filter controlpanel
+
 
 Deprecated
 ==========
