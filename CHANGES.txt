@@ -4,7 +4,8 @@ Changelog
 2.2.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Do not assume roles managed through the control panel include Manager.
+  [danjacka]
 
 
 2.2.11 (2013-01-13)
