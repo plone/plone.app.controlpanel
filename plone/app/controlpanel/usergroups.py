@@ -266,7 +266,8 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
 
             canDelete = user.canDelete()
             canPasswordSet = user.canPasswordSet()
-            if roleList['Manager']['explicit'] or roleList['Manager']['inherited']:
+            if ('Manager' in explicitlyAssignedRoles or
+                'Manager' in allInheritedRoles.get(userId, [])):
                 if not self.is_zope_manager:
                     canDelete = False
                     canPasswordSet = False
@@ -582,10 +583,11 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
                     canAssign = False
                 roleList[role]={'canAssign': canAssign,
                                 'explicit': role in explicitlyAssignedRoles,
-                                'inherited': role in allInheritedRoles[groupId] }
+                                'inherited': role in allInheritedRoles.get(groupId, [])}
 
             canDelete = group.canDelete()
-            if roleList['Manager']['explicit'] or roleList['Manager']['inherited']:
+            if ('Manager' in explicitlyAssignedRoles or
+                'Manager' in allInheritedRoles.get(groupId, [])):
                 if not self.is_zope_manager:
                     canDelete = False
 
