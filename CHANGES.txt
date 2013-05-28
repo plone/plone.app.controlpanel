@@ -4,7 +4,9 @@ Changelog
 2.3.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix get_display_pub_date_in_byline when upgrading your site, refs
+  https://dev.plone.org/ticket/13604
+  [maartenkling]
 
 
 2.3.5 (2013-05-23)
