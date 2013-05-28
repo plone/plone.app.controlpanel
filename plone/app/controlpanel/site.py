@@ -111,7 +111,8 @@ class SiteControlPanelAdapter(SchemaAdapterBase):
     exposeDCMetaTags = ProxyFieldProperty(ISiteSchema['exposeDCMetaTags'])
 
     def get_display_pub_date_in_byline(self):
-        return self.context.site_properties.displayPublicationDateInByline
+        return getattr(self.context.site_properties,
+                       'displayPublicationDateInByline', False)
 
     def set_display_pub_date_in_byline(self, value):
         self.context.site_properties.displayPublicationDateInByline = value
