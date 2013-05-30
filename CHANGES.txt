@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.6 (unreleased)
+2.3.6 (2013-05-30)
 ------------------
 
 - Fix get_display_pub_date_in_byline when upgrading your site, refs
