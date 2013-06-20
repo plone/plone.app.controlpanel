@@ -179,7 +179,8 @@ class MailControlPanel(ControlPanelForm):
         fromaddr = self.context.getProperty('email_from_address')
         fromname = self.context.getProperty('email_from_name')
 
-        message = _(u"Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "
+        message = _(u"text_testmailbody",
+                   default = u"Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "
                    "Your receipt of this message (at the address specified in the "
                    "Site 'From' address field) "
                    "indicates that your e-mail server is working!\n\n"
