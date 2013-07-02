@@ -4,7 +4,10 @@ Changelog
 2.3.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Don't display the upgrade portal message unless the logged in user
+  actually has the permission to upgrade the portal. No one likes a
+  tease.
+  [eleddy]
 
 
 2.3.6 (2013-05-30)
