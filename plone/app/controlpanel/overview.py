@@ -2,8 +2,10 @@ from plone.memoize.instance import memoize
 
 from Acquisition import aq_base
 from Acquisition import aq_inner
+from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.permissions import ManagePortal
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone.app.controlpanel.form import ControlPanelView
@@ -75,7 +77,12 @@ class OverviewControlPanel(ControlPanelView):
 
     def upgrade_warning(self):
         mt = getToolByName(aq_inner(self.context), 'portal_migration')
-        return mt.needUpgrading()
+        if mt.needUpgrading():
+            # if the user can't run the upgrade, no sense in displaying the message
+            sm = getSecurityManager()
+            if sm.checkPermission(ManagePortal, self.context):
+                return True
+        return False
 
     def mailhost_warning(self):
         mailhost = getToolByName(aq_inner(self.context), 'MailHost', None)
