@@ -273,6 +273,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                     canPasswordSet = False
 
             user_info['roles'] = roleList
+            user_info['login'] = user.getUserName()
             user_info['fullname'] = user.getProperty('fullname', '')
             user_info['email'] = user.getProperty('email', '')
             user_info['can_delete'] = canDelete

@@ -172,7 +172,7 @@ Add a test for http://dev.plone.org/plone/ticket/8940:
     >>> self.browser.getControl(name='form.button.Search').click()
     >>> self.browser.getControl(name='group_Reviewers:list', index=1).getControl(value='Reader').selected = True
     >>> self.browser.getControl('Apply Changes').click()
-    >>> self.browser.getLink('Reviewers (Reviewers)').click()
+    >>> self.browser.getLink('Reviewers').click()
     >>> self.browser.getLink('Group Members').click()
     >>> self.browser.getControl(name='searchstring').value = 'Sean Foster'
     >>> self.browser.getControl(name='form.button.Search').click()

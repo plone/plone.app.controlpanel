@@ -4,6 +4,14 @@ Changelog
 2.3.7 (unreleased)
 ------------------
 
+- In the users listing and group membership listing, show the user's
+  login name instead of the user id, which is an internal identifier.
+  [davisagli]
+
+- In the groups listing, don't show the group name if it is the same
+  as the group title.
+  [davisagli]
+
 - Don't display the upgrade portal message unless the logged in user
   actually has the permission to upgrade the portal. No one likes a
   tease.
