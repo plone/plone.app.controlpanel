@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.7 (unreleased)
+2.3.7 (2013-08-13)
 ------------------
 
 - In the users listing and group membership listing, show the user's
