@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2.12 (unreleased)
+2.2.12 (2013-08-14)
 -------------------
 
 - Do not assume roles managed through the control panel include Manager.
