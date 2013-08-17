@@ -4,7 +4,8 @@ Changelog
 2.3.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix syndication settings to not write on read
+  [vangheem]
 
 
 2.3.7 (2013-08-13)
