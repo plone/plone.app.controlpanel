@@ -4,8 +4,8 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- add quickinstaller control panel
+  [vangheem]
 
 2.4.1 (2014-03-01)
 ------------------
@@ -54,7 +54,7 @@ Changelog
 - Fix test email: msgid was sent, not translation.
   [thomasdesvenain]
 
-- Fix syndication settings to not write on read.
+- fix syndication settings to not write on read
   [vangheem]
 
 
