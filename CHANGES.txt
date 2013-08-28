@@ -4,6 +4,9 @@ Changelog
 2.3.8 (unreleased)
 ------------------
 
+- add quickinstaller control panel
+  [vangheem]
+
 - fix syndication settings to not write on read
   [vangheem]
 
