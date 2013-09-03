@@ -15,10 +15,10 @@ Make sure we assume the right defaults
 --------------------------------------
 
     >>> stool.default_skin
-    'Sunburst Theme'
+    'Plone Default'
 
     >>> stool.getSkinSelections()
-    ['Plone Default', 'Sunburst Theme', 'TestSkin']
+    ['Plone Default', 'TestSkin']
 
 Viewing the skins control panel
 -------------------------------
