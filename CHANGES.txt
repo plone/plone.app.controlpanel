@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.8 (unreleased)
+2.4.0 (unreleased)
 ------------------
 
 - When switching on the 'Use email address as login name' option in
@@ -13,6 +13,10 @@ Changelog
 - Add 'Use UUID user ids' option in security control panel.
   Part of PLIP 13419.
   [maurits]
+
+
+2.3.8 (unreleased)
+------------------
 
 - fix syndication settings to not write on read
   [vangheem]
