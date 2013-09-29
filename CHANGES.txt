@@ -4,6 +4,16 @@ Changelog
 2.3.8 (unreleased)
 ------------------
 
+- When switching on the 'Use email address as login name' option in
+  the security control panel, automatically update PAS to use
+  lowercase login names and migrate the existing login names.
+  Part of PLIP 13419.
+  [maurits]
+
+- Add 'Use UUID user ids' option in security control panel.
+  Part of PLIP 13419.
+  [maurits]
+
 - fix syndication settings to not write on read
   [vangheem]
 
