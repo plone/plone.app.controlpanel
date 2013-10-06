@@ -4,6 +4,9 @@ Changelog
 2.4.0 (unreleased)
 ------------------
 
+- Remove columns in the controlpanel overview.
+  [esteele]
+
 - When switching on the 'Use email address as login name' option in
   the security control panel, automatically update PAS to use
   lowercase login names and migrate the existing login names.
