@@ -11,25 +11,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.controlpanel.form import ControlPanelView
 
 
-def three_column_list(input_list):
-    list_len = len(input_list)
-
-    # Calculate the length of the sublists
-    sublist_len = (list_len % 3 == 0 and list_len / 3 or list_len / 3 + 1)
-
-    # Calculate the list end point given the list number
-    def _list_end(num):
-        return (num == 2 and list_len or (num + 1) * sublist_len)
-
-    # Generate only filled columns
-    final = []
-    for i in range(3):
-        column = input_list[i*sublist_len:_list_end(i)]
-        if len(column) > 0:
-            final.append(column)
-    return final
-
-
 class OverviewControlPanel(ControlPanelView):
 
     template = ViewPageTemplateFile('overview.pt')
@@ -98,5 +79,4 @@ class OverviewControlPanel(ControlPanelView):
         return self.cptool().getGroups()
 
     def sublists(self, category):
-        actions = self.cptool().enumConfiglets(group=category)
-        return three_column_list(actions)
+        return self.cptool().enumConfiglets(group=category)

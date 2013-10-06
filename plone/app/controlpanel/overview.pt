@@ -76,11 +76,9 @@
         <h2 tal:content="category/title"
             i18n:translate="">Category</h2>
 
-        <div tal:define="sublists python:view.sublists(category.get('id'))">
+        <div tal:define="sublist python:view.sublists(category.get('id'))">
 
-            <div tal:repeat="sublist sublists"
-                 tal:condition="sublists"
-                 style="float:left; margin-right: 1em; width: 29%">
+            <div tal:condition="sublist">
 
                 <ul class="configlets"
                     tal:condition="sublist">
@@ -110,7 +108,7 @@
             <div class="visualClear"><!-- --></div>
 
             <div class="discreet"
-                 tal:condition="not:sublists"
+                 tal:condition="not:sublist"
                  i18n:translate="label_no_prefs_panels_available">
                 No preference panels available.
             </div>
