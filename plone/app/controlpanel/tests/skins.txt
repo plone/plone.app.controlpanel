@@ -1,3 +1,4 @@
+
 Skins control panel
 ===================
 
@@ -15,10 +16,10 @@ Make sure we assume the right defaults
 --------------------------------------
 
     >>> stool.default_skin
-    'Plone Default'
+    'Sunburst Theme'
 
     >>> stool.getSkinSelections()
-    ['Plone Default', 'TestSkin']
+    ['Plone Default', 'Sunburst Theme', 'TestSkin']
 
 Viewing the skins control panel
 -------------------------------
@@ -67,7 +68,7 @@ We should be starting with mark_special_links.js disabled:
     >>> jstool = getToolByName(self.portal, 'portal_javascripts')
     >>> jstool.getResource('mark_special_links.js').getEnabled()
     False
-   
+
 The mark_special_links and ext_links_open_new_window properties should also
 false:
 
@@ -79,7 +80,7 @@ false:
     >>> site_props.mark_special_links
     'false'
 
-mark_special_links and ext_links_open_new_windowshould be initially unchecked 
+mark_special_links and ext_links_open_new_windowshould be initially unchecked
 in the browser:
 
     >>> self.browser.open('http://nohost/plone/@@skins-controlpanel')
@@ -95,7 +96,7 @@ Checking mark_special_items should enable the js support and set the site prop:
     >>> self.browser.getControl(name="form.actions.save").click()
     >>> site_props.mark_special_links
     'true'
-    
+
     >>> jstool.getResource('mark_special_links.js').getEnabled()
     True
 
