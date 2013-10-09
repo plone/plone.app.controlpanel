@@ -1,3 +1,57 @@
+ToDo
+====
+
+ [ ] Fix failing tests in buildout.coredev 5.0.
+
+ [ ] Move plone.app.registry entries from "plone.app.controlpanel."-prefix to
+    "plone."-prefix.
+
+ [ ] Move plone.app.registry entries from Interfaces to XML entries.
+
+ [ ] Move from monkey patching to fireing events
+
+ [ ] @@filter-controlpanel          plone.app.registry (was formlib)
+ ADAPTER, TESTS, WIDGETS
+
+ [ ] @@usergroup-userprefs          plone.app.registry (was formlib)
+ TABS STYLES
+
+ [ ] Mark old resources as deprecated
+
+ [ ] Check out https://github.com/collective/collective.z3cform.widgets /
+     https://github.com/Quimera/tasksplease for the filter controlpanel
+
+
+Future
+======
+
+ [ ] Try to replace selected portal tools with utilities
+
+
+Portal Tools
+============
+
+ [ ] MailHost (Mail server settings for outgoing mail)
+ [ ] plone_utils
+ [ ] portal_actionicons
+ [ ] portal_actions
+ [ ] portal_calendar
+ [ ] portal_catalog
+ [ ] portal_controlpanel
+ [ ] portal_factory'
+ [ ] portal_interface
+ [ ] portal_metadata
+ [ ] portal_migration
+ [ ] portal_properties
+ [ ] portal_quickinstaller
+ [ ] portal_registration
+ [ ] portal_skins
+ [ ] portal_types
+ [ ] portal_undo
+ [ ] portal_url
+ [ ] portal_workflow
+ [ ] translation_service
+
 DONE
 ====
 
@@ -23,19 +77,6 @@ REMOVED
 =======
 
  [X] @@ramcache-controlpanel
-
-
-TODO
-====
- [ ] @@filter-controlpanel          plone.app.registry (was formlib)
- ADAPTER, TESTS, WIDGETS
- [ ] @@usergroup-userprefs          plone.app.registry (was formlib)
- TABS STYLES
- [ ] Move from monkey patching to fireing events
- [ ] Mark old resources as deprecated
-
- [ ] Check out https://github.com/collective/collective.z3cform.widgets /
-     https://github.com/Quimera/tasksplease for the filter controlpanel
 
 
 Deprecated
