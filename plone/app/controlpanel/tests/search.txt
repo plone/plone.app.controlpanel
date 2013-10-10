@@ -75,25 +75,12 @@ Make sure the changes have been applied correctly to the registry:
     >>> settings = registry.forInterface(ISearchSchema)
     >>> settings.enable_livesearch
     False
-    >>> settings.types_not_searched    
-    ('ATBooleanCriterion',
-     'ATCurrentAuthorCriterion',
-     'ATDateCriteria',
-     'ATDateRangeCriterion',
-     'ATListCriterion',
-     'ATPathCriterion',
-     'ATPortalTypeCriterion',
-     'ATReferenceCriterion',
-     'ATRelativePathCriterion',
-     'ATSelectionCriterion',
-     'ATSimpleIntCriterion',
-     'ATSimpleStringCriterion',
-     'ATSortCriterion',
-     'ChangeSet',
-     'Discussion Item',
-     'File',
-     'Plone Site',
-     'TempFolder')
+    >>> 'Document' in settings.types_not_searched
+    False
+    >>> 'Event' in settings.types_not_searched
+    False
+    >>> 'Plone Site' in settings.types_not_searched
+    True
 
 Make sure the changes have been applied correctly to the tool:
 

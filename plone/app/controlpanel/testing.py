@@ -113,22 +113,27 @@ class PloneAppControlpanel(PloneSandboxLayer):
     def addPortalTypes(self, portal):
         types = [
             'ATBooleanCriterion',
+            'ATCurrentAuthorCriterion',
             'ATDateCriteria',
             'ATDateRangeCriterion',
             'ATListCriterion',
+            'ATPathCriterion',
             'ATPortalTypeCriterion',
             'ATReferenceCriterion',
+            'ATRelativePathCriterion',
             'ATSelectionCriterion',
             'ATSimpleIntCriterion',
             'ATSimpleStringCriterion',
             'ATSortCriterion',
             'ChangeSet',
-            'ATCurrentAuthorCriterion',
-            'ATPathCriterion',
-            'ATRelativePathCriterion',
+            'Collection',
             'Document',
             'Event',
             'File',
+            'Folder',
+            'Image',
+            'Link',
+            'News Item',
         ]
         ttool = getToolByName(portal, 'portal_types')
         for type_ in types:
