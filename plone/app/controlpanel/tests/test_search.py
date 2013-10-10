@@ -190,15 +190,21 @@ class SearchControlPanelAdapterFunctionalTest(unittest.TestCase):
 
         self.assertEqual(self.site_properties.enable_livesearch, False)
 
-    def test_types_not_searched(self):
-        self.assertTrue('Event' not in self.site_properties.types_not_searched)
+    def test_types_not_searched_contains_unselected_types(self):
+        self.browser.open(
+            "%s/@@search-controlpanel" % self.portal_url)
+        self.browser.getControl(name='form.widgets.types_not_searched:list')\
+            .value = ['Document']
+        self.browser.getControl('Save').click()
+        self.assertIn('Event', self.site_properties.types_not_searched)
+
+    def test_types_not_searched_does_not_containn_selected_types(self):
         self.browser.open(
             "%s/@@search-controlpanel" % self.portal_url)
         self.browser.getControl(name='form.widgets.types_not_searched:list')\
             .value = ['Event']
         self.browser.getControl('Save').click()
-
-        self.assertTrue('Event' in self.site_properties.types_not_searched)
+        self.assertNotIn('Event', self.site_properties.types_not_searched)
 
 
 def test_suite():
