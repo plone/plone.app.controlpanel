@@ -1,10 +1,9 @@
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from plone.app.controlpanel import _
+from plone.app.controlpanel.interfaces import ISearchSchema
+from plone.app.controlpanel.widgets import ReverseCheckBoxFieldWidget
 from plone.app.registry.browser import controlpanel
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
-
-from plone.app.controlpanel.interfaces import ISearchSchema
 
 
 class SearchControlPanelForm(controlpanel.RegistryEditForm):
@@ -13,14 +12,10 @@ class SearchControlPanelForm(controlpanel.RegistryEditForm):
     label = _(u"Search settings")
     schema = ISearchSchema
 
-    #form_fields = FormFieldsets(searchset)
-    #form_fields['types_not_searched'].custom_widget = MCBThreeColumnWidget
-    #form_fields['types_not_searched'].custom_widget.cssClass='label'
-
     def updateFields(self):
         super(SearchControlPanelForm, self).updateFields()
         self.fields['types_not_searched'].widgetFactory = \
-            CheckBoxFieldWidget
+            ReverseCheckBoxFieldWidget
 
     def updateWidgets(self):
         super(SearchControlPanelForm, self).updateWidgets()
@@ -44,7 +39,7 @@ class SearchControlPanelForm(controlpanel.RegistryEditForm):
                      or (t in current_types and t not in friendly_types)]
         data['types_not_searched'] = tuple(new_types)
         super(SearchControlPanelForm, self).applyChanges(data)
-        
+
     def _friendly_types_vocabulary(self):
         return queryUtility(IVocabularyFactory,
                             'plone.app.vocabularies.ReallyUserFriendlyTypes')

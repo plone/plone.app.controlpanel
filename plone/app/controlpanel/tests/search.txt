@@ -75,7 +75,7 @@ Make sure the changes have been applied correctly to the registry:
     >>> settings = registry.forInterface(ISearchSchema)
     >>> settings.enable_livesearch
     False
-    >>> settings.types_not_searched
+    >>> settings.types_not_searched    
     ('ATBooleanCriterion',
      'ATCurrentAuthorCriterion',
      'ATDateCriteria',
@@ -89,8 +89,9 @@ Make sure the changes have been applied correctly to the registry:
      'ATSimpleIntCriterion',
      'ATSimpleStringCriterion',
      'ATSortCriterion',
-     'Document',
-     'Event',
+     'ChangeSet',
+     'Discussion Item',
+     'File',
      'Plone Site',
      'TempFolder')
 
@@ -103,13 +104,13 @@ Make sure the changes have been applied correctly to the tool:
     False
 
     >>> 'Event' in site_props.types_not_searched
-    True
+    False
 
     >>> 'Document' in site_props.types_not_searched
-    True
+    False
 
     >>> 'File' in site_props.types_not_searched
-    False
+    True
 
 So called 'bad types' are not listed in the search panel, but they
 should still be listed in the site_properties as not searchable:

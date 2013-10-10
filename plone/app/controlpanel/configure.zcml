@@ -45,4 +45,10 @@
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
 
+  <adapter
+      factory=".widgets.ReverseCheckBoxFieldWidget"
+      provides="z3c.form.interfaces.IFieldWidget"
+      for="zope.schema.interfaces.IField
+           z3c.form.interfaces.IFormLayer" />
+
 </configure>
