@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.TypesTool import FactoryTypeInformation
 
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
@@ -34,6 +35,7 @@ class PloneAppControlpanel(PloneSandboxLayer):
         #self.generateMemberarea(portal)
         self.generateUsers(portal)
         self.generateGroups(portal)
+        self.addPortalTypes(portal)
 
     def generateMemberarea(self, portal):
         portal.invokeFactory("Folder", "Members")
@@ -107,6 +109,31 @@ class PloneAppControlpanel(PloneSandboxLayer):
         rtool = getToolByName(portal, 'portal_registration')
         for member in members:
             rtool.addMember(member['username'], 'somepassword', properties=member)
+
+    def addPortalTypes(self, portal):
+        types = [
+            'ATBooleanCriterion',
+            'ATDateCriteria',
+            'ATDateRangeCriterion',
+            'ATListCriterion',
+            'ATPortalTypeCriterion',
+            'ATReferenceCriterion',
+            'ATSelectionCriterion',
+            'ATSimpleIntCriterion',
+            'ATSimpleStringCriterion',
+            'ATSortCriterion',
+            'ChangeSet',
+            'ATCurrentAuthorCriterion',
+            'ATPathCriterion',
+            'ATRelativePathCriterion',
+            'Document',
+            'Event',
+            'File',
+        ]
+        ttool = getToolByName(portal, 'portal_types')
+        for type_ in types:
+            ttool._setObject(type_, FactoryTypeInformation(type_))
+
 
 PLONE_APP_CONTROLPANEL_FIXTURE = PloneAppControlpanel()
 PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING = IntegrationTesting(

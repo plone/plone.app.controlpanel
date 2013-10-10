@@ -436,7 +436,7 @@ class ISearchSchema(Interface):
             u"will be enabled by default unless explicitly turned "
             u"off here or by the relevant installer."
         ),
-        required=True,
+        required=False,
         default=(
             'ATBooleanCriterion',
             'ATDateCriteria',
@@ -454,10 +454,10 @@ class ISearchSchema(Interface):
             'TempFolder',
             'ATCurrentAuthorCriterion',
             'ATPathCriterion',
-            'ATRelativePathCriterion'
+            'ATRelativePathCriterion',
         ),
         value_type=schema.Choice(
-            source="plone.app.vocabularies.ReallyUserFriendlyTypes")
+            source="plone.app.vocabularies.PortalTypes"),
     )
 
 
