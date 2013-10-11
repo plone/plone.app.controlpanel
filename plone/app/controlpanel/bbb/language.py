@@ -57,17 +57,3 @@ class LanguageControlPanelAdapter(object):
 
     use_combined_language_codes = property(get_use_combined_language_codes,
                                            set_use_combined_language_codes)
-
-
-def syncPloneAppRegistryToLanguageProperties(settings, event):
-    portal = getSite()
-    language_properties = getAdapter(portal, ILanguageSchema)
-
-    if event.record.fieldName == "default_language":
-        language_properties.default_language = settings.default_language
-        return
-
-    if event.record.fieldName == "use_combined_language_codes":
-        language_properties.use_combined_language_codes = \
-            settings.use_combined_language_codes
-        return

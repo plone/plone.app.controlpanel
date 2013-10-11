@@ -37,12 +37,6 @@
     />
 
   <subscriber
-    for="plone.app.controlpanel.interfaces.ILanguageSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".language.syncPloneAppRegistryToLanguageProperties"
-    />
-
-  <subscriber
     for="plone.app.controlpanel.interfaces.IMailSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".mail.syncPloneAppRegistryToMailhostProperties"

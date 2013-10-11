@@ -65,7 +65,7 @@ class LanguageRegistryIntegrationTest(unittest.TestCase):
         self.assertEqual(
             self.registry['plone.app.controlpanel.interfaces.' +
                           'ILanguageSchema.default_language'],
-            False)
+            'en')
 
 
 class LanguageControlPanelFunctionalTest(unittest.TestCase):
@@ -124,77 +124,6 @@ class LanguageControlPanelFunctionalTest(unittest.TestCase):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ILanguageSchema)
         self.assertEqual(settings.default_language, 'en')
-
-
-class LanguageRegistryIntegrationTest(unittest.TestCase):
-    """Test that changes in the language registry are actually applied.
-    """
-
-    layer = PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-
-        registry = getUtility(IRegistry)
-        self.settings = registry.forInterface(ILanguageSchema)
-        self.ltool = getToolByName(self.portal, "portal_languages")
-
-    def test_default_language(self):
-        self.assertEqual(self.settings.default_language, 'en')
-        self.assertEquals(self.ltool.getDefaultLanguage(), 'en')
-
-        self.settings.default_language = 'de'
-
-        self.assertEqual(self.settings.default_language, 'de')
-        self.assertEquals(self.ltool.getDefaultLanguage(), 'de')
-
-    def test_use_combined_language_codes(self):
-        self.assertEqual(self.settings.use_combined_language_codes, False)
-        self.assertEquals(self.ltool.use_combined_language_codes, False)
-
-        self.settings.use_combined_language_codes = True
-
-        self.assertEqual(self.settings.use_combined_language_codes, True)
-        self.assertEquals(self.ltool.use_combined_language_codes, True)
-
-
-class LanguageControlPanelAdapterFunctionalTest(unittest.TestCase):
-
-    layer = PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING
-
-    def setUp(self):
-        self.app = self.layer['app']
-        self.portal = self.layer['portal']
-        self.portal_url = self.portal.absolute_url()
-        self.ltool = getToolByName(self.portal, "portal_languages")
-        self.browser = Browser(self.app)
-        self.browser.handleErrors = False
-        self.browser.addHeader(
-            'Authorization',
-            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
-        )
-
-    def test_default_language(self):
-        self.assertEqual(self.ltool.getDefaultLanguage(), 'en')
-        self.browser.open(
-            "%s/@@language-controlpanel" % self.portal_url)
-        self.browser.getControl(
-            'Site language').value = ['de']
-        self.browser.getControl('Save').click()
-
-        self.assertEqual(self.ltool.getDefaultLanguage(), 'de')
-
-    def test_use_combined_language_codes(self):
-        self.assertEqual(self.ltool.use_combined_language_codes, False)
-        self.browser.open(
-            "%s/@@language-controlpanel" % self.portal_url)
-        self.browser.getControl(
-            'Show country-specific language variants').selected = True
-        self.browser.getControl('Save').click()
-
-        self.assertEqual(self.ltool.use_combined_language_codes, True)
 
 
 def test_suite():
