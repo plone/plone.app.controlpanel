@@ -3,7 +3,9 @@ ToDo
 
  [ ] Enable filter control panel adapter
 
- [ ] Functional doctest for language control panel is missing.
+ [ ] Functional doctest for language control panel is missing
+
+ [ ] MailHost settings sync can not be removed. Find solution
 
  [ ] Fix failing tests in buildout.coredev 5.0.
 
