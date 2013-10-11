@@ -70,35 +70,35 @@ Displayed Content Types
 Default values:
 
     >>> browser.getControl('Collection', index=0).selected
-    True
+    False
     >>> browser.getControl('Comment').selected
     False
     >>> browser.getControl('Event').selected
-    True
+    False
     >>> browser.getControl('File').selected
-    True
+    False
     >>> browser.getControl('Folder').selected
-    True
+    False
     >>> browser.getControl('Image').selected
-    True
+    False
     >>> browser.getControl('Link').selected
-    True
+    False
     >>> browser.getControl('News Item').selected
-    True
-    >>> browser.getControl('Page').selected
-    True
+    False
+    >>> browser.getControl('Document').selected
+    False
 
 Change settings:
 
-    >>> browser.getControl('Collection', index=0).selected = False
+    >>> browser.getControl('Collection', index=0).selected = True
     >>> browser.getControl('Comment').selected = True
-    >>> browser.getControl('Event').selected = False
-    >>> browser.getControl('File').selected = False
-    >>> browser.getControl('Folder').selected = False
-    >>> browser.getControl('Image').selected = False
-    >>> browser.getControl('Link').selected = False
-    >>> browser.getControl('News Item').selected = False
-    >>> browser.getControl('Page').selected = False
+    >>> browser.getControl('Event').selected = True
+    >>> browser.getControl('File').selected = True
+    >>> browser.getControl('Folder').selected = True
+    >>> browser.getControl('Image').selected = True
+    >>> browser.getControl('Link').selected = True
+    >>> browser.getControl('News Item').selected = True
+    >>> browser.getControl('Document').selected = True
 
     >>> browser.getControl("Save").click()
     >>> browser.url.endswith('navigation-controlpanel')
@@ -109,31 +109,31 @@ Change settings:
 Make sure the settings have been applied properly:
 
     >>> 'Collection' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'Comment' in navProps.metaTypesNotToList
     False
 
     >>> 'Event' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'File' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'Folder' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'Image' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'Link' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'News Item' in navProps.metaTypesNotToList
-    True
+    False
 
     >>> 'Document' in navProps.metaTypesNotToList
-    True
+    False
 
 
 Workflow Settings
