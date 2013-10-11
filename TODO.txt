@@ -1,6 +1,10 @@
 ToDo
 ====
 
+ [ ] Enable filter control panel adapter
+
+ [ ] Functional doctest for language control panel is missing.
+
  [ ] Fix failing tests in buildout.coredev 5.0.
 
  [ ] Move plone.app.registry entries from "plone.app.controlpanel."-prefix to
