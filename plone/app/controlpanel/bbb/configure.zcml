@@ -36,13 +36,6 @@
     replacement=".patches.edit_configuration"
     />
 
-  <!-- Subscriber -->
-  <subscriber
-    for="plone.app.controlpanel.interfaces.ICalendarSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".calendar.syncPloneAppRegistryToCalendarProperties"
-    />
-
   <subscriber
     for="plone.app.controlpanel.interfaces.IEditingSchema
          plone.registry.interfaces.IRecordModifiedEvent"

@@ -10,10 +10,6 @@ Test setup::
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
 
-First some initial setup code:
-
-    >>> from Products.CMFCore.utils import getToolByName
-    >>> ctool = getToolByName(portal, 'portal_calendar')
 
 Viewing the calendar control panel
 ----------------------------------
@@ -61,5 +57,11 @@ We should be informed that something has changed:
 
 Make sure the changes have been applied correctly to the tool:
 
-    >>> ctool.firstweekday
+    >>> from zope.component import getUtility
+    >>> from plone.registry.interfaces import IRegistry
+    >>> from plone.app.controlpanel.interfaces import ICalendarSchema
+    >>> registry = getUtility(IRegistry)
+    >>> settings = registry.forInterface(ICalendarSchema)
+    >>> settings.firstweekday
     3
+

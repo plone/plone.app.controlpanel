@@ -20,16 +20,3 @@ class CalendarControlPanelAdapter(object):
 
     firstweekday = ProxyFieldProperty(ICalendarSchema['firstweekday'])
     calendar_states = ProxyFieldProperty(ICalendarSchema['calendar_states'])
-
-
-def syncPloneAppRegistryToCalendarProperties(settings, event):
-    portal = getSite()
-    ctool = getToolByName(portal, "portal_calendar")
-
-    if event.record.fieldName == "firstweekday":
-        ctool.firstweekday = settings.firstweekday
-        return
-
-    if event.record.fieldName == "calendar_states":
-        ctool.calendar_states = settings.calendar_states
-        return
