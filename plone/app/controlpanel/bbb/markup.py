@@ -54,18 +54,3 @@ class MarkupControlPanelAdapter(object):
             forbidden_contenttypes=tuple(forbidden_types)
         )
     allowed_types = property(get_allowed_types, set_allowed_types)
-
-
-def syncPloneAppRegistryToMarkupPortalProperties(settings, event):
-    portal = getSite()
-    pprop = getToolByName(portal, 'portal_properties')
-    site_properties = pprop['site_properties']
-
-    if event.record.fieldName == "default_type":
-        site_properties.default_contenttype = settings.default_type
-        return
-
-    if event.record.fieldName == "allowed_types":
-        markup_adapter = getAdapter(portal, IMarkupSchema)
-        markup_adapter.allowed_types = settings.allowed_types
-        return

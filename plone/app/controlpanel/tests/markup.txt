@@ -70,13 +70,3 @@ Verify, that the settings have actually been changed in plone.app.registry:
     'text/x-web-textile'
     >>> settings.allowed_types
     ('text/html', 'text/x-web-textile')
-
-Verify, that the settings have actually been changed in the site properties:
-
-    >>> from Products.CMFCore.utils import getToolByName
-    >>> portal_properties = getToolByName(portal, "portal_properties")
-    >>> site_properties = portal_properties.site_properties
-    >>> site_properties.getProperty('default_contenttype')
-    'text/x-web-textile'
-    >>> 'text/x-web-textile' in site_properties.getProperty('forbidden_contenttypes')
-    False

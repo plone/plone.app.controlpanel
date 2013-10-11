@@ -43,12 +43,6 @@
     />
 
   <subscriber
-    for="plone.app.controlpanel.interfaces.IMarkupSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".markup.syncPloneAppRegistryToMarkupPortalProperties"
-    />
-
-  <subscriber
     for="plone.app.controlpanel.interfaces.INavigationSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".navigation.syncPloneAppRegistryToNavigationPortalProperties"
