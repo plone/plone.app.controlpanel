@@ -19,7 +19,7 @@ optionflags = (
 normal_testfiles = [
     'calendar.txt',
     'editing.txt',
-    'filter.txt',
+#    'filter.txt',
     'mail.txt',
     'maintenance.txt',
 #    'security_enable_user_folder.txt',
