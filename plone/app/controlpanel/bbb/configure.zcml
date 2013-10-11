@@ -37,12 +37,6 @@
     />
 
   <subscriber
-    for="plone.app.controlpanel.interfaces.IEditingSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".editing.syncPloneAppRegistryToEditingSiteProperties"
-    />
-
-  <subscriber
     for="plone.app.controlpanel.interfaces.ILanguageSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".language.syncPloneAppRegistryToLanguageProperties"
