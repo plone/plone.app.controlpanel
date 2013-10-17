@@ -18,10 +18,13 @@ Test setup
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
     >>> portal_url = portal.absolute_url()
-    >>> from Products.CMFCore.utils import getToolByName
-    >>> pprop = getToolByName(portal, 'portal_properties')
-    >>> siteProps = pprop['site_properties']
-    >>> navProps = pprop['navtree_properties']
+
+    >>> from zope.component import getUtility
+    >>> from plone.registry.interfaces import IRegistry
+    >>> from plone.app.controlpanel.interfaces import INavigationSchema
+
+    >>> registry = getUtility(IRegistry)
+    >>> settings = registry.forInterface(INavigationSchema)
 
 
 Tabs Generation Settings
@@ -52,11 +55,11 @@ Change settings:
 
 Make sure the settings have been applied properly:
 
-    >>> siteProps.disable_folder_sections
-    True
+    >>> settings.generate_tabs
+    False
 
-    >>> siteProps.disable_nonfolderish_sections
-    True
+    >>> settings.nonfolderish_tabs
+    False
 
 
 Displayed Content Types
@@ -108,32 +111,32 @@ Change settings:
 
 Make sure the settings have been applied properly:
 
-    >>> 'Collection' in navProps.metaTypesNotToList
+    >>> 'Collection' in settings.displayed_types
+    True
+
+    >>> 'Comment' in settings.displayed_types
     False
 
-    >>> 'Comment' in navProps.metaTypesNotToList
-    False
+    >>> 'Event' in settings.displayed_types
+    True
 
-    >>> 'Event' in navProps.metaTypesNotToList
-    False
+    >>> 'File' in settings.displayed_types
+    True
 
-    >>> 'File' in navProps.metaTypesNotToList
-    False
+    >>> 'Folder' in settings.displayed_types
+    True
 
-    >>> 'Folder' in navProps.metaTypesNotToList
-    False
+    >>> 'Image' in settings.displayed_types
+    True
 
-    >>> 'Image' in navProps.metaTypesNotToList
-    False
+    >>> 'Link' in settings.displayed_types
+    True
 
-    >>> 'Link' in navProps.metaTypesNotToList
-    False
+    >>> 'News Item' in settings.displayed_types
+    True
 
-    >>> 'News Item' in navProps.metaTypesNotToList
-    False
-
-    >>> 'Document' in navProps.metaTypesNotToList
-    False
+    >>> 'Document' in settings.displayed_types
+    True
 
 
 Workflow Settings
@@ -183,28 +186,28 @@ Change settings:
 
 Make sure the settings have been applied properly:
 
-    >>> navProps.enable_wf_state_filtering
+    >>> settings.filter_on_workflow
     True
 
-    >>> 'external' in navProps.wf_states_to_show
+    >>> 'external' in settings.workflow_states_to_show
     True
 
-    >>> 'internal' in navProps.wf_states_to_show
+    >>> 'internal' in settings.workflow_states_to_show
     True
 
-    >>> 'internally_published' in navProps.wf_states_to_show
+    >>> 'internally_published' in settings.workflow_states_to_show
     True
 
-    >>> 'pending' in navProps.wf_states_to_show
+    >>> 'pending' in settings.workflow_states_to_show
     True
 
-    >>> 'private' in navProps.wf_states_to_show
+    >>> 'private' in settings.workflow_states_to_show
     True
 
-    >>> 'visible' in navProps.wf_states_to_show
+    >>> 'visible' in settings.workflow_states_to_show
     True
 
-    >>> 'published' in navProps.wf_states_to_show
+    >>> 'published' in settings.workflow_states_to_show
     True
 
 
@@ -233,5 +236,5 @@ Change setting:
 
 Make sure the settings have been applied properly:
 
-    >>> navProps.showAllParents
+    >>> settings.show_excluded_items
     False

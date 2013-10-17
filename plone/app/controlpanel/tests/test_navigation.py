@@ -140,6 +140,8 @@ class NavigationControlPanelAdapterFunctionalTest(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.portal_url = self.portal.absolute_url()
+        self.registry = Registry()
+        self.registry.registerInterface(INavigationSchema)
         pprop = getToolByName(self.portal, 'portal_properties')
         self.siteProps = pprop['site_properties']
         self.navProps = pprop['navtree_properties']
@@ -157,8 +159,10 @@ class NavigationControlPanelAdapterFunctionalTest(unittest.TestCase):
             'Automatically generate tabs').selected = False
         self.browser.getControl('Save').click()
 
-        self.assertEqual(self.siteProps.disable_folder_sections, True)
-
+        self.assertEqual(
+            self.registry['plone.app.controlpanel.interfaces.' +
+                          'INavigationSchema.generate_tabs'],
+            True)
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
