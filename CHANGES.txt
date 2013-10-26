@@ -4,7 +4,10 @@ Changelog
 2.3.8 (unreleased)
 ------------------
 
-- fix syndication settings to not write on read
+- Fix test email: msgid was sent, not translation.
+  [thomasdesvenain]
+
+- Fix syndication settings to not write on read.
   [vangheem]
 
 
