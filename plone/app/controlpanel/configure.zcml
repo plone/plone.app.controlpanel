@@ -20,14 +20,6 @@
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
-  <!-- Register the import step -->
-  <genericsetup:importStep
-    name="plone.app.controlpanel"
-    title="plone.app.controlpanel import handlers"
-    description=""
-    handler="plone.app.controlpanel.setuphandlers.setupVarious"
-    />
-
   <include file="permissions.zcml"/>
 
   <include package=".bbb" />
