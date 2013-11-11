@@ -1,0 +1,24 @@
+site: registry -> portal properties
+-----------------------------------
+
+    portal = getSite()
+    portal_properties = getToolByName(portal, "portal_properties")
+    site_properties = portal_properties.site_properties
+
+    portal.site_title = settings.site_title
+    portal.site_description = settings.site_description
+    site_properties.enable_sitemap = settings.enable_sitemap
+    site_properties.exposeDCMetaTags = settings.exposeDCMetaTags
+
+
+mail: registry -> portal properties
+-----------------------------------
+
+    portal = getSite()
+    mailhost = getToolByName(portal, 'MailHost')
+    mailhost.smtp_host = settings.smtp_host
+    mailhost.smtp_port = settings.smtp_port
+    mailhost.smtp_uid = settings.smtp_userid
+    mailhost.smtp_pwd = settings.smtp_pass
+    getUtility(ISiteRoot).email_from_name = settings.email_from_name
+    getUtility(ISiteRoot).email_from_address = settings.email_from_address
