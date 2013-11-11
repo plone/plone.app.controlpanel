@@ -119,32 +119,3 @@ class SecurityControlPanelAdapter(object):
 
     use_email_as_login = property(get_use_email_as_login,
                                   set_use_email_as_login)
-
-
-def syncPloneAppRegistryToSecurityPortalProperties(settings, event):
-    portal = getSite()
-    security_properties = getAdapter(portal, ISecuritySchema)
-    portal_properties = getToolByName(portal, "portal_properties")
-    site_properties = portal_properties.site_properties
-
-    if event.record.fieldName == "enable_self_reg":
-        security_properties.enable_self_reg = settings.enable_self_reg
-        return
-
-    if event.record.fieldName == "enable_user_pwd_choice":
-        portal.validate_email = not settings.enable_user_pwd_choice
-        return
-
-    if event.record.fieldName == "enable_user_folders":
-        mtool = getToolByName(portal, "portal_membership")
-        mtool.memberareaCreationFlag = settings.enable_user_folders
-        return
-
-    if event.record.fieldName == "allow_anon_views_about":
-        site_properties.allowAnonymousViewAbout = \
-            settings.allow_anon_views_about
-        return
-
-    if event.record.fieldName == "use_email_as_login":
-        site_properties.use_email_as_login = settings.use_email_as_login
-        return

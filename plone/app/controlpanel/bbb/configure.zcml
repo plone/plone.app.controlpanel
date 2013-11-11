@@ -43,12 +43,6 @@
     />
 
   <subscriber
-    for="plone.app.controlpanel.interfaces.ISecuritySchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".security.syncPloneAppRegistryToSecurityPortalProperties"
-    />
-
-  <subscriber
     for="plone.app.controlpanel.interfaces.ISiteSchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".site.syncPloneAppRegistryToSitePortalProperties"
