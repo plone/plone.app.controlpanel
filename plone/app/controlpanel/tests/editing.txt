@@ -1,4 +1,4 @@
-Editing control panel
+Editing Control Panel
 =====================
 
 Test setup::
@@ -64,6 +64,13 @@ Confirm that the visible ids setting has been stored in plone.app.registry::
 
     >>> settings.visible_ids
     True
+
+Confirm that visible ids show up on the page::
+
+    >>> browser.open(portal_url + '/++add++Document')
+    >>> browser.getControl("Save").click()
+
+XXX: Figure out how the visible_id settings is supposed to work.
 
 
 Enable inline editing

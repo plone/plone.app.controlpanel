@@ -7,7 +7,6 @@ from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
 from plone.app.testing import applyProfile
-
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
@@ -35,7 +34,15 @@ class PloneAppControlpanel(PloneSandboxLayer):
         #self.generateMemberarea(portal)
         self.generateUsers(portal)
         self.generateGroups(portal)
-        self.addPortalTypes(portal)
+        from plone.dexterity.fti import DexterityFTI
+        types_tool = getToolByName(portal, "portal_types")
+        portal_types = [
+            'Document', 'Event', 'File', 'Folder', 'Image', 'News Item',
+            'Collection', 'Link'
+        ]
+        for portal_type in portal_types:
+            fti = DexterityFTI(portal_type)
+            types_tool._setObject(portal_type, fti)
 
     def generateMemberarea(self, portal):
         portal.invokeFactory("Folder", "Members")
@@ -109,35 +116,6 @@ class PloneAppControlpanel(PloneSandboxLayer):
         rtool = getToolByName(portal, 'portal_registration')
         for member in members:
             rtool.addMember(member['username'], 'somepassword', properties=member)
-
-    def addPortalTypes(self, portal):
-        types = [
-            'ATBooleanCriterion',
-            'ATCurrentAuthorCriterion',
-            'ATDateCriteria',
-            'ATDateRangeCriterion',
-            'ATListCriterion',
-            'ATPathCriterion',
-            'ATPortalTypeCriterion',
-            'ATReferenceCriterion',
-            'ATRelativePathCriterion',
-            'ATSelectionCriterion',
-            'ATSimpleIntCriterion',
-            'ATSimpleStringCriterion',
-            'ATSortCriterion',
-            'ChangeSet',
-            'Collection',
-            'Document',
-            'Event',
-            'File',
-            'Folder',
-            'Image',
-            'Link',
-            'News Item',
-        ]
-        ttool = getToolByName(portal, 'portal_types')
-        for type_ in types:
-            ttool._setObject(type_, FactoryTypeInformation(type_))
 
 
 PLONE_APP_CONTROLPANEL_FIXTURE = PloneAppControlpanel()

@@ -1,6 +1,11 @@
 REGISTRY -> PROPERTIES
 ======================
 
+editing: registry ->
+--------------------
+
+    settings.visible_ids
+
 site: registry -> portal properties
 -----------------------------------
 
