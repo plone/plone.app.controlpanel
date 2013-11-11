@@ -88,33 +88,3 @@ class MailControlPanelAdapter(object):
 
     email_from_address = property(get_email_from_address,
                                   set_email_from_address)
-
-
-def syncPloneAppRegistryToMailhostProperties(settings, event):
-    portal = getSite()
-    mailhost = getToolByName(portal, 'MailHost')
-
-    if event.record.fieldName == "smtp_host":
-        mailhost.smtp_host = settings.smtp_host
-        return
-
-    if event.record.fieldName == "smtp_port":
-        mailhost.smtp_port = settings.smtp_port
-        return
-
-    if event.record.fieldName == "smtp_userid":
-        mailhost.smtp_uid = settings.smtp_userid
-        return
-
-    if event.record.fieldName == "smtp_pass":
-        mailhost.smtp_pwd = settings.smtp_pass
-        return
-
-    if event.record.fieldName == "email_from_name":
-        getUtility(ISiteRoot).email_from_name = \
-            settings.email_from_name
-        return
-
-    if event.record.fieldName == "email_from_address":
-        getUtility(ISiteRoot).email_from_address = settings.email_from_address
-        return
