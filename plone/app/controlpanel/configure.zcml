@@ -43,4 +43,9 @@
       for="zope.schema.interfaces.IField
            z3c.form.interfaces.IFormLayer" />
 
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="plone.app.controlpanel"
+      provides="Products.CMFPlone.interfaces.INonInstallable" />
+      
 </configure>
