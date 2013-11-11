@@ -42,12 +42,6 @@
     handler=".mail.syncPloneAppRegistryToMailhostProperties"
     />
 
-  <subscriber
-    for="plone.app.controlpanel.interfaces.IUserGroupsSettingsSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".usergroups.syncPloneAppRegistryToUserGroupsPortalProperties"
-    />
-
   <!-- Adapter  -->
   <adapter factory=".calendar.CalendarControlPanelAdapter" />
   <adapter factory=".editing.EditingControlPanelAdapter" />

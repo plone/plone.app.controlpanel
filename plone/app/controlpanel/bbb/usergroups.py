@@ -33,18 +33,3 @@ class UserGroupsSettingsControlPanelAdapter(object):
         self.context.many_users = value
 
     many_users = property(get_many_users, set_many_users)
-
-
-def syncPloneAppRegistryToUserGroupsPortalProperties(settings, event):
-    portal = getSite()
-    site_properties = getAdapter(portal, IUserGroupsSettingsSchema)
-    portal_properties = getToolByName(portal, "portal_properties")
-    site_properties = portal_properties.site_properties
-
-    if event.record.fieldName == "many_users":
-        site_properties.many_users = settings.many_users
-        return
-
-    if event.record.fieldName == "many_groups":
-        site_properties.many_groups = settings.many_groups
-        return
