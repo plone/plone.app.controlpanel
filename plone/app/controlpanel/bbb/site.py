@@ -58,30 +58,3 @@ class SiteControlPanelAdapter(object):
 
     enable_sitemap = ProxyFieldProperty(ISiteSchema['enable_sitemap'])
     exposeDCMetaTags = ProxyFieldProperty(ISiteSchema['exposeDCMetaTags'])
-
-
-def syncPloneAppRegistryToSitePortalProperties(settings, event):
-    portal = getSite()
-    site_properties = getAdapter(portal, ISiteSchema)
-    portal_properties = getToolByName(portal, "portal_properties")
-    site_properties = portal_properties.site_properties
-
-    if event.record.fieldName == "site_title":
-        portal.site_title = settings.site_title
-        return
-
-    if event.record.fieldName == "site_description":
-        portal.site_description = settings.site_description
-        return
-
-#    if event.record.fieldName == "webstats_js":
-#        site_properties.webstats_js = settings.webstats_js
-#        return
-
-    if event.record.fieldName == "enable_sitemap":
-        site_properties.enable_sitemap = settings.enable_sitemap
-        return
-
-    if event.record.fieldName == "exposeDCMetaTags":
-        site_properties.exposeDCMetaTags = settings.exposeDCMetaTags
-        return

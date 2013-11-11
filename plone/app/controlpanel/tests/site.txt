@@ -10,10 +10,11 @@ Test setup::
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
     >>> portal = layer['portal']
     >>> from zope.component import getUtility
-    >>> from Products.CMFCore.interfaces import IPropertiesTool
-    >>> ptool = getUtility(IPropertiesTool)
-    >>> ptool.site_properties.enable_sitemap
-    False
+    >>> from plone.registry.interfaces import IRegistry
+    >>> from plone.app.controlpanel.interfaces import ISiteSchema
+    >>> registry = getUtility(IRegistry)
+    >>> settings = registry.forInterface(ISiteSchema)
+
 
 Viewing the site control panel
 -----------------------------
@@ -56,7 +57,7 @@ We should be informed that something has changed:
 
 Make sure the changes have been applied correctly to the tool:
 
-    >>> ptool.site_properties.enable_sitemap
+    >>> settings.enable_sitemap
     True
 
 Test if the sitemaps does appear:
@@ -92,7 +93,7 @@ We should be informed that something has changed:
 
 Make sure the changes have been applied correctly to the tool:
 
-    >>> ptool.site_properties.enable_sitemap
+    >>> settings.enable_sitemap
     False
 
 Check the sitemap actually, should raise a 404:
@@ -130,7 +131,7 @@ We should be informed that something has changed:
 
 Make sure the changes have been applied correctly to the tool:
 
-    >>> ptool.site_properties.exposeDCMetaTags
+    >>> settings.exposeDCMetaTags
     True
 
 Test if DC meta tags are exposed:

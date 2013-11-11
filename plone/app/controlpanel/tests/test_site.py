@@ -179,47 +179,6 @@ class SiteControlPanelFunctionalTest(unittest.TestCase):
         self.assertEqual(settings.webstats_js, u"<script>a=1</script>")
 
 
-class SiteRegistryIntegrationTest(unittest.TestCase):
-    """Test that changes in the site registry are actually applied.
-    """
-
-    layer = PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-
-        registry = getUtility(IRegistry)
-        self.settings = registry.forInterface(ISiteSchema)
-        self.site_properties = self.portal.portal_properties.site_properties
-        self.mtool = getToolByName(self.portal, "portal_membership")
-
-    def test_site_title(self):
-        self.assertEqual(self.settings.site_title, u"")
-        self.assertEqual(self.portal.get("site_title", None), None)
-
-        self.settings.site_title = u"Plone Site"
-
-        self.assertEqual(self.settings.site_title, u"Plone Site")
-        self.assertEqual(self.portal.site_title, u"Plone Site")
-
-    def test_site_description(self):
-        self.assertEqual(self.settings.site_description, u"")
-        self.assertEqual(self.portal.get("site_description", None), None)
-
-        self.settings.site_description = u"Plone Site Description"
-
-        self.assertEqual(
-            self.settings.site_description,
-            u"Plone Site Description")
-        self.assertEqual(
-            self.portal.site_description,
-            u"Plone Site Description")
-
-    # XXX: Todo
-
-
 class SiteControlPanelAdapterFunctionalTest(unittest.TestCase):
 
     layer = PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING
@@ -228,6 +187,9 @@ class SiteControlPanelAdapterFunctionalTest(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.portal_url = self.portal.absolute_url()
+        registry = getUtility(IRegistry)
+        self.settings = registry.forInterface(ISiteSchema)
+
         self.browser = Browser(self.app)
         self.browser.handleErrors = False
         self.browser.addHeader(
@@ -243,7 +205,7 @@ class SiteControlPanelAdapterFunctionalTest(unittest.TestCase):
             'Site title').value = u"Plone Site"
         self.browser.getControl('Save').click()
 
-        self.assertEqual(self.portal.site_title, u"Plone Site")
+        self.assertEqual(self.settings.site_title, u"Plone Site")
 
 
     # XXX: Todo
