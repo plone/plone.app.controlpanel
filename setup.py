@@ -36,7 +36,6 @@ install_requires = [
     'Products.statusmessages',
     'Zope2>=2.13.0',
     'ZODB3',
-    'collective.monkeypatcher',
 ]
 
 setup(name='plone.app.controlpanel',

@@ -1,42 +1,8 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:monkey="http://namespaces.plone.org/monkey">
+    xmlns:browser="http://namespaces.zope.org/browser">
 
-  <!-- Monkey Patch Properties Tool -->
-  <include package="collective.monkeypatcher" />
-  <monkey:patch
-    description=""
-    class="Products.CMFPlone.PropertiesTool.SimpleItemWithProperties"
-    original="_setPropValue"
-    replacement=".patches._setPropValue"
-    />
-
-  <monkey:patch
-    description=""
-    class="Products.MailHost.MailHost.MailBase"
-    original="manage_makeChanges"
-    replacement=".patches.manage_makeChanges"
-    />
-
-  <!-- Monkey Patch Plone Site -->
-  <monkey:patch
-    description=""
-    class="Products.CMFPlone.Portal.PloneSite"
-    original="_setPropValue"
-    replacement=".patches.setPloneSitePropertyValue"
-    />
-
-  <!-- Monkey Patch Calendar Tool -->
-  <monkey:patch
-    description="Calendar Tool Monkey Patch"
-    class="Products.CMFCalendar.CalendarTool.CalendarTool"
-    original="edit_configuration"
-    replacement=".patches.edit_configuration"
-    />
-
-  <!-- Adapter  -->
   <adapter factory=".calendar.CalendarControlPanelAdapter" />
   <adapter factory=".editing.EditingControlPanelAdapter" />
   <!--<adapter factory=".filter.FilterControlPanelAdapter" />-->

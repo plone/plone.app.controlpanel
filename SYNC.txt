@@ -1,3 +1,6 @@
+REGISTRY -> PROPERTIES
+======================
+
 site: registry -> portal properties
 -----------------------------------
 
@@ -22,3 +25,51 @@ mail: registry -> portal properties
     mailhost.smtp_pwd = settings.smtp_pass
     getUtility(ISiteRoot).email_from_name = settings.email_from_name
     getUtility(ISiteRoot).email_from_address = settings.email_from_address
+
+
+PROPERTIES -> REGISTRY
+======================
+
+site/portal properties
+----------------------
+
+  <!-- Monkey Patch Properties Tool -->
+  <include package="collective.monkeypatcher" />
+  <monkey:patch
+    description=""
+    class="Products.CMFPlone.PropertiesTool.SimpleItemWithProperties"
+    original="_setPropValue"
+    replacement=".patches._setPropValue"
+    />
+
+MailHost
+--------
+
+  <monkey:patch
+    description=""
+    class="Products.MailHost.MailHost.MailBase"
+    original="manage_makeChanges"
+    replacement=".patches.manage_makeChanges"
+    />
+
+portal
+------
+
+  <!-- Monkey Patch Plone Site -->
+  <monkey:patch
+    description=""
+    class="Products.CMFPlone.Portal.PloneSite"
+    original="_setPropValue"
+    replacement=".patches.setPloneSitePropertyValue"
+    />
+
+calendar
+--------
+
+  <!-- Monkey Patch Calendar Tool -->
+  <monkey:patch
+    description="Calendar Tool Monkey Patch"
+    class="Products.CMFCalendar.CalendarTool.CalendarTool"
+    original="edit_configuration"
+    replacement=".patches.edit_configuration"
+    />
