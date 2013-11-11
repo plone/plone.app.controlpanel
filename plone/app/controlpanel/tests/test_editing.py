@@ -67,13 +67,6 @@ class EditingControlPanelIntegrationTest(unittest.TestCase):
                           'IEditingSchema.ext_editor'],
             False)
 
-    def test_enable_inline_editing_setting(self):
-        self.assertTrue('enable_inline_editing' in IEditingSchema.names())
-        self.assertEqual(
-            self.registry['plone.app.controlpanel.interfaces.' +
-                          'IEditingSchema.enable_inline_editing'],
-            False)
-
     def test_enable_link_integrity_checks_setting(self):
         self.assertTrue(
             'enable_link_integrity_checks' in IEditingSchema.names())
@@ -152,15 +145,6 @@ class EditingControlPanelFunctionalTest(unittest.TestCase):
         self.browser.getControl('Save').click()
 
         self.assertEqual(self.settings.ext_editor, True)
-
-    def test_enable_inline_editing(self):
-        self.browser.open(
-            "%s/@@editing-controlpanel" % self.portal_url)
-        self.browser.getControl("Enable inline editing")\
-            .selected = True
-        self.browser.getControl('Save').click()
-
-        self.assertEqual(self.settings.enable_inline_editing, True)
 
     def test_enable_link_integrity_checks(self):
         self.browser.open(

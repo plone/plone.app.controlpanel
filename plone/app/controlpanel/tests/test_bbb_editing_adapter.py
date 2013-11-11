@@ -36,18 +36,6 @@ class EditingControlPanelAdapterTest(unittest.TestCase):
         editing_settings.visible_ids = True
         self.assertEquals(self.site_properties.visible_ids, True)
 
-    def test_get_enable_inline_editing_setting(self):
-        self.assertEquals(self.site_properties.enable_inline_editing, False)
-        self.site_properties.enable_inline_editing = True
-        editing_settings = getAdapter(self.portal, IEditingSchema)
-        self.assertEquals(editing_settings.enable_inline_editing, True)
-
-    def test_set_enable_inline_editing_setting(self):
-        self.assertEquals(self.site_properties.enable_inline_editing, False)
-        editing_settings = getAdapter(self.portal, IEditingSchema)
-        editing_settings.enable_inline_editing = True
-        self.assertEquals(self.site_properties.enable_inline_editing, True)
-
     def test_get_enable_link_integrity_checks_setting(self):
         self.assertEquals(
             self.site_properties.enable_link_integrity_checks, True)

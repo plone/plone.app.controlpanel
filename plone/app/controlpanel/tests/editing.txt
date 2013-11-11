@@ -73,31 +73,6 @@ Confirm that visible ids show up on the page::
 XXX: Figure out how the visible_id settings is supposed to work.
 
 
-Enable inline editing
----------------------
-
-By default 'enable inline editing' is disabled::
-
-    >>> settings.enable_inline_editing
-    False
-
-    >>> browser.open(portal_url + '/@@editing-controlpanel')
-    >>> browser.getControl(name='form.widgets.enable_inline_editing:list').value
-    []
-
-Set 'enable inline editing' to True::
-
-    >>> browser.getControl(name='form.widgets.enable_inline_editing:list').value = [True]
-    >>> browser.getControl(name="form.buttons.save").click()
-    >>> browser.url.endswith('editing-controlpanel')
-    True
-
-Confirm that the 'enable_inline_editing' setting has been stored in plone.app.registry::
-
-    >>> settings.enable_inline_editing
-    True
-
-
 Enable link integrity checks
 ----------------------------
 

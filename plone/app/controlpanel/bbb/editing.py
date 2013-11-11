@@ -21,8 +21,6 @@ class EditingControlPanelAdapter(object):
         self.encoding = pprop.site_properties.default_charset
 
     visible_ids = ProxyFieldProperty(IEditingSchema['visible_ids'])
-    enable_inline_editing = ProxyFieldProperty(
-        IEditingSchema['enable_inline_editing'])
     enable_link_integrity_checks = ProxyFieldProperty(
         IEditingSchema['enable_link_integrity_checks'])
     ext_editor = ProxyFieldProperty(
