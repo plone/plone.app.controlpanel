@@ -43,12 +43,6 @@
     />
 
   <subscriber
-    for="plone.app.controlpanel.interfaces.ISearchSchema
-         plone.registry.interfaces.IRecordModifiedEvent"
-    handler=".search.syncPloneAppRegistryToSearchPortalProperties"
-    />
-
-  <subscriber
     for="plone.app.controlpanel.interfaces.ISecuritySchema
          plone.registry.interfaces.IRecordModifiedEvent"
     handler=".security.syncPloneAppRegistryToSecurityPortalProperties"

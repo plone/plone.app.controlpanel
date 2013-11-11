@@ -82,23 +82,6 @@ Make sure the changes have been applied correctly to the registry:
     >>> 'Plone Site' in settings.types_not_searched
     True
 
-Make sure the changes have been applied correctly to the tool:
-
-    >>> site_props.enable_livesearch
-    False
-
-    >>> jstool.getResource('livesearch.js').getEnabled()
-    False
-
-    >>> 'Event' in site_props.types_not_searched
-    False
-
-    >>> 'Document' in site_props.types_not_searched
-    False
-
-    >>> 'File' in site_props.types_not_searched
-    True
-
 So called 'bad types' are not listed in the search panel, but they
 should still be listed in the site_properties as not searchable:
 

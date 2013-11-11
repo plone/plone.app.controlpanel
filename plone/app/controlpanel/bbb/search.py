@@ -68,19 +68,3 @@ class SearchControlPanelAdapter(object):
         get_types_not_searched,
         set_types_not_searched
     )
-
-
-def syncPloneAppRegistryToSearchPortalProperties(settings, event):
-    portal = getSite()
-    search_properties = getAdapter(portal, ISearchSchema)
-
-    if event.record.fieldName == "enable_livesearch":
-        search_properties.enable_livesearch = settings.enable_livesearch
-        return
-
-    if event.record.fieldName == "types_not_searched":
-        #search_properties.types_not_searched = settings.types_not_searched
-        portal.portal_properties.site_properties.manage_changeProperties(
-            types_not_searched=settings.types_not_searched
-        )
-        return
