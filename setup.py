@@ -28,7 +28,6 @@ install_requires = [
     'zope.testing',
     'Acquisition',
     'Products.CMFPlone',
-    'Products.Archetypes',
     'Products.CMFCore',
     'Products.CMFDefault',
     'Products.PlonePAS',
