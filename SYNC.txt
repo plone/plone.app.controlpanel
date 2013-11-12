@@ -23,6 +23,8 @@ site: registry -> portal properties
     site_properties.exposeDCMetaTags = settings.exposeDCMetaTags
     site_properties.webstats_js = settings.webstats_js
 
+    settings.enable_sitemap -> plone.app.layout
+
 
 mail: registry -> portal properties
 -----------------------------------
