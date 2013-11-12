@@ -4,7 +4,6 @@ from plone.registry.interfaces import IRegistry
 
 from Products.CMFPlone.PropertiesTool import SimpleItemWithProperties
 
-from plone.app.controlpanel.interfaces import ICalendarSchema
 from plone.app.controlpanel.interfaces import IEditingSchema
 from plone.app.controlpanel.interfaces import IMailSchema
 from plone.app.controlpanel.interfaces import INavigationSchema

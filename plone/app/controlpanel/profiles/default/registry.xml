@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <registry>
-  <records interface="plone.app.controlpanel.interfaces.ICalendarSchema" />
   <records interface="plone.app.controlpanel.interfaces.IEditingSchema" />
   <records interface="plone.app.controlpanel.interfaces.IFilterSchema" />
   <records interface="plone.app.controlpanel.interfaces.ILanguageSchema" />

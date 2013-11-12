@@ -17,7 +17,6 @@ optionflags = (
     doctest.NORMALIZE_WHITESPACE |
     doctest.REPORT_ONLY_FIRST_FAILURE)
 normal_testfiles = [
-    'calendar.txt',
     'editing.txt',
 #    'filter.txt',
     'mail.txt',

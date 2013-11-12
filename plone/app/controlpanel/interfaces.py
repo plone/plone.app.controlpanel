@@ -48,22 +48,6 @@ weekdays = SimpleVocabulary([
 ])
 
 
-class ICalendarSchema(Interface):
-
-    firstweekday = schema.Choice(
-        title=_(u'First day of week in the calendar'),
-        default=0,
-        vocabulary=weekdays,
-        required=True)
-
-    calendar_states = schema.Tuple(
-        title=_(u'Workflow states to show in the calendar'),
-        required=True,
-        default=('published',),
-        value_type=schema.Choice(
-            source="plone.app.vocabularies.WorkflowStates"))
-
-
 class IEditingSchema(Interface):
 
     visible_ids = schema.Bool(
