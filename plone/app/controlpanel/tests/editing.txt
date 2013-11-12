@@ -134,6 +134,15 @@ Confirm that the 'default_editor' setting has been stored in plone.app.registry:
     >>> settings.default_editor
     'None'
 
+Confirm that the 'default_editor' setting is acutally used in plone.app.form::
+
+XXX: TODO
+
+Confirm that the 'default_editor' setting is acutally used in
+plone.app.textfield::
+
+XXX: TODO
+
 
 Lock on TTW edit
 ----------------
@@ -158,6 +167,10 @@ Confirm that the 'lock_on_ttw_edit' setting has been stored in plone.app.registr
 
     >>> settings.lock_on_ttw_edit
     False
+
+Confirm that the 'lock_on_ttw_edit' setting is actually used::
+
+XXX: TODO
 
 
 External Editor
