@@ -1,0 +1,9 @@
+UPGRADE STEP
+============
+
+Site
+----
+
+- site_title -> unicode
+- site_description -> unicode
+- webstat_js -> unicode
