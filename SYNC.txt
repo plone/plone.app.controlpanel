@@ -4,7 +4,11 @@ REGISTRY -> PROPERTIES
 editing: registry ->
 --------------------
 
-    settings.visible_ids
+    settings.visible_ids -> Products.CMFPlone?
+    settings.enable_link_integrity_checks -> plone.app.linkintegrity
+    settings.default_editor -> plone.app.textfield / plone.app.form
+    settings.lock_on_ttw_edit -> plone.locking
+    settings.ext_editor -> Products.Archetypes
 
 site: registry -> portal properties
 -----------------------------------
