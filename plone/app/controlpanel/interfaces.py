@@ -37,16 +37,6 @@ class IConfigurationChangedEvent(Interface):
 
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-weekdays = SimpleVocabulary([
-    SimpleTerm(value=0, title=_(u'Monday')),
-    SimpleTerm(value=1, title=_(u'Tuesday')),
-    SimpleTerm(value=2, title=_(u'Wednesday')),
-    SimpleTerm(value=3, title=_(u'Thursday')),
-    SimpleTerm(value=4, title=_(u'Friday')),
-    SimpleTerm(value=5, title=_(u'Saturday')),
-    SimpleTerm(value=6, title=_(u'Sunday')),
-])
-
 
 class IEditingSchema(Interface):
 
