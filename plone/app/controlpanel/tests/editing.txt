@@ -97,6 +97,13 @@ Confirm that the 'enable_link_integrity_checks' setting has been stored in plone
     >>> settings.enable_link_integrity_checks
     False
 
+Confirm that the plone.app.registry setting is actually used by
+plone.app.linkintegrity::
+
+    >>> from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+    >>> ILinkIntegrityInfo(layer['request']).integrityCheckingEnabled()
+    False
+
 
 Default Editor
 --------------
