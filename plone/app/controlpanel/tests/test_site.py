@@ -57,13 +57,6 @@ class SiteRegistryIntegrationTest(unittest.TestCase):
                           'ISiteSchema.site_title'],
             u"")
 
-    def test_site_description_setting(self):
-        self.assertTrue('site_description' in ISiteSchema.names())
-        self.assertEqual(
-            self.registry['plone.app.controlpanel.interfaces.' +
-                          'ISiteSchema.site_description'],
-            u"")
-
     def test_exposeDCMetaTags_setting(self):
         self.assertTrue('exposeDCMetaTags' in ISiteSchema.names())
         self.assertEqual(

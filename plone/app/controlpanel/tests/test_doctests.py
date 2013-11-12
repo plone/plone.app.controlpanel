@@ -23,7 +23,6 @@ normal_testfiles = [
     'maintenance.txt',
 #    'security_enable_user_folder.txt',
     'search.txt',
-    'site.txt',
     'markup.txt',
     'navigation.txt',
     'usergroups.txt',

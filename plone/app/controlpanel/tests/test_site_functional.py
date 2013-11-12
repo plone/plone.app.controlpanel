@@ -92,17 +92,19 @@ class SiteControlPanelFunctionalTest(unittest.TestCase):
         self.assertEqual(self.portal.title, u'My Site')
         self.assertEqual(self.portal.Title(), u'My Site')
 
-    def test_site_description(self):
+    @unittest.skip("XXX: TODO! Not implemented yet.")
+    def test_site_description_can_be_looked_up_by_plone_portal_state(self):
         self.browser.open(
             "%s/@@site-controlpanel" % self.portal_url)
-        self.browser.getControl('Site title').value = u"Plone Site"
         self.browser.getControl('Site description').value = \
             u"This is a Plone site."
         self.browser.getControl('Save').click()
 
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISiteSchema)
-        self.assertEqual(settings.site_description, u"This is a Plone site.")
+        portal_state = getMultiAdapter(
+            (self.portal, self.request),
+            name=u'plone_portal_state'
+        )
+        self.assertEqual(portal_state.portal_description(), u'This is a Plone site.')
 
     def test_exposeDCMetaTags(self):
         self.browser.open(
@@ -115,6 +117,17 @@ class SiteControlPanelFunctionalTest(unittest.TestCase):
         settings = registry.forInterface(ISiteSchema)
         self.assertEqual(settings.exposeDCMetaTags, True)
 
+    def test_exposeDCMetaTags_exposes_meta_tags(self):
+        self.browser.open(
+            "%s/@@site-controlpanel" % self.portal_url)
+        self.browser.getControl('Site title').value = u"Plone Site"
+        self.browser.getControl('Expose Dublin Core metadata').selected = True
+        self.browser.getControl('Save').click()
+
+        self.browser.open(self.portal_url)
+
+        self.assertTrue('DC.type' in self.browser.contents)
+
     def test_enable_sitemap(self):
         self.browser.open(
             "%s/@@site-controlpanel" % self.portal_url)
@@ -125,6 +138,24 @@ class SiteControlPanelFunctionalTest(unittest.TestCase):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ISiteSchema)
         self.assertEqual(settings.enable_sitemap, True)
+
+    def test_enable_sitemap_enables_the_sitemap(self):
+        self.browser.open(
+            "%s/@@site-controlpanel" % self.portal_url)
+        self.browser.getControl('Site title').value = u"Plone Site"
+        self.browser.getControl('Expose sitemap.xml.gz').selected = True
+        self.browser.getControl('Save').click()
+
+        self.browser.open("%s/sitemap.xml.gz" % self.portal_url)
+
+        self.assertEqual(
+            self.browser.headers['status'].lower(),
+            '200 ok'
+        )
+        self.assertEqual(
+            self.browser.headers['content-type'],
+            'application/octet-stream'
+        )
 
     def test_webstats_js(self):
         self.browser.open(
@@ -137,3 +168,19 @@ class SiteControlPanelFunctionalTest(unittest.TestCase):
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ISiteSchema)
         self.assertEqual(settings.webstats_js, u"<script>a=1</script>")
+
+    def test_webstat_js_shows_up_on_site(self):
+        self.browser.open(
+            "%s/@@site-controlpanel" % self.portal_url)
+        self.browser.getControl('Site title').value = u"Plone Site"
+        self.browser.getControl(name='form.widgets.webstats_js').value = \
+            u"<script>a=1</script>"
+        self.browser.getControl('Save').click()
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(ISiteSchema)
+        self.assertEqual(settings.webstats_js, u"<script>a=1</script>")
+        self.browser.open(self.portal_url)
+
+        self.assertTrue("<script>a=1</script>" in self.browser.contents)
+

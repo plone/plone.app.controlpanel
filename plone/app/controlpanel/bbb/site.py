@@ -33,14 +33,6 @@ class SiteControlPanelAdapter(object):
             value = value.decode('utf-8')
         self.settings.site_title = value
 
-    def get_site_description(self):
-        return self.settings.site_description
-
-    def set_site_description(self, value):
-        if isinstance(value, str):
-            value = value.decode('utf-8')
-        self.settings.site_description = value
-
     def get_webstats_js(self):
         return self.settings.webstats_js
 
@@ -50,7 +42,6 @@ class SiteControlPanelAdapter(object):
         self.settings.webstats_js = value
 
     site_title = property(get_site_title, set_site_title)
-    site_description = property(get_site_description, set_site_description)
     webstats_js = property(get_webstats_js, set_webstats_js)
 
     enable_sitemap = ProxyFieldProperty(ISiteSchema['enable_sitemap'])

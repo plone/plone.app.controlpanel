@@ -491,15 +491,6 @@ class ISiteSchema(ILockSettings):
             u"browsers and in syndication feeds."),
         default=u'')
 
-    site_description = schema.Text(
-        title=_(u'Site description'),
-        description=_(
-            u"The site description is available "
-            u"in syndicated content and in search engines. "
-            u"Keep it brief."),
-        default=u'',
-        required=False)
-
     exposeDCMetaTags = schema.Bool(
         title=_(u"Expose Dublin Core metadata"),
         description=_(u"Exposes the Dublin Core properties as metatags."),

@@ -7,3 +7,10 @@ Site
 - site_title -> unicode
 - site_description -> unicode
 - webstat_js -> unicode
+
+DEPRECATE
+=========
+
+SiteControlPanelAdapter.get_site_description()
+SiteControlPanelAdapter.set_site_description()
+

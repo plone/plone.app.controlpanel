@@ -29,32 +29,16 @@ class SiteControlPanelAdapterTest(unittest.TestCase):
         self.assertTrue(getAdapter(self.portal, ISiteSchema))
 
     def test_site_title_unicode(self):
-        self.assertEqual(self.settings.site_title, u'')
         site_settings_adapter = getAdapter(self.portal, ISiteSchema)
         site_settings_adapter.site_title = u'Lorem Ipsum'
         self.assertEquals(
             site_settings_adapter.site_title, u'Lorem Ipsum')
 
     def test_site_title_string(self):
-        self.assertEqual(self.settings.site_title, u'')
         site_settings_adapter = getAdapter(self.portal, ISiteSchema)
         site_settings_adapter.site_title = 'Lorem Ipsum'
         self.assertEquals(
             site_settings_adapter.site_title, u'Lorem Ipsum')
-
-    def test_site_description_unicode(self):
-        self.assertEqual(self.settings.site_description, u'')
-        site_settings_adapter = getAdapter(self.portal, ISiteSchema)
-        site_settings_adapter.site_description = u'Lorem Ipsum'
-        self.assertEquals(
-            site_settings_adapter.site_description, u'Lorem Ipsum')
-
-    def test_site_description_string(self):
-        self.assertEqual(self.settings.site_description, u'')
-        site_settings_adapter = getAdapter(self.portal, ISiteSchema)
-        site_settings_adapter.site_description = 'Lorem Ipsum'
-        self.assertEquals(
-            site_settings_adapter.site_description, u'Lorem Ipsum')
 
     def test_webstats_js_unicode(self):
         self.assertEqual(self.settings.webstats_js, u'')
