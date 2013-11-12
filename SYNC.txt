@@ -21,6 +21,7 @@ site: registry -> portal properties
     portal.site_description = settings.site_description
     site_properties.enable_sitemap = settings.enable_sitemap
     site_properties.exposeDCMetaTags = settings.exposeDCMetaTags
+    site_properties.webstats_js = settings.webstats_js
 
 
 mail: registry -> portal properties
