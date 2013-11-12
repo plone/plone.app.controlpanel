@@ -6,7 +6,6 @@ First some initial setup code:
     >>> from Products.CMFCore.utils import getToolByName
     >>> from zope.component import getUtility
     >>> from Products.MailHost.interfaces import IMailHost
-    >>> ctool = getToolByName(self.portal, 'portal_calendar')
     >>> mailhost = getUtility(IMailHost)
     >>> self.loginAsManager()
 
