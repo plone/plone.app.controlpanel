@@ -44,8 +44,9 @@
            z3c.form.interfaces.IFormLayer" />
 
   <utility
-      factory=".profiles.HiddenProfiles"
+      factory=".profiles.HiddenProfilesAndProducts"
       name="plone.app.controlpanel"
-      provides="Products.CMFPlone.interfaces.INonInstallable" />
+      provides="Products.CMFQuickInstallerTool.interfaces.INonInstallable"
+      />
       
 </configure>

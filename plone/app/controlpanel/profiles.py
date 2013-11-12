@@ -1,15 +1,9 @@
-from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implements
+from Products.CMFQuickInstallerTool.interfaces import INonInstallable
 
-class HiddenProfiles(object):
+
+class HiddenProfilesAndProducts(object):
     implements(INonInstallable)
-
-    def getNonInstallableProfiles(self):
-        """
-        Prevents uninstall profile from showing up in the profile list
-        when creating a Plone site.
-        """
-        return [
-            u'plone.app.controlpanel:uninstall',
-            u'plone.app.controlpanel:default'
-        ]
+            
+    def getNonInstallableProducts(self):
+        return ['plone.app.controlpanel']
