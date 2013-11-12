@@ -15,12 +15,26 @@ If you want to change the settings, just change the attribute::
 
   >>> site_settings.site_title = 'My Plone site'
 
+  >>> from plone.registry.interfaces import IRegistry
+  >>> from zope.component import getUtility
+  >>> registry = getUtility(IRegistry)
+
+Editing Control Panel
+---------------------
+
+  >>> from plone.app.controlpanel.interfaces import IEditingSchema
+  >>> editing_settings = registry.forInterface(IEditingSchema)
+
+  >>> editing_settings.visible_ids = True
+  >>> editing_settings.default_editor = ['TinyMCE']
+  >>> editing_settings.ext_editor = True
+  >>> editing_settings.enable_link_integrity_checks = True
+  >>> editing_settings.lock_on_ttw_edit = True
+
 
 Site Control Panel
 ------------------
 
-  >>> from plone.registry.interfaces import IRegistry
-  >>> from zope.component import getUtility
   >>> from plone.app.controlpanel.interfaces import ISiteSchema
   >>> registry = getUtility(IRegistry)
 
@@ -30,16 +44,3 @@ Site Control Panel
   >>> site_settings.exposeDCMetaTags = True
   >>> site_settings.enable_sitemap = True
   >>> site_settings.webstats_js = u'<script>a=1</script>'
-
-
-Editing Control Panel
----------------------
-
-    visible_ids
-    default_editor
-    ext_editor
-    enable_link_integrity_checks
-    lock_on_ttw_edit
-
-
-
