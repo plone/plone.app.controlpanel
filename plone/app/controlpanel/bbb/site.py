@@ -1,6 +1,8 @@
 from zope.component import getAdapter
-
 from zope.component import adapts
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+from plone.app.controlpanel.interfaces import ISiteSchema
 
 from zope.interface import implements
 
@@ -20,37 +22,32 @@ class SiteControlPanelAdapter(object):
     implements(ISiteSchema)
 
     def __init__(self, context):
-        self.portal = getSite()
-        pprop = getToolByName(self.portal, 'portal_properties')
-        self.context = pprop.site_properties
-        self.encoding = pprop.site_properties.default_charset
+        registry = getUtility(IRegistry)
+        self.settings = registry.forInterface(ISiteSchema)
 
     def get_site_title(self):
-        title = getattr(self.portal, 'title', u'')
-        return safe_unicode(title)
+        return self.settings.site_title
 
     def set_site_title(self, value):
-        self.portal.title = value.encode(self.encoding)
+        if isinstance(value, str):
+            value = value.decode('utf-8')
+        self.settings.site_title = value
 
     def get_site_description(self):
-        description = getattr(self.portal, 'description', u'')
-        return safe_unicode(description)
+        return self.settings.site_description
 
     def set_site_description(self, value):
-        if value is not None:
-            self.portal.description = value.encode(self.encoding)
-        else:
-            self.portal.description = ''
+        if isinstance(value, str):
+            value = value.decode('utf-8')
+        self.settings.site_description = value
 
     def get_webstats_js(self):
-        description = getattr(self.context, 'webstats_js', u'')
-        return safe_unicode(description)
+        return self.settings.webstats_js
 
     def set_webstats_js(self, value):
-        if value is not None:
-            self.context.webstats_js = value.encode(self.encoding)
-        else:
-            self.context.webstats_js = u''
+        if isinstance(value, str):
+            value = value.decode('utf-8')
+        self.settings.webstats_js = value
 
     site_title = property(get_site_title, set_site_title)
     site_description = property(get_site_description, set_site_description)
