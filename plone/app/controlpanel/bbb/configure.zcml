@@ -13,6 +13,7 @@
   <adapter factory=".search.SearchControlPanelAdapter" />
   <adapter factory=".site.SiteControlPanelAdapter" />
   <adapter factory=".security.SecurityControlPanelAdapter" />
+  <adapter factory=".skins.SkinsControlPanelAdapter" />
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
 
 </configure>
