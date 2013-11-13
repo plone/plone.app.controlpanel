@@ -35,10 +35,19 @@ Editing Control Panel
 Site Control Panel
 ------------------
 
-  >>> from plone.app.controlpanel.interfaces import ISiteSchema
-  >>> registry = getUtility(IRegistry)
+  >>> from plone.app.controlpanel.interfaces import ISearchSchema
+  >>> site_settings = registry.forInterface(ISearchSchema)
 
+  >>> site_settings.enable_livesearch = True
+  >>> site_settings.types_not_searched = ['Discussion Item', 'Folder']
+
+
+Site Control Panel
+------------------
+
+  >>> from plone.app.controlpanel.interfaces import ISiteSchema
   >>> site_settings = registry.forInterface(ISiteSchema)
+
   >>> site_settings.site_title = u'My Site'
   >>> site_settings.description_title = u'This is my site'
   >>> site_settings.exposeDCMetaTags = True

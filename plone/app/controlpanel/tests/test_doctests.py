@@ -20,7 +20,6 @@ normal_testfiles = [
 #    'filter.txt',
     'mail.txt',
 #    'security_enable_user_folder.txt',
-    'search.txt',
     'markup.txt',
     'navigation.txt',
     'usergroups.txt',
