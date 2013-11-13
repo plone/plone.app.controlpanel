@@ -24,6 +24,7 @@ normal_testfiles = [
     'navigation.txt',
     'usergroups.txt',
     'types.txt',
+    '../../../../README.txt',
 ]
 
 

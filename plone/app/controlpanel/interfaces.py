@@ -489,7 +489,7 @@ class ISiteSchema(ILockSettings):
         description=_(
             u"This shows up in the title bar of "
             u"browsers and in syndication feeds."),
-        default=u'')
+        default=u'Plone site')
 
     exposeDCMetaTags = schema.Bool(
         title=_(u"Expose Dublin Core metadata"),

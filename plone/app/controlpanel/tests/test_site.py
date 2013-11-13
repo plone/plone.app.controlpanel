@@ -52,28 +52,13 @@ class SiteRegistryIntegrationTest(unittest.TestCase):
 
     def test_site_title_setting(self):
         self.assertTrue('site_title' in ISiteSchema.names())
-        self.assertEqual(
-            self.registry['plone.app.controlpanel.interfaces.' +
-                          'ISiteSchema.site_title'],
-            u"")
 
     def test_exposeDCMetaTags_setting(self):
         self.assertTrue('exposeDCMetaTags' in ISiteSchema.names())
-        self.assertEqual(
-            self.registry['plone.app.controlpanel.interfaces.' +
-                          'ISiteSchema.exposeDCMetaTags'],
-            False)
 
     def test_webstats_js_setting(self):
         self.assertTrue('webstats_js' in ISiteSchema.names())
-        self.assertEqual(
-            self.registry['plone.app.controlpanel.interfaces.' +
-                          'ISiteSchema.webstats_js'],
-            u"")
 
     def test_enable_sitemap_setting(self):
         self.assertTrue('enable_sitemap' in ISiteSchema.names())
-        self.assertEqual(
-            self.registry['plone.app.controlpanel.interfaces.' +
-                          'ISiteSchema.enable_sitemap'],
-            False)
+
