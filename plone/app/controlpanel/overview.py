@@ -1,14 +1,19 @@
-from plone.memoize.instance import memoize
-
+from AccessControl import getSecurityManager
 from Acquisition import aq_base
 from Acquisition import aq_inner
-from AccessControl import getSecurityManager
-
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.permissions import ManagePortal
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from plone.app.controlpanel.form import ControlPanelView
+from plone.memoize.instance import memoize
+from plone.registry.interfaces import IRegistry
+from zope.component import queryUtility
+
+try:
+    from plone.app.event.interfaces import IEventSettings
+    HAS_PAE = True
+except ImportError:
+    HAS_PAE = False
 
 
 class OverviewControlPanel(ControlPanelView):
@@ -72,6 +77,21 @@ class OverviewControlPanel(ControlPanelView):
         mailhost = getattr(aq_base(mailhost), 'smtp_host', None)
         email = getattr(aq_inner(self.context), 'email_from_address', None)
         if mailhost and email:
+            return False
+        return True
+
+    def timezone_warning(self):
+        if not HAS_PAE:
+            return False
+        portal_timezone = None
+        reg = queryUtility(IRegistry, context=self.context, default=None)
+        if reg:
+            portal_timezone = reg.forInterface(
+                IEventSettings,
+                prefix="plone.app.event",
+                check=False  # Don't fail, if portal_timezone isn't set.
+            ).portal_timezone
+        if portal_timezone:
             return False
         return True
 

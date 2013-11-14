@@ -4,6 +4,9 @@ Changelog
 2.4.0 (unreleased)
 ------------------
 
+- Add a warning, if plone.app.event is available but timezone is not set.
+  [thet]
+
 - Remove the calendar control panel, which is replaced by plone.app.event.
   [davisagli]
 

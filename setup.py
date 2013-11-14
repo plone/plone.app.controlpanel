@@ -55,4 +55,11 @@ setup(name='plone.app.controlpanel',
         'Zope2>=2.13.0',
         'ZODB3',
       ],
+      extras_require={
+        'test': [
+            'mock',
+            'Products.PloneTestCase',
+            'plone.app.testing',
+        ]
+      }
       )
