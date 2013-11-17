@@ -72,11 +72,10 @@ class MarkupControlPanelFunctionalTest(unittest.TestCase):
             "%s/@@markup-controlpanel" % self.portal_url)
         self.browser.getControl(
             name='form.widgets.allowed_types:list'
-        ).value = ['text/plain']
+        ).value = ['text/html', 'text/x-web-textile']
         self.browser.getControl('Save').click()
 
         registry = getUtility(IRegistry)
         settings = registry.forInterface(IMarkupSchema)
-        self.assertEqual(settings.allowed_types, ('text/plain',))
-
-
+        self.assertEqual(
+            settings.allowed_types, ('text/html', 'text/x-web-textile'))

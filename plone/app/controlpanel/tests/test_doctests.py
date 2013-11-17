@@ -20,7 +20,6 @@ normal_testfiles = [
 #    'filter.txt',
     'mail.txt',
 #    'security_enable_user_folder.txt',
-    'markup.txt',
     'usergroups.txt',
     'types.txt',
     '../../../../README.txt',
