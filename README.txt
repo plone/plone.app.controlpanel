@@ -37,6 +37,16 @@ Editing Control Panel
   >>> editing_settings.lock_on_ttw_edit = True
 
 
+Markup Control Panel
+--------------------
+
+  >>> from plone.app.controlpanel.interfaces import IMarkupSchema
+  >>> markup_settings = registry.forInterface(IMarkupSchema)
+
+  >>> markup_settings.default_type = u'text/html'
+  >>> markup_settings.allowed_types = ('text/html', 'text/x-web-textile')
+
+
 Search Control Panel
 --------------------
 
