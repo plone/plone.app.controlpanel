@@ -6,17 +6,9 @@ from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
 
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
-from plone.registry import Registry
 from plone.app.controlpanel.interfaces import IMarkupSchema
 
-from zope.component import getMultiAdapter
-
-from Products.CMFCore.utils import getToolByName
-
-from plone.app.testing import TEST_USER_ID, setRoles
-
 from plone.app.controlpanel.testing import (
-    PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING,
     PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING
 )
 
