@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.8 (unreleased)
+2.3.8 (2013-12-07)
 ------------------
 
 - Fix test email: msgid was sent, not translation.
