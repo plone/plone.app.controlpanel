@@ -200,21 +200,20 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
         # and should not be addable if we try to force it
         form = {
             '_authenticator': self.siteadmin_token,
-            'form.username': 'newuser',
-            'form.email': 'newuser@example.com',
-            'form.password': 'secret',
-            'form.password_ctl': 'secret',
-            'form.groups': 'Administrators (Administrators)',
-            'form.groups-empty-marker': '1',
-            'form.actions.register': 'Register',
+            'form.widgets.username': 'newuser',
+            'form.widgets.email': 'newuser@example.com',
+            'form.widgets.password': 'secret',
+            'form.widgets.password_ctl': 'secret',
+            'form.widgets.groups:list': 'Administrators',
+            'form.widgets.groups-empty-marker': '1',
+            'form.buttons.register': 'Register',
             }
         post_data = StringIO(urlencode(form))
         res = self.publish('/plone/@@new-user',
                            request_method='POST', stdin=post_data,
                            basic='siteadmin:secret')
-        self.assertEqual(200, res.status)
+        self.assertNotEqual(200, res.status)
         self.assertEqual(None, self.portal.acl_users.getUserById('newuser'))
-        self.assertTrue('Invalid value' in res.getOutput())
 
     def test_users_overview_blocks_deleting_managers(self):
         # a user without the Manager role cannot delete a user with the
