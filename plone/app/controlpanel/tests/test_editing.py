@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
-from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.app.testing import SITE_OWNER_NAME
-from plone.testing.z2 import Browser
 from plone.registry import Registry
 from plone.app.controlpanel.browser.editing import IEditingSchema
 import unittest2 as unittest
@@ -16,9 +11,6 @@ from plone.app.testing import TEST_USER_ID, setRoles
 
 from plone.app.controlpanel.testing import \
     PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
-
-from plone.app.controlpanel.testing import \
-    PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING
 
 
 class EditingControlPanelIntegrationTest(unittest.TestCase):
@@ -43,8 +35,10 @@ class EditingControlPanelIntegrationTest(unittest.TestCase):
 
     def test_editing_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        self.assertTrue('EditingSettings' in [a.getAction(self)['id']
-                            for a in self.controlpanel.listActions()])
+        self.assertTrue('EditingSettings' in [
+            a.getAction(self)['id']
+            for a in self.controlpanel.listActions()
+        ])
 
     def test_visible_ids_setting(self):
         self.assertTrue('visible_ids' in IEditingSchema.names())

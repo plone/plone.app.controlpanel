@@ -4,20 +4,10 @@ from plone.registry.interfaces import IRegistry
 from plone.app.testing import SITE_OWNER_PASSWORD
 from plone.app.testing import SITE_OWNER_NAME
 from plone.testing.z2 import Browser
-from plone.registry import Registry
 from plone.app.controlpanel.browser.editing import IEditingSchema
 from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 
 import unittest2 as unittest
-
-from zope.component import getMultiAdapter
-
-from Products.CMFCore.utils import getToolByName
-
-from plone.app.testing import TEST_USER_ID, setRoles
-
-from plone.app.controlpanel.testing import \
-    PLONE_APP_CONTROLPANEL_INTEGRATION_TESTING
 
 from plone.app.controlpanel.testing import \
     PLONE_APP_CONTROLPANEL_FUNCTIONAL_TESTING
@@ -39,9 +29,10 @@ class EditingControlPanelFunctionalTest(unittest.TestCase):
         self.settings = registry.forInterface(IEditingSchema)
         self.browser = Browser(self.app)
         self.browser.handleErrors = False
-        self.browser.addHeader('Authorization',
-                'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
-            )
+        self.browser.addHeader(
+            'Authorization',
+            'Basic %s:%s' % (SITE_OWNER_NAME, SITE_OWNER_PASSWORD,)
+        )
 
     def test_editing_control_panel_link(self):
         self.browser.open(
