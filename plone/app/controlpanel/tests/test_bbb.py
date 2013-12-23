@@ -97,7 +97,3 @@ class BBBNavPropertiesTest(unittest.TestCase):
         self.assertEquals(
             self.navtree_properties.enable_wf_state_filtering,
             True)
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

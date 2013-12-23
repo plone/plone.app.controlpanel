@@ -15,7 +15,3 @@ class TestSiteAdministratorRoleFunctional(unittest.TestCase):
     def test_rewrite_old_tests(self):
         # XXX: Re-write tests from master here
         pass
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)

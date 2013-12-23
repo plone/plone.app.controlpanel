@@ -38,8 +38,12 @@ class MailControlPanelIntegrationTest(unittest.TestCase):
 
     def test_plone_app_registry_in_controlpanel(self):
         self.controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        self.assertTrue('plone.app.registry' in [a.getAction(self)['id']
-                            for a in self.controlpanel.listActions()])
+        self.assertTrue(
+            'plone.app.registry' in [
+                a.getAction(self)['id']
+                for a in self.controlpanel.listActions()
+            ]
+        )
 
     def test_smtp_host_setting(self):
         self.assertTrue('smtp_host' in IMailSchema.names())
@@ -125,7 +129,3 @@ class MailControlPanelFormTest(unittest.TestCase):
 
         #self.assertEquals(
         #    self.portal.getProperty('smtp_host'), True)
-
-
-def test_suite():
-    return unittest.defaultTestLoader.loadTestsFromName(__name__)
