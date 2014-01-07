@@ -6,6 +6,7 @@ from Testing.ZopeTestCase import FunctionalDocFileSuite
 
 from plone.app.controlpanel.tests.cptc import ControlPanelTestCase
 from plone.app.controlpanel.tests.cptc import UserGroupsControlPanelTestCase
+from plone.app.controlpanel.tests.cptc import EmailLoginSecurityControlPanelTestCase
 
 setupPloneSite()
 
@@ -13,8 +14,7 @@ OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
 
 def test_suite():
-    tests = ['calendar.txt',
-             'editing.txt',
+    tests = ['editing.txt',
              'filter.txt',
              'mail.txt',
              'maintenance.txt',
@@ -40,5 +40,11 @@ def test_suite():
         optionflags=OPTIONFLAGS,
         package="plone.app.controlpanel.tests",
         test_class=UserGroupsControlPanelTestCase))
+
+    suite.addTest(FunctionalDocFileSuite(
+        'security.txt',
+        optionflags=OPTIONFLAGS,
+        package="plone.app.controlpanel.tests",
+        test_class=EmailLoginSecurityControlPanelTestCase))
 
     return suite

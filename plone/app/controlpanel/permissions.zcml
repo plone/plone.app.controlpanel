@@ -7,12 +7,6 @@
     <role name="Site Administrator"/>
   </permission>
 
-  <permission id="plone.app.controlpanel.Calendar"
-              title="Plone Site Setup: Calendar">
-    <role name="Manager"/>
-    <role name="Site Administrator"/>
-  </permission>
-
   <permission id="plone.app.controlpanel.Editing"
               title="Plone Site Setup: Editing">
     <role name="Manager"/>

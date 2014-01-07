@@ -1,0 +1,133 @@
+Security controlpanel
+=====================
+
+First some initial setup code. We are logging as the 'root' user with 'Manager' permission:
+
+    >>> browser = self.browser
+    >>> self.loginAsManager()
+
+Check some initial settings:
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> site_props = getToolByName(self.portal, 'portal_properties').site_properties
+    >>> site_props.getProperty('use_uuid_as_userid')
+    False
+    >>> site_props.getProperty('use_email_as_login')
+    True
+    >>> browser.open('http://nohost/plone/@@security-controlpanel')
+    >>> browser.getControl(name='form.use_uuid_as_userid').value
+    False
+    >>> browser.getControl(name='form.use_email_as_login').value
+    True
+
+Several dozen users are created by the test setup.  Our installation
+code changes their login name to their email address.  Let's check a
+few things:
+
+    >>> pas = getToolByName(self.portal, 'acl_users')
+    >>> len(pas.getUsers()) > 50
+    True
+    >>> for user in pas.getUsers():
+    ...     self.assertEqual(user.getUserName(), user.getUserName().lower())
+    ...     if user.getId() in ('root', 'test_user_1_'):
+    ...         continue
+    ...     self.assertTrue('@' in user.getUserName())
+
+Enable uuid as user id:
+
+    >>> browser.getControl(name='form.use_uuid_as_userid').value = True
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.url.endswith('security-controlpanel')
+    True
+    >>> browser.getControl(name='form.use_uuid_as_userid').value
+    True
+    >>> site_props.getProperty('use_uuid_as_userid')
+    True
+
+Switch off emaillogin:
+
+    >>> browser.getControl(name='form.use_email_as_login').value = False
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.url.endswith('security-controlpanel')
+    True
+    >>> browser.getControl(name='form.use_email_as_login').value
+    False
+    >>> site_props.getProperty('use_email_as_login')
+    False
+
+Create a new user:
+
+    >>> browser.open('http://nohost/plone/@@new-user')
+    >>> browser.getControl('Full Name').value = 'New User'
+    >>> browser.getControl('User Name').value = 'newie'
+    >>> browser.getControl('E-mail').value = 'NewUser@Example.Com'
+    >>> browser.getControl('Password').value = 'foobar'
+    >>> browser.getControl('Confirm password').value = 'foobar'
+    >>> browser.getControl('Register').click()
+    >>> len(pas.searchUsers(name='newie'))
+    1
+
+The user id will be a uuid, so not one of the usual suspects:
+
+    >>> user = pas.getUser('newie')
+    >>> user_id = user.getId()
+    >>> user_id == 'newie'
+    False
+    >>> user_id == 'new-user'
+    False
+    >>> from plone.app.users.utils import uuid_userid_generator
+    >>> len(user_id) == len(uuid_userid_generator())
+    True
+
+Switch to email as login:
+
+    >>> browser.open('http://nohost/plone/@@security-controlpanel')
+    >>> browser.getControl(name='form.use_email_as_login').value = True
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.url.endswith('security-controlpanel')
+    True
+    >>> browser.getControl(name='form.use_email_as_login').value
+    True
+    >>> site_props.getProperty('use_email_as_login')
+    True
+
+This has changed the login name to the lower case email address.
+
+    >>> len(pas.searchUsers(name='newie'))
+    0
+    >>> len(pas.searchUsers(name='newuser@example.com'))
+    1
+    >>> len(pas.searchUsers(name='NewUser@Example.Com'))
+    1
+    >>> user = pas.getUser('NewUser@Example.Com')
+    >>> user.getId() == user_id  # user id has not changed
+    True
+    >>> user.getUserName()
+    'newuser@example.com'
+
+Switch to normal user ids again:
+
+    >>> browser.getControl(name='form.use_uuid_as_userid').value = False
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.url.endswith('security-controlpanel')
+    True
+    >>> browser.getControl(name='form.use_uuid_as_userid').value
+    False
+    >>> site_props.getProperty('use_uuid_as_userid')
+    False
+
+Create a new user.  This should get a user id based on the full name:
+
+    >>> browser.open('http://nohost/plone/@@new-user')
+    >>> browser.getControl('Full Name').value = 'User Two'
+    >>> browser.getControl('E-mail').value = 'UserTwo@Example.Com'
+    >>> browser.getControl('Password').value = 'foobar'
+    >>> browser.getControl('Confirm password').value = 'foobar'
+    >>> browser.getControl('Register').click()
+    >>> len(pas.searchUsers(name='UserTwo@Example.Com'))
+    1
+    >>> user = pas.getUser('UserTwo@Example.Com')
+    >>> user.getId()
+    'user-two'
+    >>> user.getUserName()
+    'usertwo@example.com'
