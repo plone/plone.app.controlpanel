@@ -16,7 +16,7 @@ Make sure we assume the right defaults
 --------------------------------------
 
     >>> stool.default_skin in ('Sunburst Theme', 'Plone Default')
-    'Sunburst Theme'
+    True
 
     >>> 'Plone Default' in stool.getSkinSelections()
     True
