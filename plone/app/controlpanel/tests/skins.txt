@@ -15,11 +15,11 @@ Fake a second available skin:
 Make sure we assume the right defaults
 --------------------------------------
 
-    >>> stool.default_skin
+    >>> stool.default_skin in ('Sunburst Theme', 'Plone Default')
     'Sunburst Theme'
 
-    >>> stool.getSkinSelections()
-    ['Plone Default', 'Sunburst Theme', 'TestSkin']
+    >>> 'Plone Default' in stool.getSkinSelections()
+    True
 
 Viewing the skins control panel
 -------------------------------
