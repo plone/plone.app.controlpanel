@@ -17,15 +17,15 @@
 
         <metal:block define-macro="header">
 
-            <dl tal:define="status view/status"
+            <div class="portalMessage info"
+                 tal:define="status view/status"
                  tal:condition="status"
-                 class="portalMessage info"
                  tal:attributes="class python: view.errors and 'portalMessage error' or 'portalMessage info'">
-                <dt i18n:translate="">
+                <strong i18n:translate="">
                     Info
-                </dt>
-                <dd tal:content="view/status" />
-            </dl>
+                </strong>
+                <span tal:replace="view/status" />
+            </div>
         </metal:block>
 
             <a href=""

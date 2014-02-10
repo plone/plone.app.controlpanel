@@ -14,14 +14,14 @@
 
          <metal:block define-macro="header">
 
-             <dl tal:define="status view/status"
-                  tal:condition="status"
-                  class="portalMessage info">
-                 <dt i18n:translate="">
+             <div class="portalMessage info"
+                  tal:define="status view/status"
+                  tal:condition="status">
+                 <strong i18n:translate="">
                      Info
-                 </dt>
-                 <dd tal:content="view/status" />
-             </dl>
+                 </strong>
+                 <span tal:replace="view/status" />
+             </div>
 
          </metal:block>
 
