@@ -1,11 +1,23 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser">
 
   <include package="Products.CMFCore" />
 
   <include file="permissions.zcml" />
+
+  <genericsetup:registerProfile
+    name="default"
+    title="Plone Control Panels"
+    directory="profiles/default"
+    description="Control panels for Plone."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+  <include package=".bbb" />
+  <include package=".browser" />
 
   <adapter for="*"
            factory=".editing.EditingControlPanelAdapter" />
