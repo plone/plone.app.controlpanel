@@ -4,6 +4,10 @@ Changelog
 2.4.0 (unreleased)
 ------------------
 
+- Remove DL's from portal message templates.
+  https://github.com/plone/Products.CMFPlone/issues/153
+  [khink]
+
 - Add a warning, if plone.app.event is available but timezone is not set.
   [thet]
 
