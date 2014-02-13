@@ -78,19 +78,10 @@
                   search.
                 </p>
 
-                <form action=""
-                      name="users_add"
-                      method="post"
-                      tal:attributes="action string:$portal_url/@@new-user">
-
-                  <input class="standalone add"
-                             type="submit"
-                             name="form.button.AddUser"
-                             value="Add New User"
-                             i18n:attributes="value label_add_new_user;"
-                             />
-                  <input type="hidden" name="form.submitted" value="1" />
-                </form>
+                <a class="pat-modal" id="add-user"
+                   tal:attributes="href string:${portal_url}/@@new-user">
+                   <button i18n:translate="label_add_new_user">Add New User</button>
+                </a>
 
                 <form action=""
                       class="enableAutoFocus"
