@@ -1,23 +1,11 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser">
 
   <include package="Products.CMFCore" />
 
   <include file="permissions.zcml" />
-
-  <genericsetup:registerProfile
-    name="default"
-    title="Plone Control Panels"
-    directory="profiles/default"
-    description="Control panels for Plone."
-    provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
-
-  <include package=".bbb" />
-  <include package=".browser" />
 
   <adapter for="*"
            factory=".editing.EditingControlPanelAdapter" />
@@ -35,6 +23,8 @@
   <adapter factory=".markup.MarkupControlPanelAdapter" />
 
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
+
+  <adapter factory=".search.SearchControlPanelAdapter" />
 
   <adapter factory=".security.SecurityControlPanelAdapter" />
 
@@ -105,6 +95,13 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".ram.RAMCacheControlPanel"
       permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="search-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".search.SearchControlPanel"
+      permission="plone.app.controlpanel.Search"
       />
 
   <browser:page

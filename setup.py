@@ -1,31 +1,30 @@
 from setuptools import setup, find_packages
 
-version = '3.0.0.dev0'
+version = '2.4.0.dev0'
 
-setup(
-    name='plone.app.controlpanel',
-    version=version,
-    description="Formlib-based controlpanels for Plone.",
-    long_description=open("README.txt").read() + "\n" +
-                     open("CHANGES.txt").read(),
-    classifiers=[
-        "Environment :: Web Environment",
-        "Framework :: Plone",
-        "Framework :: Zope2",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-    ],
-    keywords='plone controlpanel formlib',
-    author='Plone Foundation',
-    author_email='plone-developers@lists.sourceforge.net',
-    url='http://pypi.python.org/pypi/plone.app.controlpanel',
-    license='GPL version 2',
-    packages=find_packages(exclude=['ez_setup']),
-    namespace_packages=['plone', 'plone.app'],
-    include_package_data=True,
-    zip_safe=False,
-    install_requires=[
+setup(name='plone.app.controlpanel',
+      version=version,
+      description="Formlib-based controlpanels for Plone.",
+      long_description=open("README.txt").read() + "\n" +
+                       open("CHANGES.txt").read(),
+      classifiers=[
+          "Environment :: Web Environment",
+          "Framework :: Plone",
+          "Framework :: Zope2",
+          "License :: OSI Approved :: GNU General Public License (GPL)",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python",
+        ],
+      keywords='plone controlpanel formlib',
+      author='Plone Foundation',
+      author_email='plone-developers@lists.sourceforge.net',
+      url='http://pypi.python.org/pypi/plone.app.controlpanel',
+      license='GPL version 2',
+      packages=find_packages(exclude=['ez_setup']),
+      namespace_packages = ['plone', 'plone.app'],
+      include_package_data=True,
+      zip_safe=False,
+      install_requires=[
         'setuptools',
         'plone.app.form',
         'plone.app.vocabularies',
@@ -55,12 +54,12 @@ setup(
         'Products.statusmessages',
         'Zope2>=2.13.0',
         'ZODB3',
-    ],
-    extras_require={
+      ],
+      extras_require={
         'test': [
             'mock',
             'Products.PloneTestCase',
             'plone.app.testing',
         ]
-    }
-)
+      }
+      )
