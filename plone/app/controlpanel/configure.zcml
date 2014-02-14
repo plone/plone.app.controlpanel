@@ -25,7 +25,6 @@
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
   <!--<adapter factory=".search.SearchControlPanelAdapter" />-->
-  <adapter factory=".search.SearchControlPanelAdapter" />
 
   <adapter factory=".security.SecurityControlPanelAdapter" />
 
@@ -99,6 +98,7 @@
       />
 
   <!--
+<<<<<<< HEAD
   <browser:page
       name="search-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -107,12 +107,15 @@
       />
   -->
 
+=======
+>>>>>>> Comment out the search control panel because it has been moved to CMFPlone; Remove skins and search tests here as well.
   <browser:page
       name="search-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".search.SearchControlPanel"
       permission="plone.app.controlpanel.Search"
       />
+  -->
 
   <browser:page
       name="security-controlpanel"
