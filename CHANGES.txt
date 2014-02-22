@@ -7,6 +7,9 @@ Changelog
 - add quickinstaller control panel
   [vangheem]
 
+- Remove search control panel since it has been moved to Products.CMFPlone.
+  [timo]
+
 - Remove DL's from portal message templates.
   https://github.com/plone/Products.CMFPlone/issues/153
   [khink]
