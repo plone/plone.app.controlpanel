@@ -1,6 +1,12 @@
 Changelog
 =========
 
+y (unreleased)
+--------------
+
+- Nothing changed yet.
+
+
 2.4.0 (2014-02-22)
 ------------------
 
