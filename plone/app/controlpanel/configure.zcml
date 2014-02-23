@@ -28,7 +28,7 @@
 
   <adapter factory=".security.SecurityControlPanelAdapter" />
 
-  <adapter factory=".site.SiteControlPanelAdapter" />
+  <!--<adapter factory=".site.SiteControlPanelAdapter" />-->
 
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
@@ -113,12 +113,14 @@
       permission="plone.app.controlpanel.Security"
       />
 
+  <!--
   <browser:page
       name="site-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".site.SiteControlPanel"
       permission="plone.app.controlpanel.Site"
       />
+  -->
 
   <browser:page
       name="skins-controlpanel"
