@@ -4,7 +4,8 @@ Changelog
 2.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove site control panel since it has been moved to Products.CMFPlone.
+  [timo]
 
 
 2.4.0 (2014-02-22)
