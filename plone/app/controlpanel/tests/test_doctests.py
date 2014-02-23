@@ -20,7 +20,7 @@ def test_suite():
              'maintenance.txt',
              'security_enable_user_folder.txt',
 #             'search.txt',
-             'site.txt',
+#             'site.txt',
 #             'skins.txt',
              'markup.txt',
              'navigation.txt',
