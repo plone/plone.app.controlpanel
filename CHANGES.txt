@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Remove site control panel since it has been moved to Products.CMFPlone.
+  (PLIP #10359: http://dev.plone.org/ticket/10359)
   [timo]
 
 
