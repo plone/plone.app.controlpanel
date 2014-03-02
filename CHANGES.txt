@@ -19,9 +19,6 @@ Changelog
 2.4.0 (2014-02-22)
 ------------------
 
-- add quickinstaller control panel
-  [vangheem]
-
 - Remove search control panel since it has been moved to Products.CMFPlone.
   [timo]
 
