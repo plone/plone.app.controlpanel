@@ -14,6 +14,12 @@ from Products.Five.testbrowser import Browser
 from Products.CMFCore.utils import getToolByName
 
 
+class FakeRequest(object):
+
+    SERVER_URL = 'http://nohost/plone'
+    environ = {}
+
+
 class ControlPanelTestCase(FunctionalTestCase):
     """base test case with convenience methods for all control panel tests"""
 
@@ -28,8 +34,11 @@ class ControlPanelTestCase(FunctionalTestCase):
         self.ptool = getToolByName(self.portal, 'portal_properties')
         self.site_props = self.ptool.site_properties
 
+        self.fake_request = FakeRequest()
+
     def loginAsManager(self, user='root', pwd='secret'):
-        """points the browser to the login screen and logs in as user root with Manager role."""
+        """points the browser to the login screen and logs in as user root
+           with Manager role."""
         self.browser.open('http://nohost/plone/')
         self.browser.getLink('Log in').click()
         self.browser.getControl('Login Name').value = user
