@@ -29,9 +29,6 @@ from Products.PluggableAuthService.interfaces.plugins import IRolesPlugin
 from form import ControlPanelForm, ControlPanelView
 from security import ISecuritySchema
 
-from plone.protect.interfaces import IDisableCSRFProtection
-from zope.interface import alsoProvides
-
 logger = logging.getLogger('plone.app.controlpanel')
 
 class IUserGroupsSettingsSchema(Interface):
@@ -207,9 +204,6 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         return self.mailhost_tool
 
     def doSearch(self, searchString):
-
-        # XXX getMemberById writes on read
-        alsoProvides(self.request, IDisableCSRFProtection)
 
         acl = getToolByName(self, 'acl_users')
         rolemakers = acl.plugins.listPlugins(IRolesPlugin)
