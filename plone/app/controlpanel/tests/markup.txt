@@ -5,6 +5,7 @@ Viewing the markup control panel
 --------------------------------
 
     >>> self.loginAsManager()
+    >>> self.login('root')  # need to login with test fixture too to get right token
     >>> from plone.protect.authenticator import createToken
 
 It is only necessary in the test here to add the token.
