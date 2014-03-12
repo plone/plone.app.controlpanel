@@ -215,4 +215,34 @@
       permission="cmf.ManagePortal"
       />
 
+  <!-- quickinstaller related -->
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="prefs_install_products_form"
+    class=".qi.ManageProductsView"
+    permission="cmf.ManagePortal"
+    template="qi.pt"
+    />
+
+ <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="upgrade_products"
+    class=".qi.UpgradeProductsView"
+    permission="cmf.ManagePortal"
+    />
+
+ <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="install_products"
+    class=".qi.InstallProductsView"
+    permission="cmf.ManagePortal"
+    />
+
+ <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="uninstall_products"
+    class=".qi.UninstallProductsView"
+    permission="cmf.ManagePortal"
+    />
+
 </configure>
