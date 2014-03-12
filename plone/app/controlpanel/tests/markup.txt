@@ -5,9 +5,13 @@ Viewing the markup control panel
 --------------------------------
 
     >>> self.loginAsManager()
-    >>> self.browser.open('http://nohost/plone/@@markup-controlpanel')
+    >>> from plone.protect.authenticator import createToken
+
+It is only necessary in the test here to add the token.
+
+    >>> self.browser.open('http://nohost/plone/@@markup-controlpanel?_authenticator=' + createToken())
     >>> self.browser.url
-    'http://nohost/plone/@@markup-controlpanel'
+    'http://nohost/plone/@@markup-controlpanel...'
 
 We have two controls, one for the default type and a multi selection for
 alternative formats:
