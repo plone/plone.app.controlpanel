@@ -8,6 +8,7 @@ from zope.component import adapts
 from zope.component import getUtility
 from zope.formlib import form
 from zope.interface import implements
+from zope.i18n import translate
 from zope.schema import Int
 from zope.schema import Password
 from zope.schema import TextLine
@@ -179,15 +180,18 @@ class MailControlPanel(ControlPanelForm):
         fromaddr = self.context.getProperty('email_from_address')
         fromname = self.context.getProperty('email_from_name')
 
-        message = _(u"Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "
+        message = _(u"text_testmailbody",
+                   default = u"Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "
                    "Your receipt of this message (at the address specified in the "
                    "Site 'From' address field) "
                    "indicates that your e-mail server is working!\n\n"
                    "Have a nice day.\n\n"
                    "Love,\n\nPlone")
+        message = translate(message, context=self.request)
         email_charset = self.context.getProperty('email_charset')
         email_recipient, source = fromaddr, fromaddr
         subject = _(u"Test e-mail from Plone")
+        subject = translate(subject, context=self.request)
 
         # Make the timeout incredibly short. This is enough time for most mail
         # servers, wherever they may be in the world, to respond to the

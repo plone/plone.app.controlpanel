@@ -43,7 +43,9 @@ Test enabling syndication settings button:
 
 Create collection and check syndication settings button:
 
-    >>> self.browser.open('http://nohost/plone/createObject?type_name=Collection')
+    >>> from plone.protect.utils import addTokenToUrl
+    >>> self.login('root')
+    >>> self.browser.open(addTokenToUrl('http://nohost/plone/createObject?type_name=Collection', self.fake_request))
     >>> self.browser.getControl(name="title").value = 'test-collection'
     >>> self.browser.getControl('Save').click()
 

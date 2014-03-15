@@ -83,19 +83,11 @@
                   search.
                 </p>
 
-                <form action=""
-                      name="users_add"
-                      method="post"
-                      tal:attributes="action string:$portal_url/@@new-user">
-
-                  <input class="standalone add"
-                             type="submit"
-                             name="form.button.AddUser"
-                             value="Add New User"
-                             i18n:attributes="value label_add_new_user;"
-                             />
-                  <input type="hidden" name="form.submitted" value="1" />
-                </form>
+                <a class="pat-modal" id="add-user"
+                   data-pat-modal="{&quot;actionOptions&quot;: {&quot;displayInModal&quot;: false}}"
+                   tal:attributes="href string:${portal_url}/@@new-user">
+                   <button i18n:translate="label_add_new_user">Add New User</button>
+                </a>
 
                 <form action=""
                       class="enableAutoFocus"
@@ -157,9 +149,10 @@
 
                                 <td>
                                     <a href="@@user-information"
-                                       tal:attributes="href string:$portal_url/@@user-information?${userquery}">
+                                       tal:attributes="href string:$portal_url/@@user-information?${userquery};
+                                                       title userid">
                                         <tal:block replace="structure context/portal_url/user.png"/>&nbsp;<span tal:replace="user/fullname">Full Name</span>
-                                        (<span tal:replace="userid">username</span>)
+                                        (<span tal:replace="user/login">login name</span>)
                                     </a>
                                     <input type="hidden" name="users.id:records" tal:attributes="value userid" />
                                 </td>

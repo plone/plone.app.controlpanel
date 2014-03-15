@@ -31,29 +31,41 @@ class SyndicationControlPanelForm(controlpanel.RegistryEditForm):
             IStatusMessage(self.request).addStatusMessage(
                 _(u"Missing rss link action."), "warn")
 
-    def getContent(self):
-        """
-        We override this so we can get actual
-        settings for portal_actions related settings
-        """
-        content = getUtility(IRegistry).forInterface(self.schema,
-            prefix=self.schema_prefix)
+    def forceCheckboxValue(self, widget, checked):
+        if checked:
+            widget.value = ['selected']
+        else:
+            widget.value = []
+        for item in widget.items:
+            if 'checked' in item:
+                if checked:
+                    item['checked'] = True
+                else:
+                    item['checked'] = False
+
+    def update(self):
+        super(SyndicationControlPanelForm, self).update()
+
+        # We override this so we can get actual
+        # settings for portal_actions related settings
+        content = self.getContent()
         show_settings_btn = self.getSyndicationSettingsButtonShown()
         if show_settings_btn != content.show_syndication_button:
-            content.show_syndication_button = show_settings_btn
+            self.forceCheckboxValue(
+                self.widgets['show_syndication_button'], show_settings_btn)
         show_link_btn = self.getSyndicationLinkShown()
         if show_link_btn != content.show_syndication_link:
-            content.show_syndication_link = show_link_btn
-        return content
+            self.forceCheckboxValue(
+                self.widgets['show_syndication_link'], show_link_btn)
 
     def setSyndicationActionSettings(self, data):
         actions = getToolByName(self.context, 'portal_actions')
         if 'syndication' in actions.object.objectIds():
-            actions.object.syndication._setPropValue('visible',
-                data['show_syndication_button'])
+            actions.object.syndication._setPropValue(
+                'visible', data['show_syndication_button'])
         if 'rss' in actions.document_actions.objectIds():
-            actions.document_actions.rss._setPropValue('visible',
-                data['show_syndication_link'])
+            actions.document_actions.rss._setPropValue(
+                'visible', data['show_syndication_link'])
 
     @button.buttonAndHandler(_(u"Save"), name='save')
     def handleSave(self, action):

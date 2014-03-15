@@ -96,18 +96,10 @@
                     doing a specific search.
                 </p>
 
-                <form action=""
-                      name="groups_add"
-                      method="post"
-                      tal:attributes="action string:$portal_url/@@usergroup-groupdetails">
-
-                    <input class="standalone add"
-                           type="submit"
-                           name="form.button.AddGroup"
-                           value="Add New Group"
-                           i18n:attributes="value label_add_new_group;"
-                           />
-                </form>
+                <a class="pat-modal" id="add-group"
+                   tal:attributes="href string:${portal_url}/@@usergroup-groupdetails">
+                   <button i18n:translate="label_add_new_group">Add New Group</button>
+                </a>
 
                 <form action=""
                       name="groups_search"
@@ -203,7 +195,7 @@
                                        tal:attributes="href python:portal_url+'/@@usergroup-groupmembership?'+view.makeQuery(groupname=group_info['groupid']);
                                                        title group_info/description|string:''">
                                        <tal:block replace="structure context/portal_url/group.png" />&nbsp;
-                                       <tal:group tal:replace="group_info/title" /> (<tal:id tal:replace="group_info/groupid" />)
+                                       <tal:group tal:replace="group_info/title" /> <tal:groupid tal:condition="python:group_info['groupid'] != group_info['title']">(<tal:id tal:replace="group_info/groupid" />)</tal:groupid>
                                    </a>
                                 </td>
 

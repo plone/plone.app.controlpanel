@@ -9,8 +9,15 @@ without the PloneTestCase.setupPloneSite() side effects.
 import re
 
 from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
+from Products.PloneTestCase.PloneTestCase import portal_owner, default_password
 from Products.Five.testbrowser import Browser
 from Products.CMFCore.utils import getToolByName
+
+
+class FakeRequest(object):
+
+    SERVER_URL = 'http://nohost/plone'
+    environ = {}
 
 
 class ControlPanelTestCase(FunctionalTestCase):
@@ -27,8 +34,11 @@ class ControlPanelTestCase(FunctionalTestCase):
         self.ptool = getToolByName(self.portal, 'portal_properties')
         self.site_props = self.ptool.site_properties
 
+        self.fake_request = FakeRequest()
+
     def loginAsManager(self, user='root', pwd='secret'):
-        """points the browser to the login screen and logs in as user root with Manager role."""
+        """points the browser to the login screen and logs in as user root
+           with Manager role."""
         self.browser.open('http://nohost/plone/')
         self.browser.getLink('Log in').click()
         self.browser.getControl('Login Name').value = user
@@ -127,3 +137,25 @@ class UserGroupsControlPanelTestCase(ControlPanelTestCase):
         regtool = getToolByName(self.portal, 'portal_registration')
         for member in members:
             regtool.addMember(member['username'], 'somepassword', properties=member)
+
+
+class EmailLoginSecurityControlPanelTestCase(UserGroupsControlPanelTestCase):
+    """This switches on email as login.
+
+    Note that the afterSetUp of the UserGroupsControlPanelTestCase
+    creates several dozen users.  This might flush out a few bugs.
+    """
+
+    def afterSetUp(self):
+        super(EmailLoginSecurityControlPanelTestCase, self).afterSetUp()
+        from plone.app.controlpanel.security import migrate_to_email_login
+        migrate_to_email_login(self.portal)
+
+    def loginAsManager(self, user=portal_owner, pwd=default_password):
+        """points the browser to the login screen and logs in as user root with Manager role."""
+        self.browser.open('http://nohost/plone/')
+        self.browser.getLink('Log in').click()
+        #self.browser.getControl('Login Name').value = user
+        self.browser.getControl('E-mail').value = user
+        self.browser.getControl('Password').value = pwd
+        self.browser.getControl('Log in').click()

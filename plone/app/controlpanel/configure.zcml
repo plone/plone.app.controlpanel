@@ -7,8 +7,6 @@
 
   <include file="permissions.zcml" />
 
-  <adapter factory=".calendar.CalendarControlPanelAdapter" />
-
   <adapter for="*"
            factory=".editing.EditingControlPanelAdapter" />
 
@@ -26,22 +24,15 @@
 
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
-  <adapter factory=".search.SearchControlPanelAdapter" />
+  <!--<adapter factory=".search.SearchControlPanelAdapter" />-->
 
   <adapter factory=".security.SecurityControlPanelAdapter" />
 
-  <adapter factory=".site.SiteControlPanelAdapter" />
+  <!--<adapter factory=".site.SiteControlPanelAdapter" />-->
 
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
-
-  <browser:page
-      name="calendar-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".calendar.CalendarControlPanel"
-      permission="plone.app.controlpanel.Calendar"
-      />
 
   <browser:page
       name="editing-controlpanel"
@@ -106,12 +97,14 @@
       permission="cmf.ManagePortal"
       />
 
+  <!--
   <browser:page
       name="search-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".search.SearchControlPanel"
       permission="plone.app.controlpanel.Search"
       />
+  -->
 
   <browser:page
       name="security-controlpanel"
@@ -120,12 +113,14 @@
       permission="plone.app.controlpanel.Security"
       />
 
+  <!--
   <browser:page
       name="site-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".site.SiteControlPanel"
       permission="plone.app.controlpanel.Site"
       />
+  -->
 
   <browser:page
       name="skins-controlpanel"
@@ -219,5 +214,35 @@
       class=".syndication.SyndicationControlPanel"
       permission="cmf.ManagePortal"
       />
+
+  <!-- quickinstaller related -->
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="prefs_install_products_form"
+    class=".qi.ManageProductsView"
+    permission="cmf.ManagePortal"
+    template="qi.pt"
+    />
+
+ <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="upgrade_products"
+    class=".qi.UpgradeProductsView"
+    permission="cmf.ManagePortal"
+    />
+
+ <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="install_products"
+    class=".qi.InstallProductsView"
+    permission="cmf.ManagePortal"
+    />
+
+ <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="uninstall_products"
+    class=".qi.UninstallProductsView"
+    permission="cmf.ManagePortal"
+    />
 
 </configure>

@@ -1,31 +1,19 @@
-from plone.memoize.instance import memoize
-
+from AccessControl import getSecurityManager
 from Acquisition import aq_base
 from Acquisition import aq_inner
-
+from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from plone.app.controlpanel.form import ControlPanelView
+from plone.memoize.instance import memoize
+from plone.registry.interfaces import IRegistry
+from zope.component import queryUtility
 
-
-def three_column_list(input_list):
-    list_len = len(input_list)
-
-    # Calculate the length of the sublists
-    sublist_len = (list_len % 3 == 0 and list_len / 3 or list_len / 3 + 1)
-
-    # Calculate the list end point given the list number
-    def _list_end(num):
-        return (num == 2 and list_len or (num + 1) * sublist_len)
-
-    # Generate only filled columns
-    final = []
-    for i in range(3):
-        column = input_list[i*sublist_len:_list_end(i)]
-        if len(column) > 0:
-            final.append(column)
-    return final
+try:
+    from plone.app.event.interfaces import IEventSettings
+    HAS_PAE = True
+except ImportError:
+    HAS_PAE = False
 
 
 class OverviewControlPanel(ControlPanelView):
@@ -75,7 +63,12 @@ class OverviewControlPanel(ControlPanelView):
 
     def upgrade_warning(self):
         mt = getToolByName(aq_inner(self.context), 'portal_migration')
-        return mt.needUpgrading()
+        if mt.needUpgrading():
+            # if the user can't run the upgrade, no sense in displaying the message
+            sm = getSecurityManager()
+            if sm.checkPermission(ManagePortal, self.context):
+                return True
+        return False
 
     def mailhost_warning(self):
         mailhost = getToolByName(aq_inner(self.context), 'MailHost', None)
@@ -87,9 +80,23 @@ class OverviewControlPanel(ControlPanelView):
             return False
         return True
 
+    def timezone_warning(self):
+        if not HAS_PAE:
+            return False
+        portal_timezone = None
+        reg = queryUtility(IRegistry, context=self.context, default=None)
+        if reg:
+            portal_timezone = reg.forInterface(
+                IEventSettings,
+                prefix="plone.app.event",
+                check=False  # Don't fail, if portal_timezone isn't set.
+            ).portal_timezone
+        if portal_timezone:
+            return False
+        return True
+
     def categories(self):
         return self.cptool().getGroups()
 
     def sublists(self, category):
-        actions = self.cptool().enumConfiglets(group=category)
-        return three_column_list(actions)
+        return self.cptool().enumConfiglets(group=category)

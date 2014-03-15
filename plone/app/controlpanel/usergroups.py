@@ -175,7 +175,6 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
     mailhost_tool = None
 
     def __call__(self):
-
         form = self.request.form
         submitted = form.get('form.submitted', False)
         search = form.get('form.button.Search', None) is not None
@@ -205,11 +204,11 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         return self.mailhost_tool
 
     def doSearch(self, searchString):
+
         acl = getToolByName(self, 'acl_users')
         rolemakers = acl.plugins.listPlugins(IRolesPlugin)
 
         mtool = getToolByName(self, 'portal_membership')
-
         searchView = getMultiAdapter((aq_inner(self.context), self.request), name='pas_search')
 
         # First, search for all inherited roles assigned to each group.
@@ -242,6 +241,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         # Tack on some extra data, including whether each role is explicitly
         # assigned ('explicit'), inherited ('inherited'), or not assigned at all (None).
         results = []
+
         for user_info in explicit_users:
             userId = user_info['id']
             user = mtool.getMemberById(userId)
@@ -266,12 +266,14 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
 
             canDelete = user.canDelete()
             canPasswordSet = user.canPasswordSet()
-            if roleList['Manager']['explicit'] or roleList['Manager']['inherited']:
+            if ('Manager' in explicitlyAssignedRoles or
+                'Manager' in allInheritedRoles.get(userId, [])):
                 if not self.is_zope_manager:
                     canDelete = False
                     canPasswordSet = False
 
             user_info['roles'] = roleList
+            user_info['login'] = user.getUserName()
             user_info['fullname'] = user.getProperty('fullname', '')
             user_info['email'] = user.getProperty('email', '')
             user_info['can_delete'] = canDelete
@@ -582,10 +584,11 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
                     canAssign = False
                 roleList[role]={'canAssign': canAssign,
                                 'explicit': role in explicitlyAssignedRoles,
-                                'inherited': role in allInheritedRoles[groupId] }
+                                'inherited': role in allInheritedRoles.get(groupId, [])}
 
             canDelete = group.canDelete()
-            if roleList['Manager']['explicit'] or roleList['Manager']['inherited']:
+            if ('Manager' in explicitlyAssignedRoles or
+                'Manager' in allInheritedRoles.get(groupId, [])):
                 if not self.is_zope_manager:
                     canDelete = False
 
