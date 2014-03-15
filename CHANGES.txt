@@ -4,6 +4,8 @@ Changelog
 2.4.2 (unreleased)
 ------------------
 
+- Change "Member fields" to "Member form fields"; remove duplicate tabs.
+  [smcmahon]
 
 - Add "Member fields" tab (plip13350) [kiorky]
 
