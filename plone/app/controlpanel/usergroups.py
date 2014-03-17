@@ -211,44 +211,40 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         mtool = getToolByName(self, 'portal_membership')
         searchView = getMultiAdapter((aq_inner(self.context), self.request), name='pas_search')
 
-        # First, search for all inherited roles assigned to each group.
-        # We push this in the request so that IRoles plugins are told provide
-        # the roles inherited from the groups to which the principal belongs.
-        self.request.set('__ignore_group_roles__', False)
-        self.request.set('__ignore_direct_roles__', True)
-        inheritance_enabled_users = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['name', 'fullname', 'email']]), 'userid')
-        allInheritedRoles = {}
-        for user_info in inheritance_enabled_users:
+        # Tack on some extra data, including whether each role is explicitly
+        # assigned ('explicit'), inherited ('inherited'), or not assigned at all (None).
+        results = []
+
+        search_results = searchView.merge(
+            chain(*[
+                searchView.searchUsers(**{field: searchString})
+                for field in ['name', 'fullname', 'email']]),
+            'userid')
+        for user_info in search_results:
             userId = user_info['id']
-            user = acl.getUserById(userId)
+            user = mtool.getMemberById(userId)
             # play safe, though this should never happen
             if user is None:
-                logger.warn('Skipped user without principal object: %s' % userId)
+                logger.warn(
+                    'Skipped user without principal object: %s' % userId)
                 continue
+
+            # First, search for all inherited roles assigned to each group.
+            # We push this in the request so that IRoles plugins are told
+            # provide the roles inherited from the groups to which the
+            # principal belongs.
+            self.request.set('__ignore_group_roles__', False)
+            self.request.set('__ignore_direct_roles__', True)
             allAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
                 # getRolesForPrincipal can return None
                 roles = rolemaker.getRolesForPrincipal(user) or ()
                 allAssignedRoles.extend(roles)
-            allInheritedRoles[userId] = allAssignedRoles
 
-        # We push this in the request such IRoles plugins don't provide
-        # the roles from the groups the principal belongs.
-        self.request.set('__ignore_group_roles__', True)
-        self.request.set('__ignore_direct_roles__', False)
-        explicit_users = searchView.merge(chain(*[searchView.searchUsers(**{field: searchString}) for field in ['login', 'fullname', 'email']]), 'userid')
-
-        # Tack on some extra data, including whether each role is explicitly
-        # assigned ('explicit'), inherited ('inherited'), or not assigned at all (None).
-        results = []
-
-        for user_info in explicit_users:
-            userId = user_info['id']
-            user = mtool.getMemberById(userId)
-            # play safe, though this should never happen
-            if user is None:
-                logger.warn('Skipped user without principal object: %s' % userId)
-                continue
+            # We push this in the request such IRoles plugins don't provide
+            # the roles from the groups the principal belongs.
+            self.request.set('__ignore_group_roles__', True)
+            self.request.set('__ignore_direct_roles__', False)
             explicitlyAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
                 # getRolesForPrincipal can return None
@@ -262,12 +258,12 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                     canAssign = False
                 roleList[role]={'canAssign': canAssign,
                                 'explicit': role in explicitlyAssignedRoles,
-                                'inherited': role in allInheritedRoles.get(userId, [])}
+                                'inherited': role in allAssignedRoles}
 
             canDelete = user.canDelete()
             canPasswordSet = user.canPasswordSet()
             if ('Manager' in explicitlyAssignedRoles or
-                'Manager' in allInheritedRoles.get(userId, [])):
+                'Manager' in allAssignedRoles):
                 if not self.is_zope_manager:
                     canDelete = False
                     canPasswordSet = False
