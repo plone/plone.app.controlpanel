@@ -66,14 +66,14 @@
         </strong>
         <span tal:omit-tag="" i18n:translate="text_no_timezone_configured">
 
-            You have not set the portal timezone. Date handling will not work
-            properly for timezone aware date/time values.
+            You have not set the portal timezone. Date/Time handling will not
+            work properly for timezone aware date/time values.
             Go to the
             <tal:link i18n:name="label_mail_event_settings_link">
                 <a href=""
                    i18n:translate="text_no_timezone_configured_control_panel_link"
-                   tal:attributes="href string:${portal_url}/@@event-settings"
-                >Event settings control panel</a>
+                   tal:attributes="href string:${portal_url}/@@dateandtime-controlpanel"
+                >Date and Time settings control panel</a>
             </tal:link>
             to fix this.
         </span>

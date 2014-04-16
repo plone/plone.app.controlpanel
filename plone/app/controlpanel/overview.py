@@ -7,10 +7,10 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.controlpanel.form import ControlPanelView
 from plone.memoize.instance import memoize
 from plone.registry.interfaces import IRegistry
-from zope.component import queryUtility
+from zope.component import getUtility
 
 try:
-    from plone.app.event.interfaces import IEventSettings
+    from plone.app.event.interfaces import IEventSettings  # nopep8
     HAS_PAE = True
 except ImportError:
     HAS_PAE = False
@@ -81,19 +81,28 @@ class OverviewControlPanel(ControlPanelView):
         return True
 
     def timezone_warning(self):
+        """Returns true, if the portal_timezone is not set in the registry.
+        """
         if not HAS_PAE:
+            # No point of having a portal timezone configured without
+            # plone.app.event installed.
+            # TODO: Above applies to situation at time of writing. If other
+            # datetimes outside plone.app.event use proper timezones too, the
+            # HAS_PAE should be removed.
             return False
-        portal_timezone = None
-        reg = queryUtility(IRegistry, context=self.context, default=None)
-        if reg:
-            portal_timezone = reg.forInterface(
-                IEventSettings,
-                prefix="plone.app.event",
-                check=False  # Don't fail, if portal_timezone isn't set.
-            ).portal_timezone
+        # check if 'plone.portal_timezone' is in registry
+        registry = getUtility(IRegistry)
+        reg_key = "plone.portal_timezoner"
+        if reg_key not in registry:
+            # else use 'plone.app.event.portal_timezone'
+            # < Plone 5
+            reg_key = 'plone.app.event.portal_timezone'
+        if reg_key not in registry:
+            return True
+        portal_timezone = registry[reg_key]
         if portal_timezone:
             return False
-        return True
+        return True  # No portal_timezone found.
 
     def categories(self):
         return self.cptool().getGroups()
