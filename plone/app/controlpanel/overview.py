@@ -10,7 +10,7 @@ from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
 try:
-    from plone.app.event.interfaces import IEventSettings  # nopep8
+    import plone.app.event  # nopep8
     HAS_PAE = True
 except ImportError:
     HAS_PAE = False
@@ -64,7 +64,8 @@ class OverviewControlPanel(ControlPanelView):
     def upgrade_warning(self):
         mt = getToolByName(aq_inner(self.context), 'portal_migration')
         if mt.needUpgrading():
-            # if the user can't run the upgrade, no sense in displaying the message
+            # if the user can't run the upgrade, no sense in displaying the
+            # message
             sm = getSecurityManager()
             if sm.checkPermission(ManagePortal, self.context):
                 return True
@@ -92,7 +93,7 @@ class OverviewControlPanel(ControlPanelView):
             return False
         # check if 'plone.portal_timezone' is in registry
         registry = getUtility(IRegistry)
-        reg_key = "plone.portal_timezoner"
+        reg_key = "plone.portal_timezone"
         if reg_key not in registry:
             # else use 'plone.app.event.portal_timezone'
             # < Plone 5

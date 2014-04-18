@@ -6,20 +6,20 @@ import mock
 import unittest
 
 
-class MockSettings(mock.Mock):
-    portal_timezone = None
+def mock_getUtility1(iface):
+    return {}
 
 
-class MockUtil(mock.Mock):
-    forInterface = MockSettings
+def mock_getUtility2(iface):
+    return {'plone.portal_timezone': None}
 
 
-class MockSettings2(mock.Mock):
-    portal_timezone = "Europe/Amsterdam"
+def mock_getUtility3(iface):
+    return {'plone.portal_timezone': 'Europe/Amsterdam'}
 
 
-class MockUtil2(mock.Mock):
-    forInterface = MockSettings2
+def mock_getUtility4(iface):
+    return {'plone.app.event.portal_timezone': 'Europe/Amsterdam'}
 
 
 class TestControlPanel(unittest.TestCase):
@@ -31,30 +31,30 @@ class TestControlPanel(unittest.TestCase):
         self.request = self.layer['request']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-    @mock.patch('plone.app.controlpanel.overview.queryUtility', new=MockUtil)
-    def test_timezone_warning(self):
-        mocked = mock.Mock()
-        modules = {
-            'plone': mocked,
-            'plone.app': mocked.module,
-            'plone.app.event': mocked.module.module,
-            'plone.app.event.interfaces': mocked.module.module.module,
-        }
-        with mock.patch.dict('sys.modules', modules):
-            view = self.portal.restrictedTraverse('@@overview-controlpanel')
-            # if portal_timezone isn't set, return True
-            self.assertTrue(view.timezone_warning())
+    @mock.patch('plone.app.controlpanel.overview.getUtility',
+                new=mock_getUtility1)
+    def test_timezone_warning__noreg(self):
+        # If no registry key is available, return True
+        view = self.portal.restrictedTraverse('@@overview-controlpanel')
+        self.assertTrue(view.timezone_warning())
 
-    @mock.patch('plone.app.controlpanel.overview.queryUtility', new=MockUtil2)
-    def test_no_timezone_warning(self):
-        mocked = mock.Mock()
-        modules = {
-            'plone': mocked,
-            'plone.app': mocked.module,
-            'plone.app.event': mocked.module.module,
-            'plone.app.event.interfaces': mocked.module.module.module,
-        }
-        with mock.patch.dict('sys.modules', modules):
-            view = self.portal.restrictedTraverse('@@overview-controlpanel')
-            # if portal_timezone isn't set, return True
-            self.assertFalse(view.timezone_warning())
+    @mock.patch('plone.app.controlpanel.overview.getUtility',
+                new=mock_getUtility2)
+    def test_timezone_warning__emptyreg(self):
+        # If registry key value is empty, return True
+        view = self.portal.restrictedTraverse('@@overview-controlpanel')
+        self.assertTrue(view.timezone_warning())
+
+    @mock.patch('plone.app.controlpanel.overview.getUtility',
+                new=mock_getUtility3)
+    def test_timezone_warning__set(self):
+        # If new plone.portal_timezone is set, return False
+        view = self.portal.restrictedTraverse('@@overview-controlpanel')
+        self.assertFalse(view.timezone_warning())
+
+    @mock.patch('plone.app.controlpanel.overview.getUtility',
+                new=mock_getUtility4)
+    def test_timezone_warning__paeset(self):
+        # If old plone.app.event.portal_timezone is set, return False
+        view = self.portal.restrictedTraverse('@@overview-controlpanel')
+        self.assertFalse(view.timezone_warning())
