@@ -4,8 +4,8 @@ Changelog
 2.4.3 (unreleased)
 ------------------
 
-- Changed timezone setting check to work with controlpanel consolidation effort
-  of Plone 5.
+- Changed timezone setting check to work with controlpanel consolidation
+  effort of Plone 5.
   [thet]
 
 
