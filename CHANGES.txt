@@ -8,6 +8,8 @@ Changelog
   plone.app.jquerytools.overlays.css
   [tkimnguyen]
 
+- Be able to disable safe html transform from control panel
+  [vangheem]
 
 2.4.3 (2014-04-19)
 ------------------

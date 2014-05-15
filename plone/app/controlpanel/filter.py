@@ -37,6 +37,13 @@ class TagAttrPair:
 
 class IFilterTagsSchema(Interface):
 
+    disable_filtering = schema.Bool(
+        title=_(u'Disable html filtering'),
+        description=_(u'Warning, disabling can be potentially dangereous. '
+                      u'Only disable if you know what you are doing.'),
+        default=False,
+        required=False)
+
     nasty_tags = schema.List(
         title=_(u'Nasty tags'),
         description=_(u"These tags, and their content are completely blocked "
@@ -133,6 +140,17 @@ class FilterControlPanelAdapter(SchemaAdapterBase):
         self.transform.set_parameters(**kwargs)
         self.transform._p_changed = True
         self.transform.reload()
+
+    @apply
+    def disable_filtering():
+        def get(self):
+            return bool(
+                self.transform.get_parameter_value('disable_transform'))
+        def set(self, value):
+            self.transform._config['disable_transform'] = int(value)
+            self.transform._p_changed = True
+            self.transform.reload()
+        return property(get, set)
 
     @apply
     def nasty_tags():
