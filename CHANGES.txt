@@ -4,7 +4,9 @@ Changelog
 2.4.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow ``text-decoration`` in TinyMCE 
+  see https://github.com/plone/plone.app.controlpanel/pull/18
+  [jnachtigall]
 
 
 2.4.4 (2014-06-06)
