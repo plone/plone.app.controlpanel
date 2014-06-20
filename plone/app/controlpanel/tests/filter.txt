@@ -175,6 +175,7 @@ and re-enable
 Must use print here to take advantage of whitespace folding
 (whitespace in the body text may vary depending on the tidy_html transform).
 
+    >>> browser.open('http://nohost/plone/Members/my-page')
     >>> print browser.contents
     <!DOCTYPE...
     <p>Testing that works.</p>...
