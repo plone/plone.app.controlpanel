@@ -30,7 +30,7 @@ And log in as that user instead:
 
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log out').click()
-    >>> loginAsManager(browse, user='app')
+    >>> loginAsManager(browser, user='app')
 
 See if we can manage the server now:
 
