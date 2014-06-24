@@ -58,6 +58,8 @@ CP_FUNCTIONAL_LAYER = testing.FunctionalTesting(
 class ControlPanelTestCase(FunctionalTestCase):
     """base test case with convenience methods for all control panel tests"""
 
+    layer = CP_FUNCTIONAL_LAYER
+
     def simplify_white_space(self, text):
         return simplify_white_space(text)
 
