@@ -1,4 +1,8 @@
 *.egg-info/
-*.pyc
+*.py[co]
 *~
 *.swp
+.installed.cfg
+/bin/
+/develop-eggs/
+/parts/
