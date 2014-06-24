@@ -8,10 +8,34 @@ without the PloneTestCase.setupPloneSite() side effects.
 
 import re
 
-from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
-from Products.PloneTestCase.PloneTestCase import portal_owner, default_password
-from Products.Five.testbrowser import Browser
+from plone.app.testing.bbb import PloneTestCase as FunctionalTestCase
+from plone.app.testing.bbb import PloneTestCaseFixture
+from plone.app.testing import SITE_OWNER_NAME as portal_owner
+from plone.app.testing import SITE_OWNER_PASSWORD as default_password
+from plone.testing.z2 import Browser
+from plone.app import testing
 from Products.CMFCore.utils import getToolByName
+
+
+def simplify_white_space(text):
+    """For easier testing we replace all white space with one space.
+
+    And we remove white space around '<' and '>'.
+
+    So this:
+
+      <p
+          id="foo"> Bar
+      </p>
+
+    becomes this:
+
+      <p id="foo">Bar</p>
+    """
+    text = re.sub('\s*<\s*', '<', text)
+    text = re.sub('\s*>\s*', '>', text)
+    text = re.sub('\s+', ' ', text)
+    return text
 
 
 class FakeRequest(object):
@@ -20,50 +44,22 @@ class FakeRequest(object):
     environ = {}
 
 
+class ControlPanelFixture(PloneTestCaseFixture):
+
+    def setUpPloneSite(self, portal):
+        super(PloneTestCaseFixture, self).setUpPloneSite(portal)
+        portal.acl_users.userFolderAddUser('root', 'secret', ['Manager'], [])
+
+
+CP_FIXTURE = ControlPanelFixture()
+CP_FUNCTIONAL_LAYER = testing.FunctionalTesting(
+    bases=(CP_FIXTURE,), name='ControlPanel:Functional')
+
 class ControlPanelTestCase(FunctionalTestCase):
     """base test case with convenience methods for all control panel tests"""
 
-    def afterSetUp(self):
-        super(ControlPanelTestCase, self).afterSetUp()
-
-        self.browser = Browser()
-
-        self.uf = self.portal.acl_users
-        self.uf.userFolderAddUser('root', 'secret', ['Manager'], [])
-
-        self.ptool = getToolByName(self.portal, 'portal_properties')
-        self.site_props = self.ptool.site_properties
-
-        self.fake_request = FakeRequest()
-
-    def loginAsManager(self, user='root', pwd='secret'):
-        """points the browser to the login screen and logs in as user root
-           with Manager role."""
-        self.browser.open('http://nohost/plone/')
-        self.browser.getLink('Log in').click()
-        self.browser.getControl('Login Name').value = user
-        self.browser.getControl('Password').value = pwd
-        self.browser.getControl('Log in').click()
-
     def simplify_white_space(self, text):
-        """For easier testing we replace all white space with one space.
-
-        And we remove white space around '<' and '>'.
-
-        So this:
-
-          <p
-              id="foo"> Bar
-          </p>
-
-        becomes this:
-
-          <p id="foo">Bar</p>
-        """
-        text = re.sub('\s*<\s*', '<', text)
-        text = re.sub('\s*>\s*', '>', text)
-        text = re.sub('\s+', ' ', text)
-        return text
+        return simplify_white_space(text)
 
 
 class UserGroupsControlPanelTestCase(ControlPanelTestCase):

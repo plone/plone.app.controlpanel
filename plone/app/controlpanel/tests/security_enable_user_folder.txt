@@ -4,8 +4,11 @@ Enable/disable user folder
 
 First some initial setup code. We are logging as the 'root' user with 'Manager' permission:
 
-    >>> browser = self.browser
-    >>> self.loginAsManager()
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(layer['app'])
+
+Login as manager
+    >>> loginAsManager(browser)
 
 Lets ensure that we currently are the 'root' user:
 
@@ -70,8 +73,8 @@ Test with a member with the 'Member' permission
 
 Create a new member and log in as member:
 
-    >>> self.uf = self.portal.acl_users
-    >>> self.uf.userFolderAddUser('member', 'secret', ['Member'], [])
+    >>> uf = layer['portal'].acl_users
+    >>> uf.userFolderAddUser('member', 'secret', ['Member'], [])
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'member'
@@ -107,7 +110,7 @@ Log out as member:
 
 Log in as manager and disable user folder creation:
 
-    >>> self.loginAsManager()
+    >>> loginAsManager(browser)
 
     >>> browser.open('http://nohost/plone/@@security-controlpanel')
     >>> browser.getControl(name='form.enable_user_folders').value = False
@@ -123,8 +126,8 @@ Log out as manager:
 
 Create a new member and login as new member:
 
-    >>> self.uf = self.portal.acl_users
-    >>> self.uf.userFolderAddUser('newmember', 'secret', ['Member'], [])
+    >>> uf = layer['portal'].acl_users
+    >>> uf.userFolderAddUser('newmember', 'secret', ['Member'], [])
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'newmember'
