@@ -4,16 +4,12 @@ Security controlpanel
 First some initial setup code. We are logging as the 'root' user with 'Manager' permission:
 
     >>> portal = layer['portal']
-    >>> migrate_to_email_login(portal)
-    >>> import transaction
-    >>> transaction.commit()
-    >>> generate_user_and_groups(portal)
 
     >>> from plone.testing.z2 import Browser
     >>> browser = Browser(layer['app'])
 
 Login as manager
-    >>> loginAsManager(browser)
+    >>> loginAsManager(browser, control='E-mail')
 
 Check some initial settings:
 

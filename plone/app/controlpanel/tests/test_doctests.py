@@ -1,14 +1,12 @@
 import doctest
-import transaction
 from unittest import TestSuite
 
 from doctest import DocFileSuite
 
 from plone.testing import layered
-from plone.app.testing.bbb import PTC_FIXTURE
 
-from plone.app.controlpanel.security import migrate_to_email_login
 from plone.app.controlpanel.tests.cptc import CP_FUNCTIONAL_LAYER
+from plone.app.controlpanel.tests.cptc import CP_SECURITY_LAYER
 from plone.app.controlpanel.tests.cptc import simplify_white_space
 from plone.app.controlpanel.tests.cptc import generate_user_and_groups
 
@@ -16,12 +14,12 @@ from plone.app.controlpanel.tests.cptc import generate_user_and_groups
 OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
 
-def loginAsManager(browser, user='root', pwd='secret'):
+def loginAsManager(browser, user='root', pwd='secret', control='Login Name'):
     """points the browser to the login screen and logs in as user root
        with Manager role."""
     browser.open('http://nohost/plone/')
     browser.getLink('Log in').click()
-    browser.getControl('Login Name').value = user
+    browser.getControl(control).value = user
     browser.getControl('Password').value = pwd
     browser.getControl('Log in').click()
 
@@ -57,9 +55,7 @@ def test_suite():
     suite.addTest(layered(
         DocFileSuite('security.txt', optionflags=OPTIONFLAGS,
                      package="plone.app.controlpanel.tests",
-                     globs={'loginAsManager': loginAsManager,
-                            'generate_user_and_groups': generate_user_and_groups,
-                            'migrate_to_email_login': migrate_to_email_login}),
-        layer=CP_FUNCTIONAL_LAYER))
+                     globs={'loginAsManager': loginAsManager}),
+        layer=CP_SECURITY_LAYER))
 
     return suite
