@@ -3,6 +3,8 @@ User / Group control panel
 
 First some initial setup code:
 
+    >>> portal = layer['portal']
+    >>> generate_user_and_groups(portal)
     >>> from plone.testing.z2 import Browser
     >>> browser = Browser(layer['app'])
 
@@ -374,7 +376,7 @@ But the nested group (Group 2) should show it as an inherited global role
 
 Even when explicitly giving the nested group (Group 2) the contributor role,
 it should still show it as an inherited global role.
-   >>> layer['portal'].portal_groups.editGroup('group2', roles=['Contributor'], groups=())
+   >>> portal.portal_groups.editGroup('group2', roles=['Contributor'], groups=())
    >>> browser.open('http://nohost/plone/@@usergroup-groupprefs')
    >>> browser.getControl(name='group_group2:list', index=1).getControl(value='Contributor')
    Traceback (most recent call last):
