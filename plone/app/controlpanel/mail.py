@@ -178,7 +178,6 @@ class MailControlPanel(ControlPanelForm):
 
         # XXX Will self.context always be the Plone site?
         fromaddr = self.context.getProperty('email_from_address')
-        fromname = self.context.getProperty('email_from_name')
 
         message = _(u"text_testmailbody",
                    default = u"Hi,\n\nThis is a test message sent from the Plone 'Mail settings' control panel. "

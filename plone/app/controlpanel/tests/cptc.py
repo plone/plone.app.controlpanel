@@ -10,13 +10,14 @@ import transaction
 
 from plone.app.testing.bbb import PloneTestCase as FunctionalTestCase
 from plone.app.testing.bbb import PloneTestCaseFixture
-from plone.app.testing import SITE_OWNER_NAME as portal_owner
-from plone.app.testing import SITE_OWNER_PASSWORD as default_password
-from plone.testing.z2 import Browser
 from plone.app import testing
 from Products.CMFCore.utils import getToolByName
 
+from plone.app.controlpanel.security import migrate_to_email_login
 
+
+# utiltiy methods
+#
 def simplify_white_space(text):
     """For easier testing we replace all white space with one space.
 
@@ -38,30 +39,12 @@ def simplify_white_space(text):
     return text
 
 
-class ControlPanelFixture(PloneTestCaseFixture):
-
-    def setUpPloneSite(self, portal):
-        super(ControlPanelFixture, self).setUpPloneSite(portal)
-        portal.acl_users.userFolderAddUser('root', 'secret', ['Manager'], [])
-
-
-CP_FIXTURE = ControlPanelFixture()
-CP_FUNCTIONAL_LAYER = testing.FunctionalTesting(
-    bases=(CP_FIXTURE,), name='ControlPanel:Functional')
-
-class ControlPanelTestCase(FunctionalTestCase):
-    """base test case with convenience methods for all control panel tests"""
-
-    layer = CP_FUNCTIONAL_LAYER
-
-    def simplify_white_space(self, text):
-        return simplify_white_space(text)
-
 def generateGroups(portal):
     groupsTool = getToolByName(portal, 'portal_groups')
     groupsTool.addGroup('group1', [], [], title="Group 1")
     groupsTool.addGroup('group2', [], [], title="Group 2")
     groupsTool.addGroup('group3', [], [], title="Group 3 accentué")
+
 
 def generateUsers(portal):
     members = [{'username': 'DIispfuF', 'fullname': 'Kevin Hughes', 'email': 'DIispfuF@example.com'},
@@ -126,6 +109,45 @@ def generate_user_and_groups(portal):
     generateUsers(portal)
     generateGroups(portal)
     transaction.commit()
+
+
+# Test fixures
+#
+class ControlPanelFixture(PloneTestCaseFixture):
+
+    def setUpPloneSite(self, portal):
+        super(ControlPanelFixture, self).setUpPloneSite(portal)
+        portal.acl_users.userFolderAddUser('root', 'secret', ['Manager'], [])
+
+
+CP_FIXTURE = ControlPanelFixture()
+CP_FUNCTIONAL_LAYER = testing.FunctionalTesting(
+    bases=(CP_FIXTURE,), name='ControlPanel:Functional')
+
+
+class ControlPanelSecurityTestFixture(ControlPanelFixture):
+
+    def setUpPloneSite(self, portal):
+        super(ControlPanelSecurityTestFixture, self).setUpPloneSite(portal)
+        generate_user_and_groups(portal)
+        migrate_to_email_login(portal),
+        transaction.commit()
+
+
+CP_SECURITY_FIXTURE = ControlPanelSecurityTestFixture()
+CP_SECURITY_LAYER = testing.FunctionalTesting(
+    bases=(CP_SECURITY_FIXTURE,), name='ControlPanelSecurity:Functional')
+
+
+# Test cases
+#
+class ControlPanelTestCase(FunctionalTestCase):
+    """base test case with convenience methods for all control panel tests"""
+
+    layer = CP_FUNCTIONAL_LAYER
+
+    def simplify_white_space(self, text):
+        return simplify_white_space(text)
 
 
 class UserGroupsControlPanelTestCase(ControlPanelTestCase):

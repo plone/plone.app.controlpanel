@@ -1,6 +1,4 @@
 from Products.CMFCore.utils import getToolByName
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
 from zope.i18nmessageid import MessageFactory
 from Products.CMFPlone.interfaces.syndication import ISiteSyndicationSettings
 from plone.app.registry.browser import controlpanel
