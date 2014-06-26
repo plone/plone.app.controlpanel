@@ -25,6 +25,8 @@ Zope root:
 Let's create a manager at the Zope root:
 
     >>> layer['app'].acl_users.userFolderAddUser('app', 'secret', ['Manager'], [])
+    >>> import transaction
+    >>> transaction.commit()
 
 And log in as that user instead:
 

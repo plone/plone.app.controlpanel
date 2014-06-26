@@ -8,7 +8,9 @@ First some initial setup code:
 
 Login as manager
     >>> loginAsManager(browser)
-    >>> syndication_configlet_url = 'http://nohost/plone/@@syndication-settings'
+    >>> portal_url = layer['portal'].portal_url()
+
+    >>> syndication_configlet_url = portal_url + '/@@syndication-settings'
 
 Test Form
 ---------
@@ -48,8 +50,12 @@ Test enabling syndication settings button:
 Create collection and check syndication settings button:
 
     >>> from plone.protect.utils import addTokenToUrl
-    >>> fake_request = {}
-    >>> browser.open(addTokenToUrl('http://nohost/plone/createObject?type_name=Collection', fake_request))
+    >>> url = addTokenToUrl(portal_url + '/createObject?type_name=Collection', layer['request'])
+    >>> import transaction
+    >>> transaction.commit()
+
+    >>> browser.open(url)
+
     >>> browser.getControl(name="title").value = 'test-collection'
     >>> browser.getControl('Save').click()
 

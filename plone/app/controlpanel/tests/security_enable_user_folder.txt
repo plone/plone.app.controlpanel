@@ -49,7 +49,10 @@ So the 'My Folder' shouldn't be visible:
 
 Lets do a short cut for the root user and create the member area immediately:
 
+    >>> portal = layer['portal']
     >>> portal.portal_membership.createMemberArea('root')
+    >>> import transaction
+    >>> transaction.commit()
 
 There should now be a user folder and the 'My Folder' action should be visible
 in the personal bar:
@@ -73,8 +76,9 @@ Test with a member with the 'Member' permission
 
 Create a new member and log in as member:
 
-    >>> uf = layer['portal'].acl_users
+    >>> uf = portal.acl_users
     >>> uf.userFolderAddUser('member', 'secret', ['Member'], [])
+    >>> transaction.commit()
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'member'
@@ -128,6 +132,7 @@ Create a new member and login as new member:
 
     >>> uf = layer['portal'].acl_users
     >>> uf.userFolderAddUser('newmember', 'secret', ['Member'], [])
+    >>> transaction.commit()
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'newmember'
