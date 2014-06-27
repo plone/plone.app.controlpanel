@@ -38,12 +38,6 @@ def simplify_white_space(text):
     return text
 
 
-class FakeRequest(object):
-
-    SERVER_URL = 'http://nohost/plone'
-    environ = {}
-
-
 class ControlPanelFixture(PloneTestCaseFixture):
 
     def setUpPloneSite(self, portal):
