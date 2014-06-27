@@ -50,10 +50,11 @@ Test enabling syndication settings button:
 Create collection and check syndication settings button:
 
     >>> from plone.protect.utils import addTokenToUrl
+    >>> from plone.testing.z2 import login
+    >>> login(layer['portal'].acl_users, 'root')
     >>> url = addTokenToUrl(portal_url + '/createObject?type_name=Collection', layer['request'])
-    >>> import transaction
-    >>> transaction.commit()
 
+    >>> browser.addHeader('Authorization', 'Basic root:secret')
     >>> browser.open(url)
 
     >>> browser.getControl(name="title").value = 'test-collection'
