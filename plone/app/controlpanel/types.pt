@@ -10,13 +10,6 @@
 
 <metal:main metal:fill-slot="prefs_configlet_main">
 
-    <a href=""
-        id="setup-link"
-        tal:attributes="href string:$portal_url/plone_control_panel"
-        i18n:translate="">
-        Site Setup
-    </a>
-
     <h1 class="documentFirstHeading"
         i18n:translate="heading_type_settings">Type Settings</h1>
 
@@ -146,11 +139,13 @@
                               i18n:translate="">Community Workflow</span>
                     </div>
     
-                    <ul class="discreet"
-                        tal:repeat="desc current_wf/description"
-                        tal:condition="current_wf/description">
+                    <ul>
+                      <tal:list-type
+                        repeat="desc current_wf/description"
+                        condition="current_wf/description">
                         <li tal:content="desc"
                             i18n:translate="">Workflow description</li>
+                      </tal:list-type>
                     </ul>
     
                     <div class="field">
@@ -188,11 +183,12 @@
                         value="True"
                         tal:condition="view/have_new_workflow"
                         />
-    
-                    <ul class="discreet"
-                        tal:repeat="desc view/new_workflow_description"
-                        tal:condition="view/new_workflow_description">
+                    <ul>
+                      <tal:list-type
+                        repeat="desc view/new_workflow_description"
+                        condition="view/new_workflow_description">
                         <li tal:content="desc">Workflow description</li>
+                      </tal:list-type>
                     </ul>
     
                     <div tal:define="new_workflow view/new_workflow"
@@ -244,9 +240,9 @@
     
                 </tal:workflows>
     
-                <div tal:condition="view/have_new_workflow">
-                    <img tal:replace="structure here/info_icon.png" />
-                    <span style="color: red" i18n:translate="types_controlpanel_warn_remap">
+                <div tal:condition="view/have_new_workflow" class="portalMessage info">
+                    <strong>Info</strong>
+                    <span i18n:translate="types_controlpanel_warn_remap">
                         Changing the workflow of a type will take a while, and may slow down
                         the site significantly while the content is updated to the new setting.
                     </span>
@@ -261,7 +257,7 @@
                   <input type="submit"
                          value="Cancel"
                          name="form.button.Cancel"
-                         class="context"
+                         class="standalone"
                          i18n:attributes="value label_cancel;" />
                 </div>
     

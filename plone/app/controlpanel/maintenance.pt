@@ -14,23 +14,16 @@
 
          <metal:block define-macro="header">
 
-             <dl tal:define="status view/status"
+             <div tal:define="status view/status"
                   tal:condition="status"
                   class="portalMessage info">
-                 <dt i18n:translate="">
+                 <strong i18n:translate="">
                      Info
-                 </dt>
-                 <dd tal:content="view/status" />
-             </dl>
+                 </strong>
+                 <span tal:content="view/status" />
+             </div>
 
          </metal:block>
-
-         <a href=""
-            id="setup-link"
-            tal:attributes="href string:$portal_url/plone_control_panel"
-            i18n:translate="">
-             Site Setup
-         </a>
 
          <h1 class="documentFirstHeading"
              i18n:translate=""
@@ -88,7 +81,7 @@
                 <input tal:replace="structure context/@@authenticator/authenticator" />
 
             </form>
-
+            <br><br>
             <form action="."
                   metal:define-macro="master"
                   tal:attributes="action request/URL"
@@ -111,47 +104,42 @@
 
                     <tal:block tal:repeat="widget view/widgets">
 
-                        <div class="field"
-                             tal:define="description widget/hint;
-                                         error widget/error"
-                             tal:attributes="class python:'field'+(error and ' error' or '')">
+                      <div class="field"
+                           tal:define="description widget/hint;
+                                       error widget/error"
+                           tal:attributes="class python:'field'+(error and ' error' or '')">
 
-                            <label tal:attributes="for widget/name">
-                              <span i18n:translate="" tal:replace="widget/label">
-                                label
-                              </span>
-
-                              <span class="fieldRequired"
-                                    title="Required"
-                                    i18n:attributes="title title_required;"
-                                    i18n:translate="label_required"
-                                    tal:condition="widget/required">
-                                  (Required)
-                              </span>
-
-                              <span class="formHelp"
-                                   i18n:translate=""
-                                   tal:content="description"
-                                   tal:condition="description">
-                                  field description
-                              </span>
-                            </label>
-
-                            <div tal:condition="error"
-                                 tal:content="structure error">
-                                The Error
+                          <label tal:attributes="for widget/name">
+                            <span i18n:translate="" tal:replace="widget/label">
+                              label
+                            </span> <span class="required"
+                                  title="Required"
+                                  i18n:attributes="title title_required;"
+                                  i18n:translate="label_required"
+                                  tal:condition="widget/required">&nbsp;</span>
+                          </label>
+                            <div class="formHelp"
+                                 i18n:translate=""
+                                 tal:content="description"
+                                 tal:condition="description">
+                                field description
                             </div>
+                          
 
-                            <div class="widget" tal:content="structure widget">
-                                <input type="text" />
-                            </div>
-                        </div>
+                          <div tal:condition="error"
+                               tal:content="structure error">
+                              The Error
+                          </div>
+
+                          <div class="widget" tal:content="structure widget">
+                              <input type="text" />
+                          </div>
+                      </div>
 
                     </tal:block>
 
                     <metal:block define-slot="above_buttons" />
 
-                    <div class="visualClear"><!-- --></div>
 
                     <div id="actionsView" class="formControls">
                         <span class="actionButtons">
@@ -160,7 +148,7 @@
                                    name="form.actions.pack"
                                    value="Pack database now"
                                    i18n:attributes="value"
-                                   class="standalone" />
+                                   class="context" />
                         </span>
                     </div>
 
