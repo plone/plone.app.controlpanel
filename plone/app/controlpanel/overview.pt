@@ -85,7 +85,7 @@
             Warning
         </strong>
         <span tal:omit-tag="" i18n:translate="text_no_pil_installed">
-            Warning: PIL is not installed properly, image scaling will not work.
+            PIL is not installed properly, image scaling will not work.
         </span>
     </div>
 
