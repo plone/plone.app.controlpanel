@@ -14,7 +14,7 @@
 
   <adapter factory=".language.LanguageControlPanelAdapter" />
 
-  <adapter factory=".navigation.NavigationControlPanelAdapter" />
+  <!--<adapter factory=".navigation.NavigationControlPanelAdapter" />-->
 
   <adapter factory=".mail.MailControlPanelAdapter" />
 
@@ -76,12 +76,14 @@
       permission="cmf.ManagePortal"
       />
 
+  <!--
   <browser:page
       name="navigation-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".navigation.NavigationControlPanel"
       permission="plone.app.controlpanel.Navigation"
       />
+  -->
 
   <browser:page
       name="overview-controlpanel"
