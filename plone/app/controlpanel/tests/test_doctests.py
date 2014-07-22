@@ -17,7 +17,7 @@ def test_suite():
     tests = ['editing.txt',
              'filter.txt',
              'mail.txt',
-#             'maintenance.txt',
+             'maintenance.txt',
              'security_enable_user_folder.txt',
 #             'search.txt',
 #             'site.txt',
