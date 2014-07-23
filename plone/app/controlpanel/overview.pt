@@ -89,10 +89,7 @@
         </span>
     </div>
 
-    <div class="visualClear"><!-- --></div>
-
     <tal:category tal:repeat="category view/categories">
-
 
         <section class="portlet portletNavigationTree portletSiteSetup" tal:define="sublist python:view.sublists(category.get('id'))">
           <header class="portletHeader hiddenStructure" tal:content="category/title"
