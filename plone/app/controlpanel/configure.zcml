@@ -7,8 +7,8 @@
 
   <include file="permissions.zcml" />
 
-  <adapter for="*"
-           factory=".editing.EditingControlPanelAdapter" />
+  <!--<adapter for="*"
+           factory=".editing.EditingControlPanelAdapter" />-->
 
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
@@ -34,12 +34,12 @@
 
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
 
-  <browser:page
+  <!--<browser:page
       name="editing-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".editing.EditingControlPanel"
       permission="plone.app.controlpanel.Editing"
-      />
+      />-->
 
   <browser:page
       name="filter-controlpanel"
