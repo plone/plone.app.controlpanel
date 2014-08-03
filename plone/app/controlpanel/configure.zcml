@@ -12,7 +12,7 @@
 
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
-  <adapter factory=".language.LanguageControlPanelAdapter" />
+  <!--<adapter factory=".language.LanguageControlPanelAdapter" />-->
 
   <!--<adapter factory=".navigation.NavigationControlPanelAdapter" />-->
 
@@ -48,12 +48,12 @@
       permission="plone.app.controlpanel.Filtering"
       />
 
-  <browser:page
+  <!--<browser:page
       name="language-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".language.LanguageControlPanel"
       permission="plone.app.controlpanel.Language"
-      />
+      />-->
 
   <browser:page
       name="mail-controlpanel"
