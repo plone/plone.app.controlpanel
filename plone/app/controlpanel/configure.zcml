@@ -133,12 +133,12 @@
       permission="plone.app.controlpanel.Themes"
       />
 
-  <browser:page
+ <!--  <browser:page
       name="types-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".types.TypesControlPanel"
       permission="plone.app.controlpanel.Types"
-      />
+      /> -->
 
   <browser:page
       name="usergroup-userprefs"
