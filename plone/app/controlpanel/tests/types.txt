@@ -32,7 +32,7 @@ We should be back on the Site Setup screen:
     True
 
 Navigate back to the type control panel and select link again:
-    
+
     >>> self.browser.getLink('Types').click()
     >>> self.browser.getControl(name='type_id').value = ['Link']
     >>> self.browser.getForm(action=types_configlet_url).submit()
@@ -41,7 +41,7 @@ Enable allow commenting for the link type
 
     >>> self.browser.getControl('Allow comments').selected = True
     >>> self.browser.getControl('Apply Changes').click()
-    
+
 Navigate back to link type to confirm setting.  Also confirm that the
 redirect_links setting is enabled. For easier testing we simplify the
 white space:
@@ -61,7 +61,7 @@ white space:
     >>> '<label for="redirect_links">Redirect immediately to link target' in contents
     True
 
-For only the link type, we have a special setting that controls whether the 
+For only the link type, we have a special setting that controls whether the
 view will redirect to the remote url for users without editing permissions:
 
     >>> self.browser.open(types_configlet_url)
@@ -69,7 +69,7 @@ view will redirect to the remote url for users without editing permissions:
     >>> self.browser.getForm(action=types_configlet_url).submit()
     >>> '<input id="redirect_links"' in self.browser.contents
     False
-    
+
 We'll confirm that we can disable the redirect_links option for the link type:
 
     >>> self.browser.getControl(name='type_id').value = ['Link']
@@ -78,7 +78,7 @@ We'll confirm that we can disable the redirect_links option for the link type:
     True
     >>> self.browser.getControl(name='redirect_links:boolean').value = False
     >>> self.browser.getControl('Apply Changes').click()
-    
+
 Now the redirect links checkbox option is no longer checked:
 
     >>> self.browser.open(types_configlet_url)

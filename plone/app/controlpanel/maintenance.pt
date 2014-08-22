@@ -124,7 +124,7 @@
                                  tal:condition="description">
                                 field description
                             </div>
-                          
+
 
                           <div tal:condition="error"
                                tal:content="structure error">

@@ -23,7 +23,7 @@ We should be back on the Site Setup screen:
     True
 
 Navigate back to the syndication settings:
-    
+
     >>> self.browser.getLink('Syndication').click()
 
 Check values:

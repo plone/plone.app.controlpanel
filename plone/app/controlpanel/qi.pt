@@ -46,14 +46,14 @@
           <section tal:condition="not:products" class="portletContent">
             <div id="up-to-date-message" class="portalMessage info">
                  <strong>No upgrades in this corner</strong>
-                 <span>You are up to date. High fives.</span> 
+                 <span>You are up to date. High fives.</span>
              </div>
           </section>
           <section class="portletContent" tal:condition="products">
             <ul class="configlets">
               <tal:products  tal:repeat="product products">
               <li tal:define="pid product/id;">
-                <form action="upgrade_products" method="post" class="pull-right">      
+                <form action="upgrade_products" method="post" class="pull-right">
                   <input type="hidden"
                                      name="prefs_reinstallProducts:list"
                                      tal:attributes="value pid;" />
@@ -93,7 +93,7 @@
                           New profile version is <strong i18n:name="version" tal:content="upgrade_info/newVersion">version</strong>.
                         </tal:span>
                       </span>
-                      
+
                       <div i18n:translate=""
                             tal:condition="not:upgrade_info/available">
                         <strong>Warning</strong>
@@ -114,7 +114,7 @@
                           tal:attributes="value product/id;" />
                    </tal:products>
                    <span i18n:translate="label_product_upgrade_all_action">
-                     <div>The question is, do you feel lucky, punk?</div>        
+                     <div>The question is, do you feel lucky, punk?</div>
                      <span i18n:name="reinstall_all_button">
                               <input class="context"
                                      type="submit"
@@ -137,7 +137,7 @@
             <ul class="configlets">
               <li tal:repeat="product products">
               <tal:product define="pid product/id">
-                <form action="install_products" method="post" class="pull-right">      
+                <form action="install_products" method="post" class="pull-right">
                    <input type="hidden"
                            name="install_products:list"
                            tal:attributes="value string:profile-${product/install_profile/id};" />
@@ -160,7 +160,7 @@
                 <p class="configletDescription discreet">
                   <tal:span tal:condition="product/description" tal:content="product/description">add-on description</tal:span>
                   <em class="discreet"> – (<tal:span tal:content="string:${pid}"> plugin.app.name </tal:span>)</em>
-                </p>    
+                </p>
               </tal:product>
               </li>
             </ul>
@@ -176,7 +176,7 @@
             <ul class="configlets">
                 <li tal:repeat="product products">
                 <tal:product define="pid product/id">
-                  <form action="uninstall_products" method="post" class="pull-right">      
+                  <form action="uninstall_products" method="post" class="pull-right">
                     <input type="hidden"
                           name="uninstall_products:list"
                           tal:attributes="value pid;" />

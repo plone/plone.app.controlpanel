@@ -1,4 +1,4 @@
-Security controlpanel: 
+Security controlpanel:
 Enable/disable user folder
 ==========================
 
@@ -86,7 +86,7 @@ Lets ensure that we currently are the 'member' user:
     >>> browser.getLink('member').click()
     >>> browser.url
     'http://nohost/plone/useractions'
- 
+
 There should be a user folder now and the 'My Folder' link should be visible
 in the personal bar:
 
@@ -94,12 +94,12 @@ in the personal bar:
     >>> browser.open('http://nohost/plone')
     >>> 'My Folder' in browser.contents
     True
-    
-    >>> browser.getLink('My Folder').click()    
+
+    >>> browser.getLink('My Folder').click()
     >>> browser.url
     'http://nohost/plone/Members/member'
 
-Log out as member:  
+Log out as member:
 
     >>> browser.getLink('Log out').click()
     >>> 'You are now logged out' in browser.contents
@@ -115,7 +115,7 @@ Log in as manager and disable user folder creation:
     >>> browser.url.endswith('security-controlpanel')
     True
 
-Log out as manager:  
+Log out as manager:
 
     >>> browser.getLink('Log out').click()
     >>> 'You are now logged out' in browser.contents
@@ -145,8 +145,8 @@ There shouldn't be a new member folder and no 'My Folder' link:
     >>> browser.open('http://nohost/plone/Members/newmember')
     Traceback (most recent call last):
     ...
-    HTTPError: HTTP Error 404: Not Found    
-    
+    HTTPError: HTTP Error 404: Not Found
+
     >>> browser.open('http://nohost/plone')
     >>> 'My Folder' in browser.contents
     False
