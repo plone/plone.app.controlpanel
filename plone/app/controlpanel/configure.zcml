@@ -26,7 +26,7 @@
 
   <!--<adapter factory=".search.SearchControlPanelAdapter" />-->
 
-  <!--<adapter factory=".security.SecurityControlPanelAdapter" />-->
+  <adapter factory=".security.SecurityControlPanelAdapter" />
 
   <!--<adapter factory=".site.SiteControlPanelAdapter" />-->
 
@@ -110,14 +110,12 @@
       />
   -->
 
-  <!--
   <browser:page
       name="security-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".security.SecurityControlPanel"
       permission="plone.app.controlpanel.Security"
       />
-   -->
 
   <!--
   <browser:page
@@ -206,7 +204,6 @@
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
 
-  <!--
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       name="migrate-to-emaillogin"
@@ -214,7 +211,6 @@
       template="emaillogin.pt"
       permission="cmf.ManagePortal"
       />
-  -->
 
   <browser:page
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
