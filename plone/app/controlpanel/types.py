@@ -391,7 +391,7 @@ type_id=%s' % (context.absolute_url() , type_id))
             wf = getattr(portal_workflow, new_workflow)
             states = []
             for s in wf.states.objectValues():
-                title = translate(s.title, domain='plone', context=self.request)
+                title = translate(unicode(s.title, 'utf-8'), domain='plone', context=self.request)
                 states.append(dict(id=s.id, title=title))
             return states
         else:
