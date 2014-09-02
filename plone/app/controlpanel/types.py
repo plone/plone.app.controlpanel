@@ -1,3 +1,4 @@
+# NO LONGER USED - MOVED TO Products.CMFPlone.controlpanel.browser.types
 from plone.app.workflow.remap import remap_workflow
 from plone.memoize.instance import memoize
 
