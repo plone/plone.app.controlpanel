@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
-version = '2.4.0.dev0'
+version = '2.4.5.dev0'
 
 setup(name='plone.app.controlpanel',
       version=version,
       description="Formlib-based controlpanels for Plone.",
-      long_description=open("README.txt").read() + "\n" +
-                       open("CHANGES.txt").read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open("CHANGES.rst").read(),
       classifiers=[
           "Environment :: Web Environment",
           "Framework :: Plone",

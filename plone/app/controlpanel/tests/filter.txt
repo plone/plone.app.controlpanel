@@ -155,9 +155,27 @@ Check that the filtering works
     >>> 'My Page' in browser.contents
     True
 
+Try disabling safe html transform
+---------------------------------
+
+    >>> browser.open('http://nohost/plone/@@filter-controlpanel')
+    >>> browser.getControl(name="form.disable_filtering").value = True
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> safe_html._config['disable_transform']
+    1
+
+and re-enable
+
+    >>> browser.open('http://nohost/plone/@@filter-controlpanel')
+    >>> browser.getControl(name="form.disable_filtering").value = False
+    >>> browser.getControl(name="form.actions.save").click()
+    >>> safe_html._config['disable_transform']
+    0
+
 Must use print here to take advantage of whitespace folding
 (whitespace in the body text may vary depending on the tidy_html transform).
 
+    >>> browser.open('http://nohost/plone/Members/my-page')
     >>> print browser.contents
     <!DOCTYPE...
     <p>Testing that works.</p>...

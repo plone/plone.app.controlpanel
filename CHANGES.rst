@@ -1,12 +1,58 @@
 Changelog
 =========
 
-2.4.0 (unreleased)
+2.4.5 (unreleased)
 ------------------
 
 - Remove DL's from portal message templates.
   https://github.com/plone/Products.CMFPlone/issues/153
   [khink]
+
+- Allow ``text-decoration`` in TinyMCE
+  see https://github.com/plone/plone.app.controlpanel/pull/18
+  [jnachtigall]
+
+
+2.4.4 (2014-06-06)
+------------------
+
+- prevent error when missing popupforms.js or
+  plone.app.jquerytools.overlays.css
+  [tkimnguyen]
+
+- Be able to disable safe html transform from control panel
+  [vangheem]
+
+2.4.3 (2014-04-19)
+------------------
+
+- Changed timezone setting check to work with controlpanel consolidation
+  effort of Plone 5.
+  [thet]
+
+
+2.4.2 (2014-04-13)
+------------------
+
+- add quickinstaller control panel
+  [vangheem]
+
+
+2.4.1 (2014-03-01)
+------------------
+
+- Remove site control panel since it has been moved to Products.CMFPlone.
+  (PLIP #10359: http://dev.plone.org/ticket/10359)
+
+- Remove site control panel since it has been moved to Products.CMFPlone.
+  [timo]
+
+
+2.4.0 (2014-02-22)
+------------------
+
+- Remove search control panel since it has been moved to Products.CMFPlone.
+  [timo]
 
 - Add a warning, if plone.app.event is available but timezone is not set.
   [thet]
@@ -37,7 +83,7 @@ Changelog
 - Fix test email: msgid was sent, not translation.
   [thomasdesvenain]
 
-- Fix syndication settings to not write on read.
+- fix syndication settings to not write on read
   [vangheem]
 
 

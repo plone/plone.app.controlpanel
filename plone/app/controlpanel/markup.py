@@ -169,7 +169,7 @@ class MarkupControlPanelAdapter(SchemaAdapterBase):
         # so that new types are available by default. So, we inverse the list.
         allowable_types = self._get_allowable_types()
         forbidden_types = [t for t in allowable_types if t not in value]
-        
+
         portal_properties = getToolByName(self.context, 'portal_properties', None)
         if portal_properties is not None:
             site_properties = getattr(portal_properties, 'site_properties', None)

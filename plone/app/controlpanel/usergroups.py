@@ -175,7 +175,6 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
     mailhost_tool = None
 
     def __call__(self):
-
         form = self.request.form
         submitted = form.get('form.submitted', False)
         search = form.get('form.button.Search', None) is not None
@@ -205,11 +204,11 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         return self.mailhost_tool
 
     def doSearch(self, searchString):
+
         acl = getToolByName(self, 'acl_users')
         rolemakers = acl.plugins.listPlugins(IRolesPlugin)
 
         mtool = getToolByName(self, 'portal_membership')
-
         searchView = getMultiAdapter((aq_inner(self.context), self.request), name='pas_search')
 
         # First, search for all inherited roles assigned to each group.
@@ -242,6 +241,7 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
         # Tack on some extra data, including whether each role is explicitly
         # assigned ('explicit'), inherited ('inherited'), or not assigned at all (None).
         results = []
+
         for user_info in explicit_users:
             userId = user_info['id']
             user = mtool.getMemberById(userId)

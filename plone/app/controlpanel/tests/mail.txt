@@ -98,7 +98,7 @@ But we must deal with encoding if we someone set this info via ZMI:
     >>> self.browser.getControl(name="manage_editProperties:method").click()
 
 And the control panel should not break:
-    
+
     >>> self.browser.open('http://nohost/plone/@@mail-controlpanel')
 
 Even though data is stored as string:

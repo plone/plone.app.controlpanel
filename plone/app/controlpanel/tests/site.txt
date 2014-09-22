@@ -10,7 +10,7 @@ First some initial setup code:
 
     >>> ptool.site_properties.enable_sitemap
     False
-    
+
     >>> ptool.site_properties.displayPublicationDateInByline
     False
 
