@@ -12,6 +12,13 @@ Changelog
   see https://github.com/plone/plone.app.controlpanel/pull/18
   [jnachtigall]
 
+- Integration of the new markup update and CSS for both Plone and Barceloneta
+  theme. This is the work done in the GSOC Barceloneta theme project.
+  [albertcasado, sneridagh]
+
+- Update <div id="content"> in all templates with <article id="content">
+  [albertcasado]
+
 
 2.4.4 (2014-06-06)
 ------------------
