@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.4.5 (unreleased)
+2.4.5 (2014-10-23)
 ------------------
 
 - Remove DL's from portal message templates.
