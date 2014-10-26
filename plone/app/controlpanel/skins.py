@@ -86,7 +86,10 @@ class SkinsControlPanelAdapter(SchemaAdapterBase):
     theme = property(get_theme, set_theme)
 
     def _update_jsreg_mark_special(self):
-        self.jstool.getResource('mark_special_links.js').setEnabled(
+        resource = self.jstool.getResource('mark_special_links.js')
+        if resource is None:
+            return
+        resource.setEnabled(
             self.mark_special_links or self.ext_links_open_new_window
             )
         self.jstool.cookResources()
