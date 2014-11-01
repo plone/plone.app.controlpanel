@@ -63,7 +63,9 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
                 'title', group_info['title'])
             allAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
-                allAssignedRoles.extend(rolemaker.getRolesForPrincipal(group))
+                # getRolesForPrincipal can return None
+                roles = rolemaker.getRolesForPrincipal(group) or ()
+                allAssignedRoles.extend(roles)
             allInheritedRoles[groupId] = allAssignedRoles
 
         # Now, search for all roles explicitly assigned to each group.
@@ -87,8 +89,9 @@ class GroupsOverviewControlPanel(UsersGroupsControlPanelView):
 
             explicitlyAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
-                explicitlyAssignedRoles.extend(
-                    rolemaker.getRolesForPrincipal(group))
+                # getRolesForPrincipal can return None
+                roles = rolemaker.getRolesForPrincipal(group) or ()
+                explicitlyAssignedRoles.extend(roles)
 
             roleList = {}
             for role in self.portal_roles:

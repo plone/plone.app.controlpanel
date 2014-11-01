@@ -77,7 +77,9 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 continue
             allAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
-                allAssignedRoles.extend(rolemaker.getRolesForPrincipal(user))
+                # getRolesForPrincipal can return None
+                roles = rolemaker.getRolesForPrincipal(user) or ()
+                allAssignedRoles.extend(roles)
             allInheritedRoles[userId] = allAssignedRoles
 
         # We push this in the request such IRoles plugins don't provide
@@ -104,8 +106,9 @@ class UsersOverviewControlPanel(UsersGroupsControlPanelView):
                 continue
             explicitlyAssignedRoles = []
             for rolemaker_id, rolemaker in rolemakers:
-                explicitlyAssignedRoles.extend(
-                    rolemaker.getRolesForPrincipal(user))
+                # getRolesForPrincipal can return None
+                roles = rolemaker.getRolesForPrincipal(user) or ()
+                explicitlyAssignedRoles.extend(roles)
 
             roleList = {}
             for role in self.portal_roles:
