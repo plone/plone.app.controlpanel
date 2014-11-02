@@ -87,12 +87,14 @@
       />
   -->
 
+  <!--
   <browser:page
       name="overview-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".overview.OverviewControlPanel"
       permission="plone.app.controlpanel.Overview"
       />
+  -->
 
   <browser:page
       name="ramcache-controlpanel"
