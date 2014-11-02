@@ -16,7 +16,7 @@
 
   <!--<adapter factory=".navigation.NavigationControlPanelAdapter" />-->
 
-  <adapter factory=".mail.MailControlPanelAdapter" />
+  <!--<adapter factory=".mail.MailControlPanelAdapter" />-->
 
   <!--<adapter factory=".maintenance.MaintenanceControlPanelAdapter" />-->
 
@@ -54,13 +54,14 @@
       class=".language.LanguageControlPanel"
       permission="plone.app.controlpanel.Language"
       />
-
+  <!--
   <browser:page
       name="mail-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".mail.MailControlPanel"
       permission="plone.app.controlpanel.Mail"
       />
+  -->
 
   <browser:page
       name="markup-controlpanel"
