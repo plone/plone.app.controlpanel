@@ -1,10 +1,13 @@
 Changelog
 =========
 
-2.4.7 (unreleased)
+3.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove the control panel overview (moved to Products.CMFPlone)
+  This breaks Plone 4 compatibility.
+  PLIP 10359 (https://dev.plone.org/ticket/10359)
+  https://github.com/plone/Products.CMFPlone/issues/290
 
 
 2.4.6 (2014-11-01)
