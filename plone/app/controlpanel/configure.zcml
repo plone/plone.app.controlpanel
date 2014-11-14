@@ -20,7 +20,7 @@
 
   <!--<adapter factory=".maintenance.MaintenanceControlPanelAdapter" />-->
 
-  <adapter factory=".markup.MarkupControlPanelAdapter" />
+  <!-- adapter factory=".markup.MarkupControlPanelAdapter" /-->
 
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
@@ -62,12 +62,12 @@
       permission="plone.app.controlpanel.Mail"
       />
 
-  <browser:page
+  <!-- browser:page
       name="markup-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".markup.MarkupControlPanel"
       permission="plone.app.controlpanel.Markup"
-      />
+      /-->
 
   <!--
   <browser:page

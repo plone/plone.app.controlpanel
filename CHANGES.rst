@@ -4,10 +4,14 @@ Changelog
 3.0.0 (unreleased)
 ------------------
 
+- Remove the markup control panel, as it was moved to Products.CMFPlone.
+  [thet]
+
 - Remove the control panel overview (moved to Products.CMFPlone)
   This breaks Plone 4 compatibility.
   PLIP 10359 (https://dev.plone.org/ticket/10359)
   https://github.com/plone/Products.CMFPlone/issues/290
+  [khink]
 
 
 2.4.6 (2014-11-01)
