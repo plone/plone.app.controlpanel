@@ -55,12 +55,6 @@ class ISkinsSchema(Interface):
                                             "won't be visible."),
                              vocabulary=ICON_VISIBILITY_VOCABULARY)
 
-    use_popups = Bool(title=_(u'Use popup overlays for simple forms'),
-                        description=_(u"If enabled popup overlays will be "
-                                       "used for simple forms like login, "
-                                       "contact and delete confirmation."),
-                        default=True)
-
 
 class SkinsControlPanelAdapter(SchemaAdapterBase):
 
@@ -139,26 +133,6 @@ class SkinsControlPanelAdapter(SchemaAdapterBase):
         self.props.manage_changeProperties(icon_visibility=value)
 
     icon_visibility = property(get_icon_visibility,set_icon_visibility)
-
-    def get_use_popups(self):
-        popupforms = self.jstool.getResource('popupforms.js')
-        if popupforms:
-            return popupforms.getEnabled()
-        jqoverlays = self.csstool.getResource('++resource++plone.app.jquerytools.overlays.css')
-        if jqoverlays:
-            return jqoverlays.getEnabled()
-
-    def set_use_popups(self, value):
-        popupforms = self.jstool.getResource('popupforms.js')
-        if popupforms:
-            popupforms.setEnabled(value)
-        self.jstool.cookResources()
-        jqoverlays = self.csstool.getResource('++resource++plone.app.jquerytools.overlays.css')
-        if jqoverlays:
-            jqoverlays.setEnabled(value)
-        self.csstool.cookResources()
-
-    use_popups = property(get_use_popups, set_use_popups)
 
 
 class SkinsControlPanel(ControlPanelForm):
