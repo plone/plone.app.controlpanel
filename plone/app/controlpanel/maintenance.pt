@@ -14,13 +14,13 @@
 
          <metal:block define-macro="header">
 
-             <div tal:define="status view/status"
-                  tal:condition="status"
-                  class="portalMessage info">
+             <div class="portalMessage info"
+                  tal:define="status view/status"
+                  tal:condition="status">
                  <strong i18n:translate="">
                      Info
                  </strong>
-                 <span tal:content="view/status" />
+                 <span tal:replace="view/status" />
              </div>
 
          </metal:block>
@@ -124,7 +124,7 @@
                                  tal:condition="description">
                                 field description
                             </div>
-                          
+
 
                           <div tal:condition="error"
                                tal:content="structure error">

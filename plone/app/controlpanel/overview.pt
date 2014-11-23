@@ -85,15 +85,12 @@
             Warning
         </strong>
         <span tal:omit-tag="" i18n:translate="text_no_pil_installed">
-            Warning: PIL is not installed properly, image scaling will not work.
+            PIL is not installed properly, image scaling will not work.
         </span>
     </div>
 
-    <div class="visualClear"><!-- --></div>
-
     <tal:category tal:repeat="category view/categories">
 
-        
         <section class="portlet portletNavigationTree portletSiteSetup" tal:define="sublist python:view.sublists(category.get('id'))">
           <header class="portletHeader hiddenStructure" tal:content="category/title"
             i18n:translate="">Category</header>

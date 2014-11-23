@@ -48,7 +48,7 @@
           Portal status message
         </div>
 
-        <div id="content">
+        <article id="content">
 
 
             <h1 class="documentFirstHeading"
@@ -243,7 +243,7 @@
 
                 </form>
             </div>
-        </div>
+        </article>
     </div>
 
 </metal:main>
