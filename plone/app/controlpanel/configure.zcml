@@ -7,8 +7,6 @@
 
   <include file="permissions.zcml" />
 
-  <adapter factory=".filter.FilterControlPanelAdapter" />
-
   <adapter factory=".language.LanguageControlPanelAdapter" />
 
   <adapter factory=".mail.MailControlPanelAdapter" />
@@ -20,13 +18,6 @@
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
-
-  <browser:page
-      name="filter-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".filter.FilterControlPanel"
-      permission="plone.app.controlpanel.Filtering"
-      />
 
   <browser:page
       name="language-controlpanel"
