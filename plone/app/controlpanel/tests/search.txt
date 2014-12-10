@@ -50,7 +50,7 @@ Make some changes
     >>> browser.getControl(name='form.enable_livesearch').value = False
     >>> browser.getControl(name='form.types_not_searched').value = \
     ...     ['Event', 'Document']
-    
+
 
 Click the save button:
 

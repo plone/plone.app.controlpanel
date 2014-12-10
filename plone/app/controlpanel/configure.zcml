@@ -7,20 +7,20 @@
 
   <include file="permissions.zcml" />
 
-  <adapter for="*"
-           factory=".editing.EditingControlPanelAdapter" />
+  <!--<adapter for="*"
+           factory=".editing.EditingControlPanelAdapter" />-->
 
   <adapter factory=".filter.FilterControlPanelAdapter" />
 
   <adapter factory=".language.LanguageControlPanelAdapter" />
 
-  <adapter factory=".navigation.NavigationControlPanelAdapter" />
+  <!--<adapter factory=".navigation.NavigationControlPanelAdapter" />-->
 
   <adapter factory=".mail.MailControlPanelAdapter" />
 
-  <adapter factory=".maintenance.MaintenanceControlPanelAdapter" />
+  <!--<adapter factory=".maintenance.MaintenanceControlPanelAdapter" />-->
 
-  <adapter factory=".markup.MarkupControlPanelAdapter" />
+  <!-- adapter factory=".markup.MarkupControlPanelAdapter" /-->
 
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
@@ -34,12 +34,12 @@
 
   <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
 
-  <browser:page
+  <!--<browser:page
       name="editing-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".editing.EditingControlPanel"
       permission="plone.app.controlpanel.Editing"
-      />
+      />-->
 
   <browser:page
       name="filter-controlpanel"
@@ -62,33 +62,39 @@
       permission="plone.app.controlpanel.Mail"
       />
 
-  <browser:page
+  <!-- browser:page
       name="markup-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".markup.MarkupControlPanel"
       permission="plone.app.controlpanel.Markup"
-      />
+      /-->
 
+  <!--
   <browser:page
       name="maintenance-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".maintenance.MaintenanceControlPanel"
       permission="cmf.ManagePortal"
       />
+  -->
 
+  <!--
   <browser:page
       name="navigation-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".navigation.NavigationControlPanel"
       permission="plone.app.controlpanel.Navigation"
       />
+  -->
 
+  <!--
   <browser:page
       name="overview-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".overview.OverviewControlPanel"
       permission="plone.app.controlpanel.Overview"
       />
+  -->
 
   <browser:page
       name="ramcache-controlpanel"
@@ -129,12 +135,12 @@
       permission="plone.app.controlpanel.Themes"
       />
 
-  <browser:page
+ <!--  <browser:page
       name="types-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".types.TypesControlPanel"
       permission="plone.app.controlpanel.Types"
-      />
+      /> -->
 
   <browser:page
       name="usergroup-userprefs"

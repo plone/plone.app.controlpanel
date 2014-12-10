@@ -44,7 +44,7 @@
                            name="form.actions.clearall"
                            value="Clear cache"
                            i18n:attributes="value"
-                           class="standalone" />
+                           class="context" />
 
                 </span>
             </div>

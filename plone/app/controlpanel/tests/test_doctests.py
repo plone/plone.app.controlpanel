@@ -25,10 +25,11 @@ def loginAsManager(browser, user='root', pwd='secret', control='Login Name'):
 
 
 def test_suite():
-    tests = ['editing.txt',
+    tests = [
+#            'editing.txt',
              'filter.txt',
              'mail.txt',
-             'maintenance.txt',
+#             'maintenance.txt',
              'security_enable_user_folder.txt',
              'markup.txt',
              'navigation.txt',

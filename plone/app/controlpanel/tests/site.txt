@@ -14,7 +14,7 @@ Login as manager
 
     >>> ptool.site_properties.enable_sitemap
     False
-    
+
     >>> ptool.site_properties.displayPublicationDateInByline
     False
 

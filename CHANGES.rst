@@ -1,15 +1,44 @@
 Changelog
 =========
 
-2.4.5 (unreleased)
+3.0.0 (unreleased)
 ------------------
 
-- Allow ``text-decoration`` in TinyMCE 
-  see https://github.com/plone/plone.app.controlpanel/pull/18
-  [jnachtigall]
+- Remove the markup control panel, as it was moved to Products.CMFPlone.
+  [thet]
+
+- Remove the control panel overview (moved to Products.CMFPlone)
+  This breaks Plone 4 compatibility.
+  PLIP 10359 (https://dev.plone.org/ticket/10359)
+  https://github.com/plone/Products.CMFPlone/issues/290
+  [khink]
 
 - Ported tests to plone.app.testing
   [tomgross]
+
+2.4.6 (2014-11-01)
+------------------
+
+- Nothing changed yet.
+
+
+2.4.5 (2014-10-23)
+------------------
+
+- Remove DL's from portal message templates.
+  https://github.com/plone/Products.CMFPlone/issues/153
+  [khink]
+
+- Allow ``text-decoration`` in TinyMCE
+  see https://github.com/plone/plone.app.controlpanel/pull/18
+  [jnachtigall]
+
+- Integration of the new markup update and CSS for both Plone and Barceloneta
+  theme. This is the work done in the GSOC Barceloneta theme project.
+  [albertcasado, sneridagh]
+
+- Update <div id="content"> in all templates with <article id="content">
+  [albertcasado]
 
 
 2.4.4 (2014-06-06)
@@ -52,10 +81,6 @@ Changelog
 
 - Remove search control panel since it has been moved to Products.CMFPlone.
   [timo]
-
-- Remove DL's from portal message templates.
-  https://github.com/plone/Products.CMFPlone/issues/153
-  [khink]
 
 - Add a warning, if plone.app.event is available but timezone is not set.
   [thet]

@@ -53,7 +53,7 @@
             Portal status message
         </div>
 
-        <div id="content">
+        <article id="content">
             <a href=""
                id="setup-link"
                tal:attributes="href string:$portal_url/plone_control_panel"
@@ -272,7 +272,7 @@
 
                 </form>
             </div>
-        </div>
+        </article>
     </div>
 
 </metal:main>
