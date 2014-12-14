@@ -42,10 +42,10 @@ def test_suite():
         package="plone.app.controlpanel.tests",
         test_class=UserGroupsControlPanelTestCase))
 
-    suite.addTest(FunctionalDocFileSuite(
-        'security.txt',
-        optionflags=OPTIONFLAGS,
-        package="plone.app.controlpanel.tests",
-        test_class=EmailLoginSecurityControlPanelTestCase))
+#    suite.addTest(FunctionalDocFileSuite(
+#        'security.txt',
+#        optionflags=OPTIONFLAGS,
+#        package="plone.app.controlpanel.tests",
+#        test_class=EmailLoginSecurityControlPanelTestCase))
 
     return suite
