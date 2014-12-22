@@ -4,6 +4,9 @@ Changelog
 3.0.0 (unreleased)
 ------------------
 
+- Remove the quickinstaller (moved to Products.CMFPlone).
+  [timo]
+
 - Remove the users/groups control panel (moved to Products.CMFPlone).
   [timo]
 
