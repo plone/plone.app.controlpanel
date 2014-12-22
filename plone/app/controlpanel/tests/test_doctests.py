@@ -17,9 +17,9 @@ def test_suite():
     tests = [
 #            'editing.txt',
              'filter.txt',
-             'mail.txt',
+#             'mail.txt',
 #             'maintenance.txt',
-             'security_enable_user_folder.txt',
+#             'security_enable_user_folder.txt',
 #             'search.txt',
 #             'site.txt',
 #             'skins.txt',
@@ -42,10 +42,10 @@ def test_suite():
         package="plone.app.controlpanel.tests",
         test_class=UserGroupsControlPanelTestCase))
 
-    suite.addTest(FunctionalDocFileSuite(
-        'security.txt',
-        optionflags=OPTIONFLAGS,
-        package="plone.app.controlpanel.tests",
-        test_class=EmailLoginSecurityControlPanelTestCase))
+#    suite.addTest(FunctionalDocFileSuite(
+#        'security.txt',
+#        optionflags=OPTIONFLAGS,
+#        package="plone.app.controlpanel.tests",
+#        test_class=EmailLoginSecurityControlPanelTestCase))
 
     return suite

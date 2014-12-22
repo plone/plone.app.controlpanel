@@ -27,9 +27,10 @@ from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
 from Products.PluggableAuthService.interfaces.plugins import IRolesPlugin
 
 from form import ControlPanelForm, ControlPanelView
-from security import ISecuritySchema
+from Products.CMFPlone.interfaces import ISecuritySchema
 
 logger = logging.getLogger('plone.app.controlpanel')
+
 
 class IUserGroupsSettingsSchema(Interface):
 
