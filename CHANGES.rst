@@ -7,6 +7,9 @@ Changelog
 - Remove the users/groups control panel (moved to Products.CMFPlone).
   [timo]
 
+- Remove the navigation control panel (moved to Products.CMFPlone).
+  [timo]
+
 - Remove the markup control panel, as it was moved to Products.CMFPlone.
   [thet]
 
