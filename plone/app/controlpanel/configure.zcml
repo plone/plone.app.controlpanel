@@ -15,8 +15,6 @@
 
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
-  <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
-
   <browser:page
       name="filter-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -43,53 +41,6 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".skins.SkinsControlPanel"
       permission="plone.app.controlpanel.Themes"
-      />
-
-  <browser:page
-      name="usergroup-userprefs"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UsersOverviewControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_usersoverview.pt"
-      />
-
-  <browser:page
-      name="usergroup-groupprefs"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupsOverviewControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupsoverview.pt"
-      />
-
-  <browser:page
-      name="usergroup-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UserGroupsSettingsControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      />
-
-  <browser:page
-      name="usergroup-groupmembership"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupMembershipControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupmembership.pt"
-      />
-
-  <browser:page
-      name="usergroup-usermembership"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UserMembershipControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_usermembership.pt"
-      />
-
-  <browser:page
-      name="usergroup-groupdetails"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupDetailsControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupdetails.pt"
       />
 
   <view
