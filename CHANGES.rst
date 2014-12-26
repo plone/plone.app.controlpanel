@@ -4,6 +4,18 @@ Changelog
 3.0.0 (unreleased)
 ------------------
 
+- Remove the syndication control panel (moved to Products.CMFPlone).
+  [timo]
+
+- Remove the quickinstaller (moved to Products.CMFPlone).
+  [timo]
+
+- Remove the users/groups control panel (moved to Products.CMFPlone).
+  [timo]
+
+- Remove the navigation control panel (moved to Products.CMFPlone).
+  [timo]
+
 - Remove the markup control panel, as it was moved to Products.CMFPlone.
   [thet]
 

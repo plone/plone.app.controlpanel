@@ -28,11 +28,14 @@ def test_suite():
     tests = [
 #            'editing.txt',
              'filter.txt',
-             'mail.txt',
+#             'mail.txt',
 #             'maintenance.txt',
-             'security_enable_user_folder.txt',
-             'markup.txt',
-             'navigation.txt',
+#             'security_enable_user_folder.txt',
+#             'search.txt',
+#             'site.txt',
+#             'skins.txt',
+#             'markup.txt',
+#             'navigation.txt',
              'types.txt',
              'syndication.txt'
              ]
@@ -46,17 +49,17 @@ def test_suite():
                                 'simplify_white_space': simplify_white_space}),
             layer=CP_FUNCTIONAL_LAYER))
 
-    suite.addTest(layered(
-        DocFileSuite('usergroups.txt', optionflags=OPTIONFLAGS,
-                     package="plone.app.controlpanel.tests",
-                     globs={'loginAsManager': loginAsManager,
-                            'generate_user_and_groups': generate_user_and_groups}),
-        layer=CP_FUNCTIONAL_LAYER))
+#    suite.addTest(layered(
+#        DocFileSuite('usergroups.txt', optionflags=OPTIONFLAGS,
+#                     package="plone.app.controlpanel.tests",
+#                     globs={'loginAsManager': loginAsManager,
+#                            'generate_user_and_groups': generate_user_and_groups}),
+#        layer=CP_FUNCTIONAL_LAYER))
 
-    suite.addTest(layered(
-        DocFileSuite('security.txt', optionflags=OPTIONFLAGS,
-                     package="plone.app.controlpanel.tests",
-                     globs={'loginAsManager': loginAsManager}),
-        layer=CP_SECURITY_LAYER))
+#    suite.addTest(layered(
+#        DocFileSuite('security.txt', optionflags=OPTIONFLAGS,
+#                     package="plone.app.controlpanel.tests",
+#                     globs={'loginAsManager': loginAsManager}),
+#        layer=CP_SECURITY_LAYER))
 
     return suite
