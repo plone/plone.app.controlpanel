@@ -80,15 +80,10 @@ We'll confirm that we can disable the redirect_links option for the link type:
     >>> browser.getForm(action=types_configlet_url).submit()
     >>> '<input id="redirect_links"' in browser.contents
     True
-<<<<<<< HEAD
+
     >>> browser.getControl(name='redirect_links:boolean').value = False
     >>> browser.getControl('Apply Changes').click()
-    
-=======
-    >>> self.browser.getControl(name='redirect_links:boolean').value = False
-    >>> self.browser.getControl('Apply Changes').click()
 
->>>>>>> master
 Now the redirect links checkbox option is no longer checked:
 
     >>> browser.open(types_configlet_url)
