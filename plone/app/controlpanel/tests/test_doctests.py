@@ -17,7 +17,6 @@ def test_suite():
         'filter.txt',
         # 'mail.txt',
         # 'security_enable_user_folder.txt',
-        # 'search.txt',
         # 'site.txt',
         # 'skins.txt',
         # 'navigation.txt',
