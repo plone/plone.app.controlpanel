@@ -23,13 +23,6 @@
       />
 
   <browser:page
-      name="language-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".language.LanguageControlPanel"
-      permission="plone.app.controlpanel.Language"
-      />
-
-  <browser:page
       name="ramcache-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".ram.RAMCacheControlPanel"
