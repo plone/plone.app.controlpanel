@@ -20,7 +20,6 @@ def test_suite():
         # 'search.txt',
         # 'site.txt',
         # 'skins.txt',
-        # 'markup.txt',
         # 'navigation.txt',
         'types.txt',
         'syndication.txt'
