@@ -5,8 +5,6 @@ from Products.PloneTestCase.PloneTestCase import setupPloneSite
 from Testing.ZopeTestCase import FunctionalDocFileSuite
 
 from plone.app.controlpanel.tests.cptc import ControlPanelTestCase
-from plone.app.controlpanel.tests.cptc import UserGroupsControlPanelTestCase
-from plone.app.controlpanel.tests.cptc import EmailLoginSecurityControlPanelTestCase
 
 setupPloneSite()
 
@@ -18,7 +16,6 @@ def test_suite():
 #            'editing.txt',
              'filter.txt',
 #             'mail.txt',
-#             'maintenance.txt',
 #             'security_enable_user_folder.txt',
 #             'search.txt',
 #             'site.txt',
