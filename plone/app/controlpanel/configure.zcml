@@ -16,13 +16,6 @@
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
   <browser:page
-      name="filter-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".filter.FilterControlPanel"
-      permission="plone.app.controlpanel.Filtering"
-      />
-
-  <browser:page
       name="language-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".language.LanguageControlPanel"
