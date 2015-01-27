@@ -7,12 +7,16 @@ First some initial setup code:
     >>> from Products.CMFCore.interfaces import IPropertiesTool
     >>> from Products.CMFCore.utils import getToolByName
     >>> ptool = getUtility(IPropertiesTool)
-    >>> self.loginAsManager()
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(layer['app'])
+
+Login as manager
+    >>> loginAsManager(browser)
     >>> types_configlet_url = 'http://nohost/plone/@@types-controlpanel'
 
 Then we change a workflow title, so we can test for UnicodeDecodeErrors:
 
-    >>> wt = getToolByName(self.portal, 'portal_workflow')
+    >>> wt = getToolByName(layer['portal'], 'portal_workflow')
     >>> wf = wt['simple_publication_workflow']
     >>> old_title = wf.title
     >>> wf.title = u'Workflow de Noticias'.encode('utf-8')
@@ -22,34 +26,34 @@ Viewing the types control panel
 
 Choose a standard type and hit cancel:
 
-    >>> self.browser.open(types_configlet_url)
-    >>> self.browser.getControl(name='type_id').value = ['Link']
-    >>> self.browser.getControl('Cancel').click()
+    >>> browser.open(types_configlet_url)
+    >>> browser.getControl(name='type_id').value = ['Link']
+    >>> browser.getControl('Cancel').click()
 
 We should be back on the Site Setup screen:
 
-    >>> 'plone_control_panel' in self.browser.url
+    >>> 'plone_control_panel' in browser.url
     True
 
 Navigate back to the type control panel and select link again:
-
-    >>> self.browser.getLink('Types').click()
-    >>> self.browser.getControl(name='type_id').value = ['Link']
-    >>> self.browser.getForm(action=types_configlet_url).submit()
+    
+    >>> browser.getLink('Types').click()
+    >>> browser.getControl(name='type_id').value = ['Link']
+    >>> browser.getForm(action=types_configlet_url).submit()
 
 Enable allow commenting for the link type
 
-    >>> self.browser.getControl('Allow comments').selected = True
-    >>> self.browser.getControl('Apply Changes').click()
-
+    >>> browser.getControl('Allow comments').selected = True
+    >>> browser.getControl('Apply Changes').click()
+    
 Navigate back to link type to confirm setting.  Also confirm that the
 redirect_links setting is enabled. For easier testing we simplify the
 white space:
 
-    >>> self.browser.getLink('Types').click()
-    >>> self.browser.getControl(name='type_id').value = ['Link']
-    >>> self.browser.getForm(action=types_configlet_url).submit()
-    >>> contents = self.simplify_white_space(self.browser.contents)
+    >>> browser.getLink('Types').click()
+    >>> browser.getControl(name='type_id').value = ['Link']
+    >>> browser.getForm(action=types_configlet_url).submit()
+    >>> contents = simplify_white_space(browser.contents)
     >>> 'Globally addable' in contents
     True
     >>> 'Allow comments' in contents
@@ -64,27 +68,28 @@ white space:
 For only the link type, we have a special setting that controls whether the
 view will redirect to the remote url for users without editing permissions:
 
-    >>> self.browser.open(types_configlet_url)
-    >>> self.browser.getControl(name='type_id').value = ['News Item']
-    >>> self.browser.getForm(action=types_configlet_url).submit()
-    >>> '<input id="redirect_links"' in self.browser.contents
+    >>> browser.open(types_configlet_url)
+    >>> browser.getControl(name='type_id').value = ['News Item']
+    >>> browser.getForm(action=types_configlet_url).submit()
+    >>> '<input id="redirect_links"' in browser.contents
     False
 
 We'll confirm that we can disable the redirect_links option for the link type:
 
-    >>> self.browser.getControl(name='type_id').value = ['Link']
-    >>> self.browser.getForm(action=types_configlet_url).submit()
-    >>> '<input id="redirect_links"' in self.browser.contents
+    >>> browser.getControl(name='type_id').value = ['Link']
+    >>> browser.getForm(action=types_configlet_url).submit()
+    >>> '<input id="redirect_links"' in browser.contents
     True
-    >>> self.browser.getControl(name='redirect_links:boolean').value = False
-    >>> self.browser.getControl('Apply Changes').click()
+
+    >>> browser.getControl(name='redirect_links:boolean').value = False
+    >>> browser.getControl('Apply Changes').click()
 
 Now the redirect links checkbox option is no longer checked:
 
-    >>> self.browser.open(types_configlet_url)
-    >>> self.browser.getControl(name='type_id').value = ['Link']
-    >>> self.browser.getForm(action=types_configlet_url).submit()
-    >>> contents = self.simplify_white_space(self.browser.contents)
+    >>> browser.open(types_configlet_url)
+    >>> browser.getControl(name='type_id').value = ['Link']
+    >>> browser.getForm(action=types_configlet_url).submit()
+    >>> contents = simplify_white_space(browser.contents)
     >>> 'Globally addable' in contents
     True
     >>> 'Allow comments' in contents
@@ -108,16 +113,16 @@ No default workflow
 This references http://dev.plone.org/plone/ticket/11901
 
 Open the Types control panel and set the default workflow to None:
-    >>> self.browser.open(types_configlet_url)
-    >>> self.browser.getControl(name='new_workflow').value = ['[none]']
-    >>> self.browser.getControl(name="form.button.SelectWorkflow").click()
-    >>> self.browser.getControl(name="form.button.Save").click()
+    >>> browser.open(types_configlet_url)
+    >>> browser.getControl(name='new_workflow').value = ['[none]']
+    >>> browser.getControl(name="form.button.SelectWorkflow").click()
+    >>> browser.getControl(name="form.button.Save").click()
 
 Now choose a standard type and submit:
-    >>> self.browser.getControl(name='type_id').value = ['Link']
-    >>> self.browser.getControl(name="form.button.SelectContentType").click()
+    >>> browser.getControl(name='type_id').value = ['Link']
+    >>> browser.getControl(name="form.button.SelectContentType").click()
 
-    >>> self.browser.contents
+    >>> browser.contents
     '...Globally addable...
     ...Allow comments...
     ...Visible in searches...'
