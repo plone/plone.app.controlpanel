@@ -25,6 +25,8 @@ Changelog
   https://github.com/plone/Products.CMFPlone/issues/290
   [khink]
 
+- Ported tests to plone.app.testing
+  [tomgross]
 
 2.4.6 (2014-11-01)
 ------------------

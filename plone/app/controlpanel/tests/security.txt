@@ -3,13 +3,18 @@ Security controlpanel
 
 First some initial setup code. We are logging as the 'root' user with 'Manager' permission:
 
-    >>> browser = self.browser
-    >>> self.loginAsManager()
+    >>> portal = layer['portal']
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(layer['app'])
+
+Login as manager
+    >>> loginAsManager(browser, control='E-mail')
 
 Check some initial settings:
 
     >>> from Products.CMFCore.utils import getToolByName
-    >>> site_props = getToolByName(self.portal, 'portal_properties').site_properties
+    >>> site_props = getToolByName(portal, 'portal_properties').site_properties
     >>> site_props.getProperty('use_uuid_as_userid')
     False
     >>> site_props.getProperty('use_email_as_login')
@@ -24,14 +29,14 @@ Several dozen users are created by the test setup.  Our installation
 code changes their login name to their email address.  Let's check a
 few things:
 
-    >>> pas = getToolByName(self.portal, 'acl_users')
+    >>> pas = getToolByName(portal, 'acl_users')
     >>> len(pas.getUsers()) > 50
     True
     >>> for user in pas.getUsers():
-    ...     self.assertEqual(user.getUserName(), user.getUserName().lower())
+    ...     assert user.getUserName() == user.getUserName().lower()
     ...     if user.getId() in ('root', 'test_user_1_'):
     ...         continue
-    ...     self.assertTrue('@' in user.getUserName())
+    ...     assert '@' in user.getUserName()
 
 Enable uuid as user id:
 
