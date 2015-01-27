@@ -1,14 +1,13 @@
+import re
 from cStringIO import StringIO
 from urllib import urlencode
 from plone.app.controlpanel.tests.cptc import UserGroupsControlPanelTestCase
-from plone.protect.authenticator import createToken
+from Products.PloneTestCase.PloneTestCase import setupPloneSite
+
+setupPloneSite()
 
 
 class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
-
-    def _getauth(self, userName):
-        self.login(userName)
-        return createToken()
 
     def afterSetUp(self):
         super(TestSiteAdministratorRoleFunctional, self).afterSetUp()
@@ -16,8 +15,11 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
         # add a user with the Site Administrator role
         self.portal.portal_membership.addMember('siteadmin', 'secret', ['Site Administrator'], [])
 
-        self.manager_token = self._getauth('root')
-        self.siteadmin_token = self._getauth('siteadmin')
+        token_re = re.compile(r'name="_authenticator" value="([^"]+)"')
+        res = self.publish('/plone/@@usergroup-userprefs', basic='root:secret')
+        self.manager_token = token_re.search(res.getOutput()).group(1)
+        res = self.publish('/plone/@@usergroup-userprefs', basic='siteadmin:secret')
+        self.siteadmin_token = token_re.search(res.getOutput()).group(1)
 
         self.normal_user = 'DIispfuF'
 
@@ -260,3 +262,8 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
         group = self.portal.acl_users.getGroupById('Administrators')
         self.assertTrue(group is not None)
 
+def test_suite():
+    from unittest import TestSuite, makeSuite
+    suite = TestSuite()
+    suite.addTest(makeSuite(TestSiteAdministratorRoleFunctional))
+    return suite
