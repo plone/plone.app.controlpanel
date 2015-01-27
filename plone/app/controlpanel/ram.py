@@ -9,8 +9,6 @@ from zope.interface import implements
 from zope.ramcache.interfaces.ram import IRAMCache
 from zope.schema import Int
 
-from Acquisition import aq_inner
-
 from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
