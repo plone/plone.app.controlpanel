@@ -6,26 +6,24 @@ First some initial setup code:
     >>> from zope.component import getUtility
     >>> from Products.CMFCore.interfaces import IPropertiesTool
     >>> ptool = getUtility(IPropertiesTool)
-    >>> from plone.testing.z2 import Browser
-    >>> browser = Browser(layer['app'])
-    >>> loginAsManager(browser)
+    >>> self.loginAsManager()
 
 Viewing the site control panel
 -----------------------------
 
-    >>> browser.open('http://nohost/plone/@@editing-controlpanel')
-    >>> browser.url
+    >>> self.browser.open('http://nohost/plone/@@editing-controlpanel')
+    >>> self.browser.url
     'http://nohost/plone/@@editing-controlpanel'
 
 Click the cancel button:
 
-    >>> browser.getControl(name="form.actions.cancel").click()
-    >>> browser.url.endswith('plone_control_panel')
+    >>> self.browser.getControl(name="form.actions.cancel").click()
+    >>> self.browser.url.endswith('plone_control_panel')
     True
 
 There should be still no changes:
 
-    >>> 'Changes canceled.' in browser.contents
+    >>> 'Changes canceled.' in self.browser.contents
     True
 
 
@@ -34,11 +32,11 @@ Configure the locking for the site
 
 Standard behavior for locking is to have it enabled. Let's change that:
 
-    >>> browser.open('http://nohost/plone/@@editing-controlpanel')
-    >>> browser.getControl(name='form.lock_on_ttw_edit').value
+    >>> self.browser.open('http://nohost/plone/@@editing-controlpanel')
+    >>> self.browser.getControl(name='form.lock_on_ttw_edit').value
     True
-    >>> browser.getControl(name='form.lock_on_ttw_edit').value = False
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> self.browser.getControl(name='form.lock_on_ttw_edit').value = False
+    >>> self.browser.getControl(name="form.actions.save").click()
 
 Confirm that our change updated the property:
 

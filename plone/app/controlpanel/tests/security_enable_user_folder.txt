@@ -4,11 +4,8 @@ Enable/disable user folder
 
 First some initial setup code. We are logging as the 'root' user with 'Manager' permission:
 
-    >>> from plone.testing.z2 import Browser
-    >>> browser = Browser(layer['app'])
-
-Login as manager
-    >>> loginAsManager(browser)
+    >>> browser = self.browser
+    >>> self.loginAsManager()
 
 Lets ensure that we currently are the 'root' user:
 
@@ -49,10 +46,7 @@ So the 'My Folder' shouldn't be visible:
 
 Lets do a short cut for the root user and create the member area immediately:
 
-    >>> portal = layer['portal']
     >>> portal.portal_membership.createMemberArea('root')
-    >>> import transaction
-    >>> transaction.commit()
 
 There should now be a user folder and the 'My Folder' action should be visible
 in the personal bar:
@@ -76,9 +70,8 @@ Test with a member with the 'Member' permission
 
 Create a new member and log in as member:
 
-    >>> uf = portal.acl_users
-    >>> uf.userFolderAddUser('member', 'secret', ['Member'], [])
-    >>> transaction.commit()
+    >>> self.uf = self.portal.acl_users
+    >>> self.uf.userFolderAddUser('member', 'secret', ['Member'], [])
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'member'
@@ -114,7 +107,7 @@ Log out as member:
 
 Log in as manager and disable user folder creation:
 
-    >>> loginAsManager(browser)
+    >>> self.loginAsManager()
 
     >>> browser.open('http://nohost/plone/@@security-controlpanel')
     >>> browser.getControl(name='form.enable_user_folders').value = False
@@ -130,9 +123,8 @@ Log out as manager:
 
 Create a new member and login as new member:
 
-    >>> uf = layer['portal'].acl_users
-    >>> uf.userFolderAddUser('newmember', 'secret', ['Member'], [])
-    >>> transaction.commit()
+    >>> self.uf = self.portal.acl_users
+    >>> self.uf.userFolderAddUser('newmember', 'secret', ['Member'], [])
     >>> browser.open('http://nohost/plone/')
     >>> browser.getLink('Log in').click()
     >>> browser.getControl('Login Name').value = 'newmember'

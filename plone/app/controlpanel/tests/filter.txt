@@ -8,12 +8,9 @@ First some initial setup code:
     >>> from Products.PortalTransforms.interfaces import IPortalTransformsTool
     >>> from Products.CMFCore.utils import getToolByName
 
-    >>> from plone.testing.z2 import Browser
-    >>> browser = Browser(layer['app'])
-
-Login as manager
-    >>> loginAsManager(browser)
+    >>> browser = self.browser
     >>> safe_html = getUtility(IPortalTransformsTool).safe_html
+    >>> self.loginAsManager()
 
 Viewing the search control panel
 --------------------------------
