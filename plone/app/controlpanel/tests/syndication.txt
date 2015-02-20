@@ -47,7 +47,12 @@ Create collection and check syndication settings button:
     >>> self.login('root')
     >>> self.browser.open(addTokenToUrl('http://nohost/plone/createObject?type_name=Collection', self.fake_request))
     >>> self.browser.getControl(name="title").value = 'test-collection'
+    >>> self.browser.getControl(name="query").value = '[{"i": "portal_type", "o": "plone.app.querystring.operation.selection.is", "v": ["News Item"]}, {"i": "review_state", "o": "plone.app.querystring.operation.selection.is", "v": ["published"]}]'
     >>> self.browser.getControl('Save').click()
 
+    >>> 'Please finish your search terms / criteria' in self.browser.contents
+    False
+    >>> 'Please correct the indicated errors.' in self.browser.contents
+    False
     >>> '/synPropertiesForm' in self.browser.contents
     True

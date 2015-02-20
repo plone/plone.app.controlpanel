@@ -146,7 +146,7 @@ Check that the filtering works
     True
     >>> browser.getControl('Page').click()
     >>> browser.getControl('Add').click()
-    >>> browser.getControl('Body Text').value = \
+    >>> browser.getControl(name='text').value = \
     ... '<p>Testing that<span> tag and its contents get stripped</span> works.</p>'
     >>> browser.getControl('Title').value = 'My Page'
     >>> browser.getControl('Save').click()
@@ -176,6 +176,5 @@ Must use print here to take advantage of whitespace folding
 (whitespace in the body text may vary depending on the tidy_html transform).
 
     >>> browser.open('http://nohost/plone/Members/my-page')
-    >>> print browser.contents
-    <!DOCTYPE...
-    <p>Testing that works.</p>...
+    >>> '<p>Testing that works.</p>' in browser.contents
+    True

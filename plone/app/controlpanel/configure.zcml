@@ -15,8 +15,6 @@
 
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
-  <adapter factory=".usergroups.UserGroupsSettingsControlPanelAdapter" />
-
   <browser:page
       name="filter-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
@@ -45,53 +43,6 @@
       permission="plone.app.controlpanel.Themes"
       />
 
-  <browser:page
-      name="usergroup-userprefs"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UsersOverviewControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_usersoverview.pt"
-      />
-
-  <browser:page
-      name="usergroup-groupprefs"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupsOverviewControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupsoverview.pt"
-      />
-
-  <browser:page
-      name="usergroup-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UserGroupsSettingsControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      />
-
-  <browser:page
-      name="usergroup-groupmembership"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupMembershipControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupmembership.pt"
-      />
-
-  <browser:page
-      name="usergroup-usermembership"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.UserMembershipControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_usermembership.pt"
-      />
-
-  <browser:page
-      name="usergroup-groupdetails"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".usergroups.GroupDetailsControlPanel"
-      permission="plone.app.controlpanel.UsersAndGroups"
-      template="usergroups_groupdetails.pt"
-      />
-
   <view
       type="zope.publisher.interfaces.browser.IBrowserRequest"
       for="zope.schema.interfaces.ITuple
@@ -108,42 +59,5 @@
 
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
-
-  <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      name="syndication-settings"
-      class=".syndication.SyndicationControlPanel"
-      permission="cmf.ManagePortal"
-      />
-
-  <!-- quickinstaller related -->
-  <browser:page
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    name="prefs_install_products_form"
-    class=".qi.ManageProductsView"
-    permission="cmf.ManagePortal"
-    template="qi.pt"
-    />
-
- <browser:page
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    name="upgrade_products"
-    class=".qi.UpgradeProductsView"
-    permission="cmf.ManagePortal"
-    />
-
- <browser:page
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    name="install_products"
-    class=".qi.InstallProductsView"
-    permission="cmf.ManagePortal"
-    />
-
- <browser:page
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    name="uninstall_products"
-    class=".qi.UninstallProductsView"
-    permission="cmf.ManagePortal"
-    />
 
 </configure>
