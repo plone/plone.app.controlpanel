@@ -50,15 +50,15 @@ Test enabling syndication settings button:
 Create collection and check syndication settings button:
 
     >>> from plone.protect.utils import addTokenToUrl
-    >>> from plone.testing.z2 import login
     >>> login(layer['portal'].acl_users, 'root')
-    >>> url = addTokenToUrl(portal_url + '/createObject?type_name=Collection', layer['request'])
-
-    >>> browser.addHeader('Authorization', 'Basic root:secret')
-    >>> browser.open(url)
-
+    >>> browser.open(addTokenToUrl('http://nohost/plone/createObject?type_name=Collection', self.fake_request))
     >>> browser.getControl(name="title").value = 'test-collection'
+    >>> browser.getControl(name="query").value = '[{"i": "portal_type", "o": "plone.app.querystring.operation.selection.is", "v": ["News Item"]}, {"i": "review_state", "o": "plone.app.querystring.operation.selection.is", "v": ["published"]}]'
     >>> browser.getControl('Save').click()
 
+    >>> 'Please finish your search terms / criteria' in browser.contents
+    False
+    >>> 'Please correct the indicated errors.' in browser.contents
+    False
     >>> '/synPropertiesForm' in browser.contents
     True
