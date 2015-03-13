@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0 (unreleased)
+3.0.0 (2015-03-13)
 ------------------
 
 - Remove the syndication control panel (moved to Products.CMFPlone).
