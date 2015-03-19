@@ -21,7 +21,6 @@ def test_suite():
         # 'skins.txt',
         # 'navigation.txt',
         # 'types.txt',
-        'syndication.txt'
     ]
     suite = TestSuite()
 
