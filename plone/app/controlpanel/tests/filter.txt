@@ -148,7 +148,11 @@ Try disabling safe html transform
 ---------------------------------
 
     >>> browser.open('http://nohost/plone/@@filter-controlpanel')
-    >>> browser.getControl(name="form.widgets.disable_filtering").value = True
+    >>> browser.getControl(name="form.widgets.disable_filtering:list").value
+    []
+    >>> browser.getControl(name="form.widgets.disable_filtering:list").controls[0].click()
+    >>> browser.getControl(name="form.widgets.disable_filtering:list").value
+    ['selected']
     >>> browser.getControl(name="form.buttons.apply").click()
     >>> safe_html._config['disable_transform']
     1
@@ -156,7 +160,11 @@ Try disabling safe html transform
 and re-enable
 
     >>> browser.open('http://nohost/plone/@@filter-controlpanel')
-    >>> browser.getControl(name="form.disable_filtering").value = False
+    >>> browser.getControl(name="form.widgets.disable_filtering:list").value
+    ['selected']
+    >>> browser.getControl(name="form.widgets.disable_filtering:list").controls[0].click()
+    >>> browser.getControl(name="form.widgets.disable_filtering:list").value
+    []
     >>> browser.getControl(name="form.buttons.apply").click()
     >>> safe_html._config['disable_transform']
     0
