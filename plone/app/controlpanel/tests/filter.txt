@@ -36,12 +36,12 @@ Look at the defaults
     >>> browser.open('http://nohost/plone/@@filter-controlpanel')
 
     >>> def print_all_of(fieldname):
-    ...     for i in xrange(sys.maxint):
-    ...         key = 'form.%s.%s.' % (fieldname, i)
-    ...         try:
-    ...             print browser.getControl(name=key).value
-    ...         except LookupError, e:
-    ...             break
+    ...     try:
+    ...         valuestring = browser.getControl(name='form.widgets.%s' % fieldname).value
+    ...     except LookupError:  # no such control
+    ...         valuestring = ''
+    ...     for value in [v for v in valuestring.split('\r\n') if v]:  # print non-empty only
+    ...         print value
 
     >>> print_all_of('nasty_tags')
     applet
