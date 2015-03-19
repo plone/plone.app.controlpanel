@@ -30,17 +30,6 @@ We should get a status message:
     >>> 'Data successfully updated.' in browser.contents
     True
 
-Now click the cancel button:
-
-    >>> browser.getControl(name="form.actions.cancel").click()
-    >>> browser.url.endswith('plone_control_panel')
-    True
-
-There should be still no changes:
-
-    >>> 'Changes canceled.' in browser.contents
-    True
-
 Look at the defaults
 --------------------
 
