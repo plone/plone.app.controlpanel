@@ -21,13 +21,13 @@ Viewing the search control panel
 
 Click the save button without making any changes:
 
-    >>> browser.getControl(name="form.buttons.apply").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> browser.url.endswith('filter-controlpanel')
     True
 
 We should get a status message:
 
-    >>> 'Data successfully updated.' in browser.contents
+    >>> 'Changes saved.' in browser.contents
     True
 
 Look at the defaults
@@ -46,36 +46,15 @@ Look at the defaults
     >>> print_all_of('nasty_tags')
     applet
     embed
-    meta
     object
     script
-    style
 
     >>> print_all_of('stripped_tags')
-    button
-    fieldset
-    form
-    input
-    label
-    legend
-    link
-    noscript
-    object
-    optgroup
-    option
-    param
-    script
-    select
-    style
-    textarea
+    font
 
     >>> print_all_of('custom_tags')
-    article
-    aside
-    audio
-    ...
-
     >>> print_all_of('stripped_attributes')
+    dir
     lang
     valign
     halign
@@ -91,7 +70,7 @@ Look at the defaults
     text-align
     list-style-type
     float
-    padding-left
+    text-decoration
     >>> print_all_of('class_whitelist')
 
 Changing some values
@@ -100,8 +79,8 @@ Changing some values
 Add a new nasty tag
 
     >>> nasty_tags = browser.getControl(name="form.widgets.nasty_tags").value
-    >>> browser.getControl(name="form.widgets.nasty_tags").value = nasty_tags + '\r\rspan'
-    >>> browser.getControl(name="form.buttons.apply").click()
+    >>> browser.getControl(name="form.widgets.nasty_tags").value = nasty_tags + '\r\nspan'
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> 'span' in browser.getControl(name="form.widgets.nasty_tags").value
     True
 
@@ -114,12 +93,12 @@ Changing a permitted style:
 
     >>> style_whitelist = browser.getControl(name="form.widgets.style_whitelist").value
     >>> browser.getControl(name="form.widgets.style_whitelist").value = style_whitelist.replace('float', 'color')
-    >>> browser.getControl(name="form.buttons.apply").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> print_all_of('style_whitelist')
     text-align
     list-style-type
     color
-    padding-left
+    text-decoration
 
 Check that the filtering works
 ------------------------------
@@ -148,7 +127,7 @@ Try disabling safe html transform
     >>> browser.getControl(name="form.widgets.disable_filtering:list").controls[0].click()
     >>> browser.getControl(name="form.widgets.disable_filtering:list").value
     ['selected']
-    >>> browser.getControl(name="form.buttons.apply").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> safe_html._config['disable_transform']
     1
 
@@ -160,7 +139,7 @@ and re-enable
     >>> browser.getControl(name="form.widgets.disable_filtering:list").controls[0].click()
     >>> browser.getControl(name="form.widgets.disable_filtering:list").value
     []
-    >>> browser.getControl(name="form.buttons.apply").click()
+    >>> browser.getControl(name="form.buttons.save").click()
     >>> safe_html._config['disable_transform']
     0
 
