@@ -21,13 +21,13 @@ Viewing the search control panel
 
 Click the save button without making any changes:
 
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.apply").click()
     >>> browser.url.endswith('filter-controlpanel')
     True
 
 We should get a status message:
 
-    >>> 'Changes saved.' in browser.contents
+    >>> 'Data successfully updated.' in browser.contents
     True
 
 Now click the cancel button:
@@ -112,7 +112,7 @@ Add a new nasty tag
 
     >>> browser.getControl("Add Nasty tags").click()
     >>> browser.getControl(name="form.nasty_tags.6.").value = "span"
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.apply").click()
     >>> print_all_of('nasty_tags')
     applet
     embed
@@ -130,7 +130,7 @@ Adding span to nasty tags should have automatically removed it from the valid ta
 Changing a permitted style:
 
     >>> browser.getControl(name="form.style_whitelist.2.").value = "color"
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.apply").click()
     >>> print_all_of('style_whitelist')
     text-align
     list-style-type
@@ -159,8 +159,8 @@ Try disabling safe html transform
 ---------------------------------
 
     >>> browser.open('http://nohost/plone/@@filter-controlpanel')
-    >>> browser.getControl(name="form.disable_filtering").value = True
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.widgets.disable_filtering").value = True
+    >>> browser.getControl(name="form.buttons.apply").click()
     >>> safe_html._config['disable_transform']
     1
 
@@ -168,7 +168,7 @@ and re-enable
 
     >>> browser.open('http://nohost/plone/@@filter-controlpanel')
     >>> browser.getControl(name="form.disable_filtering").value = False
-    >>> browser.getControl(name="form.actions.save").click()
+    >>> browser.getControl(name="form.buttons.apply").click()
     >>> safe_html._config['disable_transform']
     0
 
