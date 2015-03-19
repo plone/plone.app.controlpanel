@@ -99,17 +99,11 @@ Changing some values
 
 Add a new nasty tag
 
-    >>> browser.getControl("Add Nasty tags").click()
-    >>> browser.getControl(name="form.nasty_tags.6.").value = "span"
+    >>> nasty_tags = browser.getControl(name="form.widgets.nasty_tags").value
+    >>> browser.getControl(name="form.widgets.nasty_tags").value = nasty_tags + '\r\rspan'
     >>> browser.getControl(name="form.buttons.apply").click()
-    >>> print_all_of('nasty_tags')
-    applet
-    embed
-    meta
-    object
-    script
-    span
-    style
+    >>> 'span' in browser.getControl(name="form.widgets.nasty_tags").value
+    True
 
     >>> print sorted(safe_html._config['nasty_tags'])
     [u'applet', u'embed', u'meta', u'object', u'script', u'span', u'style']
@@ -118,7 +112,8 @@ Adding span to nasty tags should have automatically removed it from the valid ta
 
 Changing a permitted style:
 
-    >>> browser.getControl(name="form.style_whitelist.2.").value = "color"
+    >>> style_whitelist = browser.getControl(name="form.widgets.style_whitelist").value
+    >>> browser.getControl(name="form.widgets.style_whitelist").value = style_whitelist.replace('float', 'color')
     >>> browser.getControl(name="form.buttons.apply").click()
     >>> print_all_of('style_whitelist')
     text-align
