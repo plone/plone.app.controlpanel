@@ -52,11 +52,6 @@
       permission="zope.Public"
       />
 
-  <utility
-    component=".markup.WickedTypesVocabularyFactory"
-    name="plone.app.controlpanel.WickedPortalTypes"
-    />
-
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
 
