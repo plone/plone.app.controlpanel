@@ -85,7 +85,7 @@ Add a new nasty tag
     True
 
     >>> print sorted(safe_html._config['nasty_tags'])
-    [u'applet', u'embed', u'meta', u'object', u'script', u'span', u'style']
+    [u'applet', u'embed', u'object', u'script', u'span']
 
 Adding span to nasty tags should have automatically removed it from the valid tags.
 
