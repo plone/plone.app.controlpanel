@@ -14,27 +14,6 @@ from plone.app import testing
 from Products.CMFCore.utils import getToolByName
 
 
-def simplify_white_space(text):
-    """For easier testing we replace all white space with one space.
-
-    And we remove white space around '<' and '>'.
-
-    So this:
-
-      <p
-          id="foo"> Bar
-      </p>
-
-    becomes this:
-
-      <p id="foo">Bar</p>
-    """
-    text = re.sub('\s*<\s*', '<', text)
-    text = re.sub('\s*>\s*', '>', text)
-    text = re.sub('\s+', ' ', text)
-    return text
-
-
 class ControlPanelFixture(PloneTestCaseFixture):
 
     def setUpPloneSite(self, portal):
@@ -47,23 +26,19 @@ CP_FUNCTIONAL_LAYER = testing.FunctionalTesting(
     bases=(CP_FIXTURE,), name='ControlPanel:Functional')
 
 
-class ControlPanelTestCase(FunctionalTestCase):
-    """base test case with convenience methods for all control panel tests"""
+class UserGroupsControlPanelTestCase(FunctionalTestCase):
+    """user/groups-specific test case"""
 
     layer = CP_FUNCTIONAL_LAYER
-
-    def simplify_white_space(self, text):
-        return simplify_white_space(text)
-
-
-class UserGroupsControlPanelTestCase(ControlPanelTestCase):
-    """user/groups-specific test case"""
 
     def afterSetUp(self):
         super(UserGroupsControlPanelTestCase, self).afterSetUp()
         members = [
-            {'username': 'DIispfuF', 'fullname': 'Kevin Hughes', 'email': 'DIispfuF@example.com'},
-            {'username': 'NP4FMIb5', 'email': 'NP4FMIb5@example.com'}
+            {
+              'username': 'DIispfuF',
+              'fullname': 'Kevin Hughes',
+              'email': 'DIispfuF@example.com'
+            },
         ]
         regtool = getToolByName(self.portal, 'portal_registration')
         for member in members:
@@ -74,3 +49,22 @@ class UserGroupsControlPanelTestCase(ControlPanelTestCase):
             )
         transaction.commit()
 
+    def simplify_white_space(self, text):
+        """For easier testing we replace all white space with one space.
+
+        And we remove white space around '<' and '>'.
+
+        So this:
+
+          <p
+              id="foo"> Bar
+          </p>
+
+        becomes this:
+
+          <p id="foo">Bar</p>
+        """
+        text = re.sub('\s*<\s*', '<', text)
+        text = re.sub('\s*>\s*', '>', text)
+        text = re.sub('\s+', ' ', text)
+        return text
