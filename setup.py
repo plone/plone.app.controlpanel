@@ -58,7 +58,6 @@ setup(name='plone.app.controlpanel',
       extras_require={
         'test': [
             'mock',
-            'Products.PloneTestCase',
             'plone.app.testing',
         ]
       }
