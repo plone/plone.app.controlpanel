@@ -13,15 +13,7 @@ OPTIONFLAGS = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
 def test_suite():
     tests = [
-        # 'editing.txt',
         'filter.txt',
-        # 'mail.txt',
-        # 'security_enable_user_folder.txt',
-        # 'site.txt',
-        # 'skins.txt',
-        # 'navigation.txt',
-        # 'types.txt',
-        'syndication.txt'
     ]
     suite = TestSuite()
 
@@ -31,17 +23,5 @@ def test_suite():
             optionflags=OPTIONFLAGS,
             package="plone.app.controlpanel.tests",
             test_class=ControlPanelTestCase))
-
-#    suite.addTest(FunctionalDocFileSuite(
-#        'usergroups.txt',
-#        optionflags=OPTIONFLAGS,
-#        package="plone.app.controlpanel.tests",
-#        test_class=UserGroupsControlPanelTestCase))
-
-#    suite.addTest(FunctionalDocFileSuite(
-#        'security.txt',
-#        optionflags=OPTIONFLAGS,
-#        package="plone.app.controlpanel.tests",
-#        test_class=EmailLoginSecurityControlPanelTestCase))
 
     return suite
