@@ -48,23 +48,3 @@ class UserGroupsControlPanelTestCase(FunctionalTestCase):
                 properties=member
             )
         transaction.commit()
-
-    def simplify_white_space(self, text):
-        """For easier testing we replace all white space with one space.
-
-        And we remove white space around '<' and '>'.
-
-        So this:
-
-          <p
-              id="foo"> Bar
-          </p>
-
-        becomes this:
-
-          <p id="foo">Bar</p>
-        """
-        text = re.sub('\s*<\s*', '<', text)
-        text = re.sub('\s*>\s*', '>', text)
-        text = re.sub('\s+', ' ', text)
-        return text

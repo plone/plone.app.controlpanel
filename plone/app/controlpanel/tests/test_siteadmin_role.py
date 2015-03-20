@@ -3,12 +3,34 @@ from urllib import urlencode
 from plone.app.controlpanel.tests.cptc import UserGroupsControlPanelTestCase
 from plone.protect.authenticator import createToken
 
+import re
+
 
 class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
 
     def _getauth(self, userName):
         self.login(userName)
         return createToken()
+
+    def _simplify_white_space(self, text):
+        """For easier testing we replace all white space with one space.
+
+        And we remove white space around '<' and '>'.
+
+        So this:
+
+          <p
+              id="foo"> Bar
+          </p>
+
+        becomes this:
+
+          <p id="foo">Bar</p>
+        """
+        text = re.sub('\s*<\s*', '<', text)
+        text = re.sub('\s*>\s*', '>', text)
+        text = re.sub('\s+', ' ', text)
+        return text
 
     def afterSetUp(self):
         super(TestSiteAdministratorRoleFunctional, self).afterSetUp()
@@ -102,7 +124,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
             '/plone/@@usergroup-groupprefs',
             basic='siteadmin:secret'
         )
-        contents = self.simplify_white_space(res.getOutput())
+        contents = self._simplify_white_space(res.getOutput())
         self.assertTrue('<input type="checkbox" class="noborder" '
                         'name="group_Reviewers:list" value="Manager" '
                         'disabled="disabled" />' in contents)
@@ -163,7 +185,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
             '/plone/@@usergroup-usermembership?userid=%s' % self.normal_user,
             basic='siteadmin:secret'
         )
-        contents = self.simplify_white_space(res.getOutput())
+        contents = self._simplify_white_space(res.getOutput())
         self.assertTrue(
             '<input type="checkbox" class="noborder" name="add:list" '
             'value="Administrators" disabled="disabled" />' in contents
@@ -192,7 +214,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
             '/plone/@@usergroup-groupmembership?groupname=Administrators',
             basic='siteadmin:secret'
         )
-        contents = self.simplify_white_space(res.getOutput())
+        contents = self._simplify_white_space(res.getOutput())
         self.assertFalse('Search for new group members' in contents)
 
         # and should not be addable if we try to force it
@@ -215,7 +237,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
         # groups granting the Manager role should not be available for
         # selection
         res = self.publish('/plone/@@new-user', basic='siteadmin:secret')
-        contents = self.simplify_white_space(res.getOutput())
+        contents = self._simplify_white_space(res.getOutput())
         self.assertFalse(
             '<input class="label checkboxType" id="form.groups.0" '
             'name="form.groups" type="checkbox" value="Administrators '
@@ -244,7 +266,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
         # a user without the Manager role cannot delete a user with the
         # Manager role
         res = self.publish('/plone/@@usergroup-userprefs', basic='siteadmin:secret')
-        contents = self.simplify_white_space(res.getOutput())
+        contents = self._simplify_white_space(res.getOutput())
         self.assertTrue('<input type="checkbox" class="noborder notify" '
                         'name="delete:list" value="root" disabled="disabled" />'
                         in contents)
@@ -271,7 +293,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
             '/plone/@@usergroup-groupprefs',
             basic='siteadmin:secret'
         )
-        contents = self.simplify_white_space(res.getOutput())
+        contents = self._simplify_white_space(res.getOutput())
         self.assertTrue(
             '<input type="checkbox" class="noborder notify" '
             'name="delete:list" value="Administrators" disabled="disabled" />'
