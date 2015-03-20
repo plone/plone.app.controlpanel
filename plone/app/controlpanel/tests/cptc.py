@@ -14,8 +14,6 @@ from plone.app import testing
 from Products.CMFCore.utils import getToolByName
 
 
-# utiltiy methods
-#
 def simplify_white_space(text):
     """For easier testing we replace all white space with one space.
 
@@ -35,13 +33,6 @@ def simplify_white_space(text):
     text = re.sub('\s*>\s*', '>', text)
     text = re.sub('\s+', ' ', text)
     return text
-
-
-def generateGroups(portal):
-    groupsTool = getToolByName(portal, 'portal_groups')
-    groupsTool.addGroup('group1', [], [], title="Group 1")
-    groupsTool.addGroup('group2', [], [], title="Group 2")
-    groupsTool.addGroup('group3', [], [], title="Group 3 accentué")
 
 
 def generateUsers(portal):
@@ -105,12 +96,9 @@ def generateUsers(portal):
 
 def generate_user_and_groups(portal):
     generateUsers(portal)
-    generateGroups(portal)
     transaction.commit()
 
 
-# Test fixures
-#
 class ControlPanelFixture(PloneTestCaseFixture):
 
     def setUpPloneSite(self, portal):
@@ -123,8 +111,6 @@ CP_FUNCTIONAL_LAYER = testing.FunctionalTesting(
     bases=(CP_FIXTURE,), name='ControlPanel:Functional')
 
 
-# Test cases
-#
 class ControlPanelTestCase(FunctionalTestCase):
     """base test case with convenience methods for all control panel tests"""
 

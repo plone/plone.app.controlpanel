@@ -31,7 +31,7 @@ class TestSiteAdministratorRoleFunctional(UserGroupsControlPanelTestCase):
 
     def testUserManagerRoleCheckboxIsDisabledForNonManagers(self):
         res = self.publish('/plone/@@usergroup-userprefs', basic='siteadmin:secret')
-        contents = self.simplify_white_space(res.getOutput())
+        contents = res.getOutput()
         self.assertTrue('<input type="checkbox" class="noborder" '
                         'name="users.roles:list:records" value="Manager" '
                         'disabled="disabled" />' in contents)
