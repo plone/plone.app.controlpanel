@@ -6,10 +6,6 @@
   <include package="Products.CMFCore" />
 
   <include file="permissions.zcml" />
-<!--
-  <adapter factory=".filter.FilterControlPanelAdapter" />
- -->
-  <adapter factory=".language.LanguageControlPanelAdapter" />
 
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
@@ -24,12 +20,12 @@
       />
  -->
 
-  <browser:page
+  <!--<browser:page
       name="language-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".language.LanguageControlPanel"
       permission="plone.app.controlpanel.Language"
-      />
+      />-->
 
   <browser:page
       name="ramcache-controlpanel"
