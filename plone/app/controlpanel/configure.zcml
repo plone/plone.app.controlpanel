@@ -7,20 +7,18 @@
 
   <include file="permissions.zcml" />
 
-  <adapter factory=".filter.FilterControlPanelAdapter" />
-
-  <!--<adapter factory=".language.LanguageControlPanelAdapter" />-->
-
   <adapter factory=".ram.RAMCacheControlPanelAdapter" />
 
   <adapter factory=".skins.SkinsControlPanelAdapter" />
 
+<!--
   <browser:page
       name="filter-controlpanel"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".filter.FilterControlPanel"
       permission="plone.app.controlpanel.Filtering"
       />
+ -->
 
   <!--<browser:page
       name="language-controlpanel"
