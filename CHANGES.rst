@@ -1,10 +1,21 @@
 Changelog
 =========
 
-3.0.1 (unreleased)
+3.0.1 (2015-03-26)
 ------------------
 
-- Nothing changed yet.
+- Disable language control panel because it has been moved to 
+  z3c.form/plone.app.registry.
+  [bloodbare]
+
+- Remove unused control panel code. Keep imports for bbb.
+  [timo]
+
+- Remove the filter control panel (moved to Products.CMFPlone)
+  [timo]
+
+- Remove Products.PloneTestCase dependency
+  [timo]
 
 
 3.0.0 (2015-03-13)
