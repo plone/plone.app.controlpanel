@@ -4,7 +4,8 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix missing closing div in qi.pt
+  [vincentfretin]
 
 
 3.0.1 (2015-03-26)
