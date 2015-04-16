@@ -4,6 +4,11 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
+- Remove not used code qi.pt/qi.py. The prefs_install_products_form
+  view moved to Products.CMFPlone/controlpanel/quickinstaller.py (closes
+  https://github.com/plone/Products.CMFPlone/issues/430)
+  [vincentfretin]
+
 - Fix missing closing div in qi.pt
   [vincentfretin]
 
