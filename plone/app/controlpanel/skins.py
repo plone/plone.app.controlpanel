@@ -6,7 +6,6 @@ from zope.schema import Bool
 from zope.schema import Choice
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
@@ -56,7 +55,7 @@ class ISkinsSchema(Interface):
                              vocabulary=ICON_VISIBILITY_VOCABULARY)
 
 
-class SkinsControlPanelAdapter(SchemaAdapterBase):
+class SkinsControlPanelAdapter(object):
 
     adapts(IPloneSiteRoot)
     implements(ISkinsSchema)
@@ -69,6 +68,7 @@ class SkinsControlPanelAdapter(SchemaAdapterBase):
         ptool = getToolByName(context, 'portal_properties')
         self.props = ptool.site_properties
         self.themeChanged = False
+        self.encoding = 'utf-8'
 
     def get_theme(self):
         return self.context.getDefaultSkin()

@@ -11,7 +11,6 @@ from zope.schema import Int
 
 from Acquisition import aq_inner
 
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ZopeTwoPageTemplateFile
@@ -38,9 +37,13 @@ class IRAMCacheSchema(Interface):
                  required=True)
 
 
-class RAMCacheControlPanelAdapter(SchemaAdapterBase):
+class RAMCacheControlPanelAdapter(object):
     adapts(IPloneSiteRoot)
     implements(IRAMCacheSchema)
+
+    def __init__(self, context):
+        self.context = context
+        self.encoding = 'utf-8'
 
     def get_max_entries(self):
         return getUtility(IRAMCache).maxEntries

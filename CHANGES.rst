@@ -12,6 +12,8 @@ Changelog
 - Fix missing closing div in qi.pt
   [vincentfretin]
 
+- Removed CMFDefault dependency
+  [tomgross]
 
 3.0.1 (2015-03-26)
 ------------------
