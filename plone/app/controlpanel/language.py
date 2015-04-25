@@ -10,7 +10,6 @@ from zope.schema import Choice
 from Acquisition import aq_inner
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.statusmessages.interfaces import IStatusMessage
@@ -39,14 +38,14 @@ class ILanguageSelectionSchema(Interface):
         vocabulary="plone.app.vocabularies.AvailableContentLanguages")
 
 
-class LanguageControlPanelAdapter(SchemaAdapterBase):
+class LanguageControlPanelAdapter(object):
 
     adapts(IPloneSiteRoot)
     implements(ILanguageSelectionSchema)
 
     def __init__(self, context):
-        super(LanguageControlPanelAdapter, self).__init__(context)
         self.context = getToolByName(context, 'portal_languages')
+        self.encoding = 'utf-8'
 
     def get_default_language(self):
         return aq_inner(self.context).getDefaultLanguage()

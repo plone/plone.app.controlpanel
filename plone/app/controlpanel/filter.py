@@ -9,7 +9,6 @@ from zope.formlib.objectwidget import ObjectWidget
 from zope.formlib.sequencewidget import ListSequenceWidget
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.PortalTransforms.transforms.safe_html import VALID_TAGS
@@ -110,16 +109,16 @@ class IFilterSchema(IFilterTagsSchema, IFilterAttributesSchema,
     """Combined schema for the adapter lookup.
     """
 
-class FilterControlPanelAdapter(SchemaAdapterBase):
+class FilterControlPanelAdapter(object):
     adapts(IPloneSiteRoot)
     implements(IFilterSchema)
 
     def __init__(self, context):
-        super(FilterControlPanelAdapter, self).__init__(context)
         self.context = context
         self.transform = getattr(
             getToolByName(context, 'portal_transforms'), 'safe_html')
         self.kupu_tool = getToolByName(context, 'kupu_library_tool', None)
+        self.encoding = 'utf-8'
 
     def _settransform(self, **kwargs):
         # Cannot pass a dict to set transform parameters, it has
