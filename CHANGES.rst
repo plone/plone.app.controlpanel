@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.2 (unreleased)
+3.0.2 (2015-05-04)
 ------------------
 
 - Remove not used code qi.pt/qi.py. The prefs_install_products_form
