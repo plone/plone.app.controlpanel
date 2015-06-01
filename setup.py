@@ -23,7 +23,7 @@ setup(name='plone.app.controlpanel',
       url='http://pypi.python.org/pypi/plone.app.controlpanel',
       license='GPL version 2',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages = ['plone', 'plone.app'],
+      namespace_packages=['plone', 'plone.app'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
