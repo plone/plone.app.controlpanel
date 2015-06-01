@@ -7,15 +7,6 @@
 
   <include file="permissions.zcml" />
 
-  <view
-      type="zope.publisher.interfaces.browser.IBrowserRequest"
-      for="zope.schema.interfaces.ITuple
-           zope.schema.interfaces.IVocabularyTokenized"
-      provides="zope.formlib.interfaces.IInputWidget"
-      factory=".widgets.MultiSelectTupleWidget"
-      permission="zope.Public"
-      />
-
   <subscriber
       handler=".events.handleConfigurationChangedEvent" />
 
