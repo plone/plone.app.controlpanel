@@ -4,7 +4,10 @@ Changelog
 3.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove formlib dependency. Remove all other unnecessary dependencies.
+  Remove ram and skins control panel. Just keep package with bbb imports for
+  control panels that have been moved to CMFPlone.
+  [timo]
 
 
 3.0.2 (2015-05-04)
@@ -25,7 +28,7 @@ Changelog
 3.0.1 (2015-03-26)
 ------------------
 
-- Disable language control panel because it has been moved to 
+- Disable language control panel because it has been moved to
   z3c.form/plone.app.registry.
   [bloodbare]
 

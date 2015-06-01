@@ -3,54 +3,11 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:browser="http://namespaces.zope.org/browser">
 
-  <include package="Products.CMFCore" />
-
+  <!-- XXX: Move to CMFPlone -->
   <include file="permissions.zcml" />
 
-  <adapter factory=".ram.RAMCacheControlPanelAdapter" />
-
-  <adapter factory=".skins.SkinsControlPanelAdapter" />
-
-<!--
-  <browser:page
-      name="filter-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".filter.FilterControlPanel"
-      permission="plone.app.controlpanel.Filtering"
-      />
- -->
-
-  <!--<browser:page
-      name="language-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".language.LanguageControlPanel"
-      permission="plone.app.controlpanel.Language"
-      />-->
-
-  <browser:page
-      name="ramcache-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".ram.RAMCacheControlPanel"
-      permission="cmf.ManagePortal"
-      />
-
-  <browser:page
-      name="skins-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".skins.SkinsControlPanel"
-      permission="plone.app.controlpanel.Themes"
-      />
-
-  <view
-      type="zope.publisher.interfaces.browser.IBrowserRequest"
-      for="zope.schema.interfaces.ITuple
-           zope.schema.interfaces.IVocabularyTokenized"
-      provides="zope.formlib.interfaces.IInputWidget"
-      factory=".widgets.MultiSelectTupleWidget"
-      permission="zope.Public"
-      />
-
+  <!-- XXX: This is used at least in plone.app.users -->
   <subscriber
-      handler=".events.handleConfigurationChangedEvent" />
+     handler=".events.handleConfigurationChangedEvent" />
 
 </configure>
