@@ -5,6 +5,7 @@ from zope.ramcache.interfaces.ram import IRAMCache
 
 from plone.app.controlpanel.interfaces import IConfigurationChangedEvent
 
+
 class ConfigurationChangedEvent(object):
     implements(IConfigurationChangedEvent)
 

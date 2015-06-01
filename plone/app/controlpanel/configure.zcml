@@ -7,40 +7,6 @@
 
   <include file="permissions.zcml" />
 
-  <adapter factory=".ram.RAMCacheControlPanelAdapter" />
-
-  <adapter factory=".skins.SkinsControlPanelAdapter" />
-
-<!--
-  <browser:page
-      name="filter-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".filter.FilterControlPanel"
-      permission="plone.app.controlpanel.Filtering"
-      />
- -->
-
-  <!--<browser:page
-      name="language-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".language.LanguageControlPanel"
-      permission="plone.app.controlpanel.Language"
-      />-->
-
-  <browser:page
-      name="ramcache-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".ram.RAMCacheControlPanel"
-      permission="cmf.ManagePortal"
-      />
-
-  <browser:page
-      name="skins-controlpanel"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".skins.SkinsControlPanel"
-      permission="plone.app.controlpanel.Themes"
-      />
-
   <view
       type="zope.publisher.interfaces.browser.IBrowserRequest"
       for="zope.schema.interfaces.ITuple
