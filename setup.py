@@ -32,10 +32,7 @@ setup(name='plone.app.controlpanel',
         'zope.component',
         'zope.interface',
         'zope.ramcache',
-        'Acquisition',
         'Products.CMFPlone',
-        'Zope2>=2.13.0',
-        'ZODB3',
       ],
       extras_require={
         'test': [
