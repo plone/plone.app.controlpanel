@@ -3,11 +3,8 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:browser="http://namespaces.zope.org/browser">
 
-  <include package="Products.CMFCore" />
-
   <include file="permissions.zcml" />
 
-  <subscriber
-      handler=".events.handleConfigurationChangedEvent" />
+  <subscriber handler=".events.handleConfigurationChangedEvent" />
 
 </configure>
