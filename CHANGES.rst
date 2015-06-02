@@ -4,6 +4,9 @@ Changelog
 3.0.3 (unreleased)
 ------------------
 
+- Remove ConfigurationChangedEvent. Import from new location to keep bbb.
+  [timo]
+
 - Remove RAM control panel (has been moved to p.a.caching).
   [timo]
 
