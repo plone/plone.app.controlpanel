@@ -28,9 +28,6 @@ setup(name='plone.app.controlpanel',
       zip_safe=False,
       install_requires=[
         'setuptools',
-        'zope.component',
-        'zope.interface',
-        'zope.ramcache',
         'Products.CMFPlone',
       ],
       extras_require={

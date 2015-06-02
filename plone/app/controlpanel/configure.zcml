@@ -5,6 +5,4 @@
 
   <include file="permissions.zcml" />
 
-  <subscriber handler=".events.handleConfigurationChangedEvent" />
-
 </configure>
