@@ -103,6 +103,7 @@ Look at the defaults
     list-style-type
     float
     padding-left
+    text-decoration
     >>> print_all_of('class_whitelist')
 
 Changing some values
@@ -136,6 +137,7 @@ Changing a permitted style:
     list-style-type
     color
     padding-left
+    text-decoration
 
 Check that the filtering works
 ------------------------------
