@@ -4,7 +4,9 @@ Changelog
 2.3.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added ``text-decoration`` to allowed css style attributes in
+  ``@@filter-controlpanel``.  Change backported from master.
+  [jnachtigall, vangheem, maurits]
 
 
 2.3.8 (2013-12-07)
