@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.3.9 (unreleased)
+2.3.9 (2015-09-27)
 ------------------
 
 - Added ``text-decoration`` to allowed css style attributes in
