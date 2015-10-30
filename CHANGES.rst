@@ -4,7 +4,13 @@ Changelog
 3.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+New:
+
+- *add item here*
+
+Fixes:
+
+- *add item here*
 
 
 3.0.3 (2015-06-05)
@@ -284,8 +290,6 @@ Changelog
 
 2.2.6 (2012-06-29)
 ------------------
-
-- Nothing changed yet.
 
 - Users/groups controlpanel: When sending a password mail fails, an error
   message will now be issued. Fixes http://dev.plone.org/ticket/6047
