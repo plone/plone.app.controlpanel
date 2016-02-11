@@ -4,6 +4,8 @@ Changelog
 2.1.5 (unreleased)
 ------------------
 
+Fixes:
+
 - Fix 'Redirect immediately to link target' setting doesn't stick #12892
   [maartenkling]
 
