@@ -4,10 +4,6 @@ Changelog
 3.0.4 (unreleased)
 ------------------
 
-New:
-
-- *add item here*
-
 Fixes:
 
 - Fix backwards-compatibilty import for SecurityControlPanel.
