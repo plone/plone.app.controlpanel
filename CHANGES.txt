@@ -4,7 +4,8 @@ Changelog
 2.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix 'Redirect immediately to link target' setting doesn't stick #12892
+  [maartenkling]
 
 
 2.1.4 (2012-04-15)
@@ -30,7 +31,7 @@ Changelog
 2.1.3 (2011-09-21)
 ------------------
 
-- Display both CMFPlone's package version and profile version in the control 
+- Display both CMFPlone's package version and profile version in the control
   panel overview.
   [esteele]
 
@@ -44,7 +45,7 @@ Changelog
   functionnalities.
   [vincentfretin]
 
-- Fixed canAddToGroup check in usergroups_usermembership view, apparently 
+- Fixed canAddToGroup check in usergroups_usermembership view, apparently
   a bad copy and paste from the old prefs_search_macros. It checked against
   the authenticated user instead of the member we're currently looking at.
   [vincentfretin]

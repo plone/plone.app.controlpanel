@@ -126,9 +126,10 @@ class TypesControlPanel(ControlPanelView):
                 site_properties.manage_changeProperties(types_not_searched = \
                                                         blacklisted)
 
-                redirect_links = form.get('redirect_links', False)
-                site_properties.manage_changeProperties(redirect_links = \
-                                                        redirect_links)
+                if type_id=='Link':
+                    redirect_links = form.get('redirect_links', False)
+                    site_properties.manage_changeProperties(redirect_links = \
+                                                            redirect_links)
 
             # Update workflow
             if self.have_new_workflow() and \
