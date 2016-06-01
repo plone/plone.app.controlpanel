@@ -10,7 +10,8 @@ Breaking changes:
 
 New features:
 
-- *add item here*
+- Added options to change default search order.
+  [rodfersou]
 
 Bug fixes:
 
