@@ -4,7 +4,10 @@ Changelog
 2.3.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- The group membership page should filter search results based on
+  group membership test. This fixes an issue where all members would
+  be shown regardless of membership to the selected group.
+  [malthe]
 
 
 2.3.9 (2015-09-27)
