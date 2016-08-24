@@ -19,7 +19,8 @@ Edit some settings and make sure they stick.
 
 We should be back on the Site Setup screen:
 
-    >>> 'plone_control_panel' in self.browser.url
+    >>> ('plone_control_panel' in self.browser.url or
+    ...  '@@overview-controlpanel' in self.browser.url)
     True
 
 Navigate back to the syndication settings:
