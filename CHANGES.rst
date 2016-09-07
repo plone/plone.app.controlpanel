@@ -4,9 +4,12 @@ Changelog
 2.3.10 (unreleased)
 -------------------
 
+Bug fixes:
+
 - Fix tests for syndication control panel to pass also with
   new plone.app.registry versions
   [Asko Soukka]
+
 
 2.3.9 (2015-09-27)
 ------------------
