@@ -27,6 +27,12 @@ anon_auth_terms = [SimpleTerm(item[0], title=item[1]) for item in
 
 AnonAuthVocabulary = SimpleVocabulary(anon_auth_terms)
 
+SortSearchResultsVocabulary = SimpleVocabulary(
+    [SimpleTerm(value=u'relevance', title=_(u'relevance')),
+     SimpleTerm(value=u'Date', title=_(u'date (newest first)')),
+     SimpleTerm(value=u'sortable_title', title=_(u'alphabetically'))])
+
+
 class IBaseSearchSchema(Interface):
 
     enable_livesearch = Bool(
@@ -49,6 +55,14 @@ class IBaseSearchSchema(Interface):
         value_type=Choice(
             vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes")
         )
+
+    sort_on = Choice(
+        title=_(u'label_sort_on', default=u'Sort on'),
+        description=_(u'Sort the default search on this index'),
+        vocabulary=SortSearchResultsVocabulary,
+        default=u'relevance',
+        required=True
+    )
 
 
 class ISearchSchema(IBaseSearchSchema):
@@ -96,6 +110,14 @@ class SearchControlPanelAdapter(SchemaAdapterBase):
     # This also defines the user friendly types
     types_not_searched = property(get_types_not_searched,
                                   set_types_not_searched)
+
+    @property
+    def sort_on(self):
+        return self.context.sort_on
+
+    @sort_on.setter
+    def sort_on(self, value):
+        self.context._updateProperty('sort_on', value)
 
 
 searchset = FormFieldsets(IBaseSearchSchema)
