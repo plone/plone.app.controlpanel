@@ -4,18 +4,10 @@ Changelog
 2.3.11 (unreleased)
 -------------------
 
-Breaking changes:
-
-- *add item here*
-
 New features:
 
 - Added options to change default search order.
   [rodfersou]
-
-Bug fixes:
-
-- *add item here*
 
 
 2.3.10 (2016-09-07)
