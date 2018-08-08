@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '3.0.5.dev0'
+version = '4.0.0.dev0'
 
 setup(name='plone.app.controlpanel',
       version=version,
@@ -10,8 +10,6 @@ setup(name='plone.app.controlpanel',
       classifiers=[
           "Environment :: Web Environment",
           "Framework :: Plone",
-          "Framework :: Plone :: 5.0",
-          "Framework :: Plone :: 5.1",
           "Framework :: Zope2",
           "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
           "Operating System :: OS Independent",
@@ -29,7 +27,7 @@ setup(name='plone.app.controlpanel',
       zip_safe=False,
       install_requires=[
         'setuptools',
-        'Products.CMFPlone',
+        'Products.CMFPlone>=5.1.9999',
       ],
       extras_require={
         'test': [
