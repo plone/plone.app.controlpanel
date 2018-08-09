@@ -1,24 +1,22 @@
 from setuptools import setup, find_packages
 
-version = '3.0.5.dev0'
+version = '4.0.0.dev0'
 
 setup(name='plone.app.controlpanel',
       version=version,
-      description="Formlib-based controlpanels for Plone.",
+      description="Controlpanels for Plone were moved to Products.CMFPlone.",
       long_description=open("README.rst").read() + "\n" +
                        open("CHANGES.rst").read(),
       classifiers=[
           "Environment :: Web Environment",
           "Framework :: Plone",
-          "Framework :: Plone :: 5.0",
-          "Framework :: Plone :: 5.1",
           "Framework :: Zope2",
           "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
           "Operating System :: OS Independent",
           "Programming Language :: Python",
           "Programming Language :: Python :: 2.7",
         ],
-      keywords='plone controlpanel formlib',
+      keywords='plone controlpanel bbb',
       author='Plone Foundation',
       author_email='plone-developers@lists.sourceforge.net',
       url='https://pypi.python.org/pypi/plone.app.controlpanel',
@@ -29,7 +27,7 @@ setup(name='plone.app.controlpanel',
       zip_safe=False,
       install_requires=[
         'setuptools',
-        'Products.CMFPlone',
+        'Products.CMFPlone>=5.1.9999',
       ],
       extras_require={
         'test': [

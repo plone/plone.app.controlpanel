@@ -1,16 +1,25 @@
 Changelog
 =========
 
-3.0.5 (unreleased)
+4.0.0 (unreleased)
 ------------------
 
-New:
+Breaking changes:
 
-- *add item here*
+- Now this packages should not be needed in Plone 5.2 core anymore.
+  It will be removed there as dependency.
+  Addon code then needs to depend on it directly if backward compatibility is needed.
+  This works not in Plone 5.1 and lower.
+  [jensens]
 
 Fixes:
 
-- *add item here*
+- Move permissions zcml to Products.CMFPlone.
+  [jensens]
+
+- Introduce subclasses for interfaces (just to keep dotted path).
+  Removes dup definitions.
+  [jensens]
 
 
 3.0.4 (2016-02-11)
