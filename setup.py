@@ -8,6 +8,7 @@ setup(name='plone.app.controlpanel',
       long_description=open("README.rst").read() + "\n" +
                        open("CHANGES.rst").read(),
       classifiers=[
+          "Development Status :: 6 - Mature",
           "Environment :: Web Environment",
           "Framework :: Plone",
           "Framework :: Zope2",
